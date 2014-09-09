@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{DD5EF8D7-ADC3-4A7A-B0E2-322A9595424D}</ProjectGuid>
+    <ProjectGuid>{6F28ACA3-7D0C-4EF9-8828-B2E46F49A280}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>CalendarBuddy</RootNamespace>
+    <RootNamespace>BoxIn</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -85,7 +85,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CalendarBuddy.cpp" />
+    <ClCompile Include="BoxIn.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

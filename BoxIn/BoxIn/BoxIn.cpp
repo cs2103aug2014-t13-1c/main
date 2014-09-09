@@ -1,4 +1,4 @@
-// CalendarBuddy.cpp : Defines the entry point for the console application.
+// BoxIn.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
