@@ -6,12 +6,14 @@
 * Links events
 */
 BoxIn::BoxIn(QWidget *parent) : QMainWindow(parent){
-	ui.setupUi(this);
 	QIcon icon("BoxIn.jpg");
+	
+	ui.setupUi(this);
 	setWindowIcon(icon);
 	setFixedSize(WIDTH_WINDOW, HEIGHT_WINDOW); //size is not variable.
 	setComponentSizes();
 	linkEvents();
+	setupMap();
 }
 
 BoxIn::~BoxIn(){
@@ -40,13 +42,50 @@ void BoxIn::linkEvents(){
 	QObject::connect(ui.commandLine, SIGNAL(returnPressed()), this, SLOT(commandLineReturnPressed()));
 }
 
+void BoxIn::setupMap(){
+	stringToCommand["add "] = CommandAdd;
+	stringToCommand["dele"] = CommandDelete;
+	stringToCommand["edit"] = CommandEdit;
+	stringToCommand["exit"] = CommandExit;
+}
+
+
+void BoxIn::displayFeedback(QString feedback){
+	ui.feedbackBox->setText(feedback);
+}
+
+QString BoxIn::readCommandLine(){
+	return ui.commandLine->text();
+}
+
+void BoxIn::clearCommandLine(){
+	ui.commandLine->setText("");
+}
 
 void BoxIn::commandLineReturnPressed(){
-	QString command = ui.commandLine->text();
-	ui.displayFeed->addItem(command);
-	ui.commandLine->setText("");
+	handleUserInput(readCommandLine());
 }
 
 void BoxIn::buttonExitClicked(){
 	qApp->quit();
+}
+
+void BoxIn::handleUserInput(QString input){
+	QString firstFourLetters = input.left(4);
+	clearCommandLine();
+	switch(stringToCommand[firstFourLetters]){
+	case CommandAdd :
+		displayFeedback(PROMPT_DATE);
+		break;
+	case CommandDelete :
+		break;
+	case CommandEdit :
+		break;
+	case CommandExit :
+		break;
+	default :
+		displayFeedback(QString("Command is not recognised"));
+		break;
+	}
+
 }

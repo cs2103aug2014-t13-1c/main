@@ -45,6 +45,18 @@ public:
     {
         if (BoxInClass->objectName().isEmpty())
             BoxInClass->setObjectName(QStringLiteral("BoxInClass"));
+        BoxInClass->resize(400, 600);
+        BoxInClass->setMinimumSize(QSize(400, 600));
+        BoxInClass->setMaximumSize(QSize(400, 600));
+        QFont font;
+        font.setFamily(QStringLiteral("MS Shell Dlg 2"));
+        font.setPointSize(8);
+        font.setItalic(false);
+        BoxInClass->setFont(font);
+        QIcon icon;
+        icon.addFile(QStringLiteral("BoxIn.jpg"), QSize(), QIcon::Normal, QIcon::Off);
+        BoxInClass->setWindowIcon(icon);
+        BoxInClass->setWindowOpacity(1);
         centralWidget = new QWidget(BoxInClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         commandLine = new QLineEdit(centralWidget);
@@ -59,6 +71,8 @@ public:
         feedbackBox = new QLabel(centralWidget);
         feedbackBox->setObjectName(QStringLiteral("feedbackBox"));
         feedbackBox->setGeometry(QRect(0, 460, 400, 20));
+        feedbackBox->setAlignment(Qt::AlignCenter);
+        feedbackBox->setIndent(0);
         buttonExit = new QPushButton(centralWidget);
         buttonExit->setObjectName(QStringLiteral("buttonExit"));
         buttonExit->setGeometry(QRect(0, 520, 400, 20));
@@ -86,9 +100,9 @@ public:
 
     void retranslateUi(QMainWindow *BoxInClass)
     {
-        BoxInClass->setWindowTitle(QApplication::translate("BoxInClass", "BoxIn", 0));
+        BoxInClass->setWindowTitle(QApplication::translate("BoxInClass", "BoxIn v0.1", 0));
         commandLabel->setText(QApplication::translate("BoxInClass", "  Command:", 0));
-        feedbackBox->setText(QApplication::translate("BoxInClass", "<html><head/><body><p align=\"center\">Welcome to BoxIn v0.1</p></body></html>", 0));
+        feedbackBox->setText(QApplication::translate("BoxInClass", "Welcome to BoxIn v0.1", 0));
         buttonExit->setText(QApplication::translate("BoxInClass", "Exit", 0));
         menuFile->setTitle(QApplication::translate("BoxInClass", "File", 0));
     } // retranslateUi

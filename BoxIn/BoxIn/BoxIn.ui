@@ -2,8 +2,42 @@
 <ui version="4.0">
  <class>BoxInClass</class>
  <widget class="QMainWindow" name="BoxInClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>MS Shell Dlg 2</family>
+    <pointsize>8</pointsize>
+    <italic>false</italic>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>BoxIn</string>
+   <string>BoxIn v0.1</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>BoxIn.jpg</normaloff>BoxIn.jpg</iconset>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLineEdit" name="commandLine">
@@ -49,7 +83,13 @@
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Welcome to BoxIn v0.1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>Welcome to BoxIn v0.1</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="indent">
+     <number>0</number>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonExit">
