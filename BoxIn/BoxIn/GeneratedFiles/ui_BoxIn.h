@@ -13,7 +13,6 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -32,13 +31,11 @@ class Ui_BoxInClass
 {
 public:
     QWidget *centralWidget;
-    QWidget *gridLayoutWidget;
-    QGridLayout *gridLayout;
-    QPushButton *buttonExit;
     QLineEdit *commandLine;
-    QLabel *label;
+    QLabel *commandLabel;
     QListWidget *displayFeed;
     QLabel *feedbackBox;
+    QPushButton *buttonExit;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -48,38 +45,28 @@ public:
     {
         if (BoxInClass->objectName().isEmpty())
             BoxInClass->setObjectName(QStringLiteral("BoxInClass"));
-        BoxInClass->resize(600, 400);
         centralWidget = new QWidget(BoxInClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        gridLayoutWidget = new QWidget(centralWidget);
-        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(0, 320, 601, 25));
-        gridLayout = new QGridLayout(gridLayoutWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        buttonExit = new QPushButton(gridLayoutWidget);
-        buttonExit->setObjectName(QStringLiteral("buttonExit"));
-
-        gridLayout->addWidget(buttonExit, 0, 0, 1, 1);
-
         commandLine = new QLineEdit(centralWidget);
         commandLine->setObjectName(QStringLiteral("commandLine"));
-        commandLine->setGeometry(QRect(60, 300, 541, 20));
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(0, 300, 61, 16));
+        commandLine->setGeometry(QRect(60, 490, 340, 20));
+        commandLabel = new QLabel(centralWidget);
+        commandLabel->setObjectName(QStringLiteral("commandLabel"));
+        commandLabel->setGeometry(QRect(0, 490, 60, 20));
         displayFeed = new QListWidget(centralWidget);
         displayFeed->setObjectName(QStringLiteral("displayFeed"));
-        displayFeed->setGeometry(QRect(0, 0, 601, 271));
+        displayFeed->setGeometry(QRect(0, 0, 400, 450));
         feedbackBox = new QLabel(centralWidget);
         feedbackBox->setObjectName(QStringLiteral("feedbackBox"));
-        feedbackBox->setGeometry(QRect(0, 270, 601, 31));
+        feedbackBox->setGeometry(QRect(0, 460, 400, 20));
+        buttonExit = new QPushButton(centralWidget);
+        buttonExit->setObjectName(QStringLiteral("buttonExit"));
+        buttonExit->setGeometry(QRect(0, 520, 400, 20));
+        buttonExit->setMaximumSize(QSize(599, 16777215));
         BoxInClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(BoxInClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 600, 21));
+        menuBar->setGeometry(QRect(0, 0, 400, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         BoxInClass->setMenuBar(menuBar);
@@ -100,9 +87,9 @@ public:
     void retranslateUi(QMainWindow *BoxInClass)
     {
         BoxInClass->setWindowTitle(QApplication::translate("BoxInClass", "BoxIn", 0));
+        commandLabel->setText(QApplication::translate("BoxInClass", "  Command:", 0));
+        feedbackBox->setText(QApplication::translate("BoxInClass", "<html><head/><body><p align=\"center\">Welcome to BoxIn v0.1</p></body></html>", 0));
         buttonExit->setText(QApplication::translate("BoxInClass", "Exit", 0));
-        label->setText(QApplication::translate("BoxInClass", "  Command:", 0));
-        feedbackBox->setText(QApplication::translate("BoxInClass", "<html><head/><body><p align=\"center\">Welcome to Task Manager v0.1</p></body></html>", 0));
         menuFile->setTitle(QApplication::translate("BoxInClass", "File", 0));
     } // retranslateUi
 
