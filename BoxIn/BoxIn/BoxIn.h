@@ -26,6 +26,8 @@ public:
 
 private:
 	Ui::BoxInClass ui;
+	void setComponentSizes();
+	void linkEvents();
 
 private slots:
 	void commandLineReturnPressed();
