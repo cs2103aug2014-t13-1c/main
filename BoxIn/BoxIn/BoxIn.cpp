@@ -43,8 +43,8 @@ void BoxIn::linkEvents(){
 }
 
 void BoxIn::setupMap(){
-	stringToCommand["add "] = CommandAdd;
-	stringToCommand["dele"] = CommandDelete;
+	stringToCommand["add"] = CommandAdd;
+	stringToCommand["delete"] = CommandDelete;
 	stringToCommand["edit"] = CommandEdit;
 	stringToCommand["exit"] = CommandExit;
 }
@@ -71,9 +71,9 @@ void BoxIn::buttonExitClicked(){
 }
 
 void BoxIn::handleUserInput(QString input){
-	QString firstFourLetters = input.left(4);
+	QString firstWord = input.split(WHITESPACE, QString::KeepEmptyParts, Qt::CaseInsensitive)[FIRST_WORD_POSITION];
 	clearCommandLine();
-	switch(stringToCommand[firstFourLetters]){
+	switch(stringToCommand[firstWord]){
 	case CommandAdd :
 		displayFeedback(PROMPT_DATE);
 		break;

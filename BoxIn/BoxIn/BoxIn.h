@@ -17,6 +17,9 @@ static const int HEIGHT_LARGE = 450;
 
 static const int WIDTH_LABEL = 60;
 
+static const int FIRST_WORD_POSITION = 0;
+static const QString WHITESPACE = " ";
+
 static const QString PROMPT_DATE = "Please enter a date in the format DDMMYY";
 static const QString PROMPT_TIME = "Please enter a time in the format HHMM";
 
