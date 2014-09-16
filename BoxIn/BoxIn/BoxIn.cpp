@@ -71,21 +71,42 @@ void BoxIn::buttonExitClicked(){
 }
 
 void BoxIn::handleUserInput(QString input){
-	QString firstWord = input.split(WHITESPACE, QString::KeepEmptyParts, Qt::CaseInsensitive)[FIRST_WORD_POSITION];
+	QStringList words = input.split(WHITESPACE, QString::KeepEmptyParts, Qt::CaseInsensitive);
+	QString firstWord = words[FIRST_WORD_POSITION];
 	clearCommandLine();
 	switch(stringToCommand[firstWord]){
-	case CommandAdd :
-		displayFeedback(PROMPT_DATE);
-		break;
-	case CommandDelete :
-		break;
-	case CommandEdit :
-		break;
-	case CommandExit :
-		break;
-	default :
-		displayFeedback(QString("Command is not recognised"));
-		break;
+		case CommandAdd :
+			displayFeedback(PROMPT_DATE);
+			break;
+		case CommandDelete :
+			break;
+		case CommandEdit :
+			break;
+		case CommandExit :
+			break;
+		default :
+			displayFeedback(QString("Command is not recognised"));
+			break;
 	}
 
+}
+
+void BoxIn::extractKeywords(QStringList input){
+	int indexPlace = input.indexOf(KEYWORD_PLACE);
+	int indexDate = input.indexOf(KEYWORD_DATE);
+	int indexTime = input.indexOf(KEYWORD_TIME);
+	
+	if(indexPlace > indexDate || indexDate > indexTime){
+		displayFeedback(QString("Command format is wrong"));
+	}else{
+		if(indexPlace == NOT_FOUND_IN_COMMAND){
+			displayFeedback(QString("Please enter a location"));
+		}
+		if(indexDate == NOT_FOUND_IN_COMMAND){
+			displayFeedback(QString("Please enter a date"));
+		}
+		if(indexTime == NOT_FOUND_IN_COMMAND){
+			displayFeedback(QString("Please enter a time"));
+		}
+	}
 }

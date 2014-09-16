@@ -23,6 +23,11 @@ static const QString WHITESPACE = " ";
 static const QString PROMPT_DATE = "Please enter a date in the format DDMMYY";
 static const QString PROMPT_TIME = "Please enter a time in the format HHMM";
 
+static const QString KEYWORD_PLACE = "place";
+static const QString KEYWORD_DATE = "date";
+static const QString KEYWORD_TIME = "time";
+static const int NOT_FOUND_IN_COMMAND = -1;
+
 enum CommandTypes {
 	CommandAdd = 1,
 	CommandDelete = 2,
@@ -52,6 +57,7 @@ private:
 	void linkEvents();
 	void setupMap();
 	void handleUserInput(QString input);
+	void extractKeywords(QStringList input);
 
 private slots:
 	void commandLineReturnPressed();
