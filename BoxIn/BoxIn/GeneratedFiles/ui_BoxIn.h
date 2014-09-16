@@ -45,9 +45,9 @@ public:
     {
         if (BoxInClass->objectName().isEmpty())
             BoxInClass->setObjectName(QStringLiteral("BoxInClass"));
-        BoxInClass->resize(400, 600);
-        BoxInClass->setMinimumSize(QSize(400, 600));
-        BoxInClass->setMaximumSize(QSize(400, 600));
+        BoxInClass->resize(800, 600);
+        BoxInClass->setMinimumSize(QSize(800, 600));
+        BoxInClass->setMaximumSize(QSize(800, 600));
         QFont font;
         font.setFamily(QStringLiteral("MS Shell Dlg 2"));
         font.setPointSize(8);
@@ -61,26 +61,26 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         commandLine = new QLineEdit(centralWidget);
         commandLine->setObjectName(QStringLiteral("commandLine"));
-        commandLine->setGeometry(QRect(60, 490, 340, 20));
+        commandLine->setGeometry(QRect(60, 490, 800, 20));
         commandLabel = new QLabel(centralWidget);
         commandLabel->setObjectName(QStringLiteral("commandLabel"));
         commandLabel->setGeometry(QRect(0, 490, 60, 20));
         displayFeed = new QListWidget(centralWidget);
         displayFeed->setObjectName(QStringLiteral("displayFeed"));
-        displayFeed->setGeometry(QRect(0, 0, 400, 450));
+        displayFeed->setGeometry(QRect(0, 0, 191, 251));
         feedbackBox = new QLabel(centralWidget);
         feedbackBox->setObjectName(QStringLiteral("feedbackBox"));
-        feedbackBox->setGeometry(QRect(0, 460, 400, 20));
+        feedbackBox->setGeometry(QRect(0, 460, 800, 20));
         feedbackBox->setAlignment(Qt::AlignCenter);
         feedbackBox->setIndent(0);
         buttonExit = new QPushButton(centralWidget);
         buttonExit->setObjectName(QStringLiteral("buttonExit"));
-        buttonExit->setGeometry(QRect(0, 520, 400, 20));
-        buttonExit->setMaximumSize(QSize(599, 16777215));
+        buttonExit->setGeometry(QRect(0, 520, 800, 20));
+        buttonExit->setMaximumSize(QSize(800, 16777215));
         BoxInClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(BoxInClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 400, 21));
+        menuBar->setGeometry(QRect(0, 0, 800, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         BoxInClass->setMenuBar(menuBar);

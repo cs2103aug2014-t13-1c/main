@@ -8,12 +8,13 @@
 #include <map>
 
 static const int HEIGHT_WINDOW = 600;
-static const int WIDTH_WINDOW = 400;
+static const int WIDTH_WINDOW = 800;
 
 static const int HEIGHT_BUFFER = 10;
+static const int HEIGHT_NO_CLICK_ZONE = 60;
 
 static const int HEIGHT_SMALL = 20;
-static const int HEIGHT_LARGE = 450;
+static const int HEIGHT_LARGE = 400;
 
 static const int WIDTH_LABEL = 60;
 
