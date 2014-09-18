@@ -11,7 +11,7 @@ public:
 	Logic(void);
 	~Logic(void);
 
-	void add(std::string stuff);
+	void add(std::string input);
 
 	std::vector<Event*> getEvents();
 };
