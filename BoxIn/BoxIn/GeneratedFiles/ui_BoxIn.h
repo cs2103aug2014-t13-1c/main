@@ -18,7 +18,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
@@ -36,8 +35,11 @@ public:
     QListWidget *displayFeed;
     QLabel *feedbackBox;
     QPushButton *buttonExit;
+    QListWidget *listWidget;
+    QListWidget *listWidget_2;
+    QLabel *todayLabel;
+    QLabel *label;
     QMenuBar *menuBar;
-    QMenu *menuFile;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -67,7 +69,8 @@ public:
         commandLabel->setGeometry(QRect(0, 490, 60, 20));
         displayFeed = new QListWidget(centralWidget);
         displayFeed->setObjectName(QStringLiteral("displayFeed"));
-        displayFeed->setGeometry(QRect(0, 0, 191, 251));
+        displayFeed->setGeometry(QRect(20, 40, 180, 250));
+        displayFeed->setUniformItemSizes(true);
         feedbackBox = new QLabel(centralWidget);
         feedbackBox->setObjectName(QStringLiteral("feedbackBox"));
         feedbackBox->setGeometry(QRect(0, 460, 800, 20));
@@ -77,12 +80,22 @@ public:
         buttonExit->setObjectName(QStringLiteral("buttonExit"));
         buttonExit->setGeometry(QRect(0, 520, 800, 20));
         buttonExit->setMaximumSize(QSize(800, 16777215));
+        listWidget = new QListWidget(centralWidget);
+        listWidget->setObjectName(QStringLiteral("listWidget"));
+        listWidget->setGeometry(QRect(220, 40, 180, 250));
+        listWidget_2 = new QListWidget(centralWidget);
+        listWidget_2->setObjectName(QStringLiteral("listWidget_2"));
+        listWidget_2->setGeometry(QRect(420, 40, 180, 250));
+        todayLabel = new QLabel(centralWidget);
+        todayLabel->setObjectName(QStringLiteral("todayLabel"));
+        todayLabel->setGeometry(QRect(20, 20, 180, 20));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(220, 20, 180, 20));
         BoxInClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(BoxInClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 800, 21));
-        menuFile = new QMenu(menuBar);
-        menuFile->setObjectName(QStringLiteral("menuFile"));
         BoxInClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(BoxInClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -90,8 +103,6 @@ public:
         statusBar = new QStatusBar(BoxInClass);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         BoxInClass->setStatusBar(statusBar);
-
-        menuBar->addAction(menuFile->menuAction());
 
         retranslateUi(BoxInClass);
 
@@ -104,7 +115,8 @@ public:
         commandLabel->setText(QApplication::translate("BoxInClass", "  Command:", 0));
         feedbackBox->setText(QApplication::translate("BoxInClass", "Welcome to BoxIn v0.1", 0));
         buttonExit->setText(QApplication::translate("BoxInClass", "Exit", 0));
-        menuFile->setTitle(QApplication::translate("BoxInClass", "File", 0));
+        todayLabel->setText(QApplication::translate("BoxInClass", "<html><head/><body><p align=\"center\">Today</p></body></html>", 0));
+        label->setText(QApplication::translate("BoxInClass", "<html><head/><body><p align=\"center\">Upcoming</p></body></html>", 0));
     } // retranslateUi
 
 };

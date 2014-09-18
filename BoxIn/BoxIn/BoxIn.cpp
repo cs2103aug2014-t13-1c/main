@@ -25,7 +25,6 @@ BoxIn::~BoxIn(){
 * declared in BoxIn.h
 */
 void BoxIn::setComponentSizes(){
-	ui.displayFeed->setGeometry(0, 0, WIDTH_WINDOW, HEIGHT_LARGE);
 	ui.feedbackBox->setGeometry(0, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 3 * HEIGHT_SMALL - 2 * HEIGHT_BUFFER, WIDTH_WINDOW, HEIGHT_SMALL);
 	ui.commandLabel->setGeometry(0, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 2 * HEIGHT_SMALL - HEIGHT_BUFFER, WIDTH_LABEL, HEIGHT_SMALL);
 	ui.commandLine->setGeometry(WIDTH_LABEL, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 2 * HEIGHT_SMALL - HEIGHT_BUFFER, WIDTH_WINDOW - WIDTH_LABEL, HEIGHT_SMALL);
@@ -76,7 +75,6 @@ void BoxIn::handleUserInput(QString input){
 	clearCommandLine();
 	switch(stringToCommand[firstWord]){
 		case CommandAdd :
-			displayFeedback(PROMPT_DATE);
 			break;
 		case CommandDelete :
 			break;
