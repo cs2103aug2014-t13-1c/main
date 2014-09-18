@@ -50,6 +50,12 @@
     <ClCompile Include="GeneratedFiles\qrc_BoxIn.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Logic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BoxIn.h">
@@ -65,6 +71,12 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_BoxIn.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

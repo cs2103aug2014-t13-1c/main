@@ -32,7 +32,7 @@ public:
     QWidget *centralWidget;
     QLineEdit *commandLine;
     QLabel *commandLabel;
-    QListWidget *displayFeed;
+    QListWidget *displayFeedToday;
     QLabel *feedbackBox;
     QPushButton *buttonExit;
     QListWidget *listWidget;
@@ -67,10 +67,10 @@ public:
         commandLabel = new QLabel(centralWidget);
         commandLabel->setObjectName(QStringLiteral("commandLabel"));
         commandLabel->setGeometry(QRect(0, 490, 60, 20));
-        displayFeed = new QListWidget(centralWidget);
-        displayFeed->setObjectName(QStringLiteral("displayFeed"));
-        displayFeed->setGeometry(QRect(20, 40, 180, 250));
-        displayFeed->setUniformItemSizes(true);
+        displayFeedToday = new QListWidget(centralWidget);
+        displayFeedToday->setObjectName(QStringLiteral("displayFeedToday"));
+        displayFeedToday->setGeometry(QRect(20, 40, 180, 250));
+        displayFeedToday->setUniformItemSizes(true);
         feedbackBox = new QLabel(centralWidget);
         feedbackBox->setObjectName(QStringLiteral("feedbackBox"));
         feedbackBox->setGeometry(QRect(0, 460, 800, 20));
