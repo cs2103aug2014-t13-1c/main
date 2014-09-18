@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "CommonFunctions.h"
 
 class Event{
 public:

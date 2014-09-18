@@ -5,7 +5,6 @@
 #include <QString>
 #include <qlistview.h>
 #include "ui_BoxIn.h"
-#include <map>
 #include "Logic.h"
 
 static const int HEIGHT_WINDOW = 600;

@@ -6,10 +6,7 @@
 * Links events
 */
 BoxIn::BoxIn(QWidget *parent) : QMainWindow(parent){
-	QIcon icon("BoxIn.jpg");
-	
 	ui.setupUi(this);
-	setWindowIcon(icon);
 	setFixedSize(WIDTH_WINDOW, HEIGHT_WINDOW); //size is not variable.
 	setComponentSizes();
 	linkEvents();

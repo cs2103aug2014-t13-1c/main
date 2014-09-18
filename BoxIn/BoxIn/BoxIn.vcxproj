@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BoxIn.cpp" />
+    <ClCompile Include="CommonFunctions.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_BoxIn.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -118,6 +119,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommonFunctions.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="GeneratedFiles\ui_BoxIn.h" />
     <ClInclude Include="Logic.h" />
