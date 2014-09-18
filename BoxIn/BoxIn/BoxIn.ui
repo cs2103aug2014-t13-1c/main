@@ -63,7 +63,7 @@
      <string>  Command:</string>
     </property>
    </widget>
-   <widget class="QListWidget" name="displayFeed">
+   <widget class="QListWidget" name="displayFeedToday">
     <property name="geometry">
      <rect>
       <x>20</x>

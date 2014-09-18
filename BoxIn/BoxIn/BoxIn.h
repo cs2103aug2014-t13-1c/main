@@ -6,6 +6,7 @@
 #include <qlistview.h>
 #include "ui_BoxIn.h"
 #include <map>
+#include "Logic.h"
 
 static const int HEIGHT_WINDOW = 600;
 static const int WIDTH_WINDOW = 800;
@@ -26,6 +27,11 @@ static const QString KEYWORD_PLACE = "place";
 static const QString KEYWORD_DATE = "date";
 static const QString KEYWORD_TIME = "time";
 static const int NOT_FOUND_IN_COMMAND = -1;
+
+static const QString USER_COMMAND_ADD = "add";
+static const QString USER_COMMAND_DELETE = "delete";
+static const QString USER_COMMAND_EDIT = "edit";
+static const QString USER_COMMAND_EXIT = "exit";
 
 enum CommandTypes {
 	CommandAdd = 1,
@@ -51,12 +57,14 @@ public:
 private:
 	Ui::BoxInClass ui;
 	std::map<QString, CommandTypes> stringToCommand;
+	Logic logic;
 
 	void setComponentSizes();
 	void linkEvents();
 	void setupMap();
 	void handleUserInput(QString input);
 	void extractKeywords(QStringList input);
+	void updateGUI();
 
 private slots:
 	void commandLineReturnPressed();

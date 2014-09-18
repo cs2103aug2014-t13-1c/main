@@ -42,10 +42,10 @@ void BoxIn::linkEvents(){
 }
 
 void BoxIn::setupMap(){
-	stringToCommand["add"] = CommandAdd;
-	stringToCommand["delete"] = CommandDelete;
-	stringToCommand["edit"] = CommandEdit;
-	stringToCommand["exit"] = CommandExit;
+	stringToCommand[USER_COMMAND_ADD] = CommandAdd;
+	stringToCommand[USER_COMMAND_DELETE] = CommandDelete;
+	stringToCommand[USER_COMMAND_EDIT] = CommandEdit;
+	stringToCommand[USER_COMMAND_EXIT] = CommandExit;
 }
 
 
@@ -75,6 +75,7 @@ void BoxIn::handleUserInput(QString input){
 	clearCommandLine();
 	switch(stringToCommand[firstWord]){
 		case CommandAdd :
+			logic.add(input.right(input.length() - USER_COMMAND_ADD.length()).toStdString());
 			break;
 		case CommandDelete :
 			break;
@@ -86,7 +87,7 @@ void BoxIn::handleUserInput(QString input){
 			displayFeedback(QString("Command is not recognised"));
 			break;
 	}
-
+	updateGUI();
 }
 
 void BoxIn::extractKeywords(QStringList input){
@@ -106,5 +107,13 @@ void BoxIn::extractKeywords(QStringList input){
 		if(indexTime == NOT_FOUND_IN_COMMAND){
 			displayFeedback(QString("Please enter a time"));
 		}
+	}
+}
+
+void BoxIn::updateGUI(){
+	std::vector<Event*> thingsToInclude = logic.getEvents();
+	ui.displayFeedToday->clear();
+	for(unsigned int i = 0; i < thingsToInclude.size(); i++){
+		QListWidgetItem *item = new QListWidgetItem(QString(thingsToInclude[i]->getName().c_str()), ui.displayFeedToday);
 	}
 }
