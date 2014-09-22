@@ -23,8 +23,8 @@ namespace BoxIn {
 
 	protected:
 		void setBoxes; //put the stuff in specific boxes/directories
-		void boxFiles;
-		string getsetBoxes;
+		void setBoxFiles;
+		string getBoxes;
 		string getboxfiles;
 		void clearFileStream();
 		void setFileStream();
