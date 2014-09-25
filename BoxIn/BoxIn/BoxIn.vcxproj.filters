@@ -88,4 +88,9 @@
   <ItemGroup>
     <ResourceCompile Include="BoxIn.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="BoxIn.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
