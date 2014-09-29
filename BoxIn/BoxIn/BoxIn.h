@@ -6,6 +6,8 @@
 #include <qlistview.h>
 #include "ui_BoxIn.h"
 #include "Logic.h"
+#include <qdatetime.h>
+#include <qtimer.h>
 
 static const int HEIGHT_WINDOW = 600;
 static const int WIDTH_WINDOW = 800;
