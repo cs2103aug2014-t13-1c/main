@@ -1,23 +1,29 @@
-<UI version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>DigitalClock</class>
- <widget class="QLCDNumber" name="DigitalClock" >
-  <property name="objectName" >
-   <string notr="true">DigitalClock</string>
-  </property>
-  <property name="geometry" >
+ <widget class="QLCDNumber" name="DigitalClock">
+  <property name="geometry">
    <rect>
-	<x>0</x>
-	<y>0</y>
-	<width>400</width>
-	<height>300</height>
+    <x>0</x>
+    <y>0</y>
+    <width>100</width>
+    <height>50</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>DigitalClock</string>
-  </property>  
+  </property>
+  <property name="frameShape">
+   <enum>QFrame::NoFrame</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Plain</enum>
+  </property>
+  <property name="segmentStyle">
+   <enum>QLCDNumber::Filled</enum>
+  </property>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
-</UI>
+</ui>

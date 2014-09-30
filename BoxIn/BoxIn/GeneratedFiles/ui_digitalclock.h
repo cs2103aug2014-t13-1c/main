@@ -26,7 +26,10 @@ public:
     {
         if (DigitalClock->objectName().isEmpty())
             DigitalClock->setObjectName(QStringLiteral("DigitalClock"));
-        DigitalClock->resize(400, 300);
+        DigitalClock->resize(100, 50);
+        DigitalClock->setFrameShape(QFrame::NoFrame);
+        DigitalClock->setFrameShadow(QFrame::Plain);
+        DigitalClock->setSegmentStyle(QLCDNumber::Filled);
 
         retranslateUi(DigitalClock);
 

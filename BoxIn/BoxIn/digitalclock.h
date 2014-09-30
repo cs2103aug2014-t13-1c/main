@@ -6,6 +6,10 @@
 #include <qtimer.h>
 #include <QTime>
 
+static const int REFRESH_TIME = 1000;
+static const int WIDTH_TIMER = 100;
+static const int HEIGHT_TIMER = 50;
+
 class DigitalClock : public QLCDNumber
 {
 	Q_OBJECT
