@@ -44,6 +44,7 @@ void BoxIn::setupMap(){
 	stringToCommand[USER_COMMAND_ADD] = CommandAdd;
 	stringToCommand[USER_COMMAND_DELETE] = CommandDelete;
 	stringToCommand[USER_COMMAND_EDIT] = CommandEdit;
+	stringToCommand[USER_COMMAND_UNDO] = CommandUndo;
 	stringToCommand[USER_COMMAND_EXIT] = CommandExit;
 }
 
@@ -81,6 +82,8 @@ void BoxIn::handleUserInput(QString input){
 		case CommandEdit :
 			break;
 		case CommandExit :
+			break;
+		case CommandUndo :
 			break;
 		default :
 			displayFeedback(QString("Command is not recognised"));

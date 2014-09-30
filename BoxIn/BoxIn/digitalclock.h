@@ -20,6 +20,8 @@ public:
 
 private:
 	Ui::DigitalClock ui;
+	QString flashColon(QString text, QTime time);
+
 private slots:
 	void showTime();
 };

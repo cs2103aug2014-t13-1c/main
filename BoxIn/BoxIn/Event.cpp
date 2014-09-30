@@ -11,8 +11,7 @@ Event::Event(std::string _name, std::string _date, std::string _time){
 	time = _time;
 }
 
-Event::~Event(void)
-{
+Event::~Event(void){
 }
 
 std::string Event::getName(){

@@ -32,12 +32,14 @@ static const QString USER_COMMAND_ADD = "add";
 static const QString USER_COMMAND_DELETE = "delete";
 static const QString USER_COMMAND_EDIT = "edit";
 static const QString USER_COMMAND_EXIT = "exit";
+static const QString USER_COMMAND_UNDO = "undo";
 
 enum CommandTypes {
 	CommandAdd = 1,
-	CommandDelete = 2,
-	CommandEdit = 3,
-	CommandExit = 4
+	CommandDelete,
+	CommandEdit,
+	CommandUndo,
+	CommandExit
 };
 
 
