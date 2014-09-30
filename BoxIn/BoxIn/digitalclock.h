@@ -20,6 +20,7 @@ public:
 
 private:
 	Ui::DigitalClock ui;
+private slots:
 	void showTime();
 };
 

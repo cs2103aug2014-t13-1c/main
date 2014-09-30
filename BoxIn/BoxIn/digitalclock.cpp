@@ -8,7 +8,7 @@ DigitalClock::DigitalClock(QWidget *parent)
 
     QTimer *timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(showTime()));
-    timer->start(REFRESH_TIME);
+    timer->start(1000);
 
     showTime();
 
