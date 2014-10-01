@@ -22,11 +22,12 @@ static const int WIDTH_LABEL = 60;
 static const int FIRST_WORD_POSITION = 0;
 static const QString WHITESPACE = " ";
 
-
+/*
 static const QString KEYWORD_PLACE = "place";
 static const QString KEYWORD_DATE = "date";
 static const QString KEYWORD_TIME = "time";
 static const int NOT_FOUND_IN_COMMAND = -1;
+*/
 
 static const QString USER_COMMAND_ADD = "add";
 static const QString USER_COMMAND_DELETE = "delete";

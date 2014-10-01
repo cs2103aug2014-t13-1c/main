@@ -91,7 +91,7 @@ void BoxIn::handleUserInput(QString input){
 	}
 	updateGUI();
 }
-
+/*
 void BoxIn::extractKeywords(QStringList input){
 	int indexPlace = input.indexOf(KEYWORD_PLACE);
 	int indexDate = input.indexOf(KEYWORD_DATE);
@@ -111,7 +111,7 @@ void BoxIn::extractKeywords(QStringList input){
 		}
 	}
 }
-
+*/
 void BoxIn::updateGUI(){
 	std::vector<Event*> thingsToInclude = logic.getEvents();
 	ui.displayFeedToday->clear();
