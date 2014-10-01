@@ -10,6 +10,10 @@ public:
 	~Logic(void);
 
 	void add(std::string input);
+	void delete(std::string intput);
+	void undo();
+	void edit(std::string input);
+	void reset();
 
 	std::vector<Event*> getEvents();
 };
