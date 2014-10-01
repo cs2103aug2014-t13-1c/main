@@ -1,16 +1,17 @@
 #include "Logic.h"
 
 
-Logic::Logic(void){
+Logic::Logic(){
 }
 
 
-Logic::~Logic(void){
+Logic::~Logic(){
 }
 
 std::vector<std::string> Logic::splitWords(std::string input){
 	std::vector<std::string> words;
-	return boost::algorithm::split(words, input, boost::algorithm::is_any_of(" "), boost::algorithm::token_compress_on);
+	boost::algorithm::split(words, input, boost::algorithm::is_any_of(" "), boost::algorithm::token_compress_on);
+	return words;
 }
 
 int Logic::indexOf(std::vector<std::string> words, std::string toFind){
@@ -19,14 +20,14 @@ int Logic::indexOf(std::vector<std::string> words, std::string toFind){
 
 std::string Logic::vectorToString(std::vector<std::string> vec){
 	std::string result = "";
-	for(std::vector<std::string>::iterator iter; iter != vec.end(); iter++){
+	for(std::vector<std::string>::iterator iter = vec.begin(); iter != vec.end(); iter++){
 		result = result + *iter + " ";
 	}
 	return result.substr(0, result.length() - 1);
 }
 
 std::string Logic::extractField(std::vector<std::string> words, int startPos, int endPos){
-	std::vector<std::string> result;
+	std::vector<std::string> result(endPos - startPos - 1);
 	std::copy(words.begin() + startPos + 1, words.begin() + endPos, result.begin());
 	return vectorToString(result);
 }

@@ -1,14 +1,14 @@
 #pragma once
 
-#include "CommonFunctions.h"
+#include <string>
 
 class Event{
 public:
-	Event(void);
+	Event();
 	Event(std::string _name, std::string _date, std::string _time);
-	~Event(void);
+	~Event();
 	std::string getName();
-	std::string getName();
+	/*
 	std::string getDescription();
 	std::string getCategory();
 	int getPriority();
@@ -18,16 +18,17 @@ public:
 	bool setCategory(std::string);
 	bool setDescription(std::string);
 	bool setFinish(bool);
-	bool contains(std::string);
+	bool contains(std::string);*/
 private:
 	std::string name;
 	std::string date;
 	std::string time;
+	/*
 	std::string _name;
 	std::string _description;
 	std::string _category;
 	int _priority;
 	bool _isFinish;
-
+	*/
 };
 

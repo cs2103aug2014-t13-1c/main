@@ -3,6 +3,8 @@
 #include "Event.h"
 #include <boost/algorithm/string.hpp>
 #include <algorithm>
+#include <string>
+#include <vector>
 
 static std::string KEYWORD_LOCATION = "place";
 static std::string KEYWORD_DATE = "date";
@@ -12,8 +14,8 @@ class Logic{
 private:
 	std::vector<Event*> events;
 public:
-	Logic(void);
-	~Logic(void);
+	Logic();
+	~Logic();
 
 	std::vector<std::string> splitWords(std::string input);
 	int indexOf(std::vector<std::string> words, std::string toFind);

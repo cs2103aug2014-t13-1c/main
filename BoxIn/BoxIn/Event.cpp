@@ -1,8 +1,7 @@
 #include "Event.h"
 
 
-Event::Event(void)
-{
+Event::Event(){
 }
 
 Event::Event(std::string _name, std::string _date, std::string _time){
@@ -18,15 +17,14 @@ std::string Event::getName(){
 	return name;
 }
 
-
+/*
 std::string Event::getDescription() {
-    return _description;
+    return description;
 }
 
 std::string Event::getCategory() {
-    return _category;
+    return category;
 }
-
 
 std::int Event::getPriority() {
      return _priority;
@@ -57,9 +55,10 @@ bool Task::setDescription(string content) {
 /**
 * Method: setFinish-->sets the task as done/undone. returns the final status of the _isDone variable
 */
-
+/*
 bool Task::setFinish(bool result) {
      _isDone = result;
      return _isFinish;
 }
 
+*/
