@@ -2,6 +2,7 @@
 
 #include "Event.h"
 #include <boost/algorithm/string.hpp>
+#include <algorithm>
 
 static std::string KEYWORD_LOCATION = "place";
 static std::string KEYWORD_DATE = "date";
@@ -16,6 +17,8 @@ public:
 
 	std::vector<std::string> splitWords(std::string input);
 	int indexOf(std::vector<std::string> words, std::string toFind);
+	std::string vectorToString(std::vector<std::string> vec);
+	std::string extractField(std::vector<std::string> words, int startPos, int endPos);
 
 	void add(std::string input);
 	void del(std::string input);

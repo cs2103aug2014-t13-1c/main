@@ -1,13 +1,11 @@
 #include "Logic.h"
 
 
-Logic::Logic(void)
-{
+Logic::Logic(void){
 }
 
 
-Logic::~Logic(void)
-{
+Logic::~Logic(void){
 }
 
 std::vector<std::string> Logic::splitWords(std::string input){
@@ -19,14 +17,33 @@ int Logic::indexOf(std::vector<std::string> words, std::string toFind){
 	return std::distance(words.begin(), std::find(words.begin(), words.end(), toFind));
 }
 
+std::string Logic::vectorToString(std::vector<std::string> vec){
+	std::string result = "";
+	for(std::vector<std::string>::iterator iter; iter != vec.end(); iter++){
+		result = result + *iter + " ";
+	}
+	return result.substr(0, result.length() - 1);
+}
+
+std::string Logic::extractField(std::vector<std::string> words, int startPos, int endPos){
+	std::vector<std::string> result;
+	std::copy(words.begin() + startPos + 1, words.begin() + endPos, result.begin());
+	return vectorToString(result);
+}
+
 void Logic::add(std::string input){
-	Event *event = new Event("Tutorial", "123456", "1100");
 	std::vector<std::string> words = splitWords(input);
 	
 	int indexLocation = indexOf(words, KEYWORD_LOCATION);
 	int indexDate = indexOf(words, KEYWORD_DATE);
 	int indexTime = indexOf(words, KEYWORD_TIME);
 
+	std::string name = extractField(words, 0, indexLocation);
+	std::string location = extractField(words, indexLocation, indexDate);
+	std::string date = extractField(words, indexDate, indexTime);
+	std::string time = extractField(words, indexTime, words.size() - 1);
+	
+	Event *event = new Event(name, date, time);
 	events.push_back(event);
 }
 
