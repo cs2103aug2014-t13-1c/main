@@ -21,6 +21,7 @@ void delete(std::string intput){
 
 void undo(){
 	//Logic code
+	events.pop_back();
 }
 
 void edit(std::string input){
@@ -29,6 +30,7 @@ void edit(std::string input){
 
 void reset(){
 	//logic code
+	events.clear();
 }
 
 std::vector<Event*> Logic::getEvents(){
