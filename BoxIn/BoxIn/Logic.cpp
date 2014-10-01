@@ -15,6 +15,22 @@ void Logic::add(std::string input){
 	events.push_back(event);
 }
 
+void delete(std::string intput){
+	//logic code
+}
+
+void undo(){
+	//Logic code
+}
+
+void edit(std::string input){
+	//logic code
+}
+
+void reset(){
+	//logic code
+}
+
 std::vector<Event*> Logic::getEvents(){
 	return events;
 }
