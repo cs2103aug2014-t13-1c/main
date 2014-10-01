@@ -60,6 +60,6 @@ bool Task::setDescription(string content) {
 
 bool Task::setFinish(bool result) {
      _isDone = result;
-     return _isDone;
+     return _isFinish;
 }
 
