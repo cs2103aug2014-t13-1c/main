@@ -7,10 +7,13 @@
 */
 BoxIn::BoxIn(QWidget *parent) : QMainWindow(parent){
 	ui.setupUi(this);
+	createActions();
+	createTrayIcon();
 	setFixedSize(WIDTH_WINDOW, HEIGHT_WINDOW); //size is not variable.
 	setComponentSizes();
 	linkEvents();
 	setupMap();
+	trayIcon->show();
 }
 
 BoxIn::~BoxIn(){
@@ -38,6 +41,19 @@ void BoxIn::setComponentSizes(){
 void BoxIn::linkEvents(){
 	QObject::connect(ui.buttonExit,SIGNAL(clicked()), this, SLOT(buttonExitClicked()));
 	QObject::connect(ui.commandLine, SIGNAL(returnPressed()), this, SLOT(commandLineReturnPressed()));
+
+	QObject::connect(this, SIGNAL(toggled(bool)), trayIcon, SLOT(setVisible(bool)));
+	QObject::connect(trayIcon, SIGNAL(messageClicked()), this, SLOT(messageClicked()));
+    QObject::connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+}
+
+void BoxIn::changeEvent(QEvent *event){
+	event->accept();
+	if(windowState() == Qt::WindowMinimized){
+		this->hide();
+	}else if(windowState() == Qt::WindowMaximized){
+		this->show();
+	}
 }
 
 void BoxIn::setupMap(){
@@ -94,27 +110,7 @@ void BoxIn::handleUserInput(QString input){
 	}
 	updateGUI();
 }
-/*
-void BoxIn::extractKeywords(QStringList input){
-	int indexPlace = input.indexOf(KEYWORD_PLACE);
-	int indexDate = input.indexOf(KEYWORD_DATE);
-	int indexTime = input.indexOf(KEYWORD_TIME);
-	
-	if(indexPlace > indexDate || indexDate > indexTime){
-		displayFeedback(QString("Command format is wrong"));
-	}else{
-		if(indexPlace == NOT_FOUND_IN_COMMAND){
-			displayFeedback(QString("Please enter a location"));
-		}
-		if(indexDate == NOT_FOUND_IN_COMMAND){
-			displayFeedback(QString("Please enter a date"));
-		}
-		if(indexTime == NOT_FOUND_IN_COMMAND){
-			displayFeedback(QString("Please enter a time"));
-		}
-	}
-}
-*/
+
 void BoxIn::updateGUI(){
 	std::vector<Event*> thingsToInclude = logic.getEvents();
 	ui.displayFeedToday->clear();
@@ -122,4 +118,57 @@ void BoxIn::updateGUI(){
 		std::string itemText = (*iter)->getName() + " at " + (*iter)->getLocation() + " - " + (*iter)->getDate() + ", " + (*iter)->getTime();
 		QListWidgetItem *item = new QListWidgetItem(QString(itemText.c_str()), ui.displayFeedToday);
 	}
+}
+
+void BoxIn::createTrayIcon(){
+	trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction(minimizeAction);
+    trayIconMenu->addAction(maximizeAction);
+    trayIconMenu->addAction(restoreAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(quitAction);
+	trayIcon = new QSystemTrayIcon(this);
+	trayIcon->setIcon(QIcon("BoxInSysTrayIco.jpg"));
+    trayIcon->setContextMenu(trayIconMenu);
+}
+
+void BoxIn::createActions()
+ {
+     minimizeAction = new QAction(tr("Minimize"), this);
+     QObject::connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
+
+     maximizeAction = new QAction(tr("Maximize"), this);
+     QObject::connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showNormal()));
+
+     restoreAction = new QAction(tr("Restore"), this);
+     QObject::connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
+
+     quitAction = new QAction(tr("Quit"), this);
+     QObject::connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+ }
+
+ void BoxIn::closeEvent(QCloseEvent *event)
+ {
+     if (trayIcon->isVisible()) {
+         QMessageBox::information(this, tr("Systray"),
+                                  tr("The program will keep running in the "
+                                     "system tray. To terminate the program, "
+                                     "choose <b>Quit</b> in the context menu "
+                                     "of the system tray entry."));
+         hide();
+         event->ignore();
+     }
+ }
+
+ void BoxIn::iconActivated(QSystemTrayIcon::ActivationReason reason){
+	 if(reason == QSystemTrayIcon::DoubleClick){
+		 this->showNormal();
+	 }
+ }
+
+ void BoxIn::setVisible(bool visible){
+    minimizeAction->setEnabled(visible);
+    maximizeAction->setEnabled(!isMaximized());
+    restoreAction->setEnabled(isMaximized() || !visible);
+    QMainWindow::setVisible(visible);
 }

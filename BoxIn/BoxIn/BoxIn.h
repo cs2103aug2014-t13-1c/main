@@ -4,6 +4,10 @@
 #include <QMainWindow>
 #include <QString>
 #include <qlistview.h>
+#include "qsystemtrayicon.h"
+#include <QMenu>
+#include <qmessagebox.h>
+#include <QCloseEvent>
 #include "ui_BoxIn.h"
 #include "Logic.h"
 #include "digitalclock.h"
@@ -56,6 +60,11 @@ public:
 	void displayFeedback(QString feedback);
 	void clearCommandLine();
 	QString readCommandLine();
+	void setVisible(bool visible);
+
+protected:
+
+	void closeEvent(QCloseEvent *event);
 
 private:
 	Ui::BoxInClass ui;
@@ -69,9 +78,26 @@ private:
 	void extractKeywords(QStringList input);
 	void updateGUI();
 
+	// for the tray icon
+	void createTrayIcon();
+	void createActions();
+	void closeEvent();
+	void iconActivatd();
+	void setVisible();
+	void changeEvent(QEvent *event);
+
+	QAction *minimizeAction;
+	QAction *maximizeAction;
+	QAction *restoreAction;
+	QAction *quitAction;
+
+	QSystemTrayIcon *trayIcon;
+	QMenu *trayIconMenu;
+
 private slots:
 	void commandLineReturnPressed();
 	void buttonExitClicked();
+	void iconActivated(QSystemTrayIcon::ActivationReason reason);
 };
 
 #endif // BOXIN_H
