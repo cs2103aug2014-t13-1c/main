@@ -39,7 +39,7 @@ void Logic::add(std::string input){
 	int indexDate = indexOf(words, KEYWORD_DATE);
 	int indexTime = indexOf(words, KEYWORD_TIME);
 
-	std::string name = extractField(words, 0, indexLocation);
+	std::string name = extractField(words, POSITION_FIRST_WORD, indexLocation);
 	std::string location = extractField(words, indexLocation, indexDate);
 	std::string date = extractField(words, indexDate, indexTime);
 	std::string time = extractField(words, indexTime, words.size() - 1);
@@ -49,7 +49,19 @@ void Logic::add(std::string input){
 }
 
 void Logic::del(std::string input){
-	//logic code
+	std::vector<std::string> words = splitWords(input);
+
+	int indexDate = indexOf(words, KEYWORD_DATE);
+
+	std::string name = extractField(words, POSITION_FIRST_WORD, indexDate);
+	std::string date = extractField(words, indexDate, words.size());
+
+	for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
+		if((*iter)->getDate() == date && (*iter)->getName() == name){
+			events.erase(iter);
+			break;
+		}
+	}
 }
 
 void Logic::undo(){

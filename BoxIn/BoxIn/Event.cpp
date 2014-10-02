@@ -4,10 +4,10 @@
 Event::Event(){
 }
 
-Event::Event(std::string _name, std::string _date, std::string _time){
-	name = _name;
-	date = _date;
-	time = _time;
+Event::Event(std::string name, std::string date, std::string time){
+	this->name = name;
+	this->date = date;
+	this->time = time;
 }
 
 Event::~Event(void){
@@ -15,6 +15,10 @@ Event::~Event(void){
 
 std::string Event::getName(){
 	return name;
+}
+
+std::string Event::getDate(){
+	return date;
 }
 
 /*

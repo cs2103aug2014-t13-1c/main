@@ -78,6 +78,7 @@ void BoxIn::handleUserInput(QString input){
 			logic.add(input.right(input.length() - USER_COMMAND_ADD.length()).toStdString());
 			break;
 		case CommandDelete :
+			logic.del(input.right(input.length() - USER_COMMAND_DELETE.length()).toStdString());
 			break;
 		case CommandEdit :
 			break;

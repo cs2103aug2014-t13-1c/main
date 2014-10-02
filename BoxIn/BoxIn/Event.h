@@ -8,6 +8,7 @@ public:
 	Event(std::string _name, std::string _date, std::string _time);
 	~Event();
 	std::string getName();
+	std::string getDate();
 	/*
 	std::string getDescription();
 	std::string getCategory();

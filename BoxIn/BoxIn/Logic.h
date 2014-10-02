@@ -10,6 +10,8 @@ static std::string KEYWORD_LOCATION = "place";
 static std::string KEYWORD_DATE = "date";
 static std::string KEYWORD_TIME = "time";
 
+static const int POSITION_FIRST_WORD = 0;
+
 class Logic{
 private:
 	std::vector<Event*> events;
