@@ -21,7 +21,7 @@ Event::Event(std::string name, std::string date, std::string time){
 	this->time = time;
 }
 
-Event::~Event(void){
+Event::~Event(){
 }
 
 std::string Event::getName(){
@@ -40,6 +40,16 @@ std::string Event::getTime(){
 
 std::string Event::getLocation(){
 	return location;
+}
+
+void Event::editField(std::string field, std::string newValue){
+	if(field == FIELD_NAME){
+		setName(newValue);
+	}
+}
+
+void Event::setName(std::string newName){
+	name = newName;
 }
 
 /*

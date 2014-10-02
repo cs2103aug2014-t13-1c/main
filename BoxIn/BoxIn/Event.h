@@ -1,10 +1,13 @@
 #pragma once
 
 #include <string>
-/* Cannot open library??? Will reinclude once linker fixed
-#include "boost/date_time/gregorian/gregorian.hpp"
-#include "boost/date_time/posix_time/posix_time.hpp"
-*/
+#include <map>
+
+static const std::string FIELD_NAME = "name";
+static const std::string FIELD_LOCATION = "place";
+static const std::string FIELD_DATE = "date";
+static const std::string FIELD_TIME = "time";
+
 class Event{
 public:
 	Event();
@@ -15,6 +18,8 @@ public:
 	std::string getDate();
 	std::string getTime();
 	std::string getLocation();
+	void editField(std::string field, std::string newValue);
+	void setName(std::string newName);
 	/*
 	std::string getDescription();
 	std::string getCategory();
@@ -41,4 +46,3 @@ private:
 	bool _isFinish;
 	*/
 };
-

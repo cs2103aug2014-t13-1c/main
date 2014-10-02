@@ -65,12 +65,25 @@ void Logic::del(std::string input){
 }
 
 void Logic::undo(){
-	//Logic code
-	events.pop_back();
+	//To be implemented. Use secondary storage structure
 }
 
 void Logic::edit(std::string input){
-	//logic code
+	std::vector<std::string> words = splitWords(input);
+
+	int indexDate = indexOf(words, KEYWORD_DATE);
+	int indexField = indexOf(words, KEYWORD_FIELD);
+
+	std::string name = extractField(words, POSITION_FIRST_WORD, indexDate);
+	std::string date = extractField(words, indexDate, indexField);
+	std::string newValue = extractField(words, indexField + 1, words.size());
+
+	for(std::vector<Event*>::iterator iter = events.begin(); iter!= events.end(); iter++){
+		if((*iter)->getDate() == date && (*iter)->getName() == name){
+			(*iter)->editField(words[indexField + 1], newValue);
+		}
+	}
+	
 }
 
 void Logic::reset(){

@@ -81,8 +81,10 @@ void BoxIn::handleUserInput(QString input){
 			logic.del(input.right(input.length() - USER_COMMAND_DELETE.length()).toStdString());
 			break;
 		case CommandEdit :
+			logic.edit(input.right(input.length() - USER_COMMAND_EDIT.length()).toStdString());
 			break;
 		case CommandExit :
+			qApp->quit();
 			break;
 		case CommandUndo :
 			break;

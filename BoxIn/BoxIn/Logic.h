@@ -6,11 +6,13 @@
 #include <string>
 #include <vector>
 
-static std::string KEYWORD_LOCATION = "place";
-static std::string KEYWORD_DATE = "date";
-static std::string KEYWORD_TIME = "time";
+static const std::string KEYWORD_LOCATION = "place";
+static const std::string KEYWORD_DATE = "date";
+static const std::string KEYWORD_TIME = "time";
+static const std::string KEYWORD_FIELD = "field";
 
 static const int POSITION_FIRST_WORD = 0;
+
 
 class Logic{
 private:
@@ -29,6 +31,7 @@ public:
 	void undo();
 	void edit(std::string input);
 	void reset();
+
 
 	std::vector<Event*> getEvents();
 };
