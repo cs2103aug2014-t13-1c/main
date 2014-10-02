@@ -82,6 +82,7 @@
     <ClCompile Include="CommonFunctions.cpp" />
     <ClCompile Include="digitalclock.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="Eventlist.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_BoxIn.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -102,6 +103,7 @@
     </ClCompile>
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Storage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BoxIn.h">
@@ -129,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFunctions.h" />
+    <ClInclude Include="Storage.h" />
     <CustomBuild Include="digitalclock.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing digitalclock.h...</Message>
@@ -140,6 +143,7 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtHelp" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
     <ClInclude Include="Event.h" />
+    <ClInclude Include="EventList.h" />
     <ClInclude Include="GeneratedFiles\ui_BoxIn.h" />
     <ClInclude Include="GeneratedFiles\ui_digitalclock.h" />
     <ClInclude Include="Logic.h" />

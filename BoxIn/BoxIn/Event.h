@@ -8,6 +8,13 @@ static const std::string FIELD_LOCATION = "place";
 static const std::string FIELD_DATE = "date";
 static const std::string FIELD_TIME = "time";
 
+enum Fields {
+	FieldName = 1,
+	FieldDate,
+	FieldTime,
+	FieldLocation
+};
+
 class Event{
 public:
 	Event();
@@ -20,6 +27,9 @@ public:
 	std::string getLocation();
 	void editField(std::string field, std::string newValue);
 	void setName(std::string newName);
+	void setDate(std::string newDate);
+	void setTime(std::string newTime);
+	void setLocation(std::string newLocation);
 	/*
 	std::string getDescription();
 	std::string getCategory();

@@ -52,6 +52,18 @@ void Event::setName(std::string newName){
 	name = newName;
 }
 
+void Event::setDate(std::string newDate){
+	date = newDate;
+}
+
+void Event::setTime(std::string newTime){
+	time = newTime;
+}
+
+void Event::setLocation(std::string newLocation){
+	location = newLocation;
+}
+
 /*
 std::string Event::getDescription() {
     return description;
