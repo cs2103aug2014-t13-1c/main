@@ -27,6 +27,9 @@ std::string Logic::vectorToString(std::vector<std::string> vec){
 }
 
 std::string Logic::extractField(std::vector<std::string> words, int startPos, int endPos){
+	if(endPos - startPos < 1){
+		return "";
+	}
 	std::vector<std::string> result(endPos - startPos - 1);
 	std::copy(words.begin() + startPos + 1, words.begin() + endPos, result.begin());
 	return vectorToString(result);

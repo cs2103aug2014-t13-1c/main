@@ -2,6 +2,7 @@
 
 
 Event::Event(){
+	fieldMap = setupMap();
 }
 
 Event::Event(std::string name, std::string location, std::string date, std::string time){
@@ -11,6 +12,7 @@ Event::Event(std::string name, std::string location, std::string date, std::stri
 	this->date = date;
 	this->time = time;
 	this->location = location;
+	fieldMap = setupMap();
 }
 
 Event::Event(std::string name, std::string date, std::string time){
@@ -19,9 +21,19 @@ Event::Event(std::string name, std::string date, std::string time){
 	// this->time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(time.substr(0,2)), std::stoi(time.substr(2,4)), 0));
 	this->date = date;
 	this->time = time;
+	fieldMap = setupMap();
 }
 
 Event::~Event(){
+}
+
+std::map<std::string, Field> Event::setupMap(){
+	std::map<std::string, Field> fieldMap;
+	fieldMap[FIELD_NAME] = FieldName;
+	fieldMap[FIELD_DATE] = FieldDate;
+	fieldMap[FIELD_TIME] = FieldTime;
+	fieldMap[FIELD_LOCATION] = FieldLocation;
+	return fieldMap;
 }
 
 std::string Event::getName(){
@@ -43,8 +55,18 @@ std::string Event::getLocation(){
 }
 
 void Event::editField(std::string field, std::string newValue){
-	if(field == FIELD_NAME){
-		setName(newValue);
+	switch(fieldMap[field]){
+		case FieldName :
+			setName(newValue);
+			break;
+		case FieldDate:
+			setDate(newValue);
+			break;
+		case FieldTime :
+			setTime(newValue);
+			break;
+		case FieldLocation :
+			setLocation(newValue);
 	}
 }
 

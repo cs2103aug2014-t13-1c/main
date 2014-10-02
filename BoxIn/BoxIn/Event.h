@@ -8,7 +8,7 @@ static const std::string FIELD_LOCATION = "place";
 static const std::string FIELD_DATE = "date";
 static const std::string FIELD_TIME = "time";
 
-enum Fields {
+enum Field {
 	FieldName = 1,
 	FieldDate,
 	FieldTime,
@@ -21,6 +21,9 @@ public:
 	Event(std::string name, std::string date, std::string time);
 	Event(std::string name, std::string location, std::string date, std::string time);
 	~Event();
+
+	std::map<std::string, Field> setupMap();
+
 	std::string getName();
 	std::string getDate();
 	std::string getTime();
@@ -42,6 +45,7 @@ public:
 	bool setFinish(bool);
 	bool contains(std::string);*/
 private:
+	std::map<std::string, Field> fieldMap;
 	std::string name;
 	// boost::gregorian::date date;
 	// boost::posix_time::ptime time;
