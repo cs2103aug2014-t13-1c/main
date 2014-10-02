@@ -42,9 +42,9 @@ void Logic::add(std::string input){
 	std::string name = extractField(words, POSITION_FIRST_WORD, indexLocation);
 	std::string location = extractField(words, indexLocation, indexDate);
 	std::string date = extractField(words, indexDate, indexTime);
-	std::string time = extractField(words, indexTime, words.size() - 1);
+	std::string time = extractField(words, indexTime, words.size());
 	
-	Event *event = new Event(name, date, time);
+	Event *event = new Event(name, location, date, time);
 	events.push_back(event);
 }
 

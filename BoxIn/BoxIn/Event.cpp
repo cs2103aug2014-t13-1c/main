@@ -4,8 +4,19 @@
 Event::Event(){
 }
 
+Event::Event(std::string name, std::string location, std::string date, std::string time){
+	this->name = name;
+	// this->date = boost::gregorian::date(boost::gregorian::from_undelimited_string(date));
+	// this->time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(time.substr(0,2)), std::stoi(time.substr(2,4)), 0));
+	this->date = date;
+	this->time = time;
+	this->location = location;
+}
+
 Event::Event(std::string name, std::string date, std::string time){
 	this->name = name;
+	// this->date = boost::gregorian::date(boost::gregorian::from_undelimited_string(date));
+	// this->time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(time.substr(0,2)), std::stoi(time.substr(2,4)), 0));
 	this->date = date;
 	this->time = time;
 }
@@ -19,6 +30,16 @@ std::string Event::getName(){
 
 std::string Event::getDate(){
 	return date;
+	// return boost::gregorian::to_iso_extended_string(date);
+}
+
+std::string Event::getTime(){
+	return time;
+	// return boost::posix_time::to_iso_extended_string(time);
+}
+
+std::string Event::getLocation(){
+	return location;
 }
 
 /*

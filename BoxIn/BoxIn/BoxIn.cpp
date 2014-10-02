@@ -116,7 +116,8 @@ void BoxIn::extractKeywords(QStringList input){
 void BoxIn::updateGUI(){
 	std::vector<Event*> thingsToInclude = logic.getEvents();
 	ui.displayFeedToday->clear();
-	for(unsigned int i = 0; i < thingsToInclude.size(); i++){
-		QListWidgetItem *item = new QListWidgetItem(QString(thingsToInclude[i]->getName().c_str()), ui.displayFeedToday);
+	for(std::vector<Event*>::iterator iter = thingsToInclude.begin(); iter != thingsToInclude.end(); iter++){
+		std::string itemText = (*iter)->getName() + " at " + (*iter)->getLocation() + " - " + (*iter)->getDate() + ", " + (*iter)->getTime();
+		QListWidgetItem *item = new QListWidgetItem(QString(itemText.c_str()), ui.displayFeedToday);
 	}
 }
