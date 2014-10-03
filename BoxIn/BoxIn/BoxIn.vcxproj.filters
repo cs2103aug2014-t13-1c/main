@@ -113,5 +113,8 @@
     <Image Include="BoxIn.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="BoxInSysTrayIco.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

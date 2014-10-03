@@ -6,13 +6,12 @@
 * Links events
 */
 BoxIn::BoxIn(QWidget *parent) : QMainWindow(parent){
-	ui.setupUi(this);
 	createActions();
-	createTrayIcon();
+	ui.setupUi(this);
 	setFixedSize(WIDTH_WINDOW, HEIGHT_WINDOW); //size is not variable.
 	setComponentSizes();
+	createTrayIcon();
 	linkEvents();
-	setupMap();
 	trayIcon->show();
 }
 
@@ -33,10 +32,9 @@ void BoxIn::setComponentSizes(){
 	clock->move(WIDTH_WINDOW - WIDTH_TIMER - WIDTH_LABEL / 2, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 2 * HEIGHT_SMALL - HEIGHT_TIMER - 3 * HEIGHT_BUFFER);
 }
 
-/*
+/**
 * Setup method
 * linkEvents deals with the events from keypresses and such, connecting them to the relevant function call
-*
 */
 void BoxIn::linkEvents(){
 	QObject::connect(ui.buttonExit,SIGNAL(clicked()), this, SLOT(buttonExitClicked()));
@@ -46,7 +44,7 @@ void BoxIn::linkEvents(){
     QObject::connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 }
 
-/*
+/**
 * Handles the event changes - particularly the minimizing and maximizing of the window to system tray.
 */
 void BoxIn::changeEvent(QEvent *event){
@@ -57,15 +55,6 @@ void BoxIn::changeEvent(QEvent *event){
 		this->show();
 	}
 }
-
-void BoxIn::setupMap(){
-	stringToCommand[USER_COMMAND_ADD] = CommandAdd;
-	stringToCommand[USER_COMMAND_DELETE] = CommandDelete;
-	stringToCommand[USER_COMMAND_EDIT] = CommandEdit;
-	stringToCommand[USER_COMMAND_UNDO] = CommandUndo;
-	stringToCommand[USER_COMMAND_EXIT] = CommandExit;
-}
-
 
 void BoxIn::displayFeedback(QString feedback){
 	ui.feedbackBox->setText(feedback);
@@ -80,7 +69,7 @@ void BoxIn::clearCommandLine(){
 }
 
 void BoxIn::commandLineReturnPressed(){
-	std::string feedback = handleUserInput(readCommandLine());
+	std::string feedback = logic.handleUserInput(readCommandLine().toStdString());
 	displayFeedback(QString(feedback.c_str()));
 	clearCommandLine();
 	updateGUI();
@@ -88,32 +77,6 @@ void BoxIn::commandLineReturnPressed(){
 
 void BoxIn::buttonExitClicked(){
 	qApp->quit();
-}
-
-std::string BoxIn::handleUserInput(QString input){
-	QStringList words = input.split(WHITESPACE, QString::KeepEmptyParts, Qt::CaseInsensitive);
-	QString firstWord = words[FIRST_WORD_POSITION];
-	std::string feedback = "Done!";
-	switch(stringToCommand[firstWord]){
-		case CommandAdd :
-			logic.add(input.right(input.length() - USER_COMMAND_ADD.length()).toStdString());
-			break;
-		case CommandDelete :
-			logic.del(input.right(input.length() - USER_COMMAND_DELETE.length()).toStdString());
-			break;
-		case CommandEdit :
-			logic.edit(input.right(input.length() - USER_COMMAND_EDIT.length()).toStdString());
-			break;
-		case CommandExit :
-			qApp->quit();
-			break;
-		case CommandUndo :
-			break;
-		default :
-			feedback = "Command is not recognised";
-			break;
-	}
-	return feedback;
 }
 
 void BoxIn::updateGUI(){
@@ -126,18 +89,17 @@ void BoxIn::updateGUI(){
 }
 
 void BoxIn::createTrayIcon(){
+	trayIcon = new QSystemTrayIcon(this);
 	trayIconMenu = new QMenu(this);
     trayIconMenu->addAction(minimizeAction);
     trayIconMenu->addAction(restoreAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
-	trayIcon = new QSystemTrayIcon(this);
 	trayIcon->setIcon(QIcon("BoxInSysTrayIco.jpg"));
     trayIcon->setContextMenu(trayIconMenu);
 }
 
-void BoxIn::createActions()
- {
+void BoxIn::createActions(){
      minimizeAction = new QAction(tr("Minimize"), this);
      QObject::connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
 
@@ -145,7 +107,7 @@ void BoxIn::createActions()
      QObject::connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
 
      quitAction = new QAction(tr("Quit"), this);
-     QObject::connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+     QObject::connect(quitAction, SIGNAL(triggered()), QApplication::instance(), SLOT(quit()));
  }
 
  void BoxIn::iconActivated(QSystemTrayIcon::ActivationReason reason){

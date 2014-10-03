@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="BoxIn.jpg" />
+    <Image Include="BoxInSysTrayIco.jpg" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="digitalclock.ui">

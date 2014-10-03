@@ -2,15 +2,23 @@
 
 
 Logic::Logic(){
+	setupMap();
 }
-
 
 Logic::~Logic(){
 }
 
+void Logic::setupMap(){
+	stringToCommand[USER_COMMAND_ADD] = CommandAdd;
+	stringToCommand[USER_COMMAND_DELETE] = CommandDelete;
+	stringToCommand[USER_COMMAND_EDIT] = CommandEdit;
+	stringToCommand[USER_COMMAND_UNDO] = CommandUndo;
+	stringToCommand[USER_COMMAND_EXIT] = CommandExit;
+}
+
 std::vector<std::string> Logic::splitWords(std::string input){
 	std::vector<std::string> words;
-	boost::algorithm::split(words, input, boost::algorithm::is_any_of(" "), boost::algorithm::token_compress_on);
+	boost::algorithm::split(words, input, boost::algorithm::is_any_of(WHITESPACE), boost::algorithm::token_compress_on);
 	return words;
 }
 
@@ -24,6 +32,31 @@ std::string Logic::vectorToString(std::vector<std::string> vec){
 		result = result + *iter + " ";
 	}
 	return result.substr(0, result.length() - 1);
+}
+
+std::string Logic::handleUserInput(std::string input){
+	std::vector<std::string> words = splitWords(input);
+	std::string firstWord = words[POSITION_FIRST_WORD];
+	std::string feedback = "Done!";
+	switch(stringToCommand[firstWord]){
+		case CommandAdd :
+			add(input.substr(USER_COMMAND_ADD.length(), input.length()));
+			break;
+		case CommandDelete :
+			del(input.substr(USER_COMMAND_DELETE.length(), input.length()));
+			break;
+		case CommandEdit :
+			edit(input.substr(USER_COMMAND_EDIT.length(), input.length()));
+			break;
+		case CommandExit :
+			break;
+		case CommandUndo :
+			break;
+		default :
+			feedback = "Command is not recognised";
+			break;
+	}
+	return feedback;
 }
 
 std::string Logic::extractField(std::vector<std::string> words, int startPos, int endPos){

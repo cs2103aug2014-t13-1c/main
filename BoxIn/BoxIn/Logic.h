@@ -5,21 +5,42 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <map>
 
 static const std::string KEYWORD_LOCATION = "place";
 static const std::string KEYWORD_DATE = "date";
 static const std::string KEYWORD_TIME = "time";
 static const std::string KEYWORD_FIELD = "field";
 
+static const std::string USER_COMMAND_ADD = "add";
+static const std::string USER_COMMAND_DELETE = "delete";
+static const std::string USER_COMMAND_EDIT = "edit";
+static const std::string USER_COMMAND_EXIT = "exit";
+static const std::string USER_COMMAND_UNDO = "undo";
+
 static const int POSITION_FIRST_WORD = 0;
+static const std::string WHITESPACE = " ";
+
+enum CommandType {
+	CommandAdd = 1,
+	CommandDelete,
+	CommandEdit,
+	CommandUndo,
+	CommandExit
+};
 
 
 class Logic{
 private:
 	std::vector<Event*> events;
+	std::map<std::string, CommandType> stringToCommand;
+
 public:
 	Logic();
 	~Logic();
+
+	void setupMap();
+	std::string handleUserInput(std::string input);
 
 	std::vector<std::string> splitWords(std::string input);
 	int indexOf(std::vector<std::string> words, std::string toFind);
