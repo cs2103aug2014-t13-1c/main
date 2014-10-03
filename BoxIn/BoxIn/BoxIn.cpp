@@ -42,11 +42,13 @@ void BoxIn::linkEvents(){
 	QObject::connect(ui.buttonExit,SIGNAL(clicked()), this, SLOT(buttonExitClicked()));
 	QObject::connect(ui.commandLine, SIGNAL(returnPressed()), this, SLOT(commandLineReturnPressed()));
 
-	QObject::connect(this, SIGNAL(toggled(bool)), trayIcon, SLOT(setVisible(bool)));
 	QObject::connect(trayIcon, SIGNAL(messageClicked()), this, SLOT(messageClicked()));
     QObject::connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 }
 
+/*
+* Handles the event changes - particularly the minimizing and maximizing of the window to system tray.
+*/
 void BoxIn::changeEvent(QEvent *event){
 	event->accept();
 	if(windowState() == Qt::WindowMinimized){
@@ -78,17 +80,20 @@ void BoxIn::clearCommandLine(){
 }
 
 void BoxIn::commandLineReturnPressed(){
-	handleUserInput(readCommandLine());
+	std::string feedback = handleUserInput(readCommandLine());
+	displayFeedback(QString(feedback.c_str()));
+	clearCommandLine();
+	updateGUI();
 }
 
 void BoxIn::buttonExitClicked(){
 	qApp->quit();
 }
 
-void BoxIn::handleUserInput(QString input){
+std::string BoxIn::handleUserInput(QString input){
 	QStringList words = input.split(WHITESPACE, QString::KeepEmptyParts, Qt::CaseInsensitive);
 	QString firstWord = words[FIRST_WORD_POSITION];
-	clearCommandLine();
+	std::string feedback = "Done!";
 	switch(stringToCommand[firstWord]){
 		case CommandAdd :
 			logic.add(input.right(input.length() - USER_COMMAND_ADD.length()).toStdString());
@@ -105,10 +110,10 @@ void BoxIn::handleUserInput(QString input){
 		case CommandUndo :
 			break;
 		default :
-			displayFeedback(QString("Command is not recognised"));
+			feedback = "Command is not recognised";
 			break;
 	}
-	updateGUI();
+	return feedback;
 }
 
 void BoxIn::updateGUI(){
@@ -123,7 +128,6 @@ void BoxIn::updateGUI(){
 void BoxIn::createTrayIcon(){
 	trayIconMenu = new QMenu(this);
     trayIconMenu->addAction(minimizeAction);
-    trayIconMenu->addAction(maximizeAction);
     trayIconMenu->addAction(restoreAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
@@ -137,9 +141,6 @@ void BoxIn::createActions()
      minimizeAction = new QAction(tr("Minimize"), this);
      QObject::connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
 
-     maximizeAction = new QAction(tr("Maximize"), this);
-     QObject::connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showNormal()));
-
      restoreAction = new QAction(tr("Restore"), this);
      QObject::connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
 
@@ -147,28 +148,16 @@ void BoxIn::createActions()
      QObject::connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
  }
 
- void BoxIn::closeEvent(QCloseEvent *event)
- {
-     if (trayIcon->isVisible()) {
-         QMessageBox::information(this, tr("Systray"),
-                                  tr("The program will keep running in the "
-                                     "system tray. To terminate the program, "
-                                     "choose <b>Quit</b> in the context menu "
-                                     "of the system tray entry."));
-         hide();
-         event->ignore();
-     }
- }
-
  void BoxIn::iconActivated(QSystemTrayIcon::ActivationReason reason){
 	 if(reason == QSystemTrayIcon::DoubleClick){
 		 this->showNormal();
+		 this->raise();
+		 this->activateWindow();
 	 }
  }
 
  void BoxIn::setVisible(bool visible){
     minimizeAction->setEnabled(visible);
-    maximizeAction->setEnabled(!isMaximized());
     restoreAction->setEnabled(isMaximized() || !visible);
     QMainWindow::setVisible(visible);
 }

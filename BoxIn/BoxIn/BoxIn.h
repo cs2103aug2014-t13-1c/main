@@ -62,10 +62,6 @@ public:
 	QString readCommandLine();
 	void setVisible(bool visible);
 
-protected:
-
-	void closeEvent(QCloseEvent *event);
-
 private:
 	Ui::BoxInClass ui;
 	std::map<QString, CommandTypes> stringToCommand;
@@ -74,20 +70,18 @@ private:
 	void setComponentSizes();
 	void linkEvents();
 	void setupMap();
-	void handleUserInput(QString input);
+	std::string handleUserInput(QString input);
 	void extractKeywords(QStringList input);
 	void updateGUI();
 
 	// for the tray icon
 	void createTrayIcon();
 	void createActions();
-	void closeEvent();
 	void iconActivatd();
 	void setVisible();
 	void changeEvent(QEvent *event);
 
 	QAction *minimizeAction;
-	QAction *maximizeAction;
 	QAction *restoreAction;
 	QAction *quitAction;
 
