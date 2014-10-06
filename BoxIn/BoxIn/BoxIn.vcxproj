@@ -78,6 +78,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="Add.cpp" />
     <ClCompile Include="BoxIn.cpp" />
     <ClCompile Include="CommonFunctions.cpp" />
     <ClCompile Include="digitalclock.cpp" />
@@ -128,6 +130,8 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="Add.h" />
     <ClInclude Include="CommonFunctions.h" />
     <ClInclude Include="Storage.h" />
     <CustomBuild Include="digitalclock.h">

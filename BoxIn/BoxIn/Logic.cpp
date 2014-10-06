@@ -40,7 +40,7 @@ std::string Logic::handleUserInput(std::string input){
 	std::string feedback = "Done!";
 	switch(stringToCommand[firstWord]){
 		case CommandAdd :
-			add(input.substr(USER_COMMAND_ADD.length(), input.length()));
+			// add(input.substr(USER_COMMAND_ADD.length(), input.length()));
 			break;
 		case CommandDelete :
 			del(input.substr(USER_COMMAND_DELETE.length(), input.length()));

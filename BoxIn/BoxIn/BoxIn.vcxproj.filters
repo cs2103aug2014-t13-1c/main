@@ -68,6 +68,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_digitalclock.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Add.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BoxIn.h">
@@ -103,6 +109,12 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="Storage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Add.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
