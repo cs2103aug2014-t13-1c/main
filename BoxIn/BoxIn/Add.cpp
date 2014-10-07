@@ -8,22 +8,28 @@ Add::Add(std::string input){
 	int indexDate = indexOf(words, KEYWORD_DATE);
 	int indexTime = indexOf(words, KEYWORD_TIME);
 
-	name = extractField(words, POSITION_FIRST_WORD, indexLocation);
-	location = extractField(words, indexLocation, indexDate);
-	date = extractField(words, indexDate, indexTime);
-	time = extractField(words, indexTime, words.size());
+	std::string name = extractField(words, POSITION_FIRST_WORD, indexLocation);
+	std::string location  = extractField(words, indexLocation, indexDate);
+	std::string date = extractField(words, indexDate, indexTime);
+	std::string time = extractField(words, indexTime, words.size());
+
+	event = new Event(name, location, date, time);
 }
 
 Add::~Add(void){
 }
 
 std::string Add::execute(std::vector<Event*> &events){
-	Event *event = new Event(name, location, date, time);
 	events.push_back(event);
-	return "Success!";
+	return event->getName() + " has been added!";
 }
 
-std::string Add::undo(std::vector<Event*>&){
+std::string Add::undo(std::vector<Event*> &events){
 	// stub
-	return "";
+	for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
+		if(*iter == event){
+			events.erase(iter);
+		}
+	}
+	return event->getName() + " was deleted";
 }
