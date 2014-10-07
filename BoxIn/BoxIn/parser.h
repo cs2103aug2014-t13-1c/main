@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <boost\algorithm\string.hpp>
+//#include <boost\algorithm\string.hpp>
 
 using namespace std;
 
@@ -41,7 +41,7 @@ public:
 	bool hasIndex();
 	bool hasTime();
 	bool hasDate();
-	bool canDo();
+	bool canDo(string);
 	bool canAdd();
 	bool canEdit();
 	bool isValidName();
