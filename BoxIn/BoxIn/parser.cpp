@@ -154,11 +154,7 @@ bool Parser::hasDate(){
 	return true;
 }
 
-<<<<<<< HEAD
-bool Parser::canDo(std::string keyword){
-=======
 bool Parser::canDo(string keyword){
->>>>>>> origin/master
 	bool value = false;
 	if (boost::iequals(keyword, "Add")){
 		if (canAdd())
