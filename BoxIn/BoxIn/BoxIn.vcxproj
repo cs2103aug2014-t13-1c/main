@@ -55,7 +55,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories);(x86)\boost_1_56_0;</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5MultimediaWidgetsd.lib;Qt5Qmld.lib;Qt5Testd.lib;Qt5Helpd.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5Scriptd.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -84,6 +84,7 @@
     <ClCompile Include="CommonFunctions.cpp" />
     <ClCompile Include="Delete.cpp" />
     <ClCompile Include="digitalclock.cpp" />
+    <ClCompile Include="Edit.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_BoxIn.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -106,7 +107,6 @@
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
-    <ClCompile Include="Storage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BoxIn.h">
@@ -137,8 +137,8 @@
     <ClInclude Include="Add.h" />
     <ClInclude Include="CommonFunctions.h" />
     <ClInclude Include="Delete.h" />
+    <ClInclude Include="Edit.h" />
     <ClInclude Include="parser.h" />
-    <ClInclude Include="Storage.h" />
     <CustomBuild Include="digitalclock.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing digitalclock.h...</Message>

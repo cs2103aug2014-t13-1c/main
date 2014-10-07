@@ -27,6 +27,10 @@ Event::Event(std::string name, std::string date, std::string time){
 Event::~Event(){
 }
 
+Event* Event::copy(){
+	return new Event(name, location, date, time);
+}
+
 std::map<std::string, Field> Event::setupMap(){
 	std::map<std::string, Field> fieldMap;
 	fieldMap[FIELD_NAME] = FieldName;

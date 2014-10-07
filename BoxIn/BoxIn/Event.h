@@ -21,6 +21,7 @@ public:
 	Event(std::string name, std::string date, std::string time);
 	Event(std::string name, std::string location, std::string date, std::string time);
 	~Event();
+	Event* copy();
 
 	std::map<std::string, Field> setupMap();
 

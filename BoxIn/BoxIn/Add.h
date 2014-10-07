@@ -10,7 +10,7 @@ private:
 public:
 	Add(std::string input);
 	~Add(void);
-	std::string execute(std::vector<Event*>&);
-	std::string undo(std::vector<Event*>&);
+	std::string execute(std::vector<Event*> &events);
+	std::string undo(std::vector<Event*> &events);
 };
 

@@ -78,9 +78,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Delete.cpp">
-	  <Filter>Source Files</Filter>
-	</ClCompile>
-    <ClCompile Include="Storage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Edit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,9 +117,6 @@
     <ClInclude Include="GeneratedFiles\ui_digitalclock.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="Storage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Action.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -130,6 +127,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Delete.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Edit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

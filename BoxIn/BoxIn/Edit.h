@@ -1,16 +1,18 @@
 #pragma once
 #include "action.h"
-
-class Delete :
+class Edit :
 	public Action
 {
 private:
-	Event *event;
+	Event* oldEvent;
+	Event* newEvent;
 	std::string name;
 	std::string date;
+	std::string field;
+	std::string newValue;
 public:
-	Delete(std::string input);
-	~Delete(void);
+	Edit(std::string input);
+	~Edit(void);
 	std::string execute(std::vector<Event*> &events);
 	std::string undo(std::vector<Event*> &events);
 };
