@@ -41,11 +41,7 @@ public:
 	bool hasIndex();
 	bool hasTime();
 	bool hasDate();
-<<<<<<< HEAD
-	bool canDo(std::string keyword);
-=======
 	bool canDo(string);
->>>>>>> origin/master
 	bool canAdd();
 	bool canEdit();
 	bool isValidName();
