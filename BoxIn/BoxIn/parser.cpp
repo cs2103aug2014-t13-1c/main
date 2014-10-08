@@ -231,3 +231,10 @@ bool Parser::isValidIndex(){
 	//stub - (self-note use boost tokenizer)
 	return true;
 }
+
+void Parser::setEventDetails(Event eventObj){
+	name = eventObj.getName();
+	location = eventObj.getLocation();
+	time = eventObj.getTime();
+	date = eventObj.getDate();
+}

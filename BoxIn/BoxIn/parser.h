@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <boost\algorithm\string.hpp>
+#include "Event.h"
 
 using namespace std;
 
@@ -50,6 +51,8 @@ public:
 	bool canDisplay();
 	bool canDelete();
 	bool isValidIndex();
+
+	void setEventDetails(Event);
 
 	~Parser(void);
 };
