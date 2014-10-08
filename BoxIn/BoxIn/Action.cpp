@@ -40,8 +40,8 @@ std::string Action::extractField(std::vector<std::string> words, int startPos, i
 		return "";
 	}
 	std::vector<std::string> result(endPos - startPos - 1);
-	assert(startPos >= 0);
-	assert(endPos <= words.size());
+	assert(startPos >= 0 && "Invalid start position");
+	assert(endPos <= words.size() && "Invalid end position");
 	std::copy(words.begin() + startPos + 1, words.begin() + endPos, result.begin());
 	return vectorToString(result);
 }

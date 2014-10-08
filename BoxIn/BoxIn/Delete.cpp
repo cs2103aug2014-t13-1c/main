@@ -21,6 +21,7 @@ std::string Delete::execute(std::vector<Event*> &events){
 		if((*iter)->getDate() == date && (*iter)->getName() == name){
 			event = *iter;
 			events.erase(iter);
+			break;
 		}
 	}
 	return event->getName() + " has been deleted!";

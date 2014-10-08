@@ -38,15 +38,19 @@ std::string Logic::handleUserInput(std::string input){
 	std::vector<std::string> words = splitWords(input);
 	std::string firstWord = words[POSITION_FIRST_WORD];
 	std::string feedback = "Done!";
+	Action *action = NULL;
 	switch(stringToCommand[firstWord]){
 		case CommandAdd :
 			// add(input.substr(USER_COMMAND_ADD.length(), input.length()));
+			action = new Add(input);
 			break;
 		case CommandDelete :
-			del(input.substr(USER_COMMAND_DELETE.length(), input.length()));
+			// del(input.substr(USER_COMMAND_DELETE.length(), input.length()));
+			action = new Delete(input);
 			break;
 		case CommandEdit :
-			edit(input.substr(USER_COMMAND_EDIT.length(), input.length()));
+			// edit(input.substr(USER_COMMAND_EDIT.length(), input.length()));
+			action = new Edit(input);
 			break;
 		case CommandExit :
 			break;
@@ -55,6 +59,9 @@ std::string Logic::handleUserInput(std::string input){
 		default :
 			feedback = "Command is not recognised";
 			break;
+	}
+	if(action != NULL){
+		feedback = action->execute(events);
 	}
 	return feedback;
 }
