@@ -34,6 +34,7 @@ public:
 	void setDate(std::string newDate);
 	void setTime(std::string newTime);
 	void setLocation(std::string newLocation);
+	std::string repr();
 	/*
 	std::string getDescription();
 	std::string getCategory();

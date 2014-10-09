@@ -40,6 +40,14 @@ std::map<std::string, Field> Event::setupMap(){
 	return fieldMap;
 }
 
+std::string Event::repr(){
+	std::string rep = name;
+	if(location != ""){rep = rep + " at " + location;}
+	if(date != ""){rep = rep + " on " + date;}
+	if(time != ""){rep = rep + " at " + time + "hrs";}
+	return rep;
+}
+
 std::string Event::getName(){
 	return name;
 }

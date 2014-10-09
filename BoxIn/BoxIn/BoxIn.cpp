@@ -48,6 +48,7 @@ void BoxIn::linkEvents(){
 * Handles the event changes - particularly the minimizing and maximizing of the window to system tray.
 */
 void BoxIn::changeEvent(QEvent *event){
+	if(event->type() == QEvent::Close){qApp->quit();}
 	event->accept();
 	if(windowState() == Qt::WindowMinimized){
 		this->hide();
@@ -83,7 +84,10 @@ void BoxIn::updateGUI(){
 	std::vector<Event*> thingsToInclude = logic.getEvents();
 	ui.displayFeedToday->clear();
 	for(std::vector<Event*>::iterator iter = thingsToInclude.begin(); iter != thingsToInclude.end(); iter++){
-		std::string itemText = (*iter)->getName() + " at " + (*iter)->getLocation() + " - " + (*iter)->getDate() + ", " + (*iter)->getTime();
+		
+		std::string itemText = (*iter)->repr();
+
+		// std::string itemText = (*iter)->getName() + " at " + (*iter)->getLocation() + " - " + (*iter)->getDate() + ", " + (*iter)->getTime();
 		QListWidgetItem *item = new QListWidgetItem(QString(itemText.c_str()), ui.displayFeedToday);
 	}
 }
@@ -107,7 +111,7 @@ void BoxIn::createActions(){
      QObject::connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
 
      quitAction = new QAction(tr("Quit"), this);
-     QObject::connect(quitAction, SIGNAL(triggered()), QApplication::instance(), SLOT(quit()));
+     QObject::connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
  }
 
  void BoxIn::iconActivated(QSystemTrayIcon::ActivationReason reason){
