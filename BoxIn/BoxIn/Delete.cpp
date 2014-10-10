@@ -17,14 +17,20 @@ Delete::~Delete(void){
 }
 
 std::string Delete::execute(std::vector<Event*> &events){
+	bool found = false;
 	for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
 		if((*iter)->getDate() == date && (*iter)->getName() == name){
 			event = *iter;
 			events.erase(iter);
+			found = true;
 			break;
 		}
 	}
-	return event->getName() + " has been deleted!";
+	if(found){
+		return event->getName() + " has been deleted!";
+	}else{
+		return "No item matching " + name + " found.";
+	}
 }
 
 std::string Delete::undo(std::vector<Event*> &events){
