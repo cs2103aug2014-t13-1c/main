@@ -84,6 +84,7 @@
     <ClCompile Include="CommonFunctions.cpp" />
     <ClCompile Include="Delete.cpp" />
     <ClCompile Include="digitalclock.cpp" />
+    <ClCompile Include="DisplayFeed.cpp" />
     <ClCompile Include="Edit.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_BoxIn.cpp">
@@ -107,6 +108,8 @@
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
+    <ClCompile Include="QEventEditor.cpp" />
+    <ClCompile Include="QEventStore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BoxIn.h">
@@ -137,8 +140,11 @@
     <ClInclude Include="Add.h" />
     <ClInclude Include="CommonFunctions.h" />
     <ClInclude Include="Delete.h" />
+    <ClInclude Include="DisplayFeed.h" />
     <ClInclude Include="Edit.h" />
     <ClInclude Include="parser.h" />
+    <ClInclude Include="QEventEditor.h" />
+    <ClInclude Include="QEventStore.h" />
     <CustomBuild Include="digitalclock.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing digitalclock.h...</Message>

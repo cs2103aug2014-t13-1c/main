@@ -24,12 +24,9 @@ BoxIn::~BoxIn(){
 * declared in BoxIn.h
 */
 void BoxIn::setComponentSizes(){
-	ui.feedbackBox->setGeometry(0, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 3 * HEIGHT_SMALL - 2 * HEIGHT_BUFFER, WIDTH_WINDOW, HEIGHT_SMALL);
-	ui.commandLabel->setGeometry(0, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 2 * HEIGHT_SMALL - HEIGHT_BUFFER, WIDTH_LABEL, HEIGHT_SMALL);
-	ui.commandLine->setGeometry(WIDTH_LABEL, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 2 * HEIGHT_SMALL - HEIGHT_BUFFER, WIDTH_WINDOW - WIDTH_LABEL, HEIGHT_SMALL);
-	ui.buttonExit->setGeometry(0, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - HEIGHT_SMALL, WIDTH_WINDOW, HEIGHT_SMALL);
 	DigitalClock *clock = new DigitalClock(this);
 	clock->move(WIDTH_WINDOW - WIDTH_TIMER - WIDTH_LABEL / 2, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 2 * HEIGHT_SMALL - HEIGHT_TIMER - 3 * HEIGHT_BUFFER);
+	displayFeedToday = new DisplayFeed(this, WIDTH_BUFFER, 40, WIDTH_WINDOW - 2 * WIDTH_BUFFER, 350, PASTEL_BLUE);
 }
 
 /**
@@ -82,14 +79,7 @@ void BoxIn::buttonExitClicked(){
 
 void BoxIn::updateGUI(){
 	std::vector<Event*> thingsToInclude = logic.getEvents();
-	ui.displayFeedToday->clear();
-	for(std::vector<Event*>::iterator iter = thingsToInclude.begin(); iter != thingsToInclude.end(); iter++){
-		
-		std::string itemText = (*iter)->repr();
-
-		// std::string itemText = (*iter)->getName() + " at " + (*iter)->getLocation() + " - " + (*iter)->getDate() + ", " + (*iter)->getTime();
-		QListWidgetItem *item = new QListWidgetItem(QString(itemText.c_str()), ui.displayFeedToday);
-	}
+	displayFeedToday->refresh(&thingsToInclude);
 }
 
 void BoxIn::createTrayIcon(){

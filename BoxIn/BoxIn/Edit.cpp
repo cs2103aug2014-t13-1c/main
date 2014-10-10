@@ -2,17 +2,13 @@
 
 
 Edit::Edit(std::string input){
-	// do something with parser here
 	std::vector<std::string> words = splitWords(input);
-
 	int indexDate = indexOf(words, KEYWORD_DATE);
 	int indexField = indexOf(words, KEYWORD_FIELD);
-
 	if(indexField != words.size()){field = words[indexField + 1];}
 	name = extractField(words, POSITION_FIRST_WORD, indexDate);
 	date = extractField(words, indexDate, indexField);
 	newValue = extractField(words, indexField + 1, words.size());
-	
 }
 
 

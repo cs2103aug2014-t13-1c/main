@@ -29,6 +29,7 @@ std::string Add::undo(std::vector<Event*> &events){
 	for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
 		if(*iter == event){
 			events.erase(iter);
+			break;
 		}
 	}
 	return event->getName() + " was deleted";

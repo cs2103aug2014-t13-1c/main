@@ -41,15 +41,12 @@ std::string Logic::handleUserInput(std::string input){
 	Action *action = NULL;
 	switch(stringToCommand[firstWord]){
 		case CommandAdd :
-			// add(input.substr(USER_COMMAND_ADD.length(), input.length()));
 			action = new Add(input);
 			break;
 		case CommandDelete :
-			// del(input.substr(USER_COMMAND_DELETE.length(), input.length()));
 			action = new Delete(input);
 			break;
 		case CommandEdit :
-			// edit(input.substr(USER_COMMAND_EDIT.length(), input.length()));
 			action = new Edit(input);
 			break;
 		case CommandExit :
@@ -108,7 +105,7 @@ void Logic::del(std::string input){
 }
 
 void Logic::undo(){
-	//To be implemented. Use secondary storage structure
+	// To be implemented. Use secondary storage structure
 }
 
 void Logic::edit(std::string input){
@@ -130,7 +127,7 @@ void Logic::edit(std::string input){
 }
 
 void Logic::reset(){
-	//logic code
+	// logic code
 	events.clear();
 }
 

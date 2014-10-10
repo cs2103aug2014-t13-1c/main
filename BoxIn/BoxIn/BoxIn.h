@@ -12,17 +12,21 @@
 #include "Logic.h"
 #include "digitalclock.h"
 #include <qapplication.h>
+#include "DisplayFeed.h"
 
 static const int HEIGHT_WINDOW = 600;
 static const int WIDTH_WINDOW = 800;
 
 static const int HEIGHT_BUFFER = 10;
+static const int WIDTH_BUFFER = 20;
 static const int HEIGHT_NO_CLICK_ZONE = 60;
 
 static const int HEIGHT_SMALL = 20;
 static const int HEIGHT_LARGE = 400;
 
 static const int WIDTH_LABEL = 60;
+
+static const std::string PASTEL_BLUE = "rgb(141, 199, 187)";
 
 class BoxIn : public QMainWindow
 {
@@ -58,6 +62,7 @@ private:
 
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu;
+	DisplayFeed *displayFeedToday;
 
 private slots:
 	void commandLineReturnPressed();
