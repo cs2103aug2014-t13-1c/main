@@ -22,6 +22,11 @@ private:
 	};
 	
 public:
+
+	enum KEYWORD{
+		ADD=1, DISPLAY, DELETE, EDIT, UNDO, RESET, DATE, TIME, INVALID
+	};
+
 	Parser(void);
 	void setInput(KEYWORD);
 	bool isKeyword(string);

@@ -1,47 +1,76 @@
+
+#ifndef __BoxIn_EventLIST_H__
+#define __BoxIn_EventLIST_H__
+
 #include <string>
 #include <list>
 #include <memory>
-#include "event.h"
-
+#include <vector>
+#include <map>
+#include "Parser.h"
 
 namespace BoxIn {
+	
+	class EventList : public BoxInObject {
+	
+	public:
+	
 
-        
-        class EventList : public BoxInObject{
-        
-        public:
-                enum SortCriteria{
-                        TIME_START,TIME_END,PRIORITY,NAME,TIME_ADDED,CATEGORY
-                };
+		EventList();
+		
+		static const bool Event_DEFAULT_DONE;
+		static const std::string Event_DEFAULT_CATEGORY;
+		static const int Event_DEFAULT_PRIORITY;
+		struct EventComparator;
+		
+		std::list<std::shared_ptr<Event>>::iterator begin();
+		std::list<std::shared_ptr<Event>>::iterator end();
+		std::list<std::shared_ptr<Event>>::iterator EventListIterator;
 
-                EventList();
-                std::string getName() const;
-                std::list<Event>& getEvents();
-                bool addEvent(std::string);
-                //bool updateEvent(Event); --> need future implementation
-                bool deleteEvent(Event);
-                bool markEvent(Event,bool);
-                bool sort(SortCriteria);
-                std::list<Event>& search(std::string);
+		std::string getName() const;
+		size_t getSize();
+		std::shared_ptr<EventList> getEvents();
+		std::shared_ptr<Event> getEvent(int EventIndex);
+		std::shared_ptr<Event> addEvent(std::string EventName);
+		bool addEvent(std::shared_ptr<Event> Event);
+		bool contains(std::shared_ptr<Event> Event);
+		std::shared_ptr<EventList> deleteEvent(int EventIndex);
+		bool deleteEvent(std::shared_ptr<Event> Event);
+		bool deleteAll();
+		bool hideEvent(std::shared_ptr<Event> Event);
+		bool showEvent(std::shared_ptr<Event> Event);
+		void resetDisplay();
+		std::string serialize();
+		void unserialize(std::string bundle);
+		
+		static bool findString(std::string content, std::string searchTerm,bool caseSensitive);
+		static std::string toLower(std::string input);
 
+		int getDefaultPriority();
+		std::string getDefaultCategory();
 
-        
+		//Testing purposes only
+		std::shared_ptr<std::list<std::string>> getAllEvents();
 
-        private:
+	private:
 
-                static bool compareEventsTimeEnd(Event,Event);
-                static bool compareEventsTimeStart(Event,Event);
-                static bool compareEventsTimeAdded(Event,Event);
-                static bool compareEventsCategory(Event,Event);
-                static bool compareEventsPriority(Event,Event);
-                static bool compareEventsName(Event,Event);
-                bool contains(Event);
-                std::list<Event> tempEvents;
-                SortCriteria _sortOrder;
-                std::string _name;
-                std::list<Event> _events;
-                std::list<Event>::iterator eventIterator;
-        };
+		static const std::string EventLIST_DEFAULT_NAME; 
 
-        
+		static const std::string EventLIST_SEPARATOR;
+
+		std::list<std::shared_ptr<Event>> _Events;
+		std::string _name;
+		std::map<std::shared_ptr<Event>,bool> _displayFlags;
+		std::stack<std::shared_ptr<Event>> _deleteStack;
+		typedef std::pair<std::shared_ptr<Event>,bool> _EventFlag;
+
+		std::string retrieveEventData(std::shared_ptr<Event> Event);
+		void clearDeleteStack();
+		void processDeleteStack();
+		
+	};
+
+	
 }
+
+#endif /* __BoxIn_EventLIST_H__ */

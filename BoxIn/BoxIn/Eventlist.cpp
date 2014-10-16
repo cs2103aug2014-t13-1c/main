@@ -1,181 +1,338 @@
-#include "Eventlist.h"
+
+#include "boost/foreach.hpp"
+#include "EventList.h"
 
 using namespace std;
 
 namespace BoxIn {
 
-        // The class constructor. : Sets up the eventlist.
-        EventList::EventList() :
-                _name("default"), _sortOrder(SortCriteria::TIME_END) {
 
-        }
+	const string EventList::event_DEFAULT_CATEGORY = "Uncategorized";
+	const int EventList::event_DEFAULT_PRIORITY = 0;
+	const bool EventList::event_DEFAULT_DONE = false;
 
- 
-         //Returns the name of this event list
+	const string EventList::EventList_DEFAULT_NAME = "default";
+	const EventList::sortType EventList::EventList_DEFAULT_SORTORDER = EventList::sortType(EventList::TIME_END,true);
 
-        string eventList::getName() const {
-                return _name;
-        }
+	const string EventList::EventList_SEPARATOR = "|";
 
-         // Returns a list of shared pointers to events contained within this event list.
+	// Sets up the EventList. 
 
-        list<Event>& EventList::getEvents() {
-                return _events;
-        }
+	EventList::EventList() :
+		_name(EventList_DEFAULT_NAME) {
+			_sortOrder.clear();
+			_sortOrder.push_back(EventList_DEFAULT_SORTORDER);
+	}
 
+	
 
-        // Returns true if event is added successfully, false otherwise.
-
-        bool EventList::addEvent(string name) {
-             Event event;
-             _events.push_back(event);
-             sort(_sortOrder);
-             return true;
-
-        }
-        
-        
- 
-        // Returns true if event is deleted, false otherwise.
-
-        bool EventList::deleteEvent(Event event) {
-                if(contains(event)) {
-                        //_event.remove(event);
-                }
-                if(contains(event)) {
-                return false; //This should not happen
-                } else {
-                return true;
-                }
-        }
-
-        
-        /**
-         * update the event given the parameter
-         */
-        /*bool EventList::updateEvent(Event event) {  
-        
-        }*/
-        
-
-         // Marks a even as done or undone
-         // Parameter: True is done, False is not done
-
-        bool EventList::markEvent(Event event, bool done) {
-                if(event.setDone(done) == done) {
-                         return true;
-                } else {
-                        return false;
-                }
-        }
-        
-
-         //Sorts the eventlist by the criteria given
-
-        bool EventList::sort(SortCriteria criteria) {
-                bool result;
-                switch(criteria) {
-                case SortCriteria::CATEGORY: {
-                                _events.sort(compareEventsCategory);
-                                break;
-                        }
-                case SortCriteria::TIME_ADDED: {
-                                _events.sort(compareEventsTimeAdded);
-                                break;
-                        }
-                case SortCriteria::TIME_END: default: {
-                                _events.sort(compareEventsTimeEnd);
-                                break;
-                        }
-                case SortCriteria::TIME_START: {
-                                _events.sort(compareEventsTimeStart);
-                                break;
-                        }
-                case SortCriteria::NAME: {
-                                _events.sort(compareEventsName);
-                                break;
-                        }
-                case SortCriteria::PRIORITY: {
-                                _events.sort(compareEventsPriority);
-                                break;
-                        }
-                }
-                return true;
-        }
-
-        // Returns a list of shared pointers to events that fit the search criteria
-
-        list<Event>& EventList::search(string criteria) {
-                tempEvents.clear();
-                for(eventIterator = _events.begin(); eventIterator != _events.end(); eventIterator++) {
-                        if(eventIterator->contains(criteria)) {
-                                tempEvents.push_back(*eventIterator);
-                        }
-                }
-                return tempEvents;
-        }
-        
- 
-        // Check if event already exists inside the list
-
-        bool EventList::contains(Event event) {
-                return false;
-        }
-
-         // compares two events with the criteria given and returns true if the first is smaller, false otherwise 
-
-        bool EventList::compareEventsTimeStart(Event event_a,Event event_b)
-        {
-                return true;
-        }
+	list<shared_ptr<event>>::iterator EventList::begin()
+	{
+		return _events.begin(); 
+			
+	}
+	
+	
+	list<shared_ptr<event>>::iterator EventList::end()
+	{
+		return _events.end(); 
+			
+	}
 
 
-        //compares two events with the criteria given and returns true if the first is smaller, false otherwise 
+	// Returns the name of this event list
 
-        bool EventList::compareEventsTimeEnd(Event event_a,Event event_b)
-        {
-                return true;
-        }
+	string EventList::getName() const {
+		return _name;
+	}
+
+	// Returns the size of this event list
+	 
+	size_t EventList::getSize() {
+		return _events.size();
+	}
+
+	// Returns all events that are set to be displayed.,Displayable events are events where the flag is set to true;
+	 
+	shared_ptr<EventList> EventList::getevents() {
+		shared_ptr<EventList> tempList = make_shared<EventList>();
+		for(EventListIterator = _events.begin(); EventListIterator != _events.end(); EventListIterator++) {
+			if(_displayFlags.at(*EventListIterator)) {
+				tempList->addevent(*EventListIterator);
+			}
+		}
+		return tempList;
+	}
+	
+	// Get event that matches the index given from the list of events return on the previous iteration, If event is not found, a null pointer is returned
+	
+	shared_ptr<event> EventList::getevent(int index) {
+		int count = 0;
+		for(EventListIterator = _events.begin(); EventListIterator != _events.end(); EventListIterator++) {
+			if(_displayFlags.at(*EventListIterator)) {
+				count++;
+			}
+			if(count == index) {
+				return *EventListIterator;
+			}
+		 }
+		return nullptr;
+	}
+	
+	//* Returns a pointer to the event created with the input parameters
+
+	shared_ptr<event> EventList::addevent(string name) {
+			shared_ptr<event> event = make_shared<event> ();
+			event->setName(name); //Creates event
+			event->setDone(event_DEFAULT_DONE);
+			event->setPriority(event_DEFAULT_PRIORITY);
+			event->setCategory(event_DEFAULT_CATEGORY);
+			_displayFlags.insert(_eventFlag(event,true)); //Insert event into eventflag map
+			_events.push_back(event); //Inserts event into EventList
+			sort(_sortOrder);
+			return event;
+	}
+	
+	// Adds the event referenced by the pointer to the EventList.  If the event exists, false is returned, otherwise, true is returned.
+	
+	bool EventList::addevent(shared_ptr<event> event) {
+			if(contains(event)) {
+				return false;
+			} else {
+				_events.push_back(event);
+				_displayFlags.insert(_eventFlag(event,true)); 
+				//Redundancy check in case flag already exists. Shouldn't happen
+				showevent(event); 
+				sort(_sortOrder);
+			}
+			return true;
+	}
+
+	//* Method: contains,Checks whether a event exists inside the EventList
+	
+	bool EventList::contains(shared_ptr<event> event) {
+		BOOST_FOREACH (shared_ptr<event>& event_in_list, _events) {
+			if (event == event_in_list) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	// Returns true if event is deleted, false if event does not exist.
+
+	bool EventList::deleteevent(shared_ptr<event> event) {
+		if(contains(event)) {
+			_events.remove(event);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	// Deletes the n-th event whose display flag is set to true, where n is the index.
+
+	shared_ptr<EventList> EventList::deleteevent(int index) {
+		shared_ptr<event> tempevent = getevent(index);
+		if(tempevent != nullptr) {
+			deleteevent(tempevent);
+		}
+		return getevents();
+	}
+	
+	//Deletes all events returned on the previous display/search call
+
+	bool EventList::deleteAll() {
+		clearDeleteStack();
+		for(EventListIterator = _events.begin(); EventListIterator != _events.end(); EventListIterator++) {
+				if(_displayFlags.at(*EventListIterator)) {
+					_deleteStack.push(*EventListIterator);
+				}
+		}
+		processDeleteStack();
+		return true;
+	}
+	
+	// Sorts the EventList by the criteria given.  Criteria: event detail, followed by true for ascending, false for descending.
+
+	EventList* EventList::sort(vector<pair<EventList::eventDetail,bool>> sortCriteriaList) {
+		_sortOrder = sortCriteriaList;
+		_events.sort(eventComparator(&_sortOrder));
+		return this;
+	}
+	
+	//Sorts the EventList by default. If the event criteria is set previously, the EventList will be sorted by that.
+
+	EventList* EventList::sort() {
+		_events.sort(eventComparator(&_sortOrder));
+		return this;
+	}
+	
+	
+	// Method resetDisplay
+	
+	void EventList::resetDisplay()
+	{
+		for(EventListIterator = _events.begin(); EventListIterator != _events.end(); EventListIterator++)
+		{
+			_displayFlags.erase(*EventListIterator);
+			_displayFlags.insert(_eventFlag(*EventListIterator,true));
+		}
+	}
+	
+	//Sets event's display to false; event will not be displayed, If event is already hidden, method will return false
+
+	bool EventList::hideevent(shared_ptr<event> event)
+	{
+		if(_displayFlags.at(event)) {
+			_displayFlags.erase(event);
+			_displayFlags.insert(_eventFlag(event,false));
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	
+	// Sets event's display to true; event will be displayed , If event is already shown, method will return false
+
+	bool EventList::showevent(shared_ptr<event> event)
+	{
+		if(!_displayFlags.at(event)) {
+			_displayFlags.erase(event);
+			_displayFlags.insert(_eventFlag(event,true));
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 
-         //compares two events with the criteria given and returns true if the first is smaller, 
+	/**
+	* Method findString
+	* Compares the second string to the first, and returns true if the 
+	* second is found inside the first. Set caseSenstive flag to true 
+	* to compare with case considerations.
+	*/
+	bool EventList::findString(string content, string searchTerm, bool caseSensitive)
+	{
+		bool result;
+		if(caseSensitive) {
+			if(content.find(searchTerm) != string::npos) { //found
+				result = true;
+			} else {
+				result = false;
+			}
+		} else {
+			if(toLower(content).find(toLower(searchTerm)) != string::npos) {
+				result = true;
+			} else {
+				result = false;
+			}
+		}
+		return result;
+	}
 
-        bool EventList::compareEventsTimeAdded(Event event_a,Event event_b)
-        {
-                return true;
-        }
+	string EventList::toLower(string value) {
+		string temp = value;
+		for (size_t i = 0; i < temp.length(); i++) {
+		temp[i] = tolower(temp[i]);
+	}
+	return temp;
+	}
+	
 
+	/**
+	* Method getAllevents
+	* Returns a list of serialized events
+	* NOTE: This method is for testing purposes only
+	*/
+	shared_ptr<list<string>> EventList::getAllevents()
+	{
+		shared_ptr<list<string>> tempevents = make_shared<list<string>>();
+		for(EventListIterator = _events.begin(); EventListIterator != _events.end(); EventListIterator++)
+		{
+			tempevents->push_back((*EventListIterator)->serialize());
+		}
+		return tempevents;
+	}
 
-         // compares two events with the criteria given and returns true if the first is smaller, 
+	
+	// returns all data inside the event as a string
 
-        bool EventList::compareEventsCategory(Event event_a,Event event_b)
-        {
-                return true;
-                
-        }
+	string EventList::retrieveeventData(shared_ptr<event> event) {
+		stringstream out_ss (stringstream::in | stringstream::out);
+		out_ss << event->getName() << EventList_SEPARATOR;
+		out_ss << event->getDescription() << EventList_SEPARATOR;
+		out_ss << event->getCategory() << EventList_SEPARATOR;
+		out_ss << event->toString(event->getPriority()) << EventList_SEPARATOR;
+		out_ss << boost::posix_time::to_simple_string(event->getStartTime()) << EventList_SEPARATOR;
+		out_ss << boost::posix_time::to_simple_string(event->getEndTime()) << EventList_SEPARATOR;
 
-      
-       //compares two events with the criteria given and returns true if the first is smaller, 
+		return out_ss.str();
+	}
 
-        bool EventList::compareEventsPriority(Event event_a,Event event_b)
-        {
-                if(event_a.getPriority() < event_b.getPriority()) {
-                                        return true;
-                                } else {
-                                        return false;
-                                }
-        }
+	/**
+	* Method: clearDeleteStack
+	* Removes all elements from the delete stack;
+	*/
+	void EventList::clearDeleteStack()
+	{
+		while(!_deleteStack.empty())
+		{
+			_deleteStack.pop();
+		}
+	}
 
+	/**
+	* Method: processDeleteStack
+	* Deletes each element and removes it from the delete stack
+	*/
+	void EventList::processDeleteStack()
+	{
+		shared_ptr<event> tempevent;
+		while(!_deleteStack.empty())
+		{
+			tempevent = _deleteStack.top();
+			deleteevent(tempevent);
+			_deleteStack.pop();
+		}
+	}
 
-         //compares two events with the criteria given and returns true if the first is smaller, 
+	/**
+	 * Method: serialize
+	 * Inherited from: BoxInObject
+	 */
+	string EventList::serialize() {
+		stringstream out_ss (stringstream::in | stringstream::out);
+		BOOST_FOREACH (const shared_ptr<event>& event, _events) {
+			out_ss << event->serialize() << endl;
+		}
 
-        bool EventList::compareEventsName(Event event_a,Event event_b)
-        {
-                        if((event_a.getName().compare(event_b.getName()) < 0)) {
-                                return true;
-                        } else {
-                                return false;
-                        }
-        }
+		return out_ss.str();
+	}
+
+	/**
+	 * Method: unserialize
+	 * Inherited from: BoxInObject
+	 */
+	void EventList::unserialize(string bundle) {
+		// Tokenize the bundle
+		stringstream bundle_ss (bundle);
+		string buffer;
+		
+		while (!bundle_ss.eof()) {
+			buffer.clear();
+			getline(bundle_ss, buffer);
+
+			// Ignore empty lines
+			if (buffer.size() > 0) {
+				shared_ptr<event> event = make_shared<event>();
+				event->unserialize(buffer);
+				addevent(event);
+			}
+		}
+	}
 
 }
