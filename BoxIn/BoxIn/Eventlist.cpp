@@ -7,35 +7,35 @@ using namespace std;
 namespace BoxIn {
 
 
-	const string EventList::event_DEFAULT_CATEGORY = "Uncategorized";
-	const int EventList::event_DEFAULT_PRIORITY = 0;
-	const bool EventList::event_DEFAULT_DONE = false;
+	const string EventList::eventDEFAULTCATEGORY = "Uncategorized";
+	const int EventList::eventDEFAULTPRIORITY = 0;
+	const bool EventList::eventDEFAULTDONE = false;
 
-	const string EventList::EventList_DEFAULT_NAME = "default";
-	const EventList::sortType EventList::EventList_DEFAULT_SORTORDER = EventList::sortType(EventList::TIME_END,true);
+	const string EventList::EventListDEFAULTNAME = "default";
+	const EventList::sortType EventList::EventListDEFAULTSORTORDER = EventList::sortType(EventList::TIMEEND,true);
 
-	const string EventList::EventList_SEPARATOR = "|";
+	const string EventList::EventListSEPARATOR = "|";
 
 	// Sets up the EventList. 
 
 	EventList::EventList() :
-		_name(EventList_DEFAULT_NAME) {
-			_sortOrder.clear();
-			_sortOrder.push_back(EventList_DEFAULT_SORTORDER);
+		name(EventListDEFAULTNAME) {
+			sortOrder.clear();
+			sortOrder.pushback(EventListDEFAULTSORTORDER);
 	}
 
 	
 
-	list<shared_ptr<event>>::iterator EventList::begin()
+	list<sharedptr<event>>::iterator EventList::begin()
 	{
-		return _events.begin(); 
+		return events.begin(); 
 			
 	}
 	
 	
-	list<shared_ptr<event>>::iterator EventList::end()
+	list<sharedptr<event>>::iterator EventList::end()
 	{
-		return _events.end(); 
+		return events.end(); 
 			
 	}
 
@@ -43,21 +43,21 @@ namespace BoxIn {
 	// Returns the name of this event list
 
 	string EventList::getName() const {
-		return _name;
+		return name;
 	}
 
 	// Returns the size of this event list
 	 
-	size_t EventList::getSize() {
-		return _events.size();
+	sizet EventList::getSize() {
+		return events.size();
 	}
 
 	// Returns all events that are set to be displayed.,Displayable events are events where the flag is set to true;
 	 
-	shared_ptr<EventList> EventList::getevents() {
-		shared_ptr<EventList> tempList = make_shared<EventList>();
-		for(EventListIterator = _events.begin(); EventListIterator != _events.end(); EventListIterator++) {
-			if(_displayFlags.at(*EventListIterator)) {
+	sharedptr<EventList> EventList::getevents() {
+		sharedptr<EventList> tempList = makeshared<EventList>();
+		for(EventListIterator = events.begin(); EventListIterator != events.end(); EventListIterator++) {
+			if(displayFlags.at(*EventListIterator)) {
 				tempList->addevent(*EventListIterator);
 			}
 		}
@@ -66,10 +66,10 @@ namespace BoxIn {
 	
 	// Get event that matches the index given from the list of events return on the previous iteration, If event is not found, a null pointer is returned
 	
-	shared_ptr<event> EventList::getevent(int index) {
+	sharedptr<event> EventList::getevent(int index) {
 		int count = 0;
-		for(EventListIterator = _events.begin(); EventListIterator != _events.end(); EventListIterator++) {
-			if(_displayFlags.at(*EventListIterator)) {
+		for(EventListIterator = events.begin(); EventListIterator != events.end(); EventListIterator++) {
+			if(displayFlags.at(*EventListIterator)) {
 				count++;
 			}
 			if(count == index) {
@@ -81,38 +81,38 @@ namespace BoxIn {
 	
 	//* Returns a pointer to the event created with the input parameters
 
-	shared_ptr<event> EventList::addevent(string name) {
-			shared_ptr<event> event = make_shared<event> ();
+	sharedptr<event> EventList::addevent(string name) {
+			sharedptr<event> event = makeshared<event> ();
 			event->setName(name); //Creates event
-			event->setDone(event_DEFAULT_DONE);
-			event->setPriority(event_DEFAULT_PRIORITY);
-			event->setCategory(event_DEFAULT_CATEGORY);
-			_displayFlags.insert(_eventFlag(event,true)); //Insert event into eventflag map
-			_events.push_back(event); //Inserts event into EventList
-			sort(_sortOrder);
+			event->setDone(eventDEFAULTDONE);
+			event->setPriority(eventDEFAULTPRIORITY);
+			event->setCategory(eventDEFAULTCATEGORY);
+			displayFlags.insert(eventFlag(event,true)); //Insert event into eventflag map
+			events.pushback(event); //Inserts event into EventList
+			sort(sortOrder);
 			return event;
 	}
 	
 	// Adds the event referenced by the pointer to the EventList.  If the event exists, false is returned, otherwise, true is returned.
 	
-	bool EventList::addevent(shared_ptr<event> event) {
+	bool EventList::addevent(sharedptr<event> event) {
 			if(contains(event)) {
 				return false;
 			} else {
-				_events.push_back(event);
-				_displayFlags.insert(_eventFlag(event,true)); 
+				events.pushback(event);
+				displayFlags.insert(eventFlag(event,true)); 
 				//Redundancy check in case flag already exists. Shouldn't happen
 				showevent(event); 
-				sort(_sortOrder);
+				sort(sortOrder);
 			}
 			return true;
 	}
 
 	//* Method: contains,Checks whether a event exists inside the EventList
 	
-	bool EventList::contains(shared_ptr<event> event) {
-		BOOST_FOREACH (shared_ptr<event>& event_in_list, _events) {
-			if (event == event_in_list) {
+	bool EventList::contains(sharedptr<event> event) {
+		BOOSTFOREACH (sharedptr<event>& eventinlist, events) {
+			if (event == eventinlist) {
 				return true;
 			}
 		}
@@ -122,9 +122,9 @@ namespace BoxIn {
 	
 	// Returns true if event is deleted, false if event does not exist.
 
-	bool EventList::deleteevent(shared_ptr<event> event) {
+	bool EventList::deleteevent(sharedptr<event> event) {
 		if(contains(event)) {
-			_events.remove(event);
+			events.remove(event);
 			return true;
 		} else {
 			return false;
@@ -133,8 +133,8 @@ namespace BoxIn {
 	
 	// Deletes the n-th event whose display flag is set to true, where n is the index.
 
-	shared_ptr<EventList> EventList::deleteevent(int index) {
-		shared_ptr<event> tempevent = getevent(index);
+	sharedptr<EventList> EventList::deleteevent(int index) {
+		sharedptr<event> tempevent = getevent(index);
 		if(tempevent != nullptr) {
 			deleteevent(tempevent);
 		}
@@ -145,9 +145,9 @@ namespace BoxIn {
 
 	bool EventList::deleteAll() {
 		clearDeleteStack();
-		for(EventListIterator = _events.begin(); EventListIterator != _events.end(); EventListIterator++) {
-				if(_displayFlags.at(*EventListIterator)) {
-					_deleteStack.push(*EventListIterator);
+		for(EventListIterator = events.begin(); EventListIterator != events.end(); EventListIterator++) {
+				if(displayFlags.at(*EventListIterator)) {
+					deleteStack.push(*EventListIterator);
 				}
 		}
 		processDeleteStack();
@@ -157,15 +157,15 @@ namespace BoxIn {
 	// Sorts the EventList by the criteria given.  Criteria: event detail, followed by true for ascending, false for descending.
 
 	EventList* EventList::sort(vector<pair<EventList::eventDetail,bool>> sortCriteriaList) {
-		_sortOrder = sortCriteriaList;
-		_events.sort(eventComparator(&_sortOrder));
+		sortOrder = sortCriteriaList;
+		events.sort(eventComparator(&sortOrder));
 		return this;
 	}
 	
 	//Sorts the EventList by default. If the event criteria is set previously, the EventList will be sorted by that.
 
 	EventList* EventList::sort() {
-		_events.sort(eventComparator(&_sortOrder));
+		events.sort(eventComparator(&sortOrder));
 		return this;
 	}
 	
@@ -174,20 +174,20 @@ namespace BoxIn {
 	
 	void EventList::resetDisplay()
 	{
-		for(EventListIterator = _events.begin(); EventListIterator != _events.end(); EventListIterator++)
+		for(EventListIterator = events.begin(); EventListIterator != events.end(); EventListIterator++)
 		{
-			_displayFlags.erase(*EventListIterator);
-			_displayFlags.insert(_eventFlag(*EventListIterator,true));
+			displayFlags.erase(*EventListIterator);
+			displayFlags.insert(eventFlag(*EventListIterator,true));
 		}
 	}
 	
 	//Sets event's display to false; event will not be displayed, If event is already hidden, method will return false
 
-	bool EventList::hideevent(shared_ptr<event> event)
+	bool EventList::hideevent(sharedptr<event> event)
 	{
-		if(_displayFlags.at(event)) {
-			_displayFlags.erase(event);
-			_displayFlags.insert(_eventFlag(event,false));
+		if(displayFlags.at(event)) {
+			displayFlags.erase(event);
+			displayFlags.insert(eventFlag(event,false));
 			return true;
 		} else {
 			return false;
@@ -197,11 +197,11 @@ namespace BoxIn {
 	
 	// Sets event's display to true; event will be displayed , If event is already shown, method will return false
 
-	bool EventList::showevent(shared_ptr<event> event)
+	bool EventList::showevent(sharedptr<event> event)
 	{
-		if(!_displayFlags.at(event)) {
-			_displayFlags.erase(event);
-			_displayFlags.insert(_eventFlag(event,true));
+		if(!displayFlags.at(event)) {
+			displayFlags.erase(event);
+			displayFlags.insert(eventFlag(event,true));
 			return true;
 		} else {
 			return false;
@@ -236,7 +236,7 @@ namespace BoxIn {
 
 	string EventList::toLower(string value) {
 		string temp = value;
-		for (size_t i = 0; i < temp.length(); i++) {
+		for (sizet i = 0; i < temp.length(); i++) {
 		temp[i] = tolower(temp[i]);
 	}
 	return temp;
@@ -248,12 +248,12 @@ namespace BoxIn {
 	* Returns a list of serialized events
 	* NOTE: This method is for testing purposes only
 	*/
-	shared_ptr<list<string>> EventList::getAllevents()
+	sharedptr<list<string>> EventList::getAllevents()
 	{
-		shared_ptr<list<string>> tempevents = make_shared<list<string>>();
-		for(EventListIterator = _events.begin(); EventListIterator != _events.end(); EventListIterator++)
+		sharedptr<list<string>> tempevents = makeshared<list<string>>();
+		for(EventListIterator = events.begin(); EventListIterator != events.end(); EventListIterator++)
 		{
-			tempevents->push_back((*EventListIterator)->serialize());
+			tempevents->pushback((*EventListIterator)->serialize());
 		}
 		return tempevents;
 	}
@@ -261,16 +261,16 @@ namespace BoxIn {
 	
 	// returns all data inside the event as a string
 
-	string EventList::retrieveeventData(shared_ptr<event> event) {
-		stringstream out_ss (stringstream::in | stringstream::out);
-		out_ss << event->getName() << EventList_SEPARATOR;
-		out_ss << event->getDescription() << EventList_SEPARATOR;
-		out_ss << event->getCategory() << EventList_SEPARATOR;
-		out_ss << event->toString(event->getPriority()) << EventList_SEPARATOR;
-		out_ss << boost::posix_time::to_simple_string(event->getStartTime()) << EventList_SEPARATOR;
-		out_ss << boost::posix_time::to_simple_string(event->getEndTime()) << EventList_SEPARATOR;
+	string EventList::retrieveeventData(sharedptr<event> event) {
+		stringstream outss (stringstream::in | stringstream::out);
+		outss << event->getName() << EventListSEPARATOR;
+		outss << event->getDescription() << EventListSEPARATOR;
+		outss << event->getCategory() << EventListSEPARATOR;
+		outss << event->toString(event->getPriority()) << EventListSEPARATOR;
+		outss << boost::posixtime::tosimplestring(event->getStartTime()) << EventListSEPARATOR;
+		outss << boost::posixtime::tosimplestring(event->getEndTime()) << EventListSEPARATOR;
 
-		return out_ss.str();
+		return outss.str();
 	}
 
 	/**
@@ -279,9 +279,9 @@ namespace BoxIn {
 	*/
 	void EventList::clearDeleteStack()
 	{
-		while(!_deleteStack.empty())
+		while(!deleteStack.empty())
 		{
-			_deleteStack.pop();
+			deleteStack.pop();
 		}
 	}
 
@@ -291,12 +291,12 @@ namespace BoxIn {
 	*/
 	void EventList::processDeleteStack()
 	{
-		shared_ptr<event> tempevent;
-		while(!_deleteStack.empty())
+		sharedptr<event> tempevent;
+		while(!deleteStack.empty())
 		{
-			tempevent = _deleteStack.top();
+			tempevent = deleteStack.top();
 			deleteevent(tempevent);
-			_deleteStack.pop();
+			deleteStack.pop();
 		}
 	}
 
@@ -305,12 +305,12 @@ namespace BoxIn {
 	 * Inherited from: BoxInObject
 	 */
 	string EventList::serialize() {
-		stringstream out_ss (stringstream::in | stringstream::out);
-		BOOST_FOREACH (const shared_ptr<event>& event, _events) {
-			out_ss << event->serialize() << endl;
+		stringstream outss (stringstream::in | stringstream::out);
+		BOOSTFOREACH (const sharedptr<event>& event, events) {
+			outss << event->serialize() << endl;
 		}
 
-		return out_ss.str();
+		return outss.str();
 	}
 
 	/**
@@ -319,16 +319,16 @@ namespace BoxIn {
 	 */
 	void EventList::unserialize(string bundle) {
 		// Tokenize the bundle
-		stringstream bundle_ss (bundle);
+		stringstream bundless (bundle);
 		string buffer;
 		
-		while (!bundle_ss.eof()) {
+		while (!bundless.eof()) {
 			buffer.clear();
-			getline(bundle_ss, buffer);
+			getline(bundless, buffer);
 
 			// Ignore empty lines
 			if (buffer.size() > 0) {
-				shared_ptr<event> event = make_shared<event>();
+				sharedptr<event> event = makeshared<event>();
 				event->unserialize(buffer);
 				addevent(event);
 			}
