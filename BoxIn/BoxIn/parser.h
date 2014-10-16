@@ -16,10 +16,6 @@ private:
 	string date;
 	string time;
 	string index;
-
-	enum KEYWORD{
-		ADD=1, DISPLAY, DELETE, EDIT, UNDO, RESET, DATE, TIME, INVALID
-	};
 	
 public:
 

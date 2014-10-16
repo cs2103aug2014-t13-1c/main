@@ -2,6 +2,7 @@
 #include <QObject>
 #include "qlistwidget.h"
 #include "Event.h"
+#include "assert.h"
 
 class QEventStore :
 	public QObject, public QListWidgetItem

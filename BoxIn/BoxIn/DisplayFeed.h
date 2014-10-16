@@ -8,6 +8,7 @@
 #include "qmessagebox.h"
 #include "qlabel.h"
 #include "qeventloop.h"
+#include "assert.h"
 
 class DisplayFeed : public QListWidget{
 	Q_OBJECT

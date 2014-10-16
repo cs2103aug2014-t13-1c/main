@@ -54,7 +54,7 @@ void QEventEditor::setField(QString text){
 	}else if(text == QString(FIELD_TIME.c_str())){
 		valueLine->setText(QString(event->getTime().c_str()));
 	}else if(text == QString(FIELD_LOCATION.c_str())){
-		valueLine->setText(QString(event->getTime().c_str()));
+		valueLine->setText(QString(event->getLocation().c_str()));
 	}
 }
 
