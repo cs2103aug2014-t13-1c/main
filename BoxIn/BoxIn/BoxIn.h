@@ -13,6 +13,7 @@
 #include "digitalclock.h"
 #include <qapplication.h>
 #include "DisplayFeed.h"
+#include <QLineEdit>
 
 static const int HEIGHT_WINDOW = 600;
 static const int WIDTH_WINDOW = 800;
@@ -28,10 +29,8 @@ static const int WIDTH_LABEL = 60;
 
 static const std::string PASTEL_BLUE = "rgb(141, 199, 187)";
 
-class BoxIn : public QMainWindow
-{
+class BoxIn : public QMainWindow{
 	Q_OBJECT
-
 public:
 	explicit BoxIn(QWidget *parent = 0);
 	~BoxIn();
@@ -40,6 +39,7 @@ public:
 	void clearCommandLine();
 	QString readCommandLine();
 	void setVisible(bool visible);
+	void updateGUI();
 
 private:
 	Ui::BoxInClass ui;
@@ -47,7 +47,6 @@ private:
 
 	void setComponentSizes();
 	void linkEvents();
-	void updateGUI();
 
 	// for the tray icon
 
@@ -63,11 +62,14 @@ private:
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu;
 	DisplayFeed *displayFeedToday;
+	QLineEdit *commandLine;
 
-private slots:
+public slots:
 	void commandLineReturnPressed();
 	void buttonExitClicked();
 	void iconActivated(QSystemTrayIcon::ActivationReason reason);
+	void editItem(QListWidgetItem *item);
+	void setCommand(std::string command);
 };
 
 #endif // BOXIN_H

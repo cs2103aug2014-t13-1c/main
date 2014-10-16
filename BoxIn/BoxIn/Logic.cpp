@@ -14,6 +14,7 @@ void Logic::setupMap(){
 	stringToCommand[USER_COMMAND_EDIT] = CommandEdit;
 	stringToCommand[USER_COMMAND_UNDO] = CommandUndo;
 	stringToCommand[USER_COMMAND_EXIT] = CommandExit;
+	stringToCommand[USER_COMMAND_SEARCH] = CommandSearch;
 }
 
 std::vector<std::string> Logic::splitWords(std::string input){
@@ -52,6 +53,11 @@ std::string Logic::handleUserInput(std::string input){
 		case CommandExit :
 			break;
 		case CommandUndo :
+			break;
+		case CommandSearch :
+			action = new Search(input);
+			action->execute(events);
+			action = NULL;
 			break;
 		default :
 			feedback = "Command is not recognised";

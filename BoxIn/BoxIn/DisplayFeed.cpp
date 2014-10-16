@@ -4,9 +4,9 @@
 DisplayFeed::DisplayFeed(QWidget *parent, int xpos, int ypos, int width, int height, std::string color)
 	: QListWidget(parent)
 {
+	this->logic = logic;
 	setGeometry(xpos, ypos, width, height);
 	setColor(color);
-	QObject::connect(this, SIGNAL(itemDoubleClicked(*item)), this, SLOT(editItem(*item)));
 	show();
 }
 
@@ -20,10 +20,6 @@ void DisplayFeed::setColor(std::string color){
     setUniformItemSizes(true);
 }
 
-void DisplayFeed::editItem(QEventStore *item){
-
-}
-
 void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
 	clear();
 	for(std::vector<Event*>::iterator iter = thingsToInclude->begin(); iter != thingsToInclude->end(); iter++){		
@@ -33,5 +29,3 @@ void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
 		addItem(item);
 	}
 }
-
-

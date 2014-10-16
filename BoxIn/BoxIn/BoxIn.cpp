@@ -26,6 +26,9 @@ BoxIn::~BoxIn(){
 void BoxIn::setComponentSizes(){
 	DigitalClock *clock = new DigitalClock(this);
 	clock->move(WIDTH_WINDOW - WIDTH_TIMER - WIDTH_LABEL / 2, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 2 * HEIGHT_SMALL - HEIGHT_TIMER - 3 * HEIGHT_BUFFER);
+	commandLine = new QLineEdit(this);
+	commandLine->setGeometry(60, 500, 800, 20);
+	commandLine->setStyleSheet("background-color: rgb(255, 255, 255)");
 	displayFeedToday = new DisplayFeed(this, WIDTH_BUFFER, 40, WIDTH_WINDOW - 2 * WIDTH_BUFFER, 350, PASTEL_BLUE);
 }
 
@@ -34,11 +37,10 @@ void BoxIn::setComponentSizes(){
 * linkEvents deals with the events from keypresses and such, connecting them to the relevant function call
 */
 void BoxIn::linkEvents(){
-	QObject::connect(ui.buttonExit,SIGNAL(clicked()), this, SLOT(buttonExitClicked()));
-	QObject::connect(ui.commandLine, SIGNAL(returnPressed()), this, SLOT(commandLineReturnPressed()));
-
-	QObject::connect(trayIcon, SIGNAL(messageClicked()), this, SLOT(messageClicked()));
+	QObject::connect(ui.buttonExit,SIGNAL(pressed()), this, SLOT(buttonExitClicked()));
+	QObject::connect(commandLine, SIGNAL(returnPressed()), this, SLOT(commandLineReturnPressed()));
     QObject::connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+	QObject::connect(displayFeedToday, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
 }
 
 /**
@@ -59,11 +61,11 @@ void BoxIn::displayFeedback(QString feedback){
 }
 
 QString BoxIn::readCommandLine(){
-	return ui.commandLine->text();
+	return commandLine->text();
 }
 
 void BoxIn::clearCommandLine(){
-	ui.commandLine->setText("");
+	commandLine->setText("");
 }
 
 void BoxIn::commandLineReturnPressed(){
@@ -116,4 +118,15 @@ void BoxIn::createActions(){
     minimizeAction->setEnabled(visible);
     restoreAction->setEnabled(isMaximized() || !visible);
     QMainWindow::setVisible(visible);
+}
+
+void BoxIn::editItem(QListWidgetItem *item){
+	QEventEditor *editor = new QEventEditor(dynamic_cast<QEventStore*>(item)->getEvent());
+	QObject::connect(editor, SIGNAL(infoOut(std::string)), this, SLOT(setCommand(std::string)));
+	QObject::connect(editor, SIGNAL(accepted()), this, SLOT(commandLineReturnPressed()));
+	editor->exec();
+}
+
+void BoxIn::setCommand(std::string command){
+	commandLine->setText(QString(command.c_str()));
 }

@@ -3,6 +3,7 @@
 #include "Add.h"
 #include "Delete.h"
 #include "Edit.h"
+#include "Search.h"
 #include <boost/algorithm/string.hpp>
 #include <algorithm>
 #include <string>
@@ -14,13 +15,15 @@ static const std::string USER_COMMAND_DELETE = "delete";
 static const std::string USER_COMMAND_EDIT = "edit";
 static const std::string USER_COMMAND_EXIT = "exit";
 static const std::string USER_COMMAND_UNDO = "undo";
+static const std::string USER_COMMAND_SEARCH = "search";
 
 enum CommandType {
 	CommandAdd = 1,
 	CommandDelete,
 	CommandEdit,
 	CommandUndo,
-	CommandExit
+	CommandExit,
+	CommandSearch
 };
 
 
@@ -46,7 +49,6 @@ public:
 	void undo();
 	void edit(std::string input);
 	void reset();
-
 
 	std::vector<Event*> getEvents();
 };
