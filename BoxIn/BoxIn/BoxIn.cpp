@@ -9,7 +9,7 @@ BoxIn::BoxIn(QWidget *parent) : QMainWindow(parent){
 	createActions();
 	ui.setupUi(this);
 	setFixedSize(WIDTH_WINDOW, HEIGHT_WINDOW); //size is not variable.
-	setComponentSizes();
+	createComponents();
 	createTrayIcon();
 	linkEvents();
 	trayIcon->show();
@@ -18,18 +18,38 @@ BoxIn::BoxIn(QWidget *parent) : QMainWindow(parent){
 BoxIn::~BoxIn(){
 }
 
+void BoxIn::createComponents(){
+	clock = new DigitalClock(this);
+	nameLabel = new QLabel("Name", this);
+	placeLabel = new QLabel("Place", this);
+	dateLabel = new QLabel("Date", this);
+	timeLabel = new QLabel("Time", this);
+	commandLine = new QLineEdit(this);
+	displayFeedToday = new DisplayFeed(this, WIDTH_BUFFER, 60, WIDTH_WINDOW - 2 * WIDTH_BUFFER, 300, TRANSPARENT);
+	setComponentSizes();
+	setComponentColors();
+}
+
 /*
 * Setup method
 * setComponentSizes deals with the sizes of the various items in the window. These are fixed constants
 * declared in BoxIn.h
 */
 void BoxIn::setComponentSizes(){
-	DigitalClock *clock = new DigitalClock(this);
 	clock->move(WIDTH_WINDOW - WIDTH_TIMER - WIDTH_LABEL / 2, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 2 * HEIGHT_SMALL - HEIGHT_TIMER - 3 * HEIGHT_BUFFER);
-	commandLine = new QLineEdit(this);
+	nameLabel->setGeometry(20, 40, 50, 20);
+	placeLabel->setGeometry(400, 40, 50, 20);
+	dateLabel->setGeometry(600, 40, 50, 20);
+	timeLabel->setGeometry(700, 40, 50, 20);
 	commandLine->setGeometry(60, 500, 800, 20);
-	commandLine->setStyleSheet("background-color: rgb(255, 255, 255)");
-	displayFeedToday = new DisplayFeed(this, WIDTH_BUFFER, 40, WIDTH_WINDOW - 2 * WIDTH_BUFFER, 350, PASTEL_BLUE);
+}
+
+void BoxIn::setComponentColors(){
+	nameLabel->setStyleSheet(TRANSPARENT);
+	placeLabel->setStyleSheet(TRANSPARENT);
+	dateLabel->setStyleSheet(TRANSPARENT);
+	timeLabel->setStyleSheet(TRANSPARENT);
+	commandLine->setStyleSheet(WHITE);
 }
 
 /**

@@ -14,6 +14,7 @@
 #include <qapplication.h>
 #include "DisplayFeed.h"
 #include <QLineEdit>
+#include <QLabel>
 
 static const int HEIGHT_WINDOW = 600;
 static const int WIDTH_WINDOW = 800;
@@ -27,7 +28,9 @@ static const int HEIGHT_LARGE = 400;
 
 static const int WIDTH_LABEL = 60;
 
-static const std::string PASTEL_BLUE = "rgb(141, 199, 187)";
+static const QString PASTEL_BLUE = "rgb(141, 199, 187)";
+static const QString TRANSPARENT = "background-color: rgba(0, 0, 0, 0)";
+static const QString WHITE = "background-color: rgb(255, 255, 255)";
 
 class BoxIn : public QMainWindow{
 	Q_OBJECT
@@ -41,11 +44,14 @@ public:
 	void setVisible(bool visible);
 	void updateGUI();
 
+
 private:
 	Ui::BoxInClass ui;
 	Logic logic;
-
+	
+	void createComponents();
 	void setComponentSizes();
+	void setComponentColors();
 	void linkEvents();
 
 	// for the tray icon
@@ -58,6 +64,12 @@ private:
 	QAction *minimizeAction;
 	QAction *restoreAction;
 	QAction *quitAction;
+
+	DigitalClock *clock;
+	QLabel *nameLabel;
+	QLabel *placeLabel;
+	QLabel *dateLabel;
+	QLabel *timeLabel;
 
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu;

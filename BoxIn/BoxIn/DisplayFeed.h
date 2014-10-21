@@ -15,10 +15,10 @@ class DisplayFeed : public QListWidget{
 private:
 	Logic *logic;
 public:
-	DisplayFeed(QWidget *parent, int xpos, int ypos, int width, int height, std::string color);
+	DisplayFeed(QWidget *parent, int xpos, int ypos, int width, int height, QString color);
 	~DisplayFeed(void);
 
-	void setColor(std::string color);
+	void setColor(QString color);
 	void refresh(std::vector<Event*> *thingsToInclude);
 };
 

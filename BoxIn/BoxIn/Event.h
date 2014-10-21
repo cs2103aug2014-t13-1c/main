@@ -2,6 +2,7 @@
 
 #include <string>
 #include <map>
+#include "boost/date_time/gregorian/gregorian.hpp"
 
 static const std::string FIELD_NAME = "name";
 static const std::string FIELD_LOCATION = "place";

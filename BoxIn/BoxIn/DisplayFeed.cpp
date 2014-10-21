@@ -1,7 +1,7 @@
 #include "DisplayFeed.h"
 
 
-DisplayFeed::DisplayFeed(QWidget *parent, int xpos, int ypos, int width, int height, std::string color)
+DisplayFeed::DisplayFeed(QWidget *parent, int xpos, int ypos, int width, int height, QString color)
 	: QListWidget(parent)
 {
 	assert(xpos >= 0 && ypos >= 0 && height > 0 && width > 0 && "Invalid geometry");
@@ -15,9 +15,10 @@ DisplayFeed::DisplayFeed(QWidget *parent, int xpos, int ypos, int width, int hei
 DisplayFeed::~DisplayFeed(void){
 }
 
-void DisplayFeed::setColor(std::string color){
+void DisplayFeed::setColor(QString color){
 	color = "background-color: " + color;
-	setStyleSheet(QString(color.c_str()));
+	setStyleSheet(color);
+	setFrameShape(QFrame::NoFrame);
     setUniformItemSizes(true);
 }
 
