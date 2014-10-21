@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include "boost/date_time/gregorian/gregorian.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
 
 static const std::string FIELD_NAME = "name";
 static const std::string FIELD_LOCATION = "place";
@@ -50,10 +51,10 @@ public:
 private:
 	std::map<std::string, Field> fieldMap;
 	std::string name;
-	// boost::gregorian::date date;
-	// boost::posix_time::ptime time;
-	std::string date;
-	std::string time;
+	boost::gregorian::date date;
+	boost::posix_time::ptime time;
+	// std::string date;
+	// std::string time;
 	std::string location;
 	/*
 	std::string _name;

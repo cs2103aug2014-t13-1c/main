@@ -7,28 +7,26 @@ Event::Event(){
 
 Event::Event(std::string name, std::string location, std::string date, std::string time){
 	this->name = name;
-	// this->date = boost::gregorian::date(boost::gregorian::from_undelimited_string(date));
-	// this->time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(time.substr(0,2)), std::stoi(time.substr(2,4)), 0));
-	this->date = date;
-	this->time = time;
+    if(date!=""){this->date = boost::gregorian::date(boost::gregorian::from_undelimited_string(date));}
+    if(time!=""){this->time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(time.substr(0,2)), std::stoi(time.substr(2,4)), 0));}
 	this->location = location;
 	fieldMap = setupMap();
 }
 
 Event::Event(std::string name, std::string date, std::string time){
-	this->name = name;
+	// this->name = name;
 	// this->date = boost::gregorian::date(boost::gregorian::from_undelimited_string(date));
 	// this->time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(time.substr(0,2)), std::stoi(time.substr(2,4)), 0));
-	this->date = date;
-	this->time = time;
-	fieldMap = setupMap();
+	// this->date = date;
+	// this->time = time;
+	// fieldMap = setupMap();
 }
 
 Event::~Event(){
 }
 
 Event* Event::copy(){
-	return new Event(name, location, date, time);
+	return new Event(name, location, to_iso_string(date), to_iso_string(time).substr(9,12));
 }
 
 std::map<std::string, Field> Event::setupMap(){
@@ -43,8 +41,8 @@ std::map<std::string, Field> Event::setupMap(){
 std::string Event::repr(){
 	std::string rep = name;
 	if(location != ""){rep = rep + " at " + location;}
-	if(date != ""){rep = rep + " on " + date;}
-	if(time != ""){rep = rep + " at " + time + "hrs";}
+	if(date != boost::gregorian::date(boost::gregorian::not_a_date_time)){rep = rep + " on " + to_iso_extended_string(date);}
+    if(time != boost::posix_time::ptime(boost::posix_time::not_a_date_time)){rep = rep + " at " + to_iso_extended_string(time) + "hrs";}
 	return rep;
 }
 
@@ -53,13 +51,11 @@ std::string Event::getName(){
 }
 
 std::string Event::getDate(){
-	return date;
-	// return boost::gregorian::to_iso_extended_string(date);
+	return boost::gregorian::to_iso_extended_string(date);
 }
 
 std::string Event::getTime(){
-	return time;
-	// return boost::posix_time::to_iso_extended_string(time);
+	return boost::posix_time::to_iso_extended_string(time).substr(9,12);
 }
 
 std::string Event::getLocation(){
@@ -87,11 +83,11 @@ void Event::setName(std::string newName){
 }
 
 void Event::setDate(std::string newDate){
-	date = newDate;
+	date = boost::gregorian::date(boost::gregorian::from_undelimited_string(newDate));
 }
 
 void Event::setTime(std::string newTime){
-	time = newTime;
+	time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(newTime.substr(0,2)), std::stoi(newTime.substr(2,4)), 0));
 }
 
 void Event::setLocation(std::string newLocation){

@@ -9,6 +9,7 @@
 class FileStorage
 {
 public:
+    FileStorage();
 	FileStorage(std::string filename);
 	~FileStorage(void);
 	void saveFile(std::vector<Event*>);
