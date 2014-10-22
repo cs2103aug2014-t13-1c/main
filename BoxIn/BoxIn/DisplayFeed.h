@@ -10,16 +10,27 @@
 #include "qeventloop.h"
 #include "assert.h"
 
+enum DisplayField{
+    Name = 1,
+    Date,
+    Time,
+    Place
+};
+
 class DisplayFeed : public QListWidget{
 	Q_OBJECT
 private:
 	Logic *logic;
+    std::map<std::string, DisplayField> displayFieldMap;
+    DisplayField field;
+    
 public:
-	DisplayFeed(QWidget *parent, int xpos, int ypos, int width, int height, QString color);
+	DisplayFeed(QWidget *parent, std::string field);
 	~DisplayFeed(void);
 
-	void setColor(QString color);
+	void setBorder();
 	void refresh(std::vector<Event*> *thingsToInclude);
+    std::map<std::string, DisplayField> setupMap();
 };
 
 #endif // DisplayFeed.h

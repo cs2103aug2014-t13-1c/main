@@ -28,7 +28,10 @@ void BoxIn::createComponents(){
 	dateLabel = new QLabel("Date", this);
 	timeLabel = new QLabel("Time", this);
 	commandLine = new QLineEdit(this);
-	displayFeedToday = new DisplayFeed(this, WIDTH_BUFFER, 60, WIDTH_WINDOW - 2 * WIDTH_BUFFER, 300, TRANSPARENT);
+	displayFeedName = new DisplayFeed(this, "Name");
+	displayFeedDate = new DisplayFeed(this, "Date");
+	displayFeedTime = new DisplayFeed(this, "Time");
+	displayFeedPlace = new DisplayFeed(this, "Place");
 	setComponentSizes();
 	setComponentColors();
 }
@@ -45,6 +48,10 @@ void BoxIn::setComponentSizes(){
 	dateLabel->setGeometry(600, 40, 50, 20);
 	timeLabel->setGeometry(700, 40, 50, 20);
 	commandLine->setGeometry(60, 500, 800, 20);
+    displayFeedName->setGeometry(20, 70, 380, 300);
+    displayFeedDate->setGeometry(600, 70, 100, 300);
+    displayFeedTime->setGeometry(700, 70, 80, 300);
+    displayFeedPlace->setGeometry(400, 70, 200, 300);
 }
 
 void BoxIn::setComponentColors(){
@@ -53,6 +60,10 @@ void BoxIn::setComponentColors(){
 	dateLabel->setStyleSheet(TRANSPARENT);
 	timeLabel->setStyleSheet(TRANSPARENT);
 	commandLine->setStyleSheet(WHITE);
+    displayFeedName->setStyleSheet(TRANSPARENT);
+    displayFeedDate->setStyleSheet(TRANSPARENT);
+    displayFeedTime->setStyleSheet(TRANSPARENT);
+    displayFeedPlace->setStyleSheet(TRANSPARENT);
 }
 
 /**
@@ -63,7 +74,10 @@ void BoxIn::linkEvents(){
 	QObject::connect(ui.buttonExit,SIGNAL(pressed()), this, SLOT(buttonExitClicked()));
 	QObject::connect(commandLine, SIGNAL(returnPressed()), this, SLOT(commandLineReturnPressed()));
     QObject::connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
-	QObject::connect(displayFeedToday, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
+	QObject::connect(displayFeedName, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
+    QObject::connect(displayFeedDate, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
+    QObject::connect(displayFeedTime, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
+    QObject::connect(displayFeedPlace, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
 }
 
 /**
@@ -104,7 +118,10 @@ void BoxIn::buttonExitClicked(){
 
 void BoxIn::updateGUI(){
 	std::vector<Event*> thingsToInclude = logic.getEvents();
-	displayFeedToday->refresh(&thingsToInclude);
+	displayFeedName->refresh(&thingsToInclude);
+    displayFeedDate->refresh(&thingsToInclude);
+    displayFeedTime->refresh(&thingsToInclude);
+    displayFeedPlace->refresh(&thingsToInclude);
 }
 
 void BoxIn::createTrayIcon(){

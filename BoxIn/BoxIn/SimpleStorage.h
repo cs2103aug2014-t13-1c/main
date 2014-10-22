@@ -10,9 +10,9 @@
 #include "CommonFunctions.h"
 
 enum SortCriteria{
-    Time = 1,
-    Priority,
-    Name
+    CriteriaTime = 1,
+    CriteriaPriority,
+    CriteriaName
 };
 
 bool alphaComp(Event* item1, Event* item2);

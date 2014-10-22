@@ -29,7 +29,7 @@ static const int HEIGHT_LARGE = 400;
 static const int WIDTH_LABEL = 60;
 
 static const QString PASTEL_BLUE = "rgb(141, 199, 187)";
-static const QString TRANSPARENT = "background-color: rgba(0, 0, 0, 0)";
+static const QString TRANSPARENT = "background-color: rgba(255, 255, 255, 0)";
 static const QString WHITE = "background-color: rgb(255, 255, 255)";
 
 class BoxIn : public QMainWindow{
@@ -73,7 +73,10 @@ private:
 
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu;
-	DisplayFeed *displayFeedToday;
+	DisplayFeed *displayFeedName;
+    DisplayFeed *displayFeedDate;
+    DisplayFeed *displayFeedTime;
+    DisplayFeed *displayFeedPlace;
 	QLineEdit *commandLine;
 
 public slots:

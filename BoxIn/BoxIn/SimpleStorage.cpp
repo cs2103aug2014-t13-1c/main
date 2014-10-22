@@ -4,7 +4,7 @@
 SimpleStorage::SimpleStorage(){
     file = FileStorage("BoxInData.json");
     events = file.readFile();
-    sortCriteria = Time;
+    sortCriteria = CriteriaTime;
 }
 
 SimpleStorage::~SimpleStorage(){
@@ -59,7 +59,7 @@ std::string SimpleStorage::removeEvent(std::string name, std::string date){
 void SimpleStorage::sortEvents(){
     std::sort(events.begin(), events.end(), alphaComp);
     switch(sortCriteria){
-    case Time:
+    case CriteriaTime:
         std::sort(events.begin(), events.end(), timeComp);
         break;
     }
