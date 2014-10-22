@@ -1,5 +1,5 @@
+//@author A0111994B
 #include "SimpleStorage.h"
-
 
 SimpleStorage::SimpleStorage(){
     file = FileStorage("BoxInData.json");
@@ -68,4 +68,8 @@ std::string SimpleStorage::execute(Action* action){
     std::string feedback = action->execute(events);
     pushStack(action);
     return feedback;
+}
+
+void SimpleStorage::saveFile(){
+    file.saveFile(events);
 }

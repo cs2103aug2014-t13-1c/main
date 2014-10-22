@@ -1,5 +1,5 @@
+//@author A0111994B
 #include "Delete.h"
-
 
 Delete::Delete(std::string input){
 	std::vector<std::string> words = splitWords(input);

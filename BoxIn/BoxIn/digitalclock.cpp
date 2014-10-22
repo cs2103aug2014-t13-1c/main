@@ -1,3 +1,4 @@
+//@author A0111994B
 #include "digitalclock.h"
 
 DigitalClock::DigitalClock(QWidget *parent)

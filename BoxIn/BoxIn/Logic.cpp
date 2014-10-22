@@ -54,6 +54,7 @@ std::string Logic::handleUserInput(std::string input){
 	if(action != NULL){
 		feedback = storage.execute(action);
 	}
+    storage.saveFile();
 	return feedback;
 }
 

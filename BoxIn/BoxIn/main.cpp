@@ -1,6 +1,6 @@
 #include <QApplication>
 #include "BoxIn.h"
-
+//@author A0111994B
 void setIcon(QApplication &app);
 
 int main(int argc, char *argv[]){

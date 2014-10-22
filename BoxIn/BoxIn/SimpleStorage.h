@@ -43,5 +43,6 @@ public:
 
     std::string execute(Action* action);
     
+    void saveFile();
 };
 

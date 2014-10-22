@@ -1,5 +1,5 @@
+//@author A0111994B
 #include "DisplayFeed.h"
-
 
 DisplayFeed::DisplayFeed(QWidget *parent, int xpos, int ypos, int width, int height, QString color)
 	: QListWidget(parent)

@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "Event.h"
+#include <iostream>
 
 class FileStorage
 {

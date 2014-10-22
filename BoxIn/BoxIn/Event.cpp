@@ -5,6 +5,7 @@ Event::Event(){
 	fieldMap = setupMap();
 }
 
+//@author A0111994B
 Event::Event(std::string name, std::string location, std::string date, std::string time){
 	this->name = name;
     if(date!=""){this->date = boost::gregorian::date(boost::gregorian::from_undelimited_string(date));}
@@ -51,11 +52,13 @@ std::string Event::getName(){
 }
 
 std::string Event::getDate(){
-	return boost::gregorian::to_simple_string(date);
+    if(date != boost::gregorian::date(boost::gregorian::not_a_date_time)){return boost::gregorian::to_simple_string(date);}
+    return "";
 }
 
 std::string Event::getTime(){
-	return boost::posix_time::to_iso_extended_string(time).substr(11,16);
+    if(time != boost::posix_time::ptime(boost::posix_time::not_a_date_time)){return boost::posix_time::to_iso_extended_string(time).substr(11,16);}
+    return "";
 }
 
 std::string Event::getLocation(){

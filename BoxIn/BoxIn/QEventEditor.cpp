@@ -1,5 +1,5 @@
+//@author A0111994B
 #include "QEventEditor.h"
-
 
 QEventEditor::QEventEditor(Event* event, QWidget *parent)
 {

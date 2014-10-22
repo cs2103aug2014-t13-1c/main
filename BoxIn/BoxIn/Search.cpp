@@ -1,5 +1,5 @@
+//@author A0111994B
 #include "Search.h"
-
 
 Search::Search(std::string input){
 	std::vector<std::string> words = splitWords(input);
