@@ -27,7 +27,7 @@ Event::~Event(){
 }
 
 Event* Event::copy(){
-	return new Event(name, location, to_iso_string(date), to_iso_string(time).substr(9,12));
+	return new Event(name, location, to_iso_string(date), getTime());
 }
 
 std::map<std::string, Field> Event::setupMap(){
@@ -57,7 +57,7 @@ std::string Event::getDate(){
 }
 
 std::string Event::getTime(){
-    if(time != boost::posix_time::ptime(boost::posix_time::not_a_date_time)){return boost::posix_time::to_iso_extended_string(time).substr(11,16);}
+    if(time != boost::posix_time::ptime(boost::posix_time::not_a_date_time)){return boost::posix_time::to_iso_extended_string(time).substr(11,5);}
     return "";
 }
 

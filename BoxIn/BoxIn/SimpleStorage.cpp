@@ -71,6 +71,11 @@ std::string SimpleStorage::execute(Action* action){
     return feedback;
 }
 
+std::string SimpleStorage::undo(Action* action){
+    std::string feedback = action->undo(events);
+    return feedback;
+}
+
 void SimpleStorage::saveFile(){
     file.saveFile(events);
 }

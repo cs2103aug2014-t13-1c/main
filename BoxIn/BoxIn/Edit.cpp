@@ -7,7 +7,8 @@ Edit::Edit(std::string input){
 	int indexField = indexOf(words, KEYWORD_FIELD);
 	if(indexField != words.size()){field = words[indexField + 1];}
 	name = extractField(words, POSITION_FIRST_WORD, indexDate);
-    date = extractField(words, indexDate, indexField);
+    date = to_iso_string(dateParser.convertToDate(extractField(words, indexDate, indexField)));
+    if(date == to_iso_string(boost::gregorian::date())){date = "";}
 	newValue = extractField(words, indexField + 1, words.size());
 }
 
@@ -45,7 +46,5 @@ std::string Edit::undo(std::vector<Event*> &events){
 		}
 	}
 	events.push_back(oldEvent);
-	oldEvent = NULL;
-	newEvent = NULL;
-	return events[events.size()-1]->getName() + " has been un-edited!";
+	return oldEvent->getName() + " has been un-edited!";
 }

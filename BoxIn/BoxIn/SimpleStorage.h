@@ -42,6 +42,7 @@ public:
     void sortEvents();
 
     std::string execute(Action* action);
+    std::string undo(Action* action);
     
     void saveFile();
 };

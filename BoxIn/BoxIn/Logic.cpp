@@ -15,6 +15,7 @@ void Logic::setupMap(){
 	stringToCommand[USER_COMMAND_UNDO] = CommandUndo;
 	stringToCommand[USER_COMMAND_EXIT] = CommandExit;
 	stringToCommand[USER_COMMAND_SEARCH] = CommandSearch;
+    stringToCommand[USER_COMMAND_UNDO] = CommandUndo;
 }
 
 std::vector<std::string> Logic::splitWords(std::string input){
@@ -41,6 +42,9 @@ std::string Logic::handleUserInput(std::string input){
 		case CommandExit :
 			break;
 		case CommandUndo :
+            action = storage.popLastAction();
+            feedback = storage.undo(action);
+            action = NULL;
 			break;
 		case CommandSearch :
 			action = new Search(input);

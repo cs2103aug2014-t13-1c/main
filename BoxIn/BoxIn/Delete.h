@@ -8,6 +8,7 @@ private:
 	Event *event;
 	std::string name;
 	std::string date;
+    DateParser dateParser;
 public:
 	Delete(std::string input);
 	~Delete(void);
