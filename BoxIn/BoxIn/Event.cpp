@@ -8,7 +8,7 @@ Event::Event(){
 //@author A0111994B
 Event::Event(std::string name, std::string location, std::string date, std::string time){
 	this->name = name;
-    if(date!=""){this->date = boost::gregorian::date(boost::gregorian::from_undelimited_string(date));}
+    if(date!=""){this->date = dateParser.convertToDate(date);}
     if(time!=""){this->time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(time.substr(0,2)), std::stoi(time.substr(2,4)), 0));}
 	this->location = location;
 	fieldMap = setupMap();
@@ -86,7 +86,7 @@ void Event::setName(std::string newName){
 }
 
 void Event::setDate(std::string newDate){
-	date = boost::gregorian::date(boost::gregorian::from_undelimited_string(newDate));
+	date = dateParser.convertToDate(newDate);
 }
 
 void Event::setTime(std::string newTime){

@@ -52,7 +52,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories);C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn;C:\Program Files (x86)\boost_1_56_0\boost_1_56_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories);C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn;C:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <BrowseInformation>true</BrowseInformation>
@@ -60,7 +60,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories);C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories);C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\Debug;C:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);C:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib\libboost_date_time-vc110-mt-gd-1_57.lib</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>

@@ -14,7 +14,9 @@ public:
 	FileStorage(std::string filename);
 	~FileStorage(void);
 	void saveFile(std::vector<Event*>);
+    void writeEvent(json_spirit::Array &eventArray, Event* event);
 	std::vector<Event*> readFile();
+    Event* readEvent(const json_spirit::Object& obj);
 private:
 	std::string filename;
 };

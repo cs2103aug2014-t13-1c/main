@@ -15,6 +15,7 @@ BoxIn::BoxIn(QWidget *parent) : QMainWindow(parent){
 	createTrayIcon();
 	linkEvents();
 	trayIcon->show();
+    updateGUI();
 }
 
 BoxIn::~BoxIn(){

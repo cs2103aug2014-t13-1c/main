@@ -2,6 +2,7 @@
 
 #include <string>
 #include <map>
+#include "DateParser.h"
 #include "boost/date_time/gregorian/gregorian.hpp"
 #include "boost/date_time/posix_time/posix_time.hpp"
 
@@ -53,9 +54,11 @@ private:
 	std::string name;
 	boost::gregorian::date date;
 	boost::posix_time::ptime time;
+    std::string nonformattime;
 	// std::string date;
 	// std::string time;
 	std::string location;
+    DateParser dateParser;
 	/*
 	std::string _name;
 	std::string _description;

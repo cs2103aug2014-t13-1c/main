@@ -3,6 +3,7 @@
 
 SimpleStorage::SimpleStorage(){
     file = FileStorage("BoxInData.json");
+    events = file.readFile();
     sortCriteria = Time;
 }
 
