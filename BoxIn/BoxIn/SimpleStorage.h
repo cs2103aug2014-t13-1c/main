@@ -17,6 +17,7 @@ enum SortCriteria{
 
 bool alphaComp(Event* item1, Event* item2);
 bool timeComp(Event* item1, Event* item2);
+//bool priorityComp(Event* item1, Event* item2); // not yet implemented
 
 class SimpleStorage{
 private:
@@ -40,8 +41,7 @@ public:
 
     void sortEvents();
 
-    //bool alphaComp(Event* item1, Event* item2);
-    //bool timeComp(Event* item1, Event* item2);
-    //bool priorityComp(Event* item1, Event* item2); // not yet implemented
+    std::string execute(Action* action);
+    
 };
 

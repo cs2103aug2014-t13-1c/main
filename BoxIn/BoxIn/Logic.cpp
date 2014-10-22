@@ -44,7 +44,7 @@ std::string Logic::handleUserInput(std::string input){
 			break;
 		case CommandSearch :
 			action = new Search(input);
-			action->execute(events);
+			storage.execute(action);
 			action = NULL;
 			break;
 		default :
@@ -52,11 +52,11 @@ std::string Logic::handleUserInput(std::string input){
 			break;
 	}
 	if(action != NULL){
-		feedback = action->execute(events);
+		feedback = storage.execute(action);
 	}
 	return feedback;
 }
 
 std::vector<Event*> Logic::getEvents(){
-	return events;
+	return storage.getEvents();
 }

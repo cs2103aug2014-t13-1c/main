@@ -5,7 +5,7 @@ Delete::Delete(std::string input){
 	std::vector<std::string> words = splitWords(input);
 	int indexDate = indexOf(words, KEYWORD_DATE);
 	name = extractField(words, POSITION_FIRST_WORD, indexDate);
-	date = extractField(words, indexDate, words.size());
+    date = extractField(words, indexDate, words.size());
 	event = NULL;
 }
 

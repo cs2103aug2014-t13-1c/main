@@ -4,6 +4,7 @@
 #include <Event.h>
 #include <vector>
 #include <boost\algorithm\string.hpp>
+#include "boost/date_time/gregorian/gregorian.hpp"
 
 static const std::string KEYWORD_LOCATION = "place";
 static const std::string KEYWORD_DATE = "date";

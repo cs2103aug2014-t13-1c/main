@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "SimpleStorage.h"
 
 static const std::string USER_COMMAND_ADD = "add";
 static const std::string USER_COMMAND_DELETE = "delete";
@@ -29,7 +30,7 @@ enum CommandType {
 
 class Logic{
 private:
-	std::vector<Event*> events;
+	SimpleStorage storage;
 	std::map<std::string, CommandType> stringToCommand;
 
 public:

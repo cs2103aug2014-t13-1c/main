@@ -6,8 +6,15 @@ SimpleStorage::SimpleStorage(){
     sortCriteria = Time;
 }
 
-
 SimpleStorage::~SimpleStorage(){
+}
+
+bool alphaComp(Event* item1, Event* item2){
+    return item1->getName() <= item2->getName();
+}
+
+bool timeComp(Event* item1, Event* item2){
+    return item1->getDate() < item2->getDate() || (item1->getTime() <= item2->getTime() && item1->getDate() == item2->getDate());
 }
 
 std::vector<Event*> SimpleStorage::getEvents(){
@@ -57,10 +64,8 @@ void SimpleStorage::sortEvents(){
     }
 }
 
-bool alphaComp(Event* item1, Event* item2){
-    return item1->getName() <= item2->getName();
-}
-
-bool timeComp(Event* item1, Event* item2){
-    return item1->getDate() < item2->getDate() || (item1->getTime() <= item2->getTime() && item1->getDate() == item2->getDate());
+std::string SimpleStorage::execute(Action* action){
+    std::string feedback = action->execute(events);
+    pushStack(action);
+    return feedback;
 }

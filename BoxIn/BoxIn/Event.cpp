@@ -51,11 +51,11 @@ std::string Event::getName(){
 }
 
 std::string Event::getDate(){
-	return boost::gregorian::to_iso_extended_string(date);
+	return boost::gregorian::to_simple_string(date);
 }
 
 std::string Event::getTime(){
-	return boost::posix_time::to_iso_extended_string(time).substr(9,12);
+	return boost::posix_time::to_iso_extended_string(time).substr(11,16);
 }
 
 std::string Event::getLocation(){
