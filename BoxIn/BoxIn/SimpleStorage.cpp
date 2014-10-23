@@ -21,10 +21,12 @@ bool alphaComp(Event* item1, Event* item2){
 }
 
 bool timeComp(Event* item1, Event* item2){
-    if(item1->getDate()==""){return true;}
+    if(item1->getDate() == "" && item2->getDate() == ""){return alphaComp(item1, item2);}
+    else if(item1->getDate()==""){return true;}
     else if(item2->getDate()==""){return false;}
     boost::gregorian::date date1 = boost::gregorian::date(boost::gregorian::from_simple_string(item1->getDate()));
     boost::gregorian::date date2 = boost::gregorian::date(boost::gregorian::from_simple_string(item2->getDate()));
+    if(date1==date2 && item1->getTime()==item2->getTime()){return alphaComp(item1, item2);}
     return (date1 < date2) || (item1->getTime() <= item2->getTime() && date1 == date2);
 }
 
