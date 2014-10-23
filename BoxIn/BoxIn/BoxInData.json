@@ -1,10 +1,26 @@
 [
     {
         "Name" : "tutorial",
-        "Date" : "2001-Jan-01"
+        "Date" : "",
+        "Time" : "",
+        "Place" : ""
+    },
+    {
+        "Name" : "wassup",
+        "Date" : "2013-Jan-02",
+        "Time" : "23:58",
+        "Place" : ""
+    },
+    {
+        "Name" : "sup homies",
+        "Date" : "2013-Jan-02",
+        "Time" : "23:59",
+        "Place" : "school"
     },
     {
         "Name" : "something",
-        "Date" : "2019-Oct-10"
+        "Date" : "2014-Oct-23",
+        "Time" : "",
+        "Place" : ""
     }
 ]

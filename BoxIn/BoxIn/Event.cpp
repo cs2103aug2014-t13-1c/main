@@ -9,7 +9,7 @@ Event::Event(){
 Event::Event(std::string name, std::string location, std::string date, std::string time){
 	this->name = name;
     if(date!=""){this->date = dateParser.convertToDate(date);}
-    if(time!=""){this->time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(time.substr(0,2)), std::stoi(time.substr(2,4)), 0));}
+    if(time!=""){this->time = timeParser.convertToTime(this->date, time);}
 	this->location = location;
 	fieldMap = setupMap();
 }
@@ -90,7 +90,7 @@ void Event::setDate(std::string newDate){
 }
 
 void Event::setTime(std::string newTime){
-	time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(newTime.substr(0,2)), std::stoi(newTime.substr(2,4)), 0));
+    time = timeParser.convertToTime(this->date, newTime);
 }
 
 void Event::setLocation(std::string newLocation){

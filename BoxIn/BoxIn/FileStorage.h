@@ -7,6 +7,11 @@
 #include "Event.h"
 #include <iostream>
 
+static const std::string TAG_NAME = "Name";
+static const std::string TAG_DATE = "Date";
+static const std::string TAG_TIME = "Time";
+static const std::string TAG_PLACE = "Place";
+
 class FileStorage
 {
 public:

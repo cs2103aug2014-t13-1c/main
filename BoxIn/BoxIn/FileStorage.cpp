@@ -23,8 +23,10 @@ void FileStorage::saveFile(std::vector<Event*> events){
 
 void FileStorage::writeEvent(json_spirit::Array &eventArray, Event* event){
     json_spirit::Object eventObj;
-    eventObj.push_back(json_spirit::Pair("Name", event->getName()));
-    eventObj.push_back(json_spirit::Pair("Date", event->getDate()));
+    eventObj.push_back(json_spirit::Pair(TAG_NAME, event->getName()));
+    eventObj.push_back(json_spirit::Pair(TAG_DATE, event->getDate()));
+    eventObj.push_back(json_spirit::Pair(TAG_TIME, event->getTime()));
+    eventObj.push_back(json_spirit::Pair(TAG_PLACE, event->getLocation()));
 
     eventArray.push_back(eventObj);
 }
@@ -47,8 +49,10 @@ Event* FileStorage::readEvent(const json_spirit::Object& obj){
         const json_spirit::Pair &pair = obj[i];
         const std::string &name = pair.name_;
         const json_spirit::Value &value = pair.value_;
-        if(name == "Name"){event->setName(value.get_str());}
-        else if(name == "Date"){event->setDate(value.get_str());}
+        if(name == TAG_NAME){event->setName(value.get_str());}
+        else if(name == TAG_DATE){event->setDate(value.get_str());}
+        else if(name == TAG_TIME){event->setTime(value.get_str());}
+        else if(name == TAG_PLACE){event->setLocation(value.get_str());}
         else{assert(false&&"Json file corrupted");}
     }
     return event;

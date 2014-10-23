@@ -1,5 +1,6 @@
 //@author A0111994B
 #include "SimpleStorage.h"
+#include "boost\date_time\gregorian\gregorian.hpp"
 
 SimpleStorage::SimpleStorage(){
     file = FileStorage("BoxInData.json");
@@ -15,7 +16,11 @@ bool alphaComp(Event* item1, Event* item2){
 }
 
 bool timeComp(Event* item1, Event* item2){
-    return item1->getDate() < item2->getDate() || (item1->getTime() <= item2->getTime() && item1->getDate() == item2->getDate());
+    if(item1->getDate()==""){return true;}
+    else if(item2->getDate()==""){return false;}
+    boost::gregorian::date date1 = boost::gregorian::date(boost::gregorian::from_simple_string(item1->getDate()));
+    boost::gregorian::date date2 = boost::gregorian::date(boost::gregorian::from_simple_string(item2->getDate()));
+    return (date1 < date2) || (item1->getTime() <= item2->getTime() && date1 == date2);
 }
 
 std::vector<Event*> SimpleStorage::getEvents(){
@@ -35,7 +40,6 @@ Action* SimpleStorage::popLastAction(){
 
 void SimpleStorage::addEvent(Event* event){
     events.push_back(event);
-    sortEvents();
 }
 
 std::string SimpleStorage::removeEvent(std::string name, std::string date){
@@ -57,10 +61,11 @@ std::string SimpleStorage::removeEvent(std::string name, std::string date){
 }
 
 void SimpleStorage::sortEvents(){
-    std::sort(events.begin(), events.end(), alphaComp);
+    std::stable_sort(events.begin(), events.end(), alphaComp);
+    std::stable_sort(events.begin(), events.end(), timeComp);
     switch(sortCriteria){
     case CriteriaTime:
-        std::sort(events.begin(), events.end(), timeComp);
+        std::stable_sort(events.begin(), events.end(), timeComp);
         break;
     }
 }
@@ -68,11 +73,13 @@ void SimpleStorage::sortEvents(){
 std::string SimpleStorage::execute(Action* action){
     std::string feedback = action->execute(events);
     pushStack(action);
+    sortEvents();
     return feedback;
 }
 
 std::string SimpleStorage::undo(Action* action){
     std::string feedback = action->undo(events);
+    // sortEvents();
     return feedback;
 }
 

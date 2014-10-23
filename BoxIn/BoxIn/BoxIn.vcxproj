@@ -126,6 +126,7 @@
     <ClCompile Include="QEventStore.cpp" />
     <ClCompile Include="Search.cpp" />
     <ClCompile Include="SimpleStorage.cpp" />
+    <ClCompile Include="TimeParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BoxIn.h">
@@ -158,6 +159,7 @@
     <ClInclude Include="DateParser.h" />
     <ClInclude Include="Delete.h" />
     <ClInclude Include="SimpleStorage.h" />
+    <ClInclude Include="TimeParser.h" />
     <CustomBuild Include="DisplayFeed.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing DisplayFeed.h...</Message>
