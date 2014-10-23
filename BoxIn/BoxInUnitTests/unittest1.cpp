@@ -11,6 +11,8 @@
 #include "FileStorage.h"
 #include "FileStorage.cpp"
 #include "json_spirit.h"
+#include "FileStorage.h"
+#include "FileStorage.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -80,5 +82,18 @@ namespace BoxInUnitTests
             Event *event2 = new Event("Later","","010101","");
             Assert::AreEqual(true, timeComp(event1, event2));
         }
+		TEST_METHOD(Storagetest1)
+		{
+			FileStorage test("hello.txt");
+			test.appendToLineEntry("date", "010204");
+			test.appendToLineEntry("start", "1200");
+			Assert::IsTrue(test.isDateAndTimeCorrect());
+		}
+		TEST_METHOD(Storagetest2)
+		{
+			FileStorage test("hello.txt");
+			test.determineType();
+			string errorStr = "Invalid Entry";
+		}
 	};
 }
