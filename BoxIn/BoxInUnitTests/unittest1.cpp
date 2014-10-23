@@ -4,6 +4,8 @@
 #include <string>
 #include "DateParser.h"
 #include "DateParser.cpp"
+#include "FileStorage.h"
+#include "FileStorage.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -29,5 +31,18 @@ namespace BoxInUnitTests
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("2004-Feb-01")));
 		}
 
+		TEST_METHOD(Storagetest1)
+		{
+			FileStorage test("hello.txt");
+			test.appendToLineEntry("date", "010204");
+			test.appendToLineEntry("start", "1200");
+			Assert::IsTrue(test.isDateAndTimeCorrect());
+		}
+		TEST_METHOD(Storagetest2)
+		{
+			FileStorage test("hello.txt");
+			test.determineType();
+			string errorStr = "Invalid Entry";
+		}
 	};
 }
