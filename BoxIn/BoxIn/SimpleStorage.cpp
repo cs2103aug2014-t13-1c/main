@@ -4,7 +4,12 @@
 
 SimpleStorage::SimpleStorage(){
     file = FileStorage("BoxInData.json");
-    events = file.readFile();
+    try{
+        events = file.readFile();
+    }
+    catch(std::exception &e){
+        // exists in case file does not exist, then events can just be an empty vector
+    }
     sortCriteria = CriteriaTime;
 }
 
