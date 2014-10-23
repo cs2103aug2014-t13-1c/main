@@ -95,5 +95,13 @@ namespace BoxInUnitTests
 			test.determineType();
 			string errorStr = "Invalid Entry";
 		}
+
+		TEST_MODULE_INITIALIZE(ModuleInitialize)
+		{Logger::WriteMessage("In Module Initialize");}
+
+		TEST_MODULE_CLEANUP(ModuleCleanup)
+		{
+			 Logger::WriteMessage("In Module Cleanup");
+		}
 	};
 }
