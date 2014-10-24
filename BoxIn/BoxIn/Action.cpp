@@ -18,7 +18,7 @@ std::string Action::undo(std::vector<Event*>&){
 	// stub
 	return "";
 }
-
+/*
 std::vector<std::string> Action::splitWords(std::string input){
 	std::vector<std::string> words;
 	boost::algorithm::split(words, input, boost::algorithm::is_any_of(WHITESPACE), boost::algorithm::token_compress_on);
@@ -48,3 +48,4 @@ std::string Action::extractField(std::vector<std::string> words, int startPos, i
 		return vectorToString(result);
 	}
 }
+*/

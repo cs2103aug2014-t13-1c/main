@@ -4,17 +4,10 @@
 
 
 Add::Add(std::string input){
-	std::vector<std::string> words = splitWords(input);
-	
-	int indexDate = indexOf(words, KEYWORD_DATE);
-	int indexTime = indexOf(words, KEYWORD_TIME);
-	int indexLocation = indexOf(words, KEYWORD_LOCATION);
-
-	std::string name = extractField(words, POSITION_FIRST_WORD, indexDate);
-	std::string date = extractField(words, indexDate, indexTime);
-	std::string time = extractField(words, indexTime, indexLocation);
-	std::string location = extractField(words, indexLocation, words.size());
-
+	std::string name = parser.getField(input, TypeName);
+    std::string date = parser.getField(input, TypeDate);
+    std::string time = parser.getField(input, TypeTime);
+    std::string location = parser.getField(input, TypePlace);
 	event = new Event(name, location, date, time);
 }
 

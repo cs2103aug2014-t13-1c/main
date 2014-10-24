@@ -26,5 +26,7 @@ public:
 	int indexOf(std::vector<std::string> words, std::string toFind);
 	std::string vectorToString(std::vector<std::string> vec);
 	std::string extractField(std::vector<std::string> words, int startPos, int endPos);
+private:
+    SimpleParser parser;
 };
 

@@ -2,11 +2,9 @@
 #include "Delete.h"
 
 Delete::Delete(std::string input){
-	std::vector<std::string> words = splitWords(input);
-	int indexDate = indexOf(words, KEYWORD_DATE);
-	name = extractField(words, POSITION_FIRST_WORD, indexDate);
-    date = to_simple_string(parser.convertToDate(extractField(words, indexDate, words.size())));
-    if(date == to_simple_string(boost::gregorian::date())){date = "";}
+    name = parser.getField(input, TypeName);
+    date = to_simple_string(parser.convertToDate(parser.getField(input, TypeDate)));
+	if(date == to_simple_string(boost::gregorian::date())){date = "";}
 	event = NULL;
 }
 

@@ -7,8 +7,8 @@
 #include "boost\date_time\gregorian\gregorian.hpp"
 #include "boost\date_time\posix_time\posix_time.hpp"
 
-static const std::string KEYWORD_ARRAY[] = {"name", "date", "time", "place"};
-static const std::vector<std::string> KEYWORDS(KEYWORD_ARRAY, KEYWORD_ARRAY+4);
+static const std::string KEYWORD_ARRAY[] = {"name", "date", "time", "place", "field"};
+static const std::vector<std::string> KEYWORDS(KEYWORD_ARRAY, KEYWORD_ARRAY+5);
 
 static const std::string CURRENT_CENTURY = "20";
 static const int lenDDMMYY = 6;
@@ -21,7 +21,9 @@ enum InfoType{
     TypeName,
     TypeDate,
     TypeTime,
-    TypePlace
+    TypePlace,
+    TypeField,
+    TypeNewValue
 };
 
 enum DateFormat{
@@ -48,5 +50,7 @@ public:
     DateFormat matchFormat(std::string date);
     bool isNumericalFormat(std::string date);
 
+    std::string removeEscapeChar(std::string word);
+    std::string removeWhitespace(std::string text);
 };
 

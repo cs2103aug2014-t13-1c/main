@@ -21,6 +21,7 @@ namespace BoxInUnitTests
 	TEST_CLASS(UnitTest1)
 	{
 	public:
+        
 		TEST_METHOD(SimpleParserTestDDMMYY)
 		{
 		    SimpleParser* parse = new SimpleParser();
@@ -92,12 +93,23 @@ namespace BoxInUnitTests
             std::string expected = "add";
             Assert::AreEqual(parser.getField("add stuff",TypeCommand), expected);
         }
+        TEST_METHOD(ExtractName){
+            SimpleParser parser;
+            std::string expected = "Something over the rainbow";
+            std::string ans = parser.getField("add Something over the rainbow date 010101", TypeName);
+            Assert::AreEqual(expected, ans);
+        }
         TEST_METHOD(ExtractDate){
             SimpleParser parser;
-            boost::gregorian::date expected(2004, boost::gregorian::Feb, 1);
             std::string date = parser.getField("add something date 010204",TypeDate);
             std::string ans = "010204";
             Assert::AreEqual(ans, date);
+        }
+        TEST_METHOD(ExtractWeirdName){
+            SimpleParser parser;
+            std::string expected = "date with you";
+            std::string ans = parser.getField("delete .date with you", TypeName);
+            Assert::AreEqual(expected, ans);
         }
         /*
 		TEST_METHOD(Storagetest1)
@@ -122,5 +134,6 @@ namespace BoxInUnitTests
 			 Logger::WriteMessage("In Module Cleanup");
 		}
         */
+        
 	};
 }

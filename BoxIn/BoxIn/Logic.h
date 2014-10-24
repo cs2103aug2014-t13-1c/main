@@ -32,6 +32,7 @@ class Logic{
 private:
 	SimpleStorage storage;
 	std::map<std::string, CommandType> stringToCommand;
+    SimpleParser parser;
 
 public:
 	Logic();

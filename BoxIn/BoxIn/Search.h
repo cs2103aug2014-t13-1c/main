@@ -11,5 +11,6 @@ public:
 	std::string undo();
 private:
 	std::string criteria;
+    SimpleParser parser;
 };
 

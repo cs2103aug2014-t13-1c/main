@@ -7,6 +7,7 @@ class Add :
 {
 private:
 	Event *event;
+    SimpleParser parser;
 public:
 	Add(std::string input);
 	~Add(void);

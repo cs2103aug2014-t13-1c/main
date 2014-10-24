@@ -14,6 +14,8 @@ void SimpleParser::setupMaps(){
     keywordMap[TypeDate] ="date";
     keywordMap[TypeTime] = "time";
     keywordMap[TypePlace] = "place";
+    keywordMap[TypeField] = "field";
+    keywordMap[TypeNewValue] = "field";
     monthMap["Jan"] = "01";
     monthMap["Feb"] = "02";
     monthMap["Mar"] = "03";
@@ -30,36 +32,42 @@ void SimpleParser::setupMaps(){
 
 std::string SimpleParser::getField(std::string input, InfoType info){
     std::string keyword = keywordMap[info];
-    std::stringstream stream;
+    std::stringstream stream(input);
     bool found;
+    std::string command;
+    stream >> command;
     if(info == TypeCommand){
-        std::string res;
-        stream << input;
-        stream >> res;
-        stream.str("");
-        return res;
+        return command;
     }
-    while(stream<<input){
-        std::string currentWord;
-        stream >> currentWord;
-        stream.str("");
-        if(currentWord == keyword){
-            found = true;
-            break;
+    if(info != TypeName){
+        while(stream){
+            std::string currentWord;
+            stream >> currentWord;
+            if(currentWord == keyword){
+                found = true;
+                break;
+            }
         }
+        if(!found){return "";}
     }
-    if(!found){return "";}
     std::string result;
-    while(stream << input){
+    if(info == TypeField){
+        std::string res;
+        stream >> res;
+        return res;
+    }else if(info == TypeNewValue){
+        std::string wasteWord;
+        stream >> wasteWord;
+    }
+    while(stream){
         std::string currentWord;
         stream >> currentWord;
-        stream.str("");
         if(isKeyword(currentWord)){
             break;
         }
-        result = result + currentWord + " ";
+        result = result + removeEscapeChar(currentWord) + " ";
     }
-    return result.substr(0, result.size()-1);
+    return removeWhitespace(result);
 }
 
 boost::gregorian::date SimpleParser::convertToDate(std::string date){
@@ -120,4 +128,15 @@ bool SimpleParser::isKeyword(std::string word){
         if(word == KEYWORDS[i]){return true;}
     }
     return false;
+}
+
+std::string SimpleParser::removeEscapeChar(std::string word){
+    if(word[0]=='.'){return word.substr(1, word.size() - 1);}
+    return word;
+}
+
+std::string SimpleParser::removeWhitespace(std::string text){
+    if(text.empty()){return text;}
+    if(text[text.size()-1] == ' '){return removeWhitespace(text.substr(0, text.size() - 1));}
+    return text;
 }

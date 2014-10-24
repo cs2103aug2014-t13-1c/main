@@ -17,16 +17,15 @@ void Logic::setupMap(){
 	stringToCommand[USER_COMMAND_SEARCH] = CommandSearch;
     stringToCommand[USER_COMMAND_UNDO] = CommandUndo;
 }
-
+/*
 std::vector<std::string> Logic::splitWords(std::string input){
 	std::vector<std::string> words;
 	boost::algorithm::split(words, input, boost::algorithm::is_any_of(WHITESPACE), boost::algorithm::token_compress_on);
 	return words;
 }
-
+*/
 std::string Logic::handleUserInput(std::string input){
-	std::vector<std::string> words = splitWords(input);
-	std::string firstWord = words[POSITION_FIRST_WORD];
+	std::string firstWord = parser.getField(input, TypeCommand);
 	std::string feedback = "Done!";
 	Action *action = NULL;
 	switch(stringToCommand[firstWord]){
