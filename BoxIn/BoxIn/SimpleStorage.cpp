@@ -39,7 +39,7 @@ void SimpleStorage::pushStack(Action* action){
 }
 
 Action* SimpleStorage::popLastAction(){
-    if(actionStack.empty()){throw "Nothing to undo";}
+    if(actionStack.empty()){throw std::exception("Nothing to undo");}
     Action* action = actionStack.top();
     actionStack.pop();
     return action;

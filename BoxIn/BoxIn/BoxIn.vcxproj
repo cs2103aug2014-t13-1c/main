@@ -125,6 +125,7 @@
     <ClCompile Include="QEventEditor.cpp" />
     <ClCompile Include="QEventStore.cpp" />
     <ClCompile Include="Search.cpp" />
+    <ClCompile Include="SimpleParser.cpp" />
     <ClCompile Include="SimpleStorage.cpp" />
     <ClCompile Include="TimeParser.cpp" />
   </ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="CommonFunctions.h" />
     <ClInclude Include="DateParser.h" />
     <ClInclude Include="Delete.h" />
+    <ClInclude Include="SimpleParser.h" />
     <ClInclude Include="SimpleStorage.h" />
     <ClInclude Include="TimeParser.h" />
     <CustomBuild Include="DisplayFeed.h">

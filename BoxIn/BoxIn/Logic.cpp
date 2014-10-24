@@ -42,9 +42,14 @@ std::string Logic::handleUserInput(std::string input){
 		case CommandExit :
 			break;
 		case CommandUndo :
-            action = storage.popLastAction();
-            feedback = storage.undo(action);
-            action = NULL;
+            try{
+                action = storage.popLastAction();
+                feedback = storage.undo(action);
+                delete action;
+                action = NULL;
+            }catch(std::exception &e){
+                feedback = "Nothing to undo";
+            }
 			break;
 		case CommandSearch :
 			action = new Search(input);
