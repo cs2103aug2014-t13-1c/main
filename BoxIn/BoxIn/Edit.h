@@ -10,7 +10,7 @@ private:
 	std::string date;
 	std::string field;
 	std::string newValue;
-    DateParser dateParser;
+    SimpleParser parser;
 public:
 	Edit(std::string input);
 	~Edit(void);

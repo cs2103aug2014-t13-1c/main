@@ -8,7 +8,7 @@ Event::Event(){
 //@author A0111994B
 Event::Event(std::string name, std::string location, std::string date, std::string time){
 	this->name = name;
-    if(date!=""){this->date = dateParser.convertToDate(date);}
+    if(date!=""){this->date = parser.convertToDate(date);}
     if(time!=""){this->time = timeParser.convertToTime(this->date, time);}
 	this->location = location;
 	fieldMap = setupMap();
@@ -86,7 +86,7 @@ void Event::setName(std::string newName){
 }
 
 void Event::setDate(std::string newDate){
-	date = dateParser.convertToDate(newDate);
+	date = parser.convertToDate(newDate);
 }
 
 void Event::setTime(std::string newTime){

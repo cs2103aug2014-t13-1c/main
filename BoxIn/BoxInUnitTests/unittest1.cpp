@@ -2,8 +2,6 @@
 #include "CppUnitTest.h"
 #include <vector>
 #include <string>
-#include "DateParser.h"
-#include "DateParser.cpp"
 #include "Event.h"
 #include "Event.cpp"
 #include "SimpleStorage.h"
@@ -11,8 +9,10 @@
 #include "FileStorage.h"
 #include "FileStorage.cpp"
 #include "json_spirit.h"
-#include "FileStorage.h"
-#include "FileStorage.cpp"
+#include "SimpleParser.h"
+#include "SimpleParser.cpp"
+#include "TimeParser.h"
+#include "TimeParser.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -21,39 +21,39 @@ namespace BoxInUnitTests
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-		TEST_METHOD(DateParserTestDDMMYY)
+		TEST_METHOD(SimpleParserTestDDMMYY)
 		{
-		    DateParser* parse = new DateParser();
+		    SimpleParser* parse = new SimpleParser();
             boost::gregorian::date expected(2004, boost::gregorian::Feb, 1);
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("010204")));
         }
-        TEST_METHOD(DateParserYYYYMMDD){
-            DateParser* parse = new DateParser();
+        TEST_METHOD(SimpleParserYYYYMMDD){
+            SimpleParser* parse = new SimpleParser();
             boost::gregorian::date expected(2004, boost::gregorian::Feb, 1);
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("20040201")));
         }
-        TEST_METHOD(DateParserYYYYMMMDD){
-            DateParser* parse = new DateParser();
+        TEST_METHOD(SimpleParserYYYYMMMDD){
+            SimpleParser* parse = new SimpleParser();
             boost::gregorian::date expected(2004, boost::gregorian::Feb, 1);
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("2004-Feb-01")));
 		}
-        TEST_METHOD(DateParserNonsense){
-            DateParser* parse = new DateParser();
+        TEST_METHOD(SimpleParserNonsense){
+            SimpleParser* parse = new SimpleParser();
             boost::gregorian::date expected;
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("nonsense")));
 		}
-        TEST_METHOD(DateParser13Month){
-            DateParser* parse = new DateParser();
+        TEST_METHOD(SimpleParser13Month){
+            SimpleParser* parse = new SimpleParser();
             boost::gregorian::date expected;
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("011314")));
 		}
-        TEST_METHOD(DateParser32Day){
-            DateParser* parse = new DateParser();
+        TEST_METHOD(SimpleParser32Day){
+            SimpleParser* parse = new SimpleParser();
             boost::gregorian::date expected;
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("320114")));
 		}
-        TEST_METHOD(DateParserIllegalMonthInTextFormat){
-            DateParser* parse = new DateParser();
+        TEST_METHOD(SimpleParserIllegalMonthInTextFormat){
+            SimpleParser* parse = new SimpleParser();
             boost::gregorian::date expected;
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("2014-Wut-12")));
 		}
@@ -82,6 +82,24 @@ namespace BoxInUnitTests
             Event *event2 = new Event("Later","","010101","");
             Assert::AreEqual(true, timeComp(event1, event2));
         }
+        TEST_METHOD(ExtractCommand){
+            SimpleParser parser;
+            std::string expected = "add";
+            Assert::AreEqual(parser.getField("add",TypeCommand), expected);
+        }
+        TEST_METHOD(ExtractCommandWithLongerString){
+            SimpleParser parser;
+            std::string expected = "add";
+            Assert::AreEqual(parser.getField("add stuff",TypeCommand), expected);
+        }
+        TEST_METHOD(ExtractDate){
+            SimpleParser parser;
+            boost::gregorian::date expected(2004, boost::gregorian::Feb, 1);
+            std::string date = parser.getField("add something date 010204",TypeDate);
+            std::string ans = "010204";
+            Assert::AreEqual(ans, date);
+        }
+        /*
 		TEST_METHOD(Storagetest1)
 		{
 			FileStorage test("hello.txt");
@@ -103,5 +121,6 @@ namespace BoxInUnitTests
 		{
 			 Logger::WriteMessage("In Module Cleanup");
 		}
+        */
 	};
 }

@@ -18,11 +18,11 @@ enum DateFormat{
     FormatNotRecognised
 };
 
-class DateParser
+class SimpleParser
 {
 public:
-    DateParser(void);
-    ~DateParser(void);
+    SimpleParser(void);
+    ~SimpleParser(void);
     boost::gregorian::date convertToDate(std::string date);
     void setupMap();
 private:

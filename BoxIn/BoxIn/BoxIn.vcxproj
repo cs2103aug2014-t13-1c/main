@@ -86,7 +86,6 @@
     <ClCompile Include="Add.cpp" />
     <ClCompile Include="BoxIn.cpp" />
     <ClCompile Include="CommonFunctions.cpp" />
-    <ClCompile Include="DateParser.cpp" />
     <ClCompile Include="Delete.cpp" />
     <ClCompile Include="digitalclock.cpp" />
     <ClCompile Include="DisplayFeed.cpp" />
@@ -157,7 +156,6 @@
     <ClInclude Include="Action.h" />
     <ClInclude Include="Add.h" />
     <ClInclude Include="CommonFunctions.h" />
-    <ClInclude Include="DateParser.h" />
     <ClInclude Include="Delete.h" />
     <ClInclude Include="SimpleParser.h" />
     <ClInclude Include="SimpleStorage.h" />

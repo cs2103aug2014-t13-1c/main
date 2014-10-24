@@ -113,9 +113,6 @@
     <ClCompile Include="SimpleStorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DateParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TimeParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -187,9 +184,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimpleStorage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DateParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TimeParser.h">

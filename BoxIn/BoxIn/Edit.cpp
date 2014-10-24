@@ -7,7 +7,7 @@ Edit::Edit(std::string input){
 	int indexField = indexOf(words, KEYWORD_FIELD);
 	if(indexField != words.size()){field = words[indexField + 1];}
 	name = extractField(words, POSITION_FIRST_WORD, indexDate);
-    date = to_simple_string(dateParser.convertToDate(extractField(words, indexDate, indexField)));
+    date = to_simple_string(parser.convertToDate(extractField(words, indexDate, indexField)));
     if(date == to_simple_string(boost::gregorian::date())){date = "";}
 	newValue = extractField(words, indexField + 1, words.size());
 }

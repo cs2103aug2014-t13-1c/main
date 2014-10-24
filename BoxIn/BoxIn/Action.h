@@ -5,7 +5,7 @@
 #include <vector>
 #include <boost\algorithm\string.hpp>
 #include "boost/date_time/gregorian/gregorian.hpp"
-#include <DateParser.h>
+#include <SimpleParser.h>
 
 static const std::string KEYWORD_LOCATION = "place";
 static const std::string KEYWORD_DATE = "date";
