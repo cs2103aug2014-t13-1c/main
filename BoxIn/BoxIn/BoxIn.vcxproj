@@ -59,7 +59,7 @@
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories);(x86)\boost_1_56_0;/cygdrive/c/Program Files (x86)/Microsoft SDKs/boost-1.57-vc110-x86-27.09.2014/stage/lib;C:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib;C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5MultimediaWidgetsd.lib;Qt5Qmld.lib;Qt5Testd.lib;Qt5Helpd.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5Scriptd.lib;Qt5Widgetsd.lib;%(AdditionalDependencies);C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Debug\JsonSpirit.lib</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5MultimediaWidgetsd.lib;Qt5Qmld.lib;Qt5Testd.lib;Qt5Helpd.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5Scriptd.lib;Qt5Widgetsd.lib;%(AdditionalDependencies);C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\Debug\JsonSpirit.lib</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>

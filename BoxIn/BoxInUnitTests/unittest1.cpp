@@ -59,28 +59,28 @@ namespace BoxInUnitTests
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("2014-Wut-12")));
 		}
         TEST_METHOD(DateComparer){
-            Event *event1 = new Event("Earlier","","010204","");
-            Event *event2 = new Event("Later","","311299","");
+            Event *event1 = new Event("Earlier","","010204","",0);
+            Event *event2 = new Event("Later","","311299","",0);
             Assert::AreEqual(true, timeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithFirstInvalid){
-            Event *event1 = new Event("Earlier","","asdfzx","");
-            Event *event2 = new Event("Later","","311299","");
+            Event *event1 = new Event("Earlier","","asdfzx","",0);
+            Event *event2 = new Event("Later","","311299","",0);
             Assert::AreEqual(true, timeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithSecondInvalid){
-            Event *event1 = new Event("Earlier","","010204","");
-            Event *event2 = new Event("Later","","supyo","");
+            Event *event1 = new Event("Earlier","","010204","",0);
+            Event *event2 = new Event("Later","","supyo","",0);
             Assert::AreEqual(false, timeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithBothInvalid){
-            Event *event1 = new Event("Earlier","","hi","");
-            Event *event2 = new Event("Later","","supyo","");
+            Event *event1 = new Event("Earlier","","hi","",0);
+            Event *event2 = new Event("Later","","supyo","",0);
             Assert::AreEqual(true, timeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithBothEqual){
-            Event *event1 = new Event("Earlier","","010101","");
-            Event *event2 = new Event("Later","","010101","");
+            Event *event1 = new Event("Earlier","","010101","",0);
+            Event *event2 = new Event("Later","","010101","",0);
             Assert::AreEqual(true, timeComp(event1, event2));
         }
         TEST_METHOD(ExtractCommand){

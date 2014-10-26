@@ -27,11 +27,13 @@ void BoxIn::createComponents(){
 	placeLabel = new QLabel("Place", this);
 	dateLabel = new QLabel("Date", this);
 	timeLabel = new QLabel("Time", this);
+    idxLabel = new QLabel("Index", this);
 	commandLine = new QLineEdit(this);
-	displayFeedName = new DisplayFeed(this, "Name");
-	displayFeedDate = new DisplayFeed(this, "Date");
-	displayFeedTime = new DisplayFeed(this, "Time");
-	displayFeedPlace = new DisplayFeed(this, "Place");
+	displayFeedName = new DisplayFeed(this, Name);
+	displayFeedDate = new DisplayFeed(this, Date);
+	displayFeedTime = new DisplayFeed(this, Time);
+	displayFeedPlace = new DisplayFeed(this, Place);
+    displayFeedIdx = new DisplayFeed(this, Index);
 	setComponentSizes();
 	setComponentColors();
 }
@@ -43,12 +45,14 @@ void BoxIn::createComponents(){
 */
 void BoxIn::setComponentSizes(){
 	clock->move(WIDTH_WINDOW - WIDTH_TIMER - WIDTH_LABEL / 2, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 2 * HEIGHT_SMALL - HEIGHT_TIMER - 3 * HEIGHT_BUFFER);
-	nameLabel->setGeometry(20, 40, 50, 20);
+    idxLabel->setGeometry(20, 40, 40, 20);
+	nameLabel->setGeometry(60, 40, 50, 20);
 	placeLabel->setGeometry(400, 40, 50, 20);
 	dateLabel->setGeometry(600, 40, 50, 20);
 	timeLabel->setGeometry(700, 40, 50, 20);
 	commandLine->setGeometry(60, 500, 800, 20);
-    displayFeedName->setGeometry(20, 70, 380, 300);
+    displayFeedIdx->setGeometry(20, 70, 40, 300);
+    displayFeedName->setGeometry(60, 70, 360, 300);
     displayFeedDate->setGeometry(600, 70, 100, 300);
     displayFeedTime->setGeometry(700, 70, 80, 300);
     displayFeedPlace->setGeometry(400, 70, 200, 300);
@@ -59,11 +63,13 @@ void BoxIn::setComponentColors(){
 	placeLabel->setStyleSheet(TRANSPARENT);
 	dateLabel->setStyleSheet(TRANSPARENT);
 	timeLabel->setStyleSheet(TRANSPARENT);
+    idxLabel->setStyleSheet(TRANSPARENT);
 	commandLine->setStyleSheet(WHITE);
     displayFeedName->setStyleSheet(TRANSPARENT);
     displayFeedDate->setStyleSheet(TRANSPARENT);
     displayFeedTime->setStyleSheet(TRANSPARENT);
     displayFeedPlace->setStyleSheet(TRANSPARENT);
+    displayFeedIdx->setStyleSheet(TRANSPARENT);
 }
 
 /**
@@ -78,6 +84,7 @@ void BoxIn::linkEvents(){
     QObject::connect(displayFeedDate, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
     QObject::connect(displayFeedTime, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
     QObject::connect(displayFeedPlace, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
+    QObject::connect(displayFeedIdx, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
 }
 
 /**
@@ -122,6 +129,7 @@ void BoxIn::updateGUI(){
     displayFeedDate->refresh(&thingsToInclude);
     displayFeedTime->refresh(&thingsToInclude);
     displayFeedPlace->refresh(&thingsToInclude);
+    displayFeedIdx->refresh(&thingsToInclude);
 }
 
 void BoxIn::createTrayIcon(){

@@ -9,12 +9,14 @@
 #include "qlabel.h"
 #include "qeventloop.h"
 #include "assert.h"
+#include <boost/lexical_cast.hpp>
 
 enum DisplayField{
     Name = 1,
     Date,
     Time,
-    Place
+    Place,
+    Index
 };
 
 class DisplayFeed : public QListWidget{
@@ -25,7 +27,7 @@ private:
     DisplayField field;
     
 public:
-	DisplayFeed(QWidget *parent, std::string field);
+	DisplayFeed(QWidget *parent, DisplayField field);
 	~DisplayFeed(void);
 
 	void setBorder();

@@ -1,27 +1,17 @@
 //@author A0111994B
 #include "DisplayFeed.h"
 
-DisplayFeed::DisplayFeed(QWidget *parent, std::string field)
+DisplayFeed::DisplayFeed(QWidget *parent, DisplayField field)
 	: QListWidget(parent)
 {
 	this->logic = logic;
-    displayFieldMap = setupMap();
-    this->field = displayFieldMap[field];
+    this->field = field;
 	setBorder();
 	show();
 }
 
 
 DisplayFeed::~DisplayFeed(void){
-}
-
-std::map<std::string, DisplayField> DisplayFeed::setupMap(){
-    std::map<std::string, DisplayField> m;
-    m["Name"] = Name;
-    m["Date"] = Date;
-    m["Time"] = Time;
-    m["Place"] = Place;
-    return m;
 }
 
 void DisplayFeed::setBorder(){
@@ -46,6 +36,9 @@ void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
             break;
         case Place :
             itemText = (*iter)->getLocation();
+            break;
+        case Index :
+            itemText = boost::lexical_cast<std::string>((*iter)->getIdx());
             break;
         }
 		QEventStore *item = new QEventStore(this, *iter);

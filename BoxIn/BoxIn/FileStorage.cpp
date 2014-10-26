@@ -27,7 +27,6 @@ void FileStorage::writeEvent(json_spirit::Array &eventArray, Event* event){
     eventObj.push_back(json_spirit::Pair(TAG_DATE, event->getDate()));
     eventObj.push_back(json_spirit::Pair(TAG_TIME, event->getTime()));
     eventObj.push_back(json_spirit::Pair(TAG_PLACE, event->getLocation()));
-
     eventArray.push_back(eventObj);
 }
 
@@ -38,12 +37,12 @@ std::vector<Event*> FileStorage::readFile(){
     read(file, value);
     const json_spirit::Array& eventArray = value.get_array();
     for(unsigned int i = 0; i < eventArray.size(); i++){
-        events.push_back(readEvent(eventArray[i].get_obj()));
+        events.push_back(readEvent(eventArray[i].get_obj(), i + 1));
     }
     return events;
 }
 
-Event* FileStorage::readEvent(const json_spirit::Object& obj){
+Event* FileStorage::readEvent(const json_spirit::Object& obj, unsigned int idx){
     Event *event = new Event;
     for(json_spirit::Object::size_type i = 0; i != obj.size(); i++){
         const json_spirit::Pair &pair = obj[i];
@@ -55,5 +54,6 @@ Event* FileStorage::readEvent(const json_spirit::Object& obj){
         else if(name == TAG_PLACE){event->setLocation(value.get_str());}
         else{assert(false&&"Json file corrupted");}
     }
+    event->setIdx(idx);
     return event;
 }

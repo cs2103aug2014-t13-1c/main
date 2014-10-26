@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoxIn", "BoxIn\BoxIn.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoxInUnitTests", "BoxInUnitTests\BoxInUnitTests.vcxproj", "{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JsonSpirit", "BoxIn\JsonSpirit.vcxproj", "{FE341162-8FDA-4D3E-A712-4B0432658004}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Release|Win32.ActiveCfg = Release|Win32
 		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Release|Win32.Build.0 = Release|Win32
+		{FE341162-8FDA-4D3E-A712-4B0432658004}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{FE341162-8FDA-4D3E-A712-4B0432658004}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{FE341162-8FDA-4D3E-A712-4B0432658004}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{FE341162-8FDA-4D3E-A712-4B0432658004}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE341162-8FDA-4D3E-A712-4B0432658004}.Debug|Win32.Build.0 = Debug|Win32
+		{FE341162-8FDA-4D3E-A712-4B0432658004}.Release|Any CPU.ActiveCfg = Release|Win32
+		{FE341162-8FDA-4D3E-A712-4B0432658004}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{FE341162-8FDA-4D3E-A712-4B0432658004}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{FE341162-8FDA-4D3E-A712-4B0432658004}.Release|Win32.ActiveCfg = Release|Win32
+		{FE341162-8FDA-4D3E-A712-4B0432658004}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

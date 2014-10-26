@@ -6,11 +6,12 @@ Event::Event(){
 }
 
 //@author A0111994B
-Event::Event(std::string name, std::string location, std::string date, std::string time){
+Event::Event(std::string name, std::string location, std::string date, std::string time, int idx){
 	this->name = name;
     if(date!=""){this->date = parser.convertToDate(date);}
     if(time!=""){this->time = timeParser.convertToTime(this->date, time);}
 	this->location = location;
+    this->idx = idx;
 	fieldMap = setupMap();
 }
 
@@ -27,7 +28,7 @@ Event::~Event(){
 }
 
 Event* Event::copy(){
-	return new Event(name, location, to_iso_string(date), getTime());
+	return new Event(name, location, to_iso_string(date), getTime(), idx);
 }
 
 std::map<std::string, Field> Event::setupMap(){
@@ -65,6 +66,10 @@ std::string Event::getLocation(){
 	return location;
 }
 
+int Event::getIdx(){
+    return idx;
+}
+
 void Event::editField(std::string field, std::string newValue){
 	switch(fieldMap[field]){
 		case FieldName :
@@ -95,6 +100,10 @@ void Event::setTime(std::string newTime){
 
 void Event::setLocation(std::string newLocation){
 	location = newLocation;
+}
+
+void Event::setIdx(int newIdx){
+    idx = newIdx;
 }
 
 /*

@@ -21,7 +21,7 @@ public:
 	void saveFile(std::vector<Event*>);
     void writeEvent(json_spirit::Array &eventArray, Event* event);
 	std::vector<Event*> readFile();
-    Event* readEvent(const json_spirit::Object& obj);
+    Event* readEvent(const json_spirit::Object& obj, unsigned int idx);
 private:
 	std::string filename;
 };

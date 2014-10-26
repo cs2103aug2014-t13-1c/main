@@ -16,7 +16,12 @@ SimpleStorage::SimpleStorage(){
 SimpleStorage::~SimpleStorage(){
 }
 
+bool idxComp(Event* item1, Event* item2){
+    return item1->getIdx() < item2->getIdx();
+}
+
 bool alphaComp(Event* item1, Event* item2){
+    if(item1->getName() == item2->getName()){return idxComp(item1, item2);}
     return item1->getName() <= item2->getName();
 }
 
@@ -74,6 +79,9 @@ void SimpleStorage::sortEvents(){
     case CriteriaTime:
         std::stable_sort(events.begin(), events.end(), timeComp);
         break;
+    }
+    for(unsigned int i = 0; i < events.size(); i++){
+        events[i]->setIdx(i+1);
     }
 }
 

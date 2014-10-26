@@ -23,7 +23,7 @@ class Event{
 public:
 	Event();
 	Event(std::string name, std::string date, std::string time);
-	Event(std::string name, std::string location, std::string date, std::string time);
+	Event(std::string name, std::string location, std::string date, std::string time, int idx);
 	~Event();
 	Event* copy();
 
@@ -39,6 +39,8 @@ public:
 	void setTime(std::string newTime);
 	void setLocation(std::string newLocation);
 	std::string repr();
+    int getIdx();
+    void setIdx(int newIdx);
 	/*
 	std::string getDescription();
 	std::string getCategory();
@@ -56,11 +58,10 @@ private:
 	boost::gregorian::date date;
 	boost::posix_time::ptime time;
     std::string nonformattime;
-	// std::string date;
-	// std::string time;
 	std::string location;
     SimpleParser parser;
     TimeParser timeParser;
+    int idx;
 	/*
 	std::string _name;
 	std::string _description;

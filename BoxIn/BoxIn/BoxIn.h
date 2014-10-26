@@ -70,6 +70,7 @@ private:
 	QLabel *placeLabel;
 	QLabel *dateLabel;
 	QLabel *timeLabel;
+    QLabel *idxLabel;
 
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu;
@@ -77,6 +78,7 @@ private:
     DisplayFeed *displayFeedDate;
     DisplayFeed *displayFeedTime;
     DisplayFeed *displayFeedPlace;
+    DisplayFeed *displayFeedIdx;
 	QLineEdit *commandLine;
 
 public slots:
