@@ -24,6 +24,12 @@
         "Place" : ""
     },
     {
+        "Name" : "this is a very long string and what is going on this is dying help me save you",
+        "Date" : "",
+        "Time" : "",
+        "Place" : ""
+    },
+    {
         "Name" : "something else",
         "Date" : "2001-Jan-01",
         "Time" : "",

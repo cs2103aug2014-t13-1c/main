@@ -52,7 +52,7 @@ void BoxIn::setComponentSizes(){
 	timeLabel->setGeometry(700, 40, 50, 20);
 	commandLine->setGeometry(60, 500, 800, 20);
     displayFeedIdx->setGeometry(20, 70, 40, 300);
-    displayFeedName->setGeometry(60, 70, 360, 300);
+    displayFeedName->setGeometry(60, 70, 340, 300);
     displayFeedDate->setGeometry(600, 70, 100, 300);
     displayFeedTime->setGeometry(700, 70, 80, 300);
     displayFeedPlace->setGeometry(400, 70, 200, 300);
@@ -91,8 +91,11 @@ void BoxIn::linkEvents(){
 * Handles the event changes - particularly the minimizing and maximizing of the window to system tray.
 */
 void BoxIn::changeEvent(QEvent *event){
-	if(event->type() == QEvent::Close){qApp->quit();}
-	event->accept();
+	if(event->type() == QEvent::Close){
+        event->ignore();
+        this->hide();
+    }
+    else{event->accept();}
 	if(windowState() == Qt::WindowMinimized){
 		this->hide();
 	}else if(windowState() == Qt::WindowMaximized){
