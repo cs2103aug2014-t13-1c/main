@@ -9,9 +9,9 @@
 
 static const std::string TAG_NAME = "Name";
 static const std::string TAG_START_DATE = "Start_Date";
-static const std::string TAG_END_DATE = "Date";
+static const std::string TAG_END_DATE = "End_Date";
 static const std::string TAG_START_TIME = "Start_Time";
-static const std::string TAG_END_TIME = "Time";
+static const std::string TAG_END_TIME = "End_Time";
 static const std::string TAG_PLACE = "Place";
 
 class FileStorage

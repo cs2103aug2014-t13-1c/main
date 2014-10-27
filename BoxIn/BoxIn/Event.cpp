@@ -129,12 +129,12 @@ void Event::setEndDate(std::string newDate){
 }
 
 void Event::setStartTime(std::string newTime){
-    if(sdate.is_special()){sdate = boost::gregorian::day_clock::local_day();}
+    if(sdate.is_special() && !newTime.empty()){sdate = boost::gregorian::day_clock::local_day();}
     stime = timeParser.convertToTime(sdate, newTime);
 }
 
 void Event::setEndTime(std::string newTime){
-    if(edate.is_special()){edate = boost::gregorian::day_clock::local_day();}
+    if(edate.is_special() && !newTime.empty()){edate = boost::gregorian::day_clock::local_day();}
     etime = timeParser.convertToTime(edate, newTime);
 }
 

@@ -25,7 +25,7 @@ bool alphaComp(Event* item1, Event* item2){
     return item1->getName() <= item2->getName();
 }
 
-bool timeComp(Event* item1, Event* item2){
+bool startTimeComp(Event* item1, Event* item2){
     if(item1->getStartDate() == "" && item2->getStartDate() == ""){return alphaComp(item1, item2);}
     else if(item1->getStartDate()==""){return true;}
     else if(item2->getStartDate()==""){return false;}
@@ -33,6 +33,16 @@ bool timeComp(Event* item1, Event* item2){
     boost::gregorian::date date2 = boost::gregorian::date(boost::gregorian::from_simple_string(item2->getStartDate()));
     if(date1==date2 && item1->getStartTime()==item2->getStartTime()){return alphaComp(item1, item2);}
     return (date1 < date2) || (item1->getStartTime() <= item2->getStartTime() && date1 == date2);
+}
+
+bool endTimeComp(Event* item1, Event* item2){
+    if(item1->getEndDate() == "" && item2->getEndDate() == ""){return startTimeComp(item1, item2);}
+    else if(item1->getEndDate()==""){return true;}
+    else if(item2->getEndDate()==""){return false;}
+    boost::gregorian::date date1 = boost::gregorian::date(boost::gregorian::from_simple_string(item1->getEndDate()));
+    boost::gregorian::date date2 = boost::gregorian::date(boost::gregorian::from_simple_string(item2->getEndDate()));
+    if(date1==date2 && item1->getEndTime()==item2->getEndTime()){return startTimeComp(item1, item2);}
+    return (date1 < date2) || (item1->getEndTime() <= item2->getEndTime() && date1 == date2);
 }
 
 std::vector<Event*> SimpleStorage::getEvents(){
@@ -52,10 +62,10 @@ Action* SimpleStorage::popLastAction(){
 
 void SimpleStorage::sortEvents(){
     std::stable_sort(events.begin(), events.end(), alphaComp);
-    std::stable_sort(events.begin(), events.end(), timeComp);
+    std::stable_sort(events.begin(), events.end(), startTimeComp);
+    std::stable_sort(events.begin(), events.end(), endTimeComp);
     switch(sortCriteria){
     case CriteriaTime:
-        std::stable_sort(events.begin(), events.end(), timeComp);
         break;
     }
     for(unsigned int i = 0; i < events.size(); i++){
