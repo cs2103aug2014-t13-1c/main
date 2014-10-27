@@ -28,11 +28,17 @@ void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
         case Name :
             itemText = (*iter)->getName();
             break;
-        case Date :
-            itemText = (*iter)->getDate();
+        case StartDate :
+            itemText = (*iter)->getStartDate();
             break;
-        case Time :
-            itemText = (*iter)->getTime();
+        case EndDate :
+            itemText = (*iter)->getEndDate();
+            break;
+        case StartTime :
+            itemText = (*iter)->getStartTime();
+            break;
+        case EndTime :
+            itemText = (*iter)->getEndTime();
             break;
         case Place :
             itemText = (*iter)->getLocation();

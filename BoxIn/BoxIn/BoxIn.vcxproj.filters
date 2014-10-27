@@ -74,9 +74,6 @@
     <ClCompile Include="Add.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Delete.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

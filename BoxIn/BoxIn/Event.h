@@ -9,13 +9,17 @@
 
 static const std::string FIELD_NAME = "name";
 static const std::string FIELD_LOCATION = "place";
-static const std::string FIELD_DATE = "date";
-static const std::string FIELD_TIME = "time";
+static const std::string FIELD_START_DATE = "sdate";
+static const std::string FIELD_END_DATE = "edate";
+static const std::string FIELD_START_TIME = "stime";
+static const std::string FIELD_END_TIME = "etime";
 
 enum Field {
 	FieldName = 1,
-	FieldDate,
-	FieldTime,
+	FieldStartDate,
+    FieldEndDate,
+	FieldStartTime,
+    FieldEndTime,
 	FieldLocation
 };
 
@@ -23,22 +27,25 @@ class Event{
 public:
 	Event();
 	Event(std::string name, std::string date, std::string time);
-	Event(std::string name, std::string location, std::string date, std::string time, int idx);
+	Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx);
 	~Event();
 	Event* copy();
 
 	std::map<std::string, Field> setupMap();
 
 	std::string getName();
-	std::string getDate();
-	std::string getTime();
+	std::string getStartDate();
+    std::string getEndDate();
+	std::string getStartTime();
+    std::string getEndTime();
 	std::string getLocation();
 	void editField(std::string field, std::string newValue);
 	void setName(std::string newName);
-	void setDate(std::string newDate);
-	void setTime(std::string newTime);
+	void setStartDate(std::string newDate);
+    void setEndDate(std::string newDate);
+	void setStartTime(std::string newTime);
+    void setEndTime(std::string newTime);
 	void setLocation(std::string newLocation);
-	std::string repr();
     int getIdx();
     void setIdx(int newIdx);
 	/*
@@ -55,8 +62,10 @@ public:
 private:
 	std::map<std::string, Field> fieldMap;
 	std::string name;
-	boost::gregorian::date date;
-	boost::posix_time::ptime time;
+	boost::gregorian::date sdate;
+    boost::gregorian::date edate;
+	boost::posix_time::ptime stime;
+    boost::posix_time::ptime etime;
     std::string nonformattime;
 	std::string location;
     SimpleParser parser;

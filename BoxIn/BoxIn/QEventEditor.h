@@ -7,10 +7,20 @@
 #include "Logic.h"
 #include "qdialog.h"
 #include "QEvent.h"
+#include <map>
 
 static const int WIDTH_POPUP = 400;
 static const int HEIGHT_POPUP = 200;
 static const int HEIGHT_TEXT = 20;
+
+namespace Editor{
+    static const std::string FIELD_NAME = "Name";
+    static const std::string FIELD_LOCATION = "Place";
+    static const std::string FIELD_START_DATE = "Start Date";
+    static const std::string FIELD_END_DATE = "End Date";
+    static const std::string FIELD_START_TIME = "Start Time";
+    static const std::string FIELD_END_TIME = "End Time";
+}
 
 class QEventEditor :
 	public QDialog
@@ -19,6 +29,7 @@ class QEventEditor :
 public:
 	QEventEditor(Event* event, QWidget *parent = 0);
 	~QEventEditor(void);
+    void setupMap();
 
 private:
 	Event *event;
@@ -28,6 +39,8 @@ private:
 	QPushButton *saveButton;
 	QPushButton *cancelButton;
 	QLineEdit *commandLine;
+
+    std::map<std::string, std::string> fieldToEditor;
 
 	void createObjects();
 	void arrangeObjects();

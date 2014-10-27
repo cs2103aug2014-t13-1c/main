@@ -13,8 +13,10 @@
 
 enum DisplayField{
     Name = 1,
-    Date,
-    Time,
+    StartDate,
+    EndDate,
+    StartTime,
+    EndTime,
     Place,
     Index
 };

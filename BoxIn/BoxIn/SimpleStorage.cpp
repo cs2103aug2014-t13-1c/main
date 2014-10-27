@@ -26,13 +26,13 @@ bool alphaComp(Event* item1, Event* item2){
 }
 
 bool timeComp(Event* item1, Event* item2){
-    if(item1->getDate() == "" && item2->getDate() == ""){return alphaComp(item1, item2);}
-    else if(item1->getDate()==""){return true;}
-    else if(item2->getDate()==""){return false;}
-    boost::gregorian::date date1 = boost::gregorian::date(boost::gregorian::from_simple_string(item1->getDate()));
-    boost::gregorian::date date2 = boost::gregorian::date(boost::gregorian::from_simple_string(item2->getDate()));
-    if(date1==date2 && item1->getTime()==item2->getTime()){return alphaComp(item1, item2);}
-    return (date1 < date2) || (item1->getTime() <= item2->getTime() && date1 == date2);
+    if(item1->getStartDate() == "" && item2->getStartDate() == ""){return alphaComp(item1, item2);}
+    else if(item1->getStartDate()==""){return true;}
+    else if(item2->getStartDate()==""){return false;}
+    boost::gregorian::date date1 = boost::gregorian::date(boost::gregorian::from_simple_string(item1->getStartDate()));
+    boost::gregorian::date date2 = boost::gregorian::date(boost::gregorian::from_simple_string(item2->getStartDate()));
+    if(date1==date2 && item1->getStartTime()==item2->getStartTime()){return alphaComp(item1, item2);}
+    return (date1 < date2) || (item1->getStartTime() <= item2->getStartTime() && date1 == date2);
 }
 
 std::vector<Event*> SimpleStorage::getEvents(){
@@ -48,28 +48,6 @@ Action* SimpleStorage::popLastAction(){
     Action* action = actionStack.top();
     actionStack.pop();
     return action;
-}
-
-void SimpleStorage::addEvent(Event* event){
-    events.push_back(event);
-}
-
-std::string SimpleStorage::removeEvent(std::string name, std::string date){
-    bool found;
-    Event *item;
-    for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
-		if((*iter)->getDate() == date && (*iter)->getName() == name){
-			item = *iter;
-			events.erase(iter);
-			found = true;
-			break;
-		}
-	}
-	if(found){
-		return item->getName() + " has been deleted!";
-	}else{
-		return "No item matching " + name + " found.";
-	}
 }
 
 void SimpleStorage::sortEvents(){

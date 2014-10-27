@@ -11,8 +11,10 @@ SimpleParser::~SimpleParser(void){
 
 void SimpleParser::setupMaps(){
     keywordMap[TypeName] = "name";
-    keywordMap[TypeDate] ="date";
-    keywordMap[TypeTime] = "time";
+    keywordMap[TypeStartDate] = "sdate";
+    keywordMap[TypeEndDate] = "edate";
+    keywordMap[TypeStartTime] = "stime";
+    keywordMap[TypeEndTime] = "etime";
     keywordMap[TypePlace] = "place";
     keywordMap[TypeField] = "field";
     keywordMap[TypeNewValue] = "field";

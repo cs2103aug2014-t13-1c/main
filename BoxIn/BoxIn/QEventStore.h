@@ -11,7 +11,6 @@ class QEventStore :
 public:
 	QEventStore(QWidget* parent, Event* event);
 	~QEventStore(void);
-	QString repr();
 	Event* getEvent();
 private:
 	Event *event;

@@ -3,7 +3,7 @@
 
 Edit::Edit(std::string input){
     name = parser.getField(input, TypeName);
-    date = to_simple_string(parser.convertToDate(parser.getField(input, TypeDate)));
+    date = to_simple_string(parser.convertToDate(parser.getField(input, TypeEndDate)));
     field = parser.getField(input, TypeField);
     newValue = parser.getField(input, TypeNewValue);
     if(date == to_simple_string(boost::gregorian::date())){date = "";}
@@ -16,7 +16,7 @@ Edit::~Edit(void){
 std::string Edit::execute(std::vector<Event*> &events){
 	bool success = false;
 	for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
-		if((*iter)->getDate() == date && (*iter)->getName() == name){
+		if((*iter)->getEndDate() == date && (*iter)->getName() == name){
 			oldEvent = *iter;
 			events.erase(iter);
 			success = true;

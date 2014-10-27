@@ -6,10 +6,30 @@ Event::Event(){
 }
 
 //@author A0111994B
-Event::Event(std::string name, std::string location, std::string date, std::string time, int idx){
+Event::Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx){
+    boost::gregorian::date today = boost::gregorian::day_clock::local_day();
 	this->name = name;
-    if(date!=""){this->date = parser.convertToDate(date);}
-    if(time!=""){this->time = timeParser.convertToTime(this->date, time);}
+    if(sdate!=""){this->sdate = parser.convertToDate(sdate);}
+    if(sdate == "" && stime != ""){
+        this->sdate = today;
+        this->stime = timeParser.convertToTime(today, stime);
+    }else if(stime!=""){
+        this->stime = timeParser.convertToTime(this->sdate, stime);
+    }
+
+    if(edate!=""){this->edate = parser.convertToDate(edate);}
+    if(edate == "" && etime != ""){
+        this->edate = today;
+        this->etime = timeParser.convertToTime(today, etime);
+    }else if(etime!=""){
+        this->etime = timeParser.convertToTime(this->edate, etime);
+    }
+    if(stime > etime){
+        // invalid start, end time pairings, reset start time to nothing and keep start time only
+        // since start time is likely to be the more important
+        this->edate = boost::gregorian::date();
+        this->etime = boost::posix_time::ptime();
+    }
 	this->location = location;
     this->idx = idx;
 	fieldMap = setupMap();
@@ -28,37 +48,41 @@ Event::~Event(){
 }
 
 Event* Event::copy(){
-	return new Event(name, location, to_iso_string(date), getTime(), idx);
+	return new Event(name, location, to_iso_string(sdate), to_iso_string(edate), getStartTime(), getEndTime(), idx);
 }
 
 std::map<std::string, Field> Event::setupMap(){
 	std::map<std::string, Field> fieldMap;
 	fieldMap[FIELD_NAME] = FieldName;
-	fieldMap[FIELD_DATE] = FieldDate;
-	fieldMap[FIELD_TIME] = FieldTime;
-	fieldMap[FIELD_LOCATION] = FieldLocation;
+	fieldMap[FIELD_START_DATE] = FieldStartDate;
+    fieldMap[FIELD_END_DATE] = FieldEndDate;
+	fieldMap[FIELD_START_TIME] = FieldStartTime;
+	fieldMap[FIELD_END_TIME] = FieldEndTime;
+    fieldMap[FIELD_LOCATION] = FieldLocation;
 	return fieldMap;
-}
-
-std::string Event::repr(){
-	std::string rep = name;
-	if(location != ""){rep = rep + " at " + location;}
-	if(date != boost::gregorian::date(boost::gregorian::not_a_date_time)){rep = rep + " on " + to_iso_extended_string(date);}
-    if(time != boost::posix_time::ptime(boost::posix_time::not_a_date_time)){rep = rep + " at " + to_iso_extended_string(time) + "hrs";}
-	return rep;
 }
 
 std::string Event::getName(){
 	return name;
 }
 
-std::string Event::getDate(){
-    if(date != boost::gregorian::date(boost::gregorian::not_a_date_time)){return boost::gregorian::to_simple_string(date);}
+std::string Event::getStartDate(){
+    if(sdate != boost::gregorian::date(boost::gregorian::not_a_date_time)){return boost::gregorian::to_simple_string(sdate);}
     return "";
 }
 
-std::string Event::getTime(){
-    if(time != boost::posix_time::ptime(boost::posix_time::not_a_date_time)){return boost::posix_time::to_iso_extended_string(time).substr(11,5);}
+std::string Event::getEndDate(){
+    if(edate != boost::gregorian::date(boost::gregorian::not_a_date_time)){return boost::gregorian::to_simple_string(edate);}
+    return "";
+}
+
+std::string Event::getStartTime(){
+    if(stime != boost::posix_time::ptime(boost::posix_time::not_a_date_time)){return boost::posix_time::to_iso_extended_string(stime).substr(11,5);}
+    return "";
+}
+
+std::string Event::getEndTime(){
+    if(etime != boost::posix_time::ptime(boost::posix_time::not_a_date_time)){return boost::posix_time::to_iso_extended_string(etime).substr(11,5);}
     return "";
 }
 
@@ -75,11 +99,17 @@ void Event::editField(std::string field, std::string newValue){
 		case FieldName :
 			setName(newValue);
 			break;
-		case FieldDate:
-			setDate(newValue);
+		case FieldStartDate :
+			setStartDate(newValue);
 			break;
-		case FieldTime :
-			setTime(newValue);
+        case FieldEndDate :
+            setEndDate(newValue);
+            break;
+        case FieldStartTime :
+            setStartTime(newValue);
+            break;
+		case FieldEndTime :
+			setEndTime(newValue);
 			break;
 		case FieldLocation :
 			setLocation(newValue);
@@ -90,12 +120,22 @@ void Event::setName(std::string newName){
 	name = newName;
 }
 
-void Event::setDate(std::string newDate){
-	date = parser.convertToDate(newDate);
+void Event::setStartDate(std::string newDate){
+	sdate = parser.convertToDate(newDate);
 }
 
-void Event::setTime(std::string newTime){
-    time = timeParser.convertToTime(this->date, newTime);
+void Event::setEndDate(std::string newDate){
+	edate = parser.convertToDate(newDate);
+}
+
+void Event::setStartTime(std::string newTime){
+    if(sdate.is_special()){sdate = boost::gregorian::day_clock::local_day();}
+    stime = timeParser.convertToTime(sdate, newTime);
+}
+
+void Event::setEndTime(std::string newTime){
+    if(edate.is_special()){edate = boost::gregorian::day_clock::local_day();}
+    etime = timeParser.convertToTime(edate, newTime);
 }
 
 void Event::setLocation(std::string newLocation){

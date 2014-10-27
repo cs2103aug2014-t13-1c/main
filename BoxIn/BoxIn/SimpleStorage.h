@@ -36,9 +36,6 @@ public:
     void pushStack(Action* action);
     Action* popLastAction();
 
-    void addEvent(Event* event);
-    std::string removeEvent(std::string name, std::string date);
-
     void sortEvents();
 
     std::string execute(Action* action);
