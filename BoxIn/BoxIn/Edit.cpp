@@ -15,14 +15,25 @@ Edit::~Edit(void){
 
 std::string Edit::execute(std::vector<Event*> &events){
 	bool success = false;
-	for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
-		if((*iter)->getEndDate() == date && (*iter)->getName() == name){
-			oldEvent = *iter;
-			events.erase(iter);
-			success = true;
-			break;
-		}
-	}
+    if(parser.isInteger(name)){
+        if(stoi(name) <= events.size()){
+            std::vector<Event*>::iterator iter = events.begin() + stoi(name) - 1;
+            oldEvent = *iter;
+            events.erase(iter);
+            success = true;
+        }else{
+            return "No item matching " + name + " found.";
+        }
+    }else{
+        for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
+	    	if((*iter)->getEndDate() == date && (*iter)->getName() == name){
+    			oldEvent = *iter;
+    			events.erase(iter);
+    			success = true;
+	    		break;
+    		}
+    	}
+    }
 	if(success){
 		newEvent = oldEvent->copy();
 		newEvent->editField(field, newValue);

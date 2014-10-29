@@ -14,7 +14,9 @@ static const std::string CURRENT_CENTURY = "20";
 static const int lenDDMMYY = 6;
 static const int lenYYYYMMDD = 8;
 static const int lenYYYY_MMM_DD = 11;
-static const std::string LEGIT_NUMBERS = "0123456789-/";
+static const std::string LEGIT_DATE_NUMBERS = "0123456789-/";
+static const std::string LEGIT_NUMBERS = "0123456789";
+
 
 enum InfoType{
     TypeCommand = 1,
@@ -47,6 +49,7 @@ public:
     std::string getField(std::string input, InfoType info);
     void setupMaps();
     bool isKeyword(std::string word);
+    bool isInteger(std::string text);
 
     boost::gregorian::date convertToDate(std::string date);
     DateFormat matchFormat(std::string date);

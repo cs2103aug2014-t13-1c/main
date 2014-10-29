@@ -18,6 +18,7 @@ std::string Action::undo(std::vector<Event*>&){
 	// stub
 	return "";
 }
+
 /*
 std::vector<std::string> Action::splitWords(std::string input){
 	std::vector<std::string> words;

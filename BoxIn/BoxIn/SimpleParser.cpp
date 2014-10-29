@@ -113,6 +113,21 @@ DateFormat SimpleParser::matchFormat(std::string date){
 bool SimpleParser::isNumericalFormat(std::string date){
     for(std::string::iterator iter = date.begin(); iter != date.end(); iter++){
         bool found = false;
+        for(unsigned int i = 0; i < LEGIT_DATE_NUMBERS.size(); i++){
+            if(*iter == LEGIT_DATE_NUMBERS[i]){
+                found = true;
+            }
+        }
+        if(!found){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool SimpleParser::isInteger(std::string num){
+    for(std::string::iterator iter = num.begin(); iter != num.end(); iter++){
+        bool found = false;
         for(unsigned int i = 0; i < LEGIT_NUMBERS.size(); i++){
             if(*iter == LEGIT_NUMBERS[i]){
                 found = true;
@@ -122,6 +137,7 @@ bool SimpleParser::isNumericalFormat(std::string date){
             return false;
         }
     }
+    if(stoi(num)<1){return false;}
     return true;
 }
 
