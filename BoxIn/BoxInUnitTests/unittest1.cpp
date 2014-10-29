@@ -44,6 +44,7 @@ namespace BoxInUnitTests
             Event *expected = new Event("something","","","","","",1);
             Event *actual = logic.getEvents()[0];
             Assert::AreEqual(expected->repr(), actual->repr());
+            file.close();
         }
         TEST_METHOD(TestEdit){
             std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
@@ -53,6 +54,7 @@ namespace BoxInUnitTests
             logic.handleUserInput("edit something field place here");
             Event *actual = logic.getEvents()[0];
             Assert::AreEqual(expected->repr(), actual->repr());
+            file.close();
         }
         TEST_METHOD(TestDelete){
             std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
@@ -61,6 +63,27 @@ namespace BoxInUnitTests
             logic.handleUserInput("delete something");
             unsigned int expected = 0;
             Assert::AreEqual(expected, logic.getEvents().size());
+            file.close();
+        }
+        TEST_METHOD(TestUndo){
+            std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
+            Logic logic;
+            logic.handleUserInput("add something");
+            logic.handleUserInput("undo");
+            unsigned int expected = 0;
+            Assert::AreEqual(expected, logic.getEvents().size());
+            file.close();
+        }
+        TEST_METHOD(TestUndoForEdit){
+            std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
+            Logic logic;
+            logic.handleUserInput("add something");
+            Event *expected = new Event("something","","","","","",1);
+            logic.handleUserInput("edit something field place here");
+            logic.handleUserInput("undo");
+            Event *actual = logic.getEvents()[0];
+            Assert::AreEqual(expected->repr(), actual->repr());
+            file.close();
         }
 
         // Tests for the parser
