@@ -158,20 +158,24 @@ namespace BoxInUnitTests
         /*
 		TEST_METHOD(Storagetest1)
 		{
-			FileStorage test("hello.txt");
+			FileStorage = new File;
+			File test("hello.txt");
 			test.appendToLineEntry("date", "010204");
 			test.appendToLineEntry("start", "1200");
-			Assert::IsTrue(test.isDateAndTimeCorrect());
+			Assert::IsTrue();
 		}
 		TEST_METHOD(Storagetest2)
 		{
-			FileStorage test("hello.txt");
+			FileStorage = new File;
+			File test("hello.txt");
 			test.determineType();
 			string errorStr = "Invalid Entry";
 		}
 
 		TEST_MODULE_INITIALIZE(ModuleInitialize)
-		{Logger::WriteMessage("In Module Initialize");}
+		{
+			Logger::WriteMessage("In Module Initialize");
+		}
 
 		TEST_MODULE_CLEANUP(ModuleCleanup)
 		{
