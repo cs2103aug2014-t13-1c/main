@@ -3,7 +3,7 @@
 #include "boost\date_time\gregorian\gregorian.hpp"
 
 SimpleStorage::SimpleStorage(){
-    file = FileStorage("BoxInData.json");
+    file = FileStorage(BOXIN_DATA_FILENAME);
     try{
         events = file.readFile();
     }
@@ -26,9 +26,9 @@ bool alphaComp(Event* item1, Event* item2){
 }
 
 bool startTimeComp(Event* item1, Event* item2){
-    if(item1->getStartDate() == "" && item2->getStartDate() == ""){return alphaComp(item1, item2);}
-    else if(item1->getStartDate()==""){return true;}
-    else if(item2->getStartDate()==""){return false;}
+    if(item1->getStartDate().empty() && item2->getStartDate().empty()){return alphaComp(item1, item2);}
+    else if(item1->getStartDate().empty()){return true;}
+    else if(item2->getStartDate().empty()){return false;}
     boost::gregorian::date date1 = boost::gregorian::date(boost::gregorian::from_simple_string(item1->getStartDate()));
     boost::gregorian::date date2 = boost::gregorian::date(boost::gregorian::from_simple_string(item2->getStartDate()));
     if(date1==date2 && item1->getStartTime()==item2->getStartTime()){return alphaComp(item1, item2);}
@@ -36,9 +36,9 @@ bool startTimeComp(Event* item1, Event* item2){
 }
 
 bool endTimeComp(Event* item1, Event* item2){
-    if(item1->getEndDate() == "" && item2->getEndDate() == ""){return startTimeComp(item1, item2);}
-    else if(item1->getEndDate()==""){return true;}
-    else if(item2->getEndDate()==""){return false;}
+    if(item1->getEndDate().empty() && item2->getEndDate().empty()){return startTimeComp(item1, item2);}
+    else if(item1->getEndDate().empty()){return true;}
+    else if(item2->getEndDate().empty()){return false;}
     boost::gregorian::date date1 = boost::gregorian::date(boost::gregorian::from_simple_string(item1->getEndDate()));
     boost::gregorian::date date2 = boost::gregorian::date(boost::gregorian::from_simple_string(item2->getEndDate()));
     if(date1==date2 && item1->getEndTime()==item2->getEndTime()){return startTimeComp(item1, item2);}

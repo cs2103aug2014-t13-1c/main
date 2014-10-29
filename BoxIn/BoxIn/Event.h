@@ -48,6 +48,7 @@ public:
 	void setLocation(std::string newLocation);
     int getIdx();
     void setIdx(int newIdx);
+    std::string repr(); // for testing purposes
 	/*
 	std::string getDescription();
 	std::string getCategory();
@@ -72,7 +73,6 @@ private:
     TimeParser timeParser;
     int idx;
 	/*
-	std::string _name;
 	std::string _description;
 	std::string _category;
 	int _priority;

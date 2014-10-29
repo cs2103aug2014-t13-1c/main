@@ -35,7 +35,7 @@ void SimpleParser::setupMaps(){
 std::string SimpleParser::getField(std::string input, InfoType info){
     std::string keyword = keywordMap[info];
     std::stringstream stream(input);
-    bool found;
+    bool found = false;
     std::string command;
     stream >> command;
     if(info == TypeCommand){

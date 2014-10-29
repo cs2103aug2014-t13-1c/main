@@ -146,6 +146,10 @@ void Event::setIdx(int newIdx){
     idx = newIdx;
 }
 
+std::string Event::repr(){
+    return name + " at " + location + " from " + getStartDate() + ", " + getStartTime() + " to " + getEndDate() + ", " + getEndTime();
+}
+
 /*
 std::string Event::getDescription() {
     return description;

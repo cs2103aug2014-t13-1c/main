@@ -19,6 +19,8 @@ bool alphaComp(Event* item1, Event* item2);
 bool timeComp(Event* item1, Event* item2);
 //bool priorityComp(Event* item1, Event* item2); // not yet implemented
 
+static const std::string BOXIN_DATA_FILENAME = "BoxInData.json";
+
 class SimpleStorage{
 private:
     std::vector<Event*> events;

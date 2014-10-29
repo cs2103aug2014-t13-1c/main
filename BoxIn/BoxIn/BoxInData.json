@@ -1,44 +1,10 @@
 [
     {
-        "Name" : "date with somebody",
-        "Date" : "",
-        "Time" : "",
+        "Name" : "Prepare v0.3",
+        "Start_Date" : "",
+        "End_Date" : "2014-Oct-29",
+        "Start_Time" : "",
+        "End_Time" : "",
         "Place" : ""
-    },
-    {
-        "Name" : "nothing",
-        "Date" : "",
-        "Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "something",
-        "Date" : "",
-        "Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "something else",
-        "Date" : "",
-        "Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "this is a very long string and what is going on this is dying help me save you",
-        "Date" : "",
-        "Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "something else",
-        "Date" : "2001-Jan-01",
-        "Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "what",
-        "Date" : "2001-Jan-01",
-        "Time" : "23:59",
-        "Place" : "here"
     }
 ]

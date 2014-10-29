@@ -1,3 +1,5 @@
+//@author A0111994
+
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include <vector>
@@ -13,6 +15,19 @@
 #include "SimpleParser.cpp"
 #include "TimeParser.h"
 #include "TimeParser.cpp"
+#include "Logic.h"
+#include "Logic.cpp"
+#include "Action.h"
+#include "Action.cpp"
+#include "Add.h"
+#include "Add.cpp"
+#include "Delete.h"
+#include "Delete.cpp"
+#include "Edit.h"
+#include "Edit.cpp"
+#include "Search.h"
+#include "Search.cpp"
+#include <fstream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -21,7 +36,34 @@ namespace BoxInUnitTests
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-        
+        // System level tests
+        TEST_METHOD(TestAdd){
+            std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
+            Logic logic;
+            logic.handleUserInput("add something");
+            Event *expected = new Event("something","","","","","",1);
+            Event *actual = logic.getEvents()[0];
+            Assert::AreEqual(expected->repr(), actual->repr());
+        }
+        TEST_METHOD(TestEdit){
+            std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
+            Logic logic;
+            logic.handleUserInput("add something");
+            Event *expected = new Event("something","here","","","","",1);
+            logic.handleUserInput("edit something field place here");
+            Event *actual = logic.getEvents()[0];
+            Assert::AreEqual(expected->repr(), actual->repr());
+        }
+        TEST_METHOD(TestDelete){
+            std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
+            Logic logic;
+            logic.handleUserInput("add something");
+            logic.handleUserInput("delete something");
+            unsigned int expected = 0;
+            Assert::AreEqual(expected, logic.getEvents().size());
+        }
+
+        // Tests for the parser
 		TEST_METHOD(SimpleParserTestDDMMYY)
 		{
 		    SimpleParser* parse = new SimpleParser();
@@ -58,30 +100,32 @@ namespace BoxInUnitTests
             boost::gregorian::date expected;
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("2014-Wut-12")));
 		}
+
+        // Tests for date comparison functions (TDD)
         TEST_METHOD(DateComparer){
-            Event *event1 = new Event("Earlier","","010204","",0);
-            Event *event2 = new Event("Later","","311299","",0);
-            Assert::AreEqual(true, timeComp(event1, event2));
+            Event *event1 = new Event("Earlier","","","010204","","",0);
+            Event *event2 = new Event("Later","","","311299","","",0);
+            Assert::AreEqual(true, endTimeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithFirstInvalid){
-            Event *event1 = new Event("Earlier","","asdfzx","",0);
-            Event *event2 = new Event("Later","","311299","",0);
-            Assert::AreEqual(true, timeComp(event1, event2));
+            Event *event1 = new Event("Earlier","","","asdfzx","","",0);
+            Event *event2 = new Event("Later","","","311299","","",0);
+            Assert::AreEqual(true, endTimeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithSecondInvalid){
-            Event *event1 = new Event("Earlier","","010204","",0);
-            Event *event2 = new Event("Later","","supyo","",0);
-            Assert::AreEqual(false, timeComp(event1, event2));
+            Event *event1 = new Event("Earlier","","","010204","","",0);
+            Event *event2 = new Event("Later","","","supyo","","",0);
+            Assert::AreEqual(false, endTimeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithBothInvalid){
-            Event *event1 = new Event("Earlier","","hi","",0);
-            Event *event2 = new Event("Later","","supyo","",0);
-            Assert::AreEqual(true, timeComp(event1, event2));
+            Event *event1 = new Event("Earlier","","","hi","","",0);
+            Event *event2 = new Event("Later","","","supyo","","",0);
+            Assert::AreEqual(true, endTimeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithBothEqual){
-            Event *event1 = new Event("Earlier","","010101","",0);
-            Event *event2 = new Event("Later","","010101","",0);
-            Assert::AreEqual(true, timeComp(event1, event2));
+            Event *event1 = new Event("Earlier","","","010101","","",0);
+            Event *event2 = new Event("Later","","","010101","","",0);
+            Assert::AreEqual(true, endTimeComp(event1, event2));
         }
         TEST_METHOD(ExtractCommand){
             SimpleParser parser;
@@ -96,12 +140,12 @@ namespace BoxInUnitTests
         TEST_METHOD(ExtractName){
             SimpleParser parser;
             std::string expected = "Something over the rainbow";
-            std::string ans = parser.getField("add Something over the rainbow date 010101", TypeName);
+            std::string ans = parser.getField("add Something over the rainbow sdate 010101", TypeName);
             Assert::AreEqual(expected, ans);
         }
         TEST_METHOD(ExtractDate){
             SimpleParser parser;
-            std::string date = parser.getField("add something date 010204",TypeDate);
+            std::string date = parser.getField("add something edate 010204",TypeEndDate);
             std::string ans = "010204";
             Assert::AreEqual(ans, date);
         }
