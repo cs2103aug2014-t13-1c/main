@@ -67,6 +67,6 @@ std::string DisplayFeed::pad(std::string str, int spaces){
     while(str.size() < spaces){
         str += " ";
     }
-    if(str.size() > spaces){return str.substr(0, spaces - 1);}
+    if(str.size() > spaces){return str.substr(0, spaces - 1) + " ";}
     return str;
 }
