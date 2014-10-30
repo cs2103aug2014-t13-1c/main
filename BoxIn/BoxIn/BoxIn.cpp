@@ -52,9 +52,8 @@ void BoxIn::setComponentSizes(){
 	placeLabel->setGeometry(400, 40, 50, 20);
 	startLabel->setGeometry(600, 40, 50, 20);
 	endLabel->setGeometry(800, 40, 50, 20);
-	commandLine->setGeometry(60, 500, 1140, 20);
+	commandLine->setGeometry(80, 500, 1140, 20);
     ui.feedbackBox->setFixedSize(WIDTH_WINDOW, 20);
-    ui.buttonExit->setFixedSize(WIDTH_WINDOW, 20);
     displayFeedIdx->setGeometry(20, 70, 40, 400);
     displayFeedName->setGeometry(60, 70, 340, 400);
     displayFeedStartDate->setGeometry(600, 70, 100, 400);
@@ -85,7 +84,6 @@ void BoxIn::setComponentColors(){
 * linkEvents deals with the events from keypresses and such, connecting them to the relevant function call
 */
 void BoxIn::linkEvents(){
-	QObject::connect(ui.buttonExit,SIGNAL(pressed()), this, SLOT(buttonExitClicked()));
 	QObject::connect(commandLine, SIGNAL(returnPressed()), this, SLOT(commandLineReturnPressed()));
     QObject::connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 	QObject::connect(displayFeedName, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
@@ -130,10 +128,6 @@ void BoxIn::commandLineReturnPressed(){
 	displayFeedback(QString(feedback.c_str()));
 	clearCommandLine();
 	updateGUI();
-}
-
-void BoxIn::buttonExitClicked(){
-	qApp->quit();
 }
 
 void BoxIn::updateGUI(){

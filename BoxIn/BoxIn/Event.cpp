@@ -122,10 +122,12 @@ void Event::setName(std::string newName){
 
 void Event::setStartDate(std::string newDate){
 	sdate = parser.convertToDate(newDate);
+    stime = timeParser.convertToTime(sdate, getStartTime());
 }
 
 void Event::setEndDate(std::string newDate){
 	edate = parser.convertToDate(newDate);
+    etime = timeParser.convertToTime(edate, getEndTime());
 }
 
 void Event::setStartTime(std::string newTime){
@@ -148,6 +150,14 @@ void Event::setIdx(int newIdx){
 
 std::string Event::repr(){
     return name + " at " + location + " from " + getStartDate() + ", " + getStartTime() + " to " + getEndDate() + ", " + getEndTime();
+}
+
+boost::posix_time::ptime Event::getPosixStartTime(){
+    return stime;
+}
+
+boost::posix_time::ptime Event::getPosixEndTime(){
+    return etime;
 }
 
 /*

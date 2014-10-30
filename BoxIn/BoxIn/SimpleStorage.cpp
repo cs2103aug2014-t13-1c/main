@@ -82,7 +82,7 @@ std::string SimpleStorage::execute(Action* action){
 
 std::string SimpleStorage::undo(Action* action){
     std::string feedback = action->undo(events);
-    // sortEvents();
+    sortEvents();
     return feedback;
 }
 

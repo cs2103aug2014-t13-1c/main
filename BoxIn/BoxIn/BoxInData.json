@@ -1,6 +1,6 @@
 [
     {
-        "Name" : "",
+        "Name" : "even more stuff",
         "Start_Date" : "",
         "End_Date" : "",
         "Start_Time" : "",
@@ -8,7 +8,7 @@
         "Place" : ""
     },
     {
-        "Name" : "0942u53we",
+        "Name" : "more stuff!",
         "Start_Date" : "",
         "End_Date" : "",
         "Start_Time" : "",
@@ -16,7 +16,7 @@
         "Place" : ""
     },
     {
-        "Name" : "1035294",
+        "Name" : "this is pretty cool",
         "Start_Date" : "",
         "End_Date" : "",
         "Start_Time" : "",
@@ -24,171 +24,27 @@
         "Place" : ""
     },
     {
-        "Name" : "1035u4",
-        "Start_Date" : "",
+        "Name" : "random meeting",
+        "Start_Date" : "2014-Feb-01",
         "End_Date" : "",
         "Start_Time" : "",
         "End_Time" : "",
         "Place" : ""
     },
     {
-        "Name" : "2",
-        "Start_Date" : "",
+        "Name" : "Tutorial",
+        "Start_Date" : "2014-Oct-30",
         "End_Date" : "",
-        "Start_Time" : "",
+        "Start_Time" : "13:00",
         "End_Time" : "",
-        "Place" : ""
+        "Place" : "Com1"
     },
     {
-        "Name" : "3",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "310",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "38u4",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "4",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "5",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "6",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "8",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "9024u53oiw",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "adfoi",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "adklfj",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "adklsfdl",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "adlfkj,",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "aklc",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "alcml",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "alkdf",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "dkslfjklds",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "ioaujsdf",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "lkvlks",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "sdkcjsdl",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
+        "Name" : "CS2103 lecture",
+        "Start_Date" : "2014-Nov-01",
+        "End_Date" : "2014-Nov-01",
+        "Start_Time" : "14:00",
+        "End_Time" : "16:00",
         "Place" : ""
     }
 ]

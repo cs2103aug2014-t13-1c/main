@@ -35,6 +35,7 @@ public:
 	void setBorder();
 	void refresh(std::vector<Event*> *thingsToInclude);
     std::map<std::string, DisplayField> setupMap();
+    void setItemColors();
 };
 
 #endif // DisplayFeed.h

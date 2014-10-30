@@ -47,6 +47,8 @@ public:
     void setEndTime(std::string newTime);
 	void setLocation(std::string newLocation);
     int getIdx();
+    boost::posix_time::ptime getPosixStartTime();
+    boost::posix_time::ptime getPosixEndTime();
     void setIdx(int newIdx);
     std::string repr(); // for testing purposes
 	/*

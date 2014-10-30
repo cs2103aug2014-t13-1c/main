@@ -17,7 +17,6 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -30,7 +29,6 @@ public:
     QWidget *centralWidget;
     QLabel *commandLabel;
     QLabel *feedbackBox;
-    QPushButton *buttonExit;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -172,7 +170,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         commandLabel = new QLabel(centralWidget);
         commandLabel->setObjectName(QStringLiteral("commandLabel"));
-        commandLabel->setGeometry(QRect(0, 490, 60, 20));
+        commandLabel->setGeometry(QRect(0, 490, 80, 20));
         feedbackBox = new QLabel(centralWidget);
         feedbackBox->setObjectName(QStringLiteral("feedbackBox"));
         feedbackBox->setGeometry(QRect(0, 460, 800, 20));
@@ -283,61 +281,6 @@ public:
         feedbackBox->setPalette(palette1);
         feedbackBox->setAlignment(Qt::AlignCenter);
         feedbackBox->setIndent(0);
-        buttonExit = new QPushButton(centralWidget);
-        buttonExit->setObjectName(QStringLiteral("buttonExit"));
-        buttonExit->setGeometry(QRect(0, 520, 800, 20));
-        buttonExit->setMaximumSize(QSize(800, 16777215));
-        QPalette palette2;
-        palette2.setBrush(QPalette::Active, QPalette::WindowText, brush);
-        QBrush brush27(QColor(226, 226, 226, 255));
-        brush27.setStyle(Qt::SolidPattern);
-        palette2.setBrush(QPalette::Active, QPalette::Button, brush27);
-        palette2.setBrush(QPalette::Active, QPalette::Light, brush2);
-        palette2.setBrush(QPalette::Active, QPalette::Midlight, brush2);
-        palette2.setBrush(QPalette::Active, QPalette::Dark, brush17);
-        palette2.setBrush(QPalette::Active, QPalette::Mid, brush18);
-        palette2.setBrush(QPalette::Active, QPalette::Text, brush);
-        palette2.setBrush(QPalette::Active, QPalette::BrightText, brush2);
-        palette2.setBrush(QPalette::Active, QPalette::ButtonText, brush);
-        palette2.setBrush(QPalette::Active, QPalette::Base, brush27);
-        palette2.setBrush(QPalette::Active, QPalette::Window, brush27);
-        palette2.setBrush(QPalette::Active, QPalette::Shadow, brush);
-        palette2.setBrush(QPalette::Active, QPalette::AlternateBase, brush2);
-        palette2.setBrush(QPalette::Active, QPalette::ToolTipBase, brush8);
-        palette2.setBrush(QPalette::Active, QPalette::ToolTipText, brush);
-        palette2.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
-        palette2.setBrush(QPalette::Inactive, QPalette::Button, brush27);
-        palette2.setBrush(QPalette::Inactive, QPalette::Light, brush2);
-        palette2.setBrush(QPalette::Inactive, QPalette::Midlight, brush2);
-        palette2.setBrush(QPalette::Inactive, QPalette::Dark, brush17);
-        palette2.setBrush(QPalette::Inactive, QPalette::Mid, brush18);
-        palette2.setBrush(QPalette::Inactive, QPalette::Text, brush);
-        palette2.setBrush(QPalette::Inactive, QPalette::BrightText, brush2);
-        palette2.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
-        palette2.setBrush(QPalette::Inactive, QPalette::Base, brush27);
-        palette2.setBrush(QPalette::Inactive, QPalette::Window, brush27);
-        palette2.setBrush(QPalette::Inactive, QPalette::Shadow, brush);
-        palette2.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush2);
-        palette2.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush8);
-        palette2.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush);
-        palette2.setBrush(QPalette::Disabled, QPalette::WindowText, brush17);
-        palette2.setBrush(QPalette::Disabled, QPalette::Button, brush27);
-        palette2.setBrush(QPalette::Disabled, QPalette::Light, brush2);
-        palette2.setBrush(QPalette::Disabled, QPalette::Midlight, brush2);
-        palette2.setBrush(QPalette::Disabled, QPalette::Dark, brush17);
-        palette2.setBrush(QPalette::Disabled, QPalette::Mid, brush18);
-        palette2.setBrush(QPalette::Disabled, QPalette::Text, brush17);
-        palette2.setBrush(QPalette::Disabled, QPalette::BrightText, brush2);
-        palette2.setBrush(QPalette::Disabled, QPalette::ButtonText, brush17);
-        palette2.setBrush(QPalette::Disabled, QPalette::Base, brush27);
-        palette2.setBrush(QPalette::Disabled, QPalette::Window, brush27);
-        palette2.setBrush(QPalette::Disabled, QPalette::Shadow, brush);
-        palette2.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush2);
-        palette2.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush8);
-        palette2.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
-        buttonExit->setPalette(palette2);
-        buttonExit->setAutoFillBackground(false);
-        buttonExit->setStyleSheet(QStringLiteral("background-color: rgb(226, 226, 226);"));
         BoxInClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(BoxInClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -360,7 +303,6 @@ public:
         BoxInClass->setWindowTitle(QApplication::translate("BoxInClass", "BoxIn v0.1", 0));
         commandLabel->setText(QApplication::translate("BoxInClass", "  Command:", 0));
         feedbackBox->setText(QApplication::translate("BoxInClass", "Welcome to BoxIn v0.1", 0));
-        buttonExit->setText(QApplication::translate("BoxInClass", "Exit", 0));
     } // retranslateUi
 
 };

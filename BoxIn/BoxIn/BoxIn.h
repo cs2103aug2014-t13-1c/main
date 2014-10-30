@@ -85,7 +85,6 @@ private:
 
 public slots:
 	void commandLineReturnPressed();
-	void buttonExitClicked();
 	void iconActivated(QSystemTrayIcon::ActivationReason reason);
 	void editItem(QListWidgetItem *item);
 	void setCommand(std::string command);
