@@ -10,7 +10,6 @@ int main(int argc, char *argv[]){
 	QApplication app(argc, argv);
 	BoxIn w;
 	setIcon(app);
-    app.setFont(QFont("Courier New", 9));
 	w.show();
 	return app.exec();
 }

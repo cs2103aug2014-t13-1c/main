@@ -48,15 +48,15 @@ void BoxIn::createComponents(){
 * declared in BoxIn.h
 */
 void BoxIn::setComponentSizes(){
-	clock->move(WIDTH_WINDOW - WIDTH_TIMER - WIDTH_LABEL / 2, HEIGHT_WINDOW - HEIGHT_NO_CLICK_ZONE - 2 * HEIGHT_SMALL - HEIGHT_TIMER - 3 * HEIGHT_BUFFER);
+	clock->move(WIDTH_WINDOW - 100, 450);
     idxLabel->setGeometry(20, 40, 40, 20);
 	nameLabel->setGeometry(60, 40, 50, 20);
 	placeLabel->setGeometry(400, 40, 50, 20);
 	startLabel->setGeometry(550, 40, 100, 20);
 	// endLabel->setGeometry(800, 40, 50, 20);
-	commandLine->setGeometry(80, 500, WIDTH_WINDOW - 80, 20);
-    ui.feedbackBox->setFixedSize(WIDTH_WINDOW, 20);
-    displayFeedIdx->setGeometry(20, 70, WIDTH_WINDOW - 2 * WIDTH_BUFFER, 400);
+	commandLine->setGeometry(80, 540, WIDTH_WINDOW - 80, 20);
+    ui.feedbackBox->setGeometry(0, 500, WIDTH_WINDOW, 20);
+    displayFeedIdx->setGeometry(20, 70, WIDTH_WINDOW - 2 * WIDTH_BUFFER, 350);
     //displayFeedName->setGeometry(60, 70, 340, 400);
     //displayFeedStartDate->setGeometry(600, 70, 100, 400);
     //displayFeedStartTime->setGeometry(700, 70, 100, 400);

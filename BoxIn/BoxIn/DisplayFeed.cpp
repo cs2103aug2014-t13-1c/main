@@ -7,6 +7,7 @@ DisplayFeed::DisplayFeed(QWidget *parent, DisplayField field)
 	this->logic = logic;
     this->field = field;
 	setBorder();
+    setFont(QFont("Courier New", 9));
 	show();
 }
 
@@ -29,13 +30,13 @@ void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
         std::string startDate = (*iter)->getStartDate();
         if(startDate == to_simple_string(boost::gregorian::day_clock::local_day())){startDate = "Today";}
         std::string endDate = (*iter)->getEndDate();
+        if(endDate == to_simple_string(boost::gregorian::day_clock::local_day())){endDate = "Today";}
         if(endDate == startDate){endDate = "";}
-        else if(endDate == to_simple_string(boost::gregorian::day_clock::local_day())){endDate = "Today";}
         std::string startTime = (*iter)->getStartTime();
         if(startTime == "00:00"){startTime = "";}
         std::string endTime = (*iter)->getEndTime();
         if(endTime == "00:00"){endTime = "";}
-        if(!(endDate.empty() && endTime.empty()) || !(startDate.empty() && startTime.empty())){filler = "to ";}
+        if(!(endDate.empty() && endTime.empty()) && !(startDate.empty() && startTime.empty())){filler = "to ";}
         std::string place = (*iter)->getLocation();
         if(place.empty()){place = "-";}
 		QEventStore *item = new QEventStore(this, *iter);
@@ -66,6 +67,6 @@ std::string DisplayFeed::pad(std::string str, int spaces){
     while(str.size() < spaces){
         str += " ";
     }
-    if(str.size() > spaces){return str.substr(0, spaces);}
+    if(str.size() > spaces){return str.substr(0, spaces - 1);}
     return str;
 }

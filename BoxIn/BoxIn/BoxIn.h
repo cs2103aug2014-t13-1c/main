@@ -17,7 +17,7 @@
 #include <QLabel>
 
 static const int HEIGHT_WINDOW = 600;
-static const int WIDTH_WINDOW = 800;
+static const int WIDTH_WINDOW = 1000;
 
 static const int HEIGHT_BUFFER = 10;
 static const int WIDTH_BUFFER = 20;

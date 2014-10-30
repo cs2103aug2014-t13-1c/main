@@ -170,10 +170,10 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         commandLabel = new QLabel(centralWidget);
         commandLabel->setObjectName(QStringLiteral("commandLabel"));
-        commandLabel->setGeometry(QRect(0, 490, 80, 20));
+        commandLabel->setGeometry(QRect(0, 530, 80, 20));
         feedbackBox = new QLabel(centralWidget);
         feedbackBox->setObjectName(QStringLiteral("feedbackBox"));
-        feedbackBox->setGeometry(QRect(0, 460, 800, 20));
+        feedbackBox->setGeometry(QRect(0, 500, 800, 20));
         QPalette palette1;
         palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
         QRadialGradient gradient9(0.5, 0.4, 0.5, 0.5, 0.5);
