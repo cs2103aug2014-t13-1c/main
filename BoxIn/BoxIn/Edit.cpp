@@ -15,6 +15,9 @@ Edit::~Edit(void){
 
 std::string Edit::execute(std::vector<Event*> &events){
 	bool success = false;
+    if(field.empty()){
+        return "Missing field key word";
+    }
     if(parser.isInteger(name)){
         if(stoi(name) <= events.size()){
             std::vector<Event*>::iterator iter = events.begin() + stoi(name) - 1;

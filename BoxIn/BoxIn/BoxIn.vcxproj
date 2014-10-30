@@ -78,7 +78,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5MultimediaWidgets.lib;Qt5Qml.lib;Qt5Test.lib;Qt5Help.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5Script.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5MultimediaWidgets.lib;Qt5Qml.lib;Qt5Test.lib;Qt5Help.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5Script.lib;Qt5Widgets.lib;%(AdditionalDependencies);C:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib\libboost_date_time-vc110-mt-1_57.lib;C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\Release\JsonSpirit.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
