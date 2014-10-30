@@ -38,9 +38,11 @@ void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
             break;
         case StartTime :
             itemText = (*iter)->getStartTime();
+            if(itemText == "00:00"){itemText = "";}
             break;
         case EndTime :
             itemText = (*iter)->getEndTime();
+            if(itemText == "00:00"){itemText = "";}
             break;
         case Place :
             itemText = (*iter)->getLocation();
