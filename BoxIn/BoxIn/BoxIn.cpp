@@ -55,13 +55,13 @@ void BoxIn::setComponentSizes(){
 	commandLine->setGeometry(60, 500, 1140, 20);
     ui.feedbackBox->setFixedSize(WIDTH_WINDOW, 20);
     ui.buttonExit->setFixedSize(WIDTH_WINDOW, 20);
-    displayFeedIdx->setGeometry(20, 70, 40, 300);
-    displayFeedName->setGeometry(60, 70, 340, 300);
-    displayFeedStartDate->setGeometry(600, 70, 100, 300);
-    displayFeedStartTime->setGeometry(700, 70, 100, 300);
-    displayFeedEndDate->setGeometry(800, 70, 100, 300);
-    displayFeedEndTime->setGeometry(900, 70, 100, 300);
-    displayFeedPlace->setGeometry(400, 70, 200, 300);
+    displayFeedIdx->setGeometry(20, 70, 40, 400);
+    displayFeedName->setGeometry(60, 70, 340, 400);
+    displayFeedStartDate->setGeometry(600, 70, 100, 400);
+    displayFeedStartTime->setGeometry(700, 70, 100, 400);
+    displayFeedEndDate->setGeometry(800, 70, 100, 400);
+    displayFeedEndTime->setGeometry(900, 70, 100, 400);
+    displayFeedPlace->setGeometry(400, 70, 200, 400);
 }
 
 void BoxIn::setComponentColors(){
