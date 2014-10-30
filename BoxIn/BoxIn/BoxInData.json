@@ -1,21 +1,5 @@
 [
     {
-        "Name" : "even more stuff",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
-        "Name" : "more stuff!",
-        "Start_Date" : "",
-        "End_Date" : "",
-        "Start_Time" : "",
-        "End_Time" : "",
-        "Place" : ""
-    },
-    {
         "Name" : "this is pretty cool",
         "Start_Date" : "",
         "End_Date" : "",
@@ -27,7 +11,7 @@
         "Name" : "random meeting",
         "Start_Date" : "2014-Feb-01",
         "End_Date" : "",
-        "Start_Time" : "",
+        "Start_Time" : "00:00",
         "End_Time" : "",
         "Place" : ""
     },
@@ -45,6 +29,22 @@
         "End_Date" : "2014-Nov-01",
         "Start_Time" : "14:00",
         "End_Time" : "16:00",
+        "Place" : ""
+    },
+    {
+        "Name" : "more stuff!",
+        "Start_Date" : "",
+        "End_Date" : "2015-Jan-01",
+        "Start_Time" : "",
+        "End_Time" : "00:00",
+        "Place" : ""
+    },
+    {
+        "Name" : "even more stuff",
+        "Start_Date" : "",
+        "End_Date" : "2016-Jan-19",
+        "Start_Time" : "",
+        "End_Time" : "00:00",
         "Place" : ""
     }
 ]

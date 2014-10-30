@@ -23,35 +23,23 @@ void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
 	clear();
 	for(std::vector<Event*>::iterator iter = thingsToInclude->begin(); iter != thingsToInclude->end(); iter++){		
 		assert(*iter!=NULL && "Null event floating around in storage?");
-        std::string itemText;
-        switch(field){
-        case Name :
-            itemText = (*iter)->getName();
-            break;
-        case StartDate :
-            itemText = (*iter)->getStartDate();
-            if(itemText == to_simple_string(boost::gregorian::day_clock::local_day())){itemText = "Today";}
-            break;
-        case EndDate :
-            itemText = (*iter)->getEndDate();
-            if(itemText == to_simple_string(boost::gregorian::day_clock::local_day())){itemText = "Today";}
-            break;
-        case StartTime :
-            itemText = (*iter)->getStartTime();
-            if(itemText == "00:00"){itemText = "";}
-            break;
-        case EndTime :
-            itemText = (*iter)->getEndTime();
-            if(itemText == "00:00"){itemText = "";}
-            break;
-        case Place :
-            itemText = (*iter)->getLocation();
-            break;
-        case Index :
-            itemText = boost::lexical_cast<std::string>((*iter)->getIdx());
-            break;
-        }
+        std::string filler = "";
+        std::string index = boost::lexical_cast<std::string>((*iter)->getIdx());
+        std::string name = (*iter)->getName();
+        std::string startDate = (*iter)->getStartDate();
+        if(startDate == to_simple_string(boost::gregorian::day_clock::local_day())){startDate = "Today";}
+        std::string endDate = (*iter)->getEndDate();
+        if(endDate == startDate){endDate = "";}
+        else if(endDate == to_simple_string(boost::gregorian::day_clock::local_day())){endDate = "Today";}
+        std::string startTime = (*iter)->getStartTime();
+        if(startTime == "00:00"){startTime = "";}
+        std::string endTime = (*iter)->getEndTime();
+        if(endTime == "00:00"){endTime = "";}
+        if(!(endDate.empty() && endTime.empty()) || !(startDate.empty() && startTime.empty())){filler = "to ";}
+        std::string place = (*iter)->getLocation();
+        if(place.empty()){place = "-";}
 		QEventStore *item = new QEventStore(this, *iter);
+        std::string itemText = pad(index, 5) + pad(name, 49) + pad(place, 21) +pad(startDate, 13) + pad(startTime, 6) + filler + pad(endDate, 13) + pad(endTime, 6);
 		item->setText(QString(itemText.c_str()));
 		addItem(item);
 	}
@@ -71,4 +59,13 @@ void DisplayFeed::setItemColors(){
             item(i)->setForeground(Qt::black);
         }
     }
+}
+
+std::string DisplayFeed::pad(std::string str, int spaces){
+    if(str.empty()){return str;}
+    while(str.size() < spaces){
+        str += " ";
+    }
+    if(str.size() > spaces){return str.substr(0, spaces);}
+    return str;
 }

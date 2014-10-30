@@ -17,7 +17,7 @@
 #include <QLabel>
 
 static const int HEIGHT_WINDOW = 600;
-static const int WIDTH_WINDOW = 1200;
+static const int WIDTH_WINDOW = 800;
 
 static const int HEIGHT_BUFFER = 10;
 static const int WIDTH_BUFFER = 20;
@@ -69,17 +69,19 @@ private:
 	QLabel *nameLabel;
 	QLabel *placeLabel;
 	QLabel *startLabel;
-	QLabel *endLabel;
+	// QLabel *endLabel;
     QLabel *idxLabel;
 
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu;
+    /*
 	DisplayFeed *displayFeedName;
     DisplayFeed *displayFeedStartDate;
     DisplayFeed *displayFeedEndDate;
     DisplayFeed *displayFeedStartTime;
     DisplayFeed *displayFeedEndTime;
     DisplayFeed *displayFeedPlace;
+    */
     DisplayFeed *displayFeedIdx;
 	QLineEdit *commandLine;
 

@@ -36,8 +36,8 @@ void QEventEditor::arrangeObjects(){
 void QEventEditor::setupComboBox(){
 	fieldSelector->addItem(QString(Editor::FIELD_NAME.c_str()));
 	fieldSelector->addItem(QString(Editor::FIELD_START_DATE.c_str()));
-    fieldSelector->addItem(QString(Editor::FIELD_END_DATE.c_str()));
     fieldSelector->addItem(QString(Editor::FIELD_START_TIME.c_str()));
+    fieldSelector->addItem(QString(Editor::FIELD_END_DATE.c_str()));
 	fieldSelector->addItem(QString(Editor::FIELD_END_TIME.c_str()));
 	fieldSelector->addItem(QString(Editor::FIELD_LOCATION.c_str()));
 	QObject::connect(fieldSelector, SIGNAL(currentIndexChanged(QString)), this, SLOT(setField(QString)));

@@ -36,6 +36,7 @@ public:
 	void refresh(std::vector<Event*> *thingsToInclude);
     std::map<std::string, DisplayField> setupMap();
     void setItemColors();
+    std::string pad(std::string str, int spaces);
 };
 
 #endif // DisplayFeed.h
