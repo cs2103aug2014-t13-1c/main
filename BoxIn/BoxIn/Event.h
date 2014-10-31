@@ -14,6 +14,9 @@ static const std::string FIELD_END_DATE = "edate";
 static const std::string FIELD_START_TIME = "stime";
 static const std::string FIELD_END_TIME = "etime";
 
+const static std::string NULL_DATE_TIME = "not-a-date-time";
+const static std::string NULL_TIME = "00:00";
+
 enum Field {
 	FieldName = 1,
 	FieldStartDate,
@@ -27,7 +30,7 @@ class Event{
 public:
 	Event();
 	Event(std::string name, std::string date, std::string time);
-	Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx);
+	Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent);
 	~Event();
 	Event* copy();
 
@@ -50,6 +53,8 @@ public:
     boost::posix_time::ptime getPosixStartTime();
     boost::posix_time::ptime getPosixEndTime();
     void setIdx(int newIdx);
+    void removeRecent();
+    bool isRecent();
     std::string repr(); // for testing purposes
 	/*
 	std::string getDescription();
@@ -74,6 +79,7 @@ private:
     SimpleParser parser;
     TimeParser timeParser;
     int idx;
+    bool recent;
 	/*
 	std::string _description;
 	std::string _category;

@@ -10,7 +10,7 @@ Add::Add(std::string input){
     std::string startTime = parser.getField(input, TypeStartTime);
     std::string endTime = parser.getField(input, TypeEndTime);
     std::string location = parser.getField(input, TypePlace);
-	event = new Event(name, location, startDate, endDate, startTime, endTime, 0);
+	event = new Event(name, location, startDate, endDate, startTime, endTime, 0, true);
 }
 
 Add::~Add(void){

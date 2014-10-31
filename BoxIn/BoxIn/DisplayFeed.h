@@ -21,6 +21,7 @@ enum DisplayField{
     Index
 };
 
+
 class DisplayFeed : public QListWidget{
 	Q_OBJECT
 private:
@@ -37,6 +38,8 @@ public:
     std::map<std::string, DisplayField> setupMap();
     void setItemColors();
     std::string pad(std::string str, int spaces);
+    std::string reprDate(std::string date);
+    std::string formatEvent(std::string index, std::string name, std::string place, std::string startDate, std::string startTime, std::string endDate, std::string endTime);
 };
 
 #endif // DisplayFeed.h
