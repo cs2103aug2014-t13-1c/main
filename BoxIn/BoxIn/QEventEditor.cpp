@@ -66,7 +66,11 @@ void QEventEditor::setField(QString text){
 }
 
 void QEventEditor::saveInfo(){
-	std::string input = "edit " + event->getName() + " edate " + event->getEndDate() + " field " + fieldToEditor[fieldSelector->currentText().toStdString()] + " " + valueLine->text().toStdString();
+    std::stringstream stream;
+    stream << event->getIdx();
+    std::string idx;
+    stream >> idx;
+    std::string input = "edit " + idx + " field " + fieldToEditor[fieldSelector->currentText().toStdString()] + " " + valueLine->text().toStdString();
 	emit infoOut(input);
 	close();
 }

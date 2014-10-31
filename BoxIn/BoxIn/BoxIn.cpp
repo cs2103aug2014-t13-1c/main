@@ -156,7 +156,7 @@ void BoxIn::createTrayIcon(){
     trayIconMenu->addAction(restoreAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
-	trayIcon->setIcon(QIcon("BoxInSysTrayIco.jpg"));
+	trayIcon->setIcon(QIcon("BoxInSysTrayIco.png"));
     trayIcon->setContextMenu(trayIconMenu);
 }
 

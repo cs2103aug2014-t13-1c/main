@@ -137,6 +137,7 @@ bool SimpleParser::isInteger(std::string num){
             return false;
         }
     }
+    if(num.empty()){return false;}
     if(stoi(num)<1){return false;}
     return true;
 }

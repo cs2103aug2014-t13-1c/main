@@ -9,22 +9,22 @@ Event::Event(){
 Event::Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx){
     boost::gregorian::date today = boost::gregorian::day_clock::local_day();
 	this->name = name;
-    if(sdate!=""){this->sdate = parser.convertToDate(sdate);}
-    if(sdate == "" && stime != ""){
+    if(sdate != "" && sdate != "not-a-date-time"){this->sdate = parser.convertToDate(sdate);}
+    if((sdate == "" && sdate == "not-a-date-time") && (stime != "" && stime != "not-a-date-time")){
         this->sdate = today;
         this->stime = timeParser.convertToTime(today, stime);
     }else if(stime!=""){
         this->stime = timeParser.convertToTime(this->sdate, stime);
     }
 
-    if(edate!=""){this->edate = parser.convertToDate(edate);}
-    if(edate == "" && etime != ""){
+    if(edate != "" && edate != "not-a-date-time"){this->edate = parser.convertToDate(edate);}
+    if((edate == "" && edate == "not-a-date-time") && (etime != "" && etime != "not-a-date-time")){
         this->edate = today;
         this->etime = timeParser.convertToTime(today, etime);
     }else if(etime!=""){
         this->etime = timeParser.convertToTime(this->edate, etime);
     }
-    if(stime > etime){
+    if(this->stime > this->etime){
         // invalid start, end time pairings, reset start time to nothing and keep start time only
         // since start time is likely to be the more important
         this->edate = boost::gregorian::date();

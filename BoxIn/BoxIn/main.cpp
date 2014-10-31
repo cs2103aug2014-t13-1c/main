@@ -15,6 +15,6 @@ int main(int argc, char *argv[]){
 }
 
 void setIcon(QApplication &app){
-	QIcon icon("BoxIn.jpg");
+	QIcon icon("BoxIn.png");
 	app.setWindowIcon(icon);
 }

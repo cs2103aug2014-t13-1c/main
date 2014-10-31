@@ -8,6 +8,7 @@
 #include "qdialog.h"
 #include "QEvent.h"
 #include <map>
+#include <sstream>
 
 static const int WIDTH_POPUP = 400;
 static const int HEIGHT_POPUP = 200;

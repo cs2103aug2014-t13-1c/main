@@ -29,8 +29,10 @@ void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
         std::string name = (*iter)->getName();
         std::string startDate = (*iter)->getStartDate();
         if(startDate == to_simple_string(boost::gregorian::day_clock::local_day())){startDate = "Today";}
+        else if(startDate == to_simple_string(boost::gregorian::day_clock::local_day()+boost::gregorian::date_duration(1))){startDate = "Tomorrow";}
         std::string endDate = (*iter)->getEndDate();
         if(endDate == to_simple_string(boost::gregorian::day_clock::local_day())){endDate = "Today";}
+        else if(endDate == to_simple_string(boost::gregorian::day_clock::local_day()+boost::gregorian::date_duration(1))){endDate = "Tomorrow";}
         if(endDate == startDate){endDate = "";}
         std::string startTime = (*iter)->getStartTime();
         if(startTime == "00:00"){startTime = "";}
