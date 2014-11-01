@@ -3,6 +3,7 @@
 
 Event::Event(){
 	fieldMap = setupMap();
+    recent = false;
 }
 
 //@author A0111994B
@@ -46,7 +47,6 @@ Event::Event(std::string name, std::string date, std::string time){
 }
 
 Event::~Event(){
-    recent = false;
 }
 
 Event* Event::copy(){
