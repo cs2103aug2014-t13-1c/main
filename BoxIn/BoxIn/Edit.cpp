@@ -22,7 +22,7 @@ std::string Edit::execute(std::vector<Event*> &events){
         return "Missing field key word";
     }
     if(parser.isInteger(name)){
-        if(stoi(name) <= events.size()){
+        if(stoi(name) <= events.size() && stoi(name) > 0){
             std::vector<Event*>::iterator iter = events.begin() + stoi(name) - 1;
             oldEvent = *iter;
             events.erase(iter);

@@ -79,5 +79,14 @@
         "End_Time" : "00:00",
         "Place" : "",
         "Done" : false
+    },
+    {
+        "Name" : "tutorial",
+        "Start_Date" : "",
+        "End_Date" : "2014-Nov-05",
+        "Start_Time" : "",
+        "End_Time" : "00:00",
+        "Place" : "s16 04-03",
+        "Done" : false
     }
 ]
