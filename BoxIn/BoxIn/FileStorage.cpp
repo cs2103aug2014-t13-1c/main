@@ -29,6 +29,7 @@ void FileStorage::writeEvent(json_spirit::Array &eventArray, Event* event){
     eventObj.push_back(json_spirit::Pair(TAG_START_TIME, event->getStartTime()));
     eventObj.push_back(json_spirit::Pair(TAG_END_TIME, event->getEndTime()));
     eventObj.push_back(json_spirit::Pair(TAG_PLACE, event->getLocation()));
+    eventObj.push_back(json_spirit::Pair(TAG_DONE, event->getDone()));
     eventArray.push_back(eventObj);
 }
 
@@ -56,6 +57,7 @@ Event* FileStorage::readEvent(const json_spirit::Object& obj, unsigned int idx){
         else if(name == TAG_START_TIME){event->setStartTime(value.get_str());}
         else if(name == TAG_END_TIME){event->setEndTime(value.get_str());}
         else if(name == TAG_PLACE){event->setLocation(value.get_str());}
+        else if(name == TAG_DONE){event->setDone(value.get_bool());}
         else{assert(false&&"Json file corrupted");}
     }
     event->setIdx(idx);

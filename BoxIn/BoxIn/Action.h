@@ -15,6 +15,12 @@ static const std::string KEYWORD_FIELD = "field";
 static const int POSITION_FIRST_WORD = 0;
 static const std::string WHITESPACE = " ";
 
+
+/*
+* The Action class is an interface for the different actions available
+* All functions are virtual and are implemented in the respective subclasses
+*
+*/
 class Action{
 public:
 	Action(void);

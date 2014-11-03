@@ -13,6 +13,7 @@ static const std::string FIELD_START_DATE = "sdate";
 static const std::string FIELD_END_DATE = "edate";
 static const std::string FIELD_START_TIME = "stime";
 static const std::string FIELD_END_TIME = "etime";
+static const std::string FIELD_DONE = "done";
 
 const static std::string NULL_DATE_TIME = "not-a-date-time";
 const static std::string NULL_TIME = "00:00";
@@ -23,14 +24,15 @@ enum Field {
     FieldEndDate,
 	FieldStartTime,
     FieldEndTime,
-	FieldLocation
+	FieldLocation,
+    FieldDone
 };
 
 class Event{
 public:
 	Event();
-	Event(std::string name, std::string date, std::string time);
 	Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent);
+	Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent, bool done);
 	~Event();
 	Event* copy();
 
@@ -55,6 +57,8 @@ public:
     void setIdx(int newIdx);
     void removeRecent();
     bool isRecent();
+    void setDone(bool newValue);
+    bool getDone();
     std::string repr(); // for testing purposes
 	/*
 	std::string getDescription();
@@ -80,6 +84,7 @@ private:
     TimeParser timeParser;
     int idx;
     bool recent;
+    bool done;
 	/*
 	std::string _description;
 	std::string _category;

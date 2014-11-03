@@ -3,7 +3,7 @@
 class Edit :
 	public Action
 {
-private:
+protected:
 	Event* oldEvent;
 	Event* newEvent;
 	std::string name;
@@ -12,6 +12,7 @@ private:
 	std::string newValue;
     SimpleParser parser;
 public:
+    Edit();
 	Edit(std::string input);
 	~Edit(void);
 	std::string execute(std::vector<Event*> &events);

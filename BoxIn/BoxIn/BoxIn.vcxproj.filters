@@ -116,6 +116,9 @@
     <ClCompile Include="SimpleParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mark.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BoxIn.h">
@@ -189,15 +192,28 @@
     <ClInclude Include="SimpleParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mark.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BoxIn.rc" />
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="BoxIn.jpg">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="BoxInSysTrayIco.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="BoxIn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="BoxInSysTrayIco.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

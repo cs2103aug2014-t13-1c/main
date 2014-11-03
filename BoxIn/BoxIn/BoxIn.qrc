@@ -1,4 +1,6 @@
 <RCC>
-    <qresource prefix="BoxIn">
-    </qresource>
+ <qresource prefix="/">
+    <file>BoxIn.png</file>
+    <file>BoxInSysTrayIco.png</file>
+ </qresource>
 </RCC>

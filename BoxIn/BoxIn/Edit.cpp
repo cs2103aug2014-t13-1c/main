@@ -1,6 +1,9 @@
 //@author A0111994B
 #include "Edit.h"
 
+Edit::Edit(){
+}
+
 Edit::Edit(std::string input){
     name = parser.getField(input, TypeName);
     date = to_simple_string(parser.convertToDate(parser.getField(input, TypeEndDate)));

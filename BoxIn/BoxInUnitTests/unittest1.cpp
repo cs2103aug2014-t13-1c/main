@@ -126,28 +126,28 @@ namespace BoxInUnitTests
 
         // Tests for date comparison functions (TDD)
         TEST_METHOD(DateComparer){
-            Event *event1 = new Event("Earlier","","","010204","","",0);
-            Event *event2 = new Event("Later","","","311299","","",0);
+            Event *event1 = new Event("Earlier","","","010204","","",0,false);
+            Event *event2 = new Event("Later","","","311299","","",0,false);
             Assert::AreEqual(true, endTimeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithFirstInvalid){
-            Event *event1 = new Event("Earlier","","","asdfzx","","",0);
-            Event *event2 = new Event("Later","","","311299","","",0);
+            Event *event1 = new Event("Earlier","","","asdfzx","","",0,false);
+            Event *event2 = new Event("Later","","","311299","","",0,false);
             Assert::AreEqual(true, endTimeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithSecondInvalid){
-            Event *event1 = new Event("Earlier","","","010204","","",0);
-            Event *event2 = new Event("Later","","","supyo","","",0);
+            Event *event1 = new Event("Earlier","","","010204","","",0,false);
+            Event *event2 = new Event("Later","","","supyo","","",0,false);
             Assert::AreEqual(false, endTimeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithBothInvalid){
-            Event *event1 = new Event("Earlier","","","hi","","",0);
-            Event *event2 = new Event("Later","","","supyo","","",0);
+            Event *event1 = new Event("Earlier","","","hi","","",0,false);
+            Event *event2 = new Event("Later","","","supyo","","",0,false);
             Assert::AreEqual(true, endTimeComp(event1, event2));
         }
         TEST_METHOD(DateCompareWithBothEqual){
-            Event *event1 = new Event("Earlier","","","010101","","",0);
-            Event *event2 = new Event("Later","","","010101","","",0);
+            Event *event1 = new Event("Earlier","","","010101","","",0,false);
+            Event *event2 = new Event("Later","","","010101","","",0,false);
             Assert::AreEqual(true, endTimeComp(event1, event2));
         }
         TEST_METHOD(ExtractCommand){

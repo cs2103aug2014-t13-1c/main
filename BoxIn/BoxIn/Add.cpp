@@ -2,7 +2,11 @@
 
 #include "Add.h"
 
-
+/*
+* Extracts the relevant info about the event to be added using the parser
+* Creates the event and holds it
+*
+*/
 Add::Add(std::string input){
 	std::string name = parser.getField(input, TypeName);
     std::string startDate = parser.getField(input, TypeStartDate);
@@ -16,6 +20,11 @@ Add::Add(std::string input){
 Add::~Add(void){
 }
 
+/*
+* Adds the event held by the Add command to the vector of events given
+* Sets the index to the last event (will be sorted internally by the storage and
+* reassigned the appropriate index)
+*/
 std::string Add::execute(std::vector<Event*> &events){
 	events.push_back(event);
     event->setIdx(events.size());

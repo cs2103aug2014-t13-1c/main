@@ -21,22 +21,16 @@ BoxIn::BoxIn(QWidget *parent) : QMainWindow(parent){
 BoxIn::~BoxIn(){
 }
 
+/*
+* Initializes the relevant components of the UI
+*/
 void BoxIn::createComponents(){
 	clock = new DigitalClock(this);
 	nameLabel = new QLabel("Name", this);
 	placeLabel = new QLabel("Place", this);
 	startLabel = new QLabel("Time / Date", this);
-	//endLabel = new QLabel("End", this);
     idxLabel = new QLabel("Index", this);
 	commandLine = new QLineEdit(this);
-    /*
-	displayFeedName = new DisplayFeed(this, Name);
-    displayFeedStartDate = new DisplayFeed(this, StartDate);
-	displayFeedEndDate = new DisplayFeed(this, EndDate);
-    displayFeedStartTime = new DisplayFeed(this, StartTime);
-	displayFeedEndTime = new DisplayFeed(this, EndTime);
-	displayFeedPlace = new DisplayFeed(this, Place);
-    */
     displayFeedIdx = new DisplayFeed(this, Index);
 	setComponentSizes();
 	setComponentColors();
@@ -53,33 +47,20 @@ void BoxIn::setComponentSizes(){
 	nameLabel->setGeometry(60, 40, 50, 20);
 	placeLabel->setGeometry(400, 40, 50, 20);
 	startLabel->setGeometry(550, 40, 100, 20);
-	// endLabel->setGeometry(800, 40, 50, 20);
 	commandLine->setGeometry(80, 540, WIDTH_WINDOW - 80, 20);
     ui.feedbackBox->setGeometry(0, 500, WIDTH_WINDOW, 20);
     displayFeedIdx->setGeometry(20, 70, WIDTH_WINDOW - 2 * WIDTH_BUFFER, 350);
-    //displayFeedName->setGeometry(60, 70, 340, 400);
-    //displayFeedStartDate->setGeometry(600, 70, 100, 400);
-    //displayFeedStartTime->setGeometry(700, 70, 100, 400);
-    //displayFeedEndDate->setGeometry(800, 70, 100, 400);
-    //displayFeedEndTime->setGeometry(900, 70, 100, 400);
-    //displayFeedPlace->setGeometry(400, 70, 200, 400);
 }
 
+/*
+* Makes use of stylesheets to set up background colors for the various components
+*/
 void BoxIn::setComponentColors(){
 	nameLabel->setStyleSheet(TRANSPARENT);
 	placeLabel->setStyleSheet(TRANSPARENT);
 	startLabel->setStyleSheet(TRANSPARENT);
-	//endLabel->setStyleSheet(TRANSPARENT);
     idxLabel->setStyleSheet(TRANSPARENT);
 	commandLine->setStyleSheet(WHITE);
-    /*
-    displayFeedName->setStyleSheet(TRANSPARENT);
-    displayFeedStartDate->setStyleSheet(TRANSPARENT);
-    displayFeedStartTime->setStyleSheet(TRANSPARENT);
-    displayFeedEndDate->setStyleSheet(TRANSPARENT);
-    displayFeedEndTime->setStyleSheet(TRANSPARENT);
-    displayFeedPlace->setStyleSheet(TRANSPARENT);
-    */
     displayFeedIdx->setStyleSheet(TRANSPARENT);
 }
 
@@ -90,14 +71,6 @@ void BoxIn::setComponentColors(){
 void BoxIn::linkEvents(){
 	QObject::connect(commandLine, SIGNAL(returnPressed()), this, SLOT(commandLineReturnPressed()));
     QObject::connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
-    /*
-	QObject::connect(displayFeedName, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
-    QObject::connect(displayFeedStartDate, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
-    QObject::connect(displayFeedStartTime, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
-    QObject::connect(displayFeedEndDate, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
-    QObject::connect(displayFeedEndTime, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
-    QObject::connect(displayFeedPlace, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
-    */
     QObject::connect(displayFeedIdx, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
 }
 
@@ -129,6 +102,11 @@ void BoxIn::clearCommandLine(){
 	commandLine->setText("");
 }
 
+/*
+* The main method for capturing the enter keypress from the user
+* Calls the logic component to process user input and retrieve the appropriate feedback
+* This is also the refresh signal for the display
+*/
 void BoxIn::commandLineReturnPressed(){
 	std::string feedback = logic.handleUserInput(readCommandLine().toStdString());
 	displayFeedback(QString(feedback.c_str()));
@@ -138,17 +116,12 @@ void BoxIn::commandLineReturnPressed(){
 
 void BoxIn::updateGUI(){
 	std::vector<Event*> thingsToInclude = logic.getEvents();
-    /*
-	displayFeedName->refresh(&thingsToInclude);
-    displayFeedStartDate->refresh(&thingsToInclude);
-    displayFeedEndDate->refresh(&thingsToInclude);
-    displayFeedStartTime->refresh(&thingsToInclude);
-    displayFeedEndTime->refresh(&thingsToInclude);
-    displayFeedPlace->refresh(&thingsToInclude);
-    */
     displayFeedIdx->refresh(&thingsToInclude);
 }
 
+/*
+* Sets up the system tray icon
+*/
 void BoxIn::createTrayIcon(){
 	trayIcon = new QSystemTrayIcon(this);
 	trayIconMenu = new QMenu(this);
@@ -160,6 +133,9 @@ void BoxIn::createTrayIcon(){
     trayIcon->setContextMenu(trayIconMenu);
 }
 
+/*
+* Sets up the system tray icon's menu
+*/
 void BoxIn::createActions(){
      minimizeAction = new QAction(tr("Minimize"), this);
      QObject::connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
@@ -171,6 +147,9 @@ void BoxIn::createActions(){
      QObject::connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
  }
 
+/*
+* Sets up the double click event for the icon to reopen the window
+*/
  void BoxIn::iconActivated(QSystemTrayIcon::ActivationReason reason){
 	 if(reason == QSystemTrayIcon::DoubleClick){
 		 this->showNormal();
@@ -185,6 +164,10 @@ void BoxIn::createActions(){
     QMainWindow::setVisible(visible);
 }
 
+ /*
+ * Connects the clicking of any event on the display to the QEventEditor
+ * Captures the formatted input and passes it through the command line as per normal
+ */
 void BoxIn::editItem(QListWidgetItem *item){
 	QEventEditor *editor = new QEventEditor(dynamic_cast<QEventStore*>(item)->getEvent());
 	QObject::connect(editor, SIGNAL(infoOut(std::string)), this, SLOT(setCommand(std::string)));

@@ -5,7 +5,8 @@
         "End_Date" : "",
         "Start_Time" : "",
         "End_Time" : "",
-        "Place" : ""
+        "Place" : "",
+        "Done" : false
     },
     {
         "Name" : "hi",
@@ -13,7 +14,8 @@
         "End_Date" : "",
         "Start_Time" : "",
         "End_Time" : "",
-        "Place" : ""
+        "Place" : "",
+        "Done" : false
     },
     {
         "Name" : "more stuff",
@@ -21,7 +23,8 @@
         "End_Date" : "",
         "Start_Time" : "",
         "End_Time" : "",
-        "Place" : ""
+        "Place" : "",
+        "Done" : false
     },
     {
         "Name" : "new stuff",
@@ -29,7 +32,17 @@
         "End_Date" : "",
         "Start_Time" : "",
         "End_Time" : "",
-        "Place" : ""
+        "Place" : "",
+        "Done" : false
+    },
+    {
+        "Name" : "stuff",
+        "Start_Date" : "",
+        "End_Date" : "",
+        "Start_Time" : "",
+        "End_Time" : "",
+        "Place" : "",
+        "Done" : false
     },
     {
         "Name" : "hello world",
@@ -37,6 +50,7 @@
         "End_Date" : "2014-Oct-31",
         "Start_Time" : "",
         "End_Time" : "20:00",
-        "Place" : ""
+        "Place" : "",
+        "Done" : false
     }
 ]

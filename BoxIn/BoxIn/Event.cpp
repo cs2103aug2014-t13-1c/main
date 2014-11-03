@@ -4,6 +4,7 @@
 Event::Event(){
 	fieldMap = setupMap();
     recent = false;
+    done = false;
 }
 
 //@author A0111994B
@@ -34,23 +35,46 @@ Event::Event(std::string name, std::string location, std::string sdate, std::str
 	this->location = location;
     this->idx = idx;
     this->recent = recent;
+    done = false;
 	fieldMap = setupMap();
 }
 
-Event::Event(std::string name, std::string date, std::string time){
-	// this->name = name;
-	// this->date = boost::gregorian::date(boost::gregorian::from_undelimited_string(date));
-	// this->time = boost::posix_time::ptime(this->date, boost::posix_time::time_duration(std::stoi(time.substr(0,2)), std::stoi(time.substr(2,4)), 0));
-	// this->date = date;
-	// this->time = time;
-	// fieldMap = setupMap();
+Event::Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent, bool done){
+    boost::gregorian::date today = boost::gregorian::day_clock::local_day();
+	this->name = name;
+    if(!sdate.empty() && sdate != NULL_DATE_TIME){this->sdate = parser.convertToDate(sdate);}
+    if((sdate.empty() && sdate == NULL_DATE_TIME) && (!stime.empty() && stime != NULL_DATE_TIME)){
+        this->sdate = today;
+        this->stime = timeParser.convertToTime(today, stime);
+    }else if(!stime.empty()){
+        this->stime = timeParser.convertToTime(this->sdate, stime);
+    }
+
+    if(!edate.empty() && edate != NULL_DATE_TIME){this->edate = parser.convertToDate(edate);}
+    if((edate.empty() && edate == NULL_DATE_TIME) && (!etime.empty() && etime != NULL_DATE_TIME)){
+        this->edate = today;
+        this->etime = timeParser.convertToTime(today, etime);
+    }else if(etime!=""){
+        this->etime = timeParser.convertToTime(this->edate, etime);
+    }
+    if(this->stime > this->etime){
+        // invalid start, end time pairings, reset start time to nothing and keep start time only
+        // since start time is likely to be the more important
+        this->edate = boost::gregorian::date();
+        this->etime = boost::posix_time::ptime();
+    }
+	this->location = location;
+    this->idx = idx;
+    this->recent = recent;
+    this->done = done;
+	fieldMap = setupMap();
 }
 
 Event::~Event(){
 }
 
 Event* Event::copy(){
-	return new Event(name, location, to_iso_string(sdate), to_iso_string(edate), getStartTime(), getEndTime(), idx, true);
+	return new Event(name, location, to_iso_string(sdate), to_iso_string(edate), getStartTime(), getEndTime(), idx, true, done);
 }
 
 std::map<std::string, Field> Event::setupMap(){
@@ -61,6 +85,7 @@ std::map<std::string, Field> Event::setupMap(){
 	fieldMap[FIELD_START_TIME] = FieldStartTime;
 	fieldMap[FIELD_END_TIME] = FieldEndTime;
     fieldMap[FIELD_LOCATION] = FieldLocation;
+    fieldMap[FIELD_DONE] = FieldDone;
 	return fieldMap;
 }
 
@@ -115,6 +140,10 @@ void Event::editField(std::string field, std::string newValue){
 			break;
 		case FieldLocation :
 			setLocation(newValue);
+            break;
+        case FieldDone :
+            setDone(!done);
+            break;
 	}
 }
 
@@ -170,6 +199,13 @@ void Event::removeRecent(){
     recent = false;
 }
 
+void Event::setDone(bool newValue){
+    done = newValue;
+}
+
+bool Event::getDone(){
+    return done;
+}
 /*
 std::string Event::getDescription() {
     return description;

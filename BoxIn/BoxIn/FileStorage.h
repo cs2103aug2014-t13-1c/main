@@ -13,6 +13,7 @@ static const std::string TAG_END_DATE = "End_Date";
 static const std::string TAG_START_TIME = "Start_Time";
 static const std::string TAG_END_TIME = "End_Time";
 static const std::string TAG_PLACE = "Place";
+static const std::string TAG_DONE = "Done";
 
 class FileStorage
 {
