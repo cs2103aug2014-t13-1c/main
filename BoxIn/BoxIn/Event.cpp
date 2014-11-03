@@ -32,6 +32,8 @@ Event::Event(std::string name, std::string location, std::string sdate, std::str
         this->edate = boost::gregorian::date();
         this->etime = boost::posix_time::ptime();
     }
+    if(!this->sdate.is_special() && stime.empty()){this->stime = timeParser.convertToTime(this->sdate, NULL_TIME);}
+    if(!this->edate.is_special() && etime.empty()){this->etime = timeParser.convertToTime(this->edate, NULL_TIME);}
 	this->location = location;
     this->idx = idx;
     this->recent = recent;
