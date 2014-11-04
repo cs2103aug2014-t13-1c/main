@@ -11,33 +11,28 @@ Event::Event(){
 Event::Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent){
     boost::gregorian::date today = boost::gregorian::day_clock::local_day();
 	this->name = name;
+    
     if(!sdate.empty() && sdate != NULL_DATE_TIME){this->sdate = parser.convertToDate(sdate);}
-    if((sdate.empty() && sdate == NULL_DATE_TIME) && (!stime.empty() && stime != NULL_DATE_TIME)){
-        this->sdate = today;
-        this->stime = timeParser.convertToTime(today, stime);
-    }else if(!stime.empty()){
+    else if(!(stime.empty() || stime == NULL_DATE_TIME)){this->sdate = today;}
+    
+    if((stime.empty() || stime == NULL_DATE_TIME) && !this->sdate.is_special()){
+        this->stime = timeParser.convertToTime(this->sdate, NULL_TIME);
+    }else if(!(stime.empty() || stime == NULL_DATE_TIME)){
         this->stime = timeParser.convertToTime(this->sdate, stime);
     }
 
     if(!edate.empty() && edate != NULL_DATE_TIME){this->edate = parser.convertToDate(edate);}
-    if((edate.empty() && edate == NULL_DATE_TIME) && (!etime.empty() && etime != NULL_DATE_TIME)){
-        this->edate = today;
-        this->etime = timeParser.convertToTime(today, etime);
-    }else if(etime!=""){
+    else if(!(etime.empty() || etime == NULL_DATE_TIME)){this->edate = today;}
+    
+    if((etime.empty() || etime == NULL_DATE_TIME) && !this->edate.is_special()){
+        this->etime = timeParser.convertToTime(this->edate, NULL_TIME);
+    }else if(!(etime.empty() || etime == NULL_DATE_TIME)){
         this->etime = timeParser.convertToTime(this->edate, etime);
     }
-    if(this->stime > this->etime){
-        // invalid start, end time pairings, reset start time to nothing and keep start time only
-        // since start time is likely to be the more important
-        this->edate = boost::gregorian::date();
-        this->etime = boost::posix_time::ptime();
-    }
-    if(!this->sdate.is_special() && stime.empty()){this->stime = timeParser.convertToTime(this->sdate, NULL_TIME);}
-    if(!this->edate.is_special() && etime.empty()){this->etime = timeParser.convertToTime(this->edate, NULL_TIME);}
 	this->location = location;
     this->idx = idx;
     this->recent = recent;
-    done = false;
+    this->done = false;
 	fieldMap = setupMap();
 }
 

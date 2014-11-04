@@ -1,9 +1,7 @@
 //@author A0111994B
 #include "DisplayFeed.h"
 
-DisplayFeed::DisplayFeed(QWidget *parent, DisplayField field)
-	: QListWidget(parent)
-{
+DisplayFeed::DisplayFeed(QWidget *parent, DisplayField field) : QListWidget(parent){
 	this->logic = logic;
     this->field = field;
 	setBorder();
@@ -20,6 +18,11 @@ void DisplayFeed::setBorder(){
     setUniformItemSizes(true);
 }
 
+/*
+* Takes in a vector of event pointers to the things to display
+* Converts their respective elements to text and links the event to QEventStore
+* Creates the textual representation and displays it
+*/
 void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
 	clear();
 	for(std::vector<Event*>::iterator iter = thingsToInclude->begin(); iter != thingsToInclude->end(); iter++){		
@@ -39,6 +42,13 @@ void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
     setItemColors();
 }
 
+/*
+* Goes through all the items in the display
+* Sets colors based on status
+* New - Purple
+* Overdue and undone - Red
+* The rest alternate between grey and black
+*/
 void DisplayFeed::setItemColors(){
     QBrush gray(QColor(100, 100, 100));
     for(unsigned int i = 0; i < count(); i++){
@@ -47,7 +57,8 @@ void DisplayFeed::setItemColors(){
         if(event->isRecent()){
             item(i)->setForeground(Qt::darkMagenta);
             dynamic_cast<QEventStore*>(item(i))->getEvent()->removeRecent();
-        }else if(event->getPosixStartTime() < now || event->getPosixEndTime() < now){
+        }else if((event->getPosixStartTime() < now || event->getPosixEndTime() < now) && !event->getDone()){
+            // only undone and overdue tasks to be in red
             item(i)->setForeground(Qt::red);
         }else if(i % 2 == 1){
             item(i)->setForeground(gray);
@@ -57,6 +68,10 @@ void DisplayFeed::setItemColors(){
     }
 }
 
+/*
+* Pads up a string to spaces number of characters with whitespace
+* Strings above the max length are truncated with one spare whitespace
+*/
 std::string DisplayFeed::pad(std::string str, int spaces){
     if(str.empty()){return str;}
     while(str.size() < spaces){
@@ -66,12 +81,18 @@ std::string DisplayFeed::pad(std::string str, int spaces){
     return str;
 }
 
+/*
+* Converts a date to today / tomorrow if it happens to match those dates
+*/
 std::string DisplayFeed::reprDate(std::string date){
     if(date == to_simple_string(boost::gregorian::day_clock::local_day())){date = "Today";}
     else if(date == to_simple_string(boost::gregorian::day_clock::local_day()+boost::gregorian::date_duration(1))){date = "Tomorrow";}
     return date;
 }
 
+/*
+* Formats data from a event into a uniformly spaced manner for display
+*/
 std::string DisplayFeed::formatEvent(std::string index, std::string name, std::string place, std::string startDate, std::string startTime, std::string endDate, std::string endTime){
     std::string filler = "";
     if(endDate == startDate){endDate = "";}

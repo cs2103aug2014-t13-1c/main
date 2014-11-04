@@ -12,6 +12,10 @@ Delete::Delete(std::string input){
 Delete::~Delete(void){
 }
 
+/*
+* Searches the event vector for the matching event and removes it
+* Stores the original event for undoing later on
+*/
 std::string Delete::execute(std::vector<Event*> &events){
 	bool found = false;
     if(parser.isInteger(name)){
@@ -40,6 +44,9 @@ std::string Delete::execute(std::vector<Event*> &events){
 	}
 }
 
+/*
+* Adds the previously deleted event pointer back to the vector of events
+*/
 std::string Delete::undo(std::vector<Event*> &events){
 	assert(event != NULL);
 	events.push_back(event);

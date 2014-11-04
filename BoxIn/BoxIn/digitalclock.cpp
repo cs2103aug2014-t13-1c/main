@@ -6,13 +6,10 @@ DigitalClock::DigitalClock(QWidget *parent)
 {
 	ui.setupUi(this);
 	setSegmentStyle(Filled);
-
     QTimer *timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(showTime()));
     timer->start(1000);
-
     showTime();
-
     resize(WIDTH_TIMER, HEIGHT_TIMER);
 }
 

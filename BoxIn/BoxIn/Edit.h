@@ -17,5 +17,8 @@ public:
 	~Edit(void);
 	std::string execute(std::vector<Event*> &events);
 	std::string undo(std::vector<Event*> &events);
+    void deleteEvent(std::vector<Event*> &events, Event* event);
+    Event* findEventByIdx(int idx, std::vector<Event*> &events);
+    Event* findEventByNameAndEndDate(std::string name, std::string endDate, std::vector<Event*> &events);
 };
 

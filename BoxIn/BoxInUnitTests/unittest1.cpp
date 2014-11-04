@@ -27,6 +27,8 @@
 #include "Edit.cpp"
 #include "Search.h"
 #include "Search.cpp"
+#include "Mark.h"
+#include "Mark.cpp"
 #include <fstream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -41,7 +43,7 @@ namespace BoxInUnitTests
             std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
             Logic logic;
             logic.handleUserInput("add something");
-            Event *expected = new Event("something","","","","","",1);
+            Event *expected = new Event("something","","","","","",1, false);
             Event *actual = logic.getEvents()[0];
             Assert::AreEqual(expected->repr(), actual->repr());
             file.close();
@@ -50,7 +52,7 @@ namespace BoxInUnitTests
             std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
             Logic logic;
             logic.handleUserInput("add something");
-            Event *expected = new Event("something","here","","","","",1);
+            Event *expected = new Event("something","here","","","","",1, false);
             logic.handleUserInput("edit something field place here");
             Event *actual = logic.getEvents()[0];
             Assert::AreEqual(expected->repr(), actual->repr());
@@ -78,7 +80,7 @@ namespace BoxInUnitTests
             std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
             Logic logic;
             logic.handleUserInput("add something");
-            Event *expected = new Event("something","","","","","",1);
+            Event *expected = new Event("something","","","","","",1, false);
             logic.handleUserInput("edit something field place here");
             logic.handleUserInput("undo");
             Event *actual = logic.getEvents()[0];
