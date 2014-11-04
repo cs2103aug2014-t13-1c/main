@@ -32,6 +32,9 @@ public:
 	int indexOf(std::vector<std::string> words, std::string toFind);
 	std::string vectorToString(std::vector<std::string> vec);
 	std::string extractField(std::vector<std::string> words, int startPos, int endPos);
+    void deleteEvent(std::vector<Event*> &events, Event* event);
+    Event* findEventByIdx(int idx, std::vector<Event*> & events);
+    Event* findEventByNameAndEndDate(std::string name, std::string endDate, std::vector<Event*> & events);
 private:
     SimpleParser parser;
 };

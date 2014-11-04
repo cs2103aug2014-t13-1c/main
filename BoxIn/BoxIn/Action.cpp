@@ -19,6 +19,35 @@ std::string Action::undo(std::vector<Event*>&){
 	return "";
 }
 
+void Action::deleteEvent(std::vector<Event*> &events, Event* event){
+    for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
+		if(*iter == event){
+			events.erase(iter);
+			break;
+		}
+	}
+}
+
+Event* Action::findEventByIdx(int idx, std::vector<Event*> &events){
+    Event* event = NULL;
+    if(idx <= events.size() && idx > 0){
+        std::vector<Event*>::iterator iter = events.begin() + idx - 1;
+        event = *iter;
+    }
+    return event;
+}
+
+Event* Action::findEventByNameAndEndDate(std::string name, std::string endDate, std::vector<Event*> &events){
+    Event* event = NULL;
+    for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
+	    if((*iter)->getEndDate() == endDate && (*iter)->getName() == name){
+    		event = *iter;
+            break;
+    	}
+    }
+    return event;
+}
+
 /*
 std::vector<std::string> Action::splitWords(std::string input){
 	std::vector<std::string> words;

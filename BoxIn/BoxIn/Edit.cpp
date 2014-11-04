@@ -49,32 +49,3 @@ std::string Edit::undo(std::vector<Event*> &events){
 	events.push_back(oldEvent);
 	return oldEvent->getName() + " has been un-edited!";
 }
-
-void Edit::deleteEvent(std::vector<Event*> &events, Event* event){
-    for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
-		if(*iter == event){
-			events.erase(iter);
-			break;
-		}
-	}
-}
-
-Event* Edit::findEventByIdx(int idx, std::vector<Event*> &events){
-    Event* event = NULL;
-    if(stoi(name) <= events.size() && stoi(name) > 0){
-        std::vector<Event*>::iterator iter = events.begin() + stoi(name) - 1;
-        event = *iter;
-    }
-    return event;
-}
-
-Event* Edit::findEventByNameAndEndDate(std::string name, std::string endDate, std::vector<Event*> &events){
-    Event* event = NULL;
-    for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
-	    if((*iter)->getEndDate() == endDate && (*iter)->getName() == name){
-    		event = *iter;
-            break;
-    	}
-    }
-    return event;
-}

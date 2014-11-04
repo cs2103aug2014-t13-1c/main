@@ -17,29 +17,13 @@ Delete::~Delete(void){
 * Stores the original event for undoing later on
 */
 std::string Delete::execute(std::vector<Event*> &events){
-	bool found = false;
-    if(parser.isInteger(name)){
-        if(stoi(name) <= events.size()){
-            std::vector<Event*>::iterator iter = events.begin() + stoi(name) - 1;
-            event = *iter;
-            events.erase(iter);
-            found=true;
-        }else{
-            return "No item matching " + name + " found.";
-        }
-    }else{
-    	for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
-            if((*iter)->getEndDate() == date && (*iter)->getName() == name){
-	    		event = *iter;
-    			events.erase(iter);
-			    found = true;
-			    break;
-		    }
-	    }
+    if(parser.isInteger(name)){event = findEventByIdx(stoi(name), events);}
+    else{event = findEventByNameAndEndDate(name, date, events);}
+    if(event != NULL){
+        deleteEvent(events, event);
+        return event->getName() + " has been deleted!";
     }
-	if(found){
-		return event->getName() + " has been deleted!";
-	}else{
+    else{
 		return "No item matching " + name + " found.";
 	}
 }
