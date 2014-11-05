@@ -19,6 +19,7 @@ void Logic::setupMap(){
     stringToCommand[USER_COMMAND_UNDO] = CommandUndo;
     stringToCommand[USER_COMMAND_MARK] = CommandMark;
     stringToCommand[USER_COMMAND_FILTER] = CommandFilter;
+    stringToCommand[USER_COMMAND_HELP] = CommandHelp;
 
     stringToFilter[Filter::FILTER_NONE] = Filter::None;
     stringToFilter[Filter::FILTER_DONE] = Filter::Done;
@@ -37,6 +38,7 @@ std::string Logic::handleUserInput(std::string input){
 	std::string firstWord = parser.getField(input, TypeCommand);
 	std::string feedback = "Done!";
 	Action *action = NULL;
+    QHelpWindow* help = new QHelpWindow();
 	switch(stringToCommand[firstWord]){
 		case CommandAdd :
 			action = new Add(input);
@@ -69,6 +71,10 @@ std::string Logic::handleUserInput(std::string input){
             break;
         case CommandFilter :
             filter = stringToFilter[parser.getField(input, TypeName)];
+            break;
+        case CommandHelp :
+            help->show();
+            feedback = "";
             break;
 		default :
 			feedback = "Command is not recognised";

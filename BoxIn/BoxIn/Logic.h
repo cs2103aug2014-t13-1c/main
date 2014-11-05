@@ -11,6 +11,7 @@
 #include <vector>
 #include <map>
 #include "SimpleStorage.h"
+#include "QHelpWindow.h"
 
 static const std::string USER_COMMAND_ADD = "add";
 static const std::string USER_COMMAND_DELETE = "delete";
@@ -20,6 +21,7 @@ static const std::string USER_COMMAND_UNDO = "undo";
 static const std::string USER_COMMAND_SEARCH = "search";
 static const std::string USER_COMMAND_MARK = "mark";
 static const std::string USER_COMMAND_FILTER = "view";
+static const std::string USER_COMMAND_HELP = "help";
 
 enum CommandType {
 	CommandAdd = 1,
@@ -29,7 +31,8 @@ enum CommandType {
 	CommandExit,
 	CommandSearch,
     CommandMark,
-    CommandFilter
+    CommandFilter,
+    CommandHelp
 };
 
 namespace Filter{

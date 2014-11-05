@@ -49,7 +49,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_QML_LIB;QT_TESTLIB_LIB;QT_HELP_LIB;QT_OPENGL_LIB;QT_SCRIPT_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\GeneratedFiles;.;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include;.\GeneratedFiles\$(ConfigurationName);C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets;%(AdditionalIncludeDirectories);C:\Boost;C:\Boost\lib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtTest;$(QTDIR)\include\QtHelp;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtScript;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories);C:\Boost;C:\Boost\lib</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -61,7 +61,7 @@
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib;%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\qtmaind.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Cored.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Guid.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5MultimediaWidgetsd.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Qmld.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Testd.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Helpd.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5OpenGLd.lib;opengl32.lib;glu32.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Scriptd.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Widgetsd.lib;%(AdditionalDependencies);./Debug\JsonSpirit.lib;C:\Boost\lib\libboost_date_time-vc110-mt-gd-1_57.lib</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5MultimediaWidgetsd.lib;Qt5Qmld.lib;Qt5Testd.lib;Qt5Helpd.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5Scriptd.lib;Qt5Widgetsd.lib;./Debug\JsonSpirit.lib;C:\Boost\lib\libboost_date_time-vc110-mt-gd-1_57.lib</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -80,7 +80,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib;%(AdditionalLibraryDirectories);C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\qtmain.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Core.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Gui.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5MultimediaWidgets.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Qml.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Test.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Help.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5OpenGL.lib;opengl32.lib;glu32.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Script.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Widgets.lib;%(AdditionalDependencies);C:\Boost\lib\libboost_date_time-vc110-mt-1_57.lib;./Release\JsonSpirit.lib</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5MultimediaWidgets.lib;Qt5Qml.lib;Qt5Test.lib;Qt5Help.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5Script.lib;Qt5Widgets.lib;\;$(INHERIT)\;C:\Boost\lib\libboost_date_time-vc110-mt-1_57.lib;./Release\JsonSpirit.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -105,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_QEventEditor.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_QEventStore.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_QHelpWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_BoxIn.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -120,11 +123,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_DisplayFeed.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QHelpWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mark.cpp" />
     <ClCompile Include="QEventEditor.cpp" />
     <ClCompile Include="QEventStore.cpp" />
+    <ClCompile Include="QHelpWindow.cpp" />
     <ClCompile Include="Search.cpp" />
     <ClCompile Include="SimpleParser.cpp" />
     <ClCompile Include="SimpleStorage.cpp" />
@@ -573,12 +580,39 @@
       <Project>{fe341162-8fda-4d3e-a712-4b0432658004}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="QHelpWindow.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QHelpWindow.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtHelp" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Boost" "-IC:\Boost\lib"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QHelpWindow.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB -D_ATL_STATIC_REGISTRY "-I.\GeneratedFiles" "-I." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Boost" "-IC:\Boost\lib"</Command>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="QHelpWindow.ui">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GeneratedFiles\ui_QHelpWindow.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties UicDir=".\GeneratedFiles" MocDir=".\GeneratedFiles\$(ConfigurationName)" MocOptions="" RccDir=".\GeneratedFiles" lupdateOnBuild="0" lupdateOptions="" lreleaseOptions="" />
+      <UserProperties UicDir=".\GeneratedFiles" MocDir=".\GeneratedFiles\$(ConfigurationName)" MocOptions="" RccDir=".\GeneratedFiles" lupdateOnBuild="0" lupdateOptions="" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2012_opengl" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
