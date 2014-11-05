@@ -26,6 +26,8 @@ namespace Days{
     static const std::string FRIDAY = "friday";
     static const std::string SATURDAY = "saturday";
     static const std::string SUNDAY = "sunday";
+    static const std::string TODAY = "today";
+    static const std::string TOMORROW = "tomorrow";
 };
 
 enum InfoType{
@@ -47,6 +49,8 @@ enum DateFormat{
     YYYY_MMM_DD,
     TextDateFormat,
     DayOfWeek,
+    Today,
+    Tomorrow,
     FormatNotRecognised
 };
 
@@ -67,7 +71,9 @@ public:
     boost::gregorian::date convertToDate(std::string date);
     DateFormat matchFormat(std::string date);
     bool isNumericalFormat(std::string date);
-    bool isDayOfWeek(std::string date);
+    bool isDayOfWeek(std::string day);
+    bool isToday(std::string day);
+    bool isTomorrow(std::string day);
 
     std::string removeEscapeChar(std::string word);
     std::string removeWhitespace(std::string text);

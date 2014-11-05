@@ -81,9 +81,9 @@ std::string SimpleParser::getField(std::string input, InfoType info){
 
 boost::gregorian::date SimpleParser::convertToDate(std::string date){
     std::string year, month, day;
+    boost::gregorian::date today;
     try{
-        if(isNumericalFormat(date)){
-            switch(matchFormat(date)){
+        switch(matchFormat(date)){
             case DDMMYY :
                 year = CURRENT_CENTURY + date.substr(4, 2);
                 month = date.substr(2, 2);
@@ -98,16 +98,19 @@ boost::gregorian::date SimpleParser::convertToDate(std::string date){
                 break;
             case FormatNotRecognised:
                 return boost::gregorian::date();
-            }
-        }
-        else{
-            if(matchFormat(date) == DayOfWeek){
-                boost::gregorian::date day = boost::gregorian::day_clock::local_day();
-                while(day.day_of_week() != dayMap[date]){
-                    day = day + boost::gregorian::days(1);
+            case DayOfWeek :
+                today = boost::gregorian::day_clock::local_day();
+                while(today.day_of_week() != dayMap[date]){
+                    today = today + boost::gregorian::days(1);
                 }
-                return day;
-            }
+                return today;
+                break;
+            case Today :
+                return boost::gregorian::day_clock::local_day();
+                break;
+            case Tomorrow :
+                return boost::gregorian::day_clock::local_day() + boost::gregorian::days(1);
+                break;
         }
         year = date.substr(0, 4);
         month = monthMap[date.substr(5, 3)];
@@ -121,6 +124,8 @@ boost::gregorian::date SimpleParser::convertToDate(std::string date){
 
 DateFormat SimpleParser::matchFormat(std::string date){
     if(isDayOfWeek(date)){return DayOfWeek;}
+    else if(isToday(date)){return Today;}
+    else if(isTomorrow(date)){return Tomorrow;}
     else if(date.size()==lenDDMMYY){return DDMMYY;}
     else if(date.size()==lenYYYYMMDD){return YYYYMMDD;}
     else if(date.size()==lenYYYY_MMM_DD){return YYYY_MMM_DD;}
@@ -179,4 +184,12 @@ std::string SimpleParser::removeWhitespace(std::string text){
 
 bool SimpleParser::isDayOfWeek(std::string day){
     return (day == Days::MONDAY || day == Days::TUESDAY || day == Days::WEDNESDAY || day == Days::THURSDAY || day == Days::FRIDAY || day == Days::SATURDAY || day == Days::SUNDAY);
+}
+
+bool SimpleParser::isToday(std::string day){
+    return day == Days::TODAY;
+}
+
+bool SimpleParser::isTomorrow(std::string day){
+    return day == Days::TOMORROW;
 }
