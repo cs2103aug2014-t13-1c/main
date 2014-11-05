@@ -39,6 +39,10 @@ void SimpleParser::setupMaps(){
     dayMap[Days::SUNDAY] = boost::date_time::Sunday;
 }
 
+/*
+* Returns the value belonging to the field given by InfoType
+* as per extracted from an input string
+*/
 std::string SimpleParser::getField(std::string input, InfoType info){
     std::string keyword = keywordMap[info];
     std::stringstream stream(input);
@@ -79,6 +83,12 @@ std::string SimpleParser::getField(std::string input, InfoType info){
     return removeWhitespace(result);
 }
 
+/*
+* Converts a string to a date
+* Can accept DDMMYY, YYYYMMDD, YYYY_Mon_DD formats
+* As well as special strings such as today, tomorrow, and days of the week
+* Returns the date as a boost::gregorian::date
+*/
 boost::gregorian::date SimpleParser::convertToDate(std::string date){
     std::string year, month, day;
     boost::gregorian::date today;
@@ -122,13 +132,17 @@ boost::gregorian::date SimpleParser::convertToDate(std::string date){
     return boost::gregorian::date();
 }
 
+/*
+* Identifies the format of a string
+* Returns FormatNotRecognised if it does not match any format
+*/
 DateFormat SimpleParser::matchFormat(std::string date){
     if(isDayOfWeek(date)){return DayOfWeek;}
     else if(isToday(date)){return Today;}
     else if(isTomorrow(date)){return Tomorrow;}
-    else if(date.size()==lenDDMMYY){return DDMMYY;}
-    else if(date.size()==lenYYYYMMDD){return YYYYMMDD;}
-    else if(date.size()==lenYYYY_MMM_DD){return YYYY_MMM_DD;}
+    else if(date.size()==lenDDMMYY && isInteger(date)){return DDMMYY;}
+    else if(date.size()==lenYYYYMMDD && isInteger(date)){return YYYYMMDD;}
+    else if(date.size()==lenYYYY_MMM_DD && isNumericalFormat(date)){return YYYY_MMM_DD;}
     else{return FormatNotRecognised;}
 }
 

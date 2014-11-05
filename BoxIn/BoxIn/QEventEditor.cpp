@@ -65,6 +65,11 @@ void QEventEditor::setField(QString text){
 	}
 }
 
+/*
+* Converts the edited item in the editor to a string which contains the standard
+* Command for handling edits, and pushes the command to the commandLine
+* The signal is caught in BoxIn.cpp and the command is processed as per normal
+*/
 void QEventEditor::saveInfo(){
     std::stringstream stream;
     stream << event->getIdx();
