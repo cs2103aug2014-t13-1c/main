@@ -100,6 +100,9 @@ int Event::getIdx(){
     return idx;
 }
 
+/*
+* Calls the appropriate setter method based on the field given as a tag string
+*/
 void Event::editField(std::string field, std::string newValue){
 	switch(fieldMap[field]){
 		case FieldName :

@@ -44,7 +44,6 @@ public:
 	void setVisible(bool visible);
 	void updateGUI();
 
-
 private:
 	Ui::BoxInClass ui;
 	Logic logic;
@@ -53,8 +52,6 @@ private:
 	void setComponentSizes();
 	void setComponentColors();
 	void linkEvents();
-
-	// for the tray icon
 
 	void createTrayIcon();
 	void createActions();
@@ -69,19 +66,10 @@ private:
 	QLabel *nameLabel;
 	QLabel *placeLabel;
 	QLabel *startLabel;
-	// QLabel *endLabel;
     QLabel *idxLabel;
 
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu;
-    /*
-	DisplayFeed *displayFeedName;
-    DisplayFeed *displayFeedStartDate;
-    DisplayFeed *displayFeedEndDate;
-    DisplayFeed *displayFeedStartTime;
-    DisplayFeed *displayFeedEndTime;
-    DisplayFeed *displayFeedPlace;
-    */
     DisplayFeed *displayFeedIdx;
 	QLineEdit *commandLine;
 

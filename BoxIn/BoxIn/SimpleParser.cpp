@@ -30,6 +30,13 @@ void SimpleParser::setupMaps(){
     monthMap["Oct"] = "10";
     monthMap["Nov"] = "11";
     monthMap["Dec"] = "12";
+    dayMap[Days::MONDAY] = boost::date_time::Monday;
+    dayMap[Days::TUESDAY] = boost::date_time::Tuesday;
+    dayMap[Days::WEDNESDAY] = boost::date_time::Wednesday;
+    dayMap[Days::THURSDAY] = boost::date_time::Thursday;
+    dayMap[Days::FRIDAY] = boost::date_time::Friday;
+    dayMap[Days::SATURDAY] = boost::date_time::Saturday;
+    dayMap[Days::SUNDAY] = boost::date_time::Sunday;
 }
 
 std::string SimpleParser::getField(std::string input, InfoType info){
@@ -93,6 +100,15 @@ boost::gregorian::date SimpleParser::convertToDate(std::string date){
                 return boost::gregorian::date();
             }
         }
+        else{
+            if(matchFormat(date) == DayOfWeek){
+                boost::gregorian::date day = boost::gregorian::day_clock::local_day();
+                while(day.day_of_week() != dayMap[date]){
+                    day = day + boost::gregorian::days(1);
+                }
+                return day;
+            }
+        }
         year = date.substr(0, 4);
         month = monthMap[date.substr(5, 3)];
         day = date.substr(9, 2);
@@ -104,7 +120,8 @@ boost::gregorian::date SimpleParser::convertToDate(std::string date){
 }
 
 DateFormat SimpleParser::matchFormat(std::string date){
-    if(date.size()==lenDDMMYY){return DDMMYY;}
+    if(isDayOfWeek(date)){return DayOfWeek;}
+    else if(date.size()==lenDDMMYY){return DDMMYY;}
     else if(date.size()==lenYYYYMMDD){return YYYYMMDD;}
     else if(date.size()==lenYYYY_MMM_DD){return YYYY_MMM_DD;}
     else{return FormatNotRecognised;}
@@ -158,4 +175,8 @@ std::string SimpleParser::removeWhitespace(std::string text){
     if(text.empty()){return text;}
     if(text[text.size()-1] == ' '){return removeWhitespace(text.substr(0, text.size() - 1));}
     return text;
+}
+
+bool SimpleParser::isDayOfWeek(std::string day){
+    return (day == Days::MONDAY || day == Days::TUESDAY || day == Days::WEDNESDAY || day == Days::THURSDAY || day == Days::FRIDAY || day == Days::SATURDAY || day == Days::SUNDAY);
 }

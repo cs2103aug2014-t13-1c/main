@@ -34,6 +34,12 @@ std::vector<std::string> Logic::splitWords(std::string input){
 	return words;
 }
 */
+
+/*
+* Extracts the first word from the user command and creates the appropriate
+* Command type and executes it, also pushing undo-able commands onto the stack
+* Then saves the file to the json file
+*/
 std::string Logic::handleUserInput(std::string input){
 	std::string firstWord = parser.getField(input, TypeCommand);
 	std::string feedback = "Done!";
@@ -87,6 +93,10 @@ std::string Logic::handleUserInput(std::string input){
 	return feedback;
 }
 
+/*
+* Returns the vector of events in storage that fulfill the filter criteria
+* The default filter is None
+*/
 std::vector<Event*> Logic::getEvents(){
     std::vector<Event*> events = storage.getEvents();
     std::vector<Event*> filteredEvents;
@@ -105,6 +115,9 @@ std::vector<Event*> Logic::getEvents(){
         break;
     case Filter::Upcoming :
         std::copy_if(events.begin(), events.end(), std::back_inserter(filteredEvents), isFuture);
+        break;
+    default :
+        filteredEvents = events;
         break;
     }
     return filteredEvents;

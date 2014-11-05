@@ -77,4 +77,3 @@ public:
 	std::vector<Event*> getEvents();
 
 };
-
