@@ -137,7 +137,7 @@ void Event::setName(std::string newName){
 */
 void Event::setStartDate(std::string newDate){
 	boost::gregorian::date date = parser.convertToDate(newDate);
-    if(date <= edate){
+    if(date <= edate || edate.is_special()){
         sdate = date;
         stime = timeParser.convertToTime(sdate, getStartTime());
     }
@@ -145,7 +145,7 @@ void Event::setStartDate(std::string newDate){
 
 void Event::setEndDate(std::string newDate){
 	boost::gregorian::date date = parser.convertToDate(newDate);
-    if(date >= sdate){
+    if(date >= sdate || sdate.is_special()){
         edate = date;
         etime = timeParser.convertToTime(edate, getEndTime());
     }
