@@ -20,7 +20,7 @@ Event::Event(std::string name, std::string location, std::string sdate, std::str
     this->edate = getDateFromInput(edate, etime, sdate);
     this->stime = getTimeFromInput(this->sdate, stime);
     this->etime = getTimeFromInput(this->edate, etime);
-    if(etime<stime){
+    if((etime<stime) && !this->etime.is_special() && !this->stime.is_special()){
         this->sdate = boost::gregorian::date();
         this->stime = boost::posix_time::ptime();
     }
@@ -231,7 +231,7 @@ boost::gregorian::date Event::getDateFromInput(std::string date, std::string tim
 boost::gregorian::date Event::getDateFromInput(std::string date, std::string time, std::string predate){
     boost::gregorian::date result;
     if(!date.empty() && date != NULL_DATE_TIME){result = parser.convertToDate(date);}
-    else if(!(time.empty() || time == NULL_DATE_TIME)){result = parser.convertToDate(predate);}
+    else if(!(time.empty() || time == NULL_DATE_TIME)){result = getDateFromInput(predate, time);}
     return result;
 }
 
