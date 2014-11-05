@@ -11,6 +11,11 @@ FileStorage::FileStorage(std::string filename){
 FileStorage::~FileStorage(void){
 }
 
+/*
+* Takes in a vector of events
+* Converts each event into an json object and stores it on an array
+* Writes the array into the file
+*/
 void FileStorage::saveFile(std::vector<Event*> events){
     std::fstream file = std::fstream(filename, std::fstream::out | std::fstream::trunc);
     json_spirit::Array eventArray;
@@ -21,6 +26,11 @@ void FileStorage::saveFile(std::vector<Event*> events){
     file.close();
 }
 
+/*
+* Converts an event into a json_spirit Object
+* Copying all information about that event
+* Pushes the object onto the array passed in
+*/
 void FileStorage::writeEvent(json_spirit::Array &eventArray, Event* event){
     json_spirit::Object eventObj;
     eventObj.push_back(json_spirit::Pair(TAG_NAME, event->getName()));
@@ -33,6 +43,11 @@ void FileStorage::writeEvent(json_spirit::Array &eventArray, Event* event){
     eventArray.push_back(eventObj);
 }
 
+/*
+* Collects the array from the json file
+* Reads individual events and pushes them onto a vector
+* Returns the vector of event pointers
+*/
 std::vector<Event*> FileStorage::readFile(){
     std::fstream file = std::fstream(filename, std::fstream::in);
     json_spirit::Value value;

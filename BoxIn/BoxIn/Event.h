@@ -59,6 +59,9 @@ public:
     bool isRecent();
     void setDone(bool newValue);
     bool getDone();
+    boost::gregorian::date getDateFromInput(std::string date, std::string time);
+    boost::gregorian::date getDateFromInput(std::string date, std::string time, std::string preDate);
+    boost::posix_time::ptime getTimeFromInput(boost::gregorian::date date, std::string time);
     std::string repr(); // for testing purposes
 	/*
 	std::string getDescription();

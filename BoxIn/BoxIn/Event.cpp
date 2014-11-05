@@ -8,26 +8,21 @@ Event::Event(){
 }
 
 //@author A0111994B
+/*
+* Constructor for the Event class
+* If the end time / date is before the start time / date, we only keep the end
+* This assumes that the end time is more important than the start
+*/
 Event::Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent){
     boost::gregorian::date today = boost::gregorian::day_clock::local_day();
 	this->name = name;
-    
-    if(!sdate.empty() && sdate != NULL_DATE_TIME){this->sdate = parser.convertToDate(sdate);}
-    else if(!(stime.empty() || stime == NULL_DATE_TIME)){this->sdate = today;}
-    
-    if((stime.empty() || stime == NULL_DATE_TIME) && !this->sdate.is_special()){
-        this->stime = timeParser.convertToTime(this->sdate, NULL_TIME);
-    }else if(!(stime.empty() || stime == NULL_DATE_TIME)){
-        this->stime = timeParser.convertToTime(this->sdate, stime);
-    }
-
-    if(!edate.empty() && edate != NULL_DATE_TIME){this->edate = parser.convertToDate(edate);}
-    else if(!(etime.empty() || etime == NULL_DATE_TIME)){this->edate = today;}
-    
-    if((etime.empty() || etime == NULL_DATE_TIME) && !this->edate.is_special()){
-        this->etime = timeParser.convertToTime(this->edate, NULL_TIME);
-    }else if(!(etime.empty() || etime == NULL_DATE_TIME)){
-        this->etime = timeParser.convertToTime(this->edate, etime);
+    this->sdate = getDateFromInput(sdate, stime);
+    this->edate = getDateFromInput(edate, etime, sdate);
+    this->stime = getTimeFromInput(this->sdate, stime);
+    this->etime = getTimeFromInput(this->edate, etime);
+    if(etime<stime){
+        this->sdate = boost::gregorian::date();
+        this->stime = boost::posix_time::ptime();
     }
 	this->location = location;
     this->idx = idx;
@@ -39,23 +34,13 @@ Event::Event(std::string name, std::string location, std::string sdate, std::str
 Event::Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent, bool done){
     boost::gregorian::date today = boost::gregorian::day_clock::local_day();
 	this->name = name;
-    
-    if(!sdate.empty() && sdate != NULL_DATE_TIME){this->sdate = parser.convertToDate(sdate);}
-    else if(!(stime.empty() || stime == NULL_DATE_TIME)){this->sdate = today;}
-    
-    if((stime.empty() || stime == NULL_DATE_TIME) && !this->sdate.is_special()){
-        this->stime = timeParser.convertToTime(this->sdate, NULL_TIME);
-    }else if(!(stime.empty() || stime == NULL_DATE_TIME)){
-        this->stime = timeParser.convertToTime(this->sdate, stime);
-    }
-
-    if(!edate.empty() && edate != NULL_DATE_TIME){this->edate = parser.convertToDate(edate);}
-    else if(!(etime.empty() || etime == NULL_DATE_TIME)){this->edate = today;}
-    
-    if((etime.empty() || etime == NULL_DATE_TIME) && !this->edate.is_special()){
-        this->etime = timeParser.convertToTime(this->edate, NULL_TIME);
-    }else if(!(etime.empty() || etime == NULL_DATE_TIME)){
-        this->etime = timeParser.convertToTime(this->edate, etime);
+    this->sdate = getDateFromInput(sdate, stime);
+    this->edate = getDateFromInput(edate, etime, sdate);
+    this->stime = getTimeFromInput(this->sdate, stime);
+    this->etime = getTimeFromInput(this->edate, etime);
+    if(etime<stime){
+        this->sdate = boost::gregorian::date();
+        this->stime = boost::posix_time::ptime();
     }
 	this->location = location;
     this->idx = idx;
@@ -145,24 +130,43 @@ void Event::setName(std::string newName){
 	name = newName;
 }
 
+/*
+* Takes in a string containing the new date
+* For all below functions, only modifies if the new entry preserves
+* The correct start/end ordering
+*/
 void Event::setStartDate(std::string newDate){
-	sdate = parser.convertToDate(newDate);
-    stime = timeParser.convertToTime(sdate, getStartTime());
+	boost::gregorian::date date = parser.convertToDate(newDate);
+    if(date <= edate){
+        sdate = date;
+        stime = timeParser.convertToTime(sdate, getStartTime());
+    }
 }
 
 void Event::setEndDate(std::string newDate){
-	edate = parser.convertToDate(newDate);
-    etime = timeParser.convertToTime(edate, getEndTime());
+	boost::gregorian::date date = parser.convertToDate(newDate);
+    if(date >= sdate){
+        edate = date;
+        etime = timeParser.convertToTime(edate, getEndTime());
+    }
 }
 
 void Event::setStartTime(std::string newTime){
-    if(sdate.is_special() && !newTime.empty()){sdate = boost::gregorian::day_clock::local_day();}
-    stime = timeParser.convertToTime(sdate, newTime);
+    boost::gregorian::date date = sdate;
+    if(sdate.is_special() && !newTime.empty()){date = boost::gregorian::day_clock::local_day();}
+    boost::posix_time::ptime time = timeParser.convertToTime(sdate, newTime);
+    if(time <= etime){
+        sdate = date;
+        stime = time;
+    }
 }
 
 void Event::setEndTime(std::string newTime){
     if(edate.is_special() && !newTime.empty()){edate = boost::gregorian::day_clock::local_day();}
-    etime = timeParser.convertToTime(edate, newTime);
+    boost::posix_time::ptime time = timeParser.convertToTime(edate, newTime);
+    if(time >= stime){
+        etime = time;
+    }
 }
 
 void Event::setLocation(std::string newLocation){
@@ -173,6 +177,9 @@ void Event::setIdx(int newIdx){
     idx = newIdx;
 }
 
+/*
+* Gives a textual representation of all data in a event. Used for unit testing
+*/
 std::string Event::repr(){
     return name + " at " + location + " from " + getStartDate() + ", " + getStartTime() + " to " + getEndDate() + ", " + getEndTime();
 }
@@ -200,6 +207,48 @@ void Event::setDone(bool newValue){
 bool Event::getDone(){
     return done;
 }
+
+/*
+* Takes in the strings for date and time
+* Returns the appropriate date based off date
+* Or today's date if a time is specified but a date is not
+* This method is overloaded
+*/
+boost::gregorian::date Event::getDateFromInput(std::string date, std::string time){
+    boost::gregorian::date today = boost::gregorian::day_clock::local_day();
+    boost::gregorian::date result;
+    if(!date.empty() && date != NULL_DATE_TIME){result = parser.convertToDate(date);}
+    else if(!(time.empty() || time == NULL_DATE_TIME)){result = today;}
+    return result;
+}
+
+/*
+* Takes in the strings for date and time and a third input for the default date if not specified
+* Returns the appropriate date based off date
+* Or the default date if the time is specified but date is not
+* This method is overloaded
+*/
+boost::gregorian::date Event::getDateFromInput(std::string date, std::string time, std::string predate){
+    boost::gregorian::date result;
+    if(!date.empty() && date != NULL_DATE_TIME){result = parser.convertToDate(date);}
+    else if(!(time.empty() || time == NULL_DATE_TIME)){result = parser.convertToDate(predate);}
+    return result;
+}
+
+/*
+* Takes in the date as a boost::gregorian::date and the time as a string
+* Returns the matching time or 00:00 when the time is not specified
+*/
+boost::posix_time::ptime Event::getTimeFromInput(boost::gregorian::date date, std::string time){
+    boost::posix_time::ptime result;
+    if((time.empty() || time == NULL_DATE_TIME) && !date.is_special()){
+        result = timeParser.convertToTime(date, NULL_TIME);
+    }else if(!(time.empty() || time == NULL_DATE_TIME)){
+        result = timeParser.convertToTime(date, time);
+    }
+    return result;
+}
+
 /*
 std::string Event::getDescription() {
     return description;

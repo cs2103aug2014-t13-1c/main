@@ -49,7 +49,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_QML_LIB;QT_TESTLIB_LIB;QT_HELP_LIB;QT_OPENGL_LIB;QT_SCRIPT_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtTest;$(QTDIR)\include\QtHelp;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtScript;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories);C:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014;C:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib;/cygdrive/c/Program Files (x86)/Microsoft SDKs/boost-1.57-vc110-x86-27-.09-2014;C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release;C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include;.\GeneratedFiles\$(ConfigurationName);C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets;%(AdditionalIncludeDirectories);C:\Boost;C:\Boost\lib</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -59,9 +59,9 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories);(x86)\boost_1_56_0;/cygdrive/c/Program Files (x86)/Microsoft SDKs/boost-1.57-vc110-x86-27.09.2014/stage/lib;C:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib;C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib;%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5MultimediaWidgetsd.lib;Qt5Qmld.lib;Qt5Testd.lib;Qt5Helpd.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5Scriptd.lib;Qt5Widgetsd.lib;%(AdditionalDependencies);C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\Debug\JsonSpirit.lib</AdditionalDependencies>
+      <AdditionalDependencies>C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\qtmaind.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Cored.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Guid.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5MultimediaWidgetsd.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Qmld.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Testd.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Helpd.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5OpenGLd.lib;opengl32.lib;glu32.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Scriptd.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Widgetsd.lib;%(AdditionalDependencies);./Debug\JsonSpirit.lib;C:\Boost\lib\libboost_date_time-vc110-mt-gd-1_57.lib</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -70,7 +70,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_QML_LIB;QT_TESTLIB_LIB;QT_HELP_LIB;QT_OPENGL_LIB;QT_SCRIPT_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtTest;$(QTDIR)\include\QtHelp;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtScript;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories);C:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014;C:\Qt\Qt5.3.1\5.3\Src\qtbase\lib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include;.\GeneratedFiles\$(ConfigurationName);C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets;%(AdditionalIncludeDirectories);C:\Boost;C:\Boost\lib</AdditionalIncludeDirectories>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -78,9 +78,9 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories);C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib;%(AdditionalLibraryDirectories);C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5MultimediaWidgets.lib;Qt5Qml.lib;Qt5Test.lib;Qt5Help.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5Script.lib;Qt5Widgets.lib;%(AdditionalDependencies);C:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib\libboost_date_time-vc110-mt-1_57.lib;C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\Release\JsonSpirit.lib</AdditionalDependencies>
+      <AdditionalDependencies>C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\qtmain.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Core.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Gui.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5MultimediaWidgets.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Qml.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Test.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Help.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5OpenGL.lib;opengl32.lib;glu32.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Script.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Widgets.lib;%(AdditionalDependencies);C:\Boost\lib\libboost_date_time-vc110-mt-1_57.lib;./Release\JsonSpirit.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -132,92 +132,358 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BoxIn.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing BoxIn.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtHelp" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib" "-I\cygdrive\c\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27-.09-2014" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib" "-I\cygdrive\c\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27-.09-2014" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing BoxIn.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB -D_ATL_STATIC_REGISTRY  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtHelp" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Qt\Qt5.3.1\5.3\Src\qtbase\lib"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB -D_ATL_STATIC_REGISTRY  "-I.\GeneratedFiles" "-I." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Qt\Qt5.3.1\5.3\Src\qtbase\lib"</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BoxIn.ui">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Uic%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Uic%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Action.h" />
-    <ClInclude Include="Add.h" />
-    <ClInclude Include="CommonFunctions.h" />
-    <ClInclude Include="Delete.h" />
-    <ClInclude Include="Mark.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="SimpleParser.h" />
-    <ClInclude Include="SimpleStorage.h" />
-    <ClInclude Include="TimeParser.h" />
+    <CustomBuild Include="Action.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="Add.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="CommonFunctions.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="Delete.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="Mark.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="resource.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="SimpleParser.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="SimpleStorage.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="TimeParser.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
     <CustomBuild Include="DisplayFeed.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing DisplayFeed.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtHelp" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib" "-I\cygdrive\c\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27-.09-2014" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib" "-I\cygdrive\c\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27-.09-2014" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing DisplayFeed.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtHelp" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014"</Command>
     </CustomBuild>
-    <ClInclude Include="Edit.h" />
-    <ClInclude Include="FileStorage.h" />
-    <ClInclude Include="parser.h" />
+    <CustomBuild Include="Edit.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="FileStorage.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="parser.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
     <CustomBuild Include="QEventEditor.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtHelp" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib" "-I\cygdrive\c\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27-.09-2014" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib" "-I\cygdrive\c\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27-.09-2014" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc_ing QEventEditor.h</Message>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="QEventStore.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtHelp" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib" "-I\cygdrive\c\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27-.09-2014" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib" "-I\cygdrive\c\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27-.09-2014" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc_ing QEventStore.cpp</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
     </CustomBuild>
-    <ClInclude Include="Search.h" />
+    <CustomBuild Include="Search.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
     <CustomBuild Include="digitalclock.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing digitalclock.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtHelp" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib" "-I\cygdrive\c\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27-.09-2014" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014\lib" "-I\cygdrive\c\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27-.09-2014" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Release" "-IC:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing digitalclock.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB -D_ATL_STATIC_REGISTRY  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtHelp" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtScript" "-I$(QTDIR)\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Qt\Qt5.3.1\5.3\Src\qtbase\lib"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QML_LIB -DQT_TESTLIB_LIB -DQT_HELP_LIB -DQT_OPENGL_LIB -DQT_SCRIPT_LIB -DQT_WIDGETS_LIB -D_ATL_STATIC_REGISTRY  "-I.\GeneratedFiles" "-I." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtCore" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtGui" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtMultimediaWidgets" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtQml" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtTest" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtHelp" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtOpenGL" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtScript" "-IC:\Qt\Qt5.3.1\5.3\msvc2012_opengl\include\QtWidgets" "-I$(INHERIT)\." "-IC:\Program Files (x86)\Microsoft SDKs\boost-1.57-vc110-x86-27.09.2014" "-IC:\Qt\Qt5.3.1\5.3\Src\qtbase\lib"</Command>
     </CustomBuild>
-    <ClInclude Include="Event.h" />
-    <ClInclude Include="GeneratedFiles\ui_BoxIn.h" />
-    <ClInclude Include="GeneratedFiles\ui_digitalclock.h" />
-    <ClInclude Include="Logic.h" />
+    <CustomBuild Include="Event.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_BoxIn.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_digitalclock.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="Logic.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BoxIn.qrc">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath);%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rcc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath);%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rcc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -225,21 +491,81 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="BoxIn.jpg" />
-    <Image Include="BoxIn.png" />
-    <Image Include="BoxInSysTrayIco.jpg" />
-    <Image Include="BoxInSysTrayIco.png" />
+    <CustomBuild Include="BoxIn.jpg">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="BoxIn.png">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="BoxInSysTrayIco.jpg">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="BoxInSysTrayIco.png">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </AdditionalInputs>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="digitalclock.ui">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Uic%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Uic%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -252,7 +578,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties UicDir=".\GeneratedFiles" MocDir=".\GeneratedFiles\$(ConfigurationName)" MocOptions="" RccDir=".\GeneratedFiles" lupdateOnBuild="0" lupdateOptions="" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2012_opengl" />
+      <UserProperties UicDir=".\GeneratedFiles" MocDir=".\GeneratedFiles\$(ConfigurationName)" MocOptions="" RccDir=".\GeneratedFiles" lupdateOnBuild="0" lupdateOptions="" lreleaseOptions="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
