@@ -7,14 +7,14 @@ Time::Time(void)
 	period="";
 }
 
-Time::Time(int hour, int minutes, string ampm)
+Time::Time(int hour, int minutes, string period)
 {
 	hour = hour;
 	minutes = minutes;
 	period = period;
 }
 
-void Time::setPeriod(string ampm)
+void Time::setPeriod(string period)
 {
 	this->period=period;
 }
