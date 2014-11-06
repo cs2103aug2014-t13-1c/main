@@ -1,3 +1,4 @@
+//@author A0111994
 #include "SimpleParser.h"
 
 
@@ -142,7 +143,7 @@ DateFormat SimpleParser::matchFormat(std::string date){
     else if(isTomorrow(date)){return Tomorrow;}
     else if(date.size()==lenDDMMYY && isInteger(date)){return DDMMYY;}
     else if(date.size()==lenYYYYMMDD && isInteger(date)){return YYYYMMDD;}
-    else if(date.size()==lenYYYY_MMM_DD && isNumericalFormat(date)){return YYYY_MMM_DD;}
+    else if(date.size()==lenYYYY_MMM_DD){return YYYY_MMM_DD;}
     else{return FormatNotRecognised;}
 }
 

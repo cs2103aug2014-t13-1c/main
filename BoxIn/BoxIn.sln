@@ -3,12 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoxIn", "BoxIn\BoxIn.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoxInUnitTests", "BoxInUnitTests\BoxInUnitTests.vcxproj", "{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B12702AD-ABFB-343A-A199-8E24837244A3} = {B12702AD-ABFB-343A-A199-8E24837244A3}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JsonSpirit", "BoxIn\JsonSpirit.vcxproj", "{FE341162-8FDA-4D3E-A712-4B0432658004}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest\UnitTest.vcxproj", "{EE144B56-EA25-4359-BE37-BB664394B1D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,16 +28,6 @@ Global
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.ActiveCfg = Release|Win32
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.Build.0 = Release|Win32
-		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Debug|Win32.ActiveCfg = Debug|Win32
-		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Debug|Win32.Build.0 = Debug|Win32
-		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Release|Any CPU.ActiveCfg = Release|Win32
-		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Release|Win32.ActiveCfg = Release|Win32
-		{CFCAE0AB-F4AE-4069-AE31-8C39EDF83C70}.Release|Win32.Build.0 = Release|Win32
 		{FE341162-8FDA-4D3E-A712-4B0432658004}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{FE341162-8FDA-4D3E-A712-4B0432658004}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{FE341162-8FDA-4D3E-A712-4B0432658004}.Debug|Mixed Platforms.Build.0 = Debug|Win32
@@ -51,6 +38,16 @@ Global
 		{FE341162-8FDA-4D3E-A712-4B0432658004}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{FE341162-8FDA-4D3E-A712-4B0432658004}.Release|Win32.ActiveCfg = Release|Win32
 		{FE341162-8FDA-4D3E-A712-4B0432658004}.Release|Win32.Build.0 = Release|Win32
+		{EE144B56-EA25-4359-BE37-BB664394B1D8}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{EE144B56-EA25-4359-BE37-BB664394B1D8}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{EE144B56-EA25-4359-BE37-BB664394B1D8}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{EE144B56-EA25-4359-BE37-BB664394B1D8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EE144B56-EA25-4359-BE37-BB664394B1D8}.Debug|Win32.Build.0 = Debug|Win32
+		{EE144B56-EA25-4359-BE37-BB664394B1D8}.Release|Any CPU.ActiveCfg = Release|Win32
+		{EE144B56-EA25-4359-BE37-BB664394B1D8}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{EE144B56-EA25-4359-BE37-BB664394B1D8}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{EE144B56-EA25-4359-BE37-BB664394B1D8}.Release|Win32.ActiveCfg = Release|Win32
+		{EE144B56-EA25-4359-BE37-BB664394B1D8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

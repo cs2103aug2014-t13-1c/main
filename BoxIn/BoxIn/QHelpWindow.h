@@ -1,7 +1,8 @@
+//@author A0111994
 #ifndef QHELPWINDOW_H
 #define QHELPWINDOW_H
 
-#include <QWidget>
+#include "qwidget.h"
 #include "ui_QHelpWindow.h"
 #include "qcombobox.h"
 #include "qtextedit.h"

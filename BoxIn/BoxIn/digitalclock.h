@@ -1,3 +1,4 @@
+//@author A0111994
 #ifndef DIGITALCLOCK_H
 #define DIGITALCLOCK_H
 

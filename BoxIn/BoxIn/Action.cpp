@@ -1,4 +1,4 @@
-//@author A0111994B
+//@author A0111994
 
 #include "Action.h"
 

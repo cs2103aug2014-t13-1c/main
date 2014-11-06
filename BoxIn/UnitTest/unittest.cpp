@@ -1,44 +1,31 @@
-//@author A0111994
-
-#include "stdafx.h"
-#include "CppUnitTest.h"
-#include <vector>
-#include <string>
-#include "Event.h"
-#include "Event.cpp"
-#include "SimpleStorage.h"
-#include "SimpleStorage.cpp"
-#include "FileStorage.h"
-#include "FileStorage.cpp"
-#include "json_spirit.h"
-#include "SimpleParser.h"
-#include "SimpleParser.cpp"
-#include "TimeParser.h"
-#include "TimeParser.cpp"
-#include "Logic.h"
-#include "Logic.cpp"
-#include "Action.h"
-#include "Action.cpp"
-#include "Add.h"
-#include "Add.cpp"
-#include "Delete.h"
-#include "Delete.cpp"
-#include "Edit.h"
-#include "Edit.cpp"
-#include "Search.h"
-#include "Search.cpp"
-#include "Mark.h"
-#include <fstream>
-
+#include "unittest.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+UnitTest::UnitTest()
+{
 
-namespace BoxInUnitTests
+}
+
+UnitTest::~UnitTest()
+{
+
+}
+
+int a = 1;
+
+int& foo(){
+    return a;
+}
+
+namespace UnitTests
 {		
 	TEST_CLASS(UnitTest1)
 	{
 	public:
         // System level tests
         TEST_METHOD(TestAdd){
+            int& argc = foo();
+            char** argv;
+            QApplication app(argc, argv);
             std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
             Logic logic;
             logic.handleUserInput("add something");
@@ -48,6 +35,9 @@ namespace BoxInUnitTests
             file.close();
         }
         TEST_METHOD(TestEdit){
+            int& argc = foo();
+            char** argv;
+            QApplication app(argc, argv);
             std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
             Logic logic;
             logic.handleUserInput("add something");
@@ -58,6 +48,9 @@ namespace BoxInUnitTests
             file.close();
         }
         TEST_METHOD(TestDelete){
+            int& argc = foo();
+            char** argv;
+            QApplication app(argc, argv);
             std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
             Logic logic;
             logic.handleUserInput("add something");
@@ -67,6 +60,9 @@ namespace BoxInUnitTests
             file.close();
         }
         TEST_METHOD(TestUndo){
+            int& argc = foo();
+            char** argv;
+            QApplication app(argc, argv);
             std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
             Logic logic;
             logic.handleUserInput("add something");
@@ -76,6 +72,9 @@ namespace BoxInUnitTests
             file.close();
         }
         TEST_METHOD(TestUndoForEdit){
+            int& argc = foo();
+            char** argv;
+            QApplication app(argc, argv);
             std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
             Logic logic;
             logic.handleUserInput("add something");
@@ -88,8 +87,7 @@ namespace BoxInUnitTests
         }
 
         // Tests for the parser
-		TEST_METHOD(SimpleParserTestDDMMYY)
-		{
+		TEST_METHOD(SimpleParserTestDDMMYY){
 		    SimpleParser* parse = new SimpleParser();
             boost::gregorian::date expected(2004, boost::gregorian::Feb, 1);
             Assert::AreEqual(to_iso_string(expected), to_iso_string(parse->convertToDate("010204")));
@@ -179,33 +177,5 @@ namespace BoxInUnitTests
             std::string ans = parser.getField("delete .date with you", TypeName);
             Assert::AreEqual(expected, ans);
         }
-        /*
-		TEST_METHOD(Storagetest1)
-		{
-			FileStorage = new File;
-			File test("hello.txt");
-			test.appendToLineEntry("date", "010204");
-			test.appendToLineEntry("start", "1200");
-			Assert::IsTrue();
-		}
-		TEST_METHOD(Storagetest2)
-		{
-			FileStorage = new File;
-			File test("hello.txt");
-			test.determineType();
-			string errorStr = "Invalid Entry";
-		}
-
-		TEST_MODULE_INITIALIZE(ModuleInitialize)
-		{
-			Logger::WriteMessage("In Module Initialize");
-		}
-
-		TEST_MODULE_CLEANUP(ModuleCleanup)
-		{
-			 Logger::WriteMessage("In Module Cleanup");
-		}
-        */
-        
-	};
-}
+    };
+};
