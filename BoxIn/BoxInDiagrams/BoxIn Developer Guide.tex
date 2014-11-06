@@ -43,11 +43,15 @@ BoxIn code follows the coding standard listed out here: \href{https://docs.googl
 \subparagraph{Namespaces}
 All namespaces should be marked out to avoid confusion with the Boost library which is used in many parts of the code. For example, \texttt{std::string} rather than simply \texttt{string}
 
+\subsection{Full class diagram}
+\includegraphics[width=\textwidth]{class_diagram}
+
 \newpage
 
 \section{Anatomy}
 
-\includegraphics[width=\textwidth]{architecture}
+\includegraphics[width=\textwidth]{architecture} 
+//change the double arrows here
 
 BoxIn has 3 major components, the GUI, the Logic and the Storage components. The components are divided in a way that follows two guiding principles. We also apply the Model View Controller pattern. A full class diagram is available in the Appendix
 
@@ -162,7 +166,8 @@ Sort & Search & Display\\
 \newpage
 
 \section{Storage}
-The Storage class has only one purpose: to write all data stored in the Tasklist class into a file, and to retrieve the data in the file for BoxIn to use in the next session. Because the Storage class does not depend on other classes, it has low coupling which makes the software more efficient.
+The Storage class has only one purpose: to write all data stored in the Tasklist class into a file, and to retrieve the data in the file for BoxIn to use in the next session. 
+
 \subsection{Event}	 					
 The Event class stores data created by the user. All of the data created by the user will be included here.
 \subparagraph{set-parts}
@@ -190,8 +195,7 @@ Bool                            & delete(vector<Event> event)
 \end{center}
 
 \section{Appendix A}
-\subsection{Full class diagram}
-\includegraphics[width=\textwidth]{class_diagram}
+
 \subsection{Use cases}
 \begin{table}[ht]
 \begin{tabular}{l|l}
@@ -292,5 +296,7 @@ Then open Visual Studio. The top bar should show QT5 -> QT Options. Make
 sure that the correct version of QT is selected. 
 \subsection{4.Git}
 You can download git from Github.com and register as a member, then clone the software and open the file and it should work out!
+
+\section{Appendix C: Testing Instructions}
 
 \end{document}
