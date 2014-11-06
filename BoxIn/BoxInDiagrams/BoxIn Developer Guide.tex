@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{extarticle}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
@@ -189,7 +189,7 @@ Bool                            & delete(vector<Event> event)
 \end{tabular}
 \end{center}
 
-\section{Appendix}
+\section{Appendix A}
 \subsection{Full class diagram}
 \includegraphics[width=\textwidth]{class_diagram}
 \subsection{Use cases}
@@ -274,7 +274,23 @@ Post Condition        & -
 \end{tabular}
 \end{table}
 
-
-
+\section{Appendix B:setting up}
+To set up, you will need Windows Operating System, VS2012, Boost, and Git.
+\subsection{1.QT}
+The Visual Studio plugin for qt. You can find it at http://qt-project.org/downloads. 
+Scroll to the bottom of the page and look for qt-vs-addin-1.2.3-opensource.exe. 
+Then open Visual Studio. The top bar should show QT5 -> QT Options. Make 
+sure that the correct version of QT is selected. 
+\subsection{2.Boost}
+boost - version 1.56, vc2012 (vc11.0), 32 bit. You can find it at 
+http://sourceforge.net/projects/boost/files/boost-binaries/1.56.0/boost_1_56_0-
+msvc-11.0-32.exe. Install to /local/boost_1_56_0 (the default folder). 
+\subsection{3.Visual Studio plugin}
+The Visual Studio plugin for qt. You can find it at http://qt-project.org/downloads. 
+Scroll to the bottom of the page and look for qt-vs-addin-1.2.3-opensource.exe. 
+Then open Visual Studio. The top bar should show QT5 -> QT Options. Make 
+sure that the correct version of QT is selected. 
+\subsection{4.Git}
+You can download git from Github.com and register as a member, then clone the software and open the file and it should work out!
 
 \end{document}
