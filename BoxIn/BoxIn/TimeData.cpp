@@ -1,4 +1,4 @@
-#include "Time.h"
+#include "TimeData.h"
 
 Time::Time(void)
 {
@@ -7,14 +7,14 @@ Time::Time(void)
 	period="";
 }
 
-Time::Time(int hour, int minutes, string ampm)
+Time::Time(int hour, int minutes, string period)
 {
 	hour = hour;
 	minutes = minutes;
 	period = period;
 }
 
-void Time::setPeriod(string ampm)
+void Time::setPeriod(string period)
 {
 	this->period=period;
 }
@@ -42,6 +42,40 @@ void Time::setMinutes(int minutes)
 int Time::getMinutes()
 {
 	return minutes;
+}
+
+bool Time::isGreaterThan(Time time2)
+{
+	bool flag;
+	int temphour1=0,temphour2=0;
+	if(this->period=="am" && time2.period=="pm")
+		flag=false;
+	else if(this->period=="pm" && time2.period=="am")
+		flag=true;
+	else
+	{
+		if(this->hour==12)
+			temphour1=0;
+		else 
+			temphour1=this->hour;
+		
+		if(time2.hour==12)
+			temphour2=0;
+		else 
+			temphour2=time2.hour;
+		
+		if( temphour1 > temphour2)
+			flag=true;
+		else if(temphour1 < temphour2)
+			flag=false;
+		else if(this->minutes > time2.minutes)
+			flag=true;
+		else if(this->minutes <= time2.minutes)
+			flag=false;
+	}
+
+	return flag;
+
 }
 
 string Time::formatTime()

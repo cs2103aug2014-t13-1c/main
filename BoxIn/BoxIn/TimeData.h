@@ -26,8 +26,8 @@ public:
 	void setMinutes(int);
 	string getPeriod();
 	void setPeriod(string);
+	bool isGreaterThan(Time);
 	string formatTime();
-
 	void timeStringToObject(string time);
 	bool isValidTime();
 	string formatCompleteTime(Time Obj);
