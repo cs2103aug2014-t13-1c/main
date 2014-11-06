@@ -15,6 +15,7 @@ QHelpWindow::QHelpWindow(QWidget *parent) : QWidget(parent){
 QHelpWindow::~QHelpWindow(){
 }
 
+//add the options for each components so people can get the help window
 void QHelpWindow::setupSelector(){
     selector->addItem(HelpOptions::GENERAL);
     selector->addItem(HelpOptions::ADD);
@@ -27,6 +28,7 @@ void QHelpWindow::setupSelector(){
     QObject::connect(selector, SIGNAL(currentIndexChanged(QString)), this, SLOT(changed(QString)));
 }
 
+//this is the text displayed after clicking on the selectors above
 void QHelpWindow::changed(QString option){
     if(option == HelpOptions::GENERAL){
         display->setText("BoxIn commands have the first word as the type of action desired.\n\nDifferent options are prefixed by the tags place, sdate (start date), stime (start time), edate (end date) and etime (endtime)\n\nDates are represented in the format DDMMYY or YYYY-Mon-DD where Mon is the 3-letter representation of the month\nAlternatively, it is possible to use special days such as today or tomorrow\nUsing a day of week (for example, tuesday) will return the nearest (tuesday) to today, today inclusive.\n\nTimes are stored in a 24-hour format HHMM or HH:MM\n\nIn the case where a word the user intends to type is a keyword, it can be escaped by prefixing the word with a . - for example, .place");

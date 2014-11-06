@@ -10,6 +10,10 @@ Logic::Logic(){
 Logic::~Logic(){
 }
 
+/*different commands
+*put the commands into different commands 
+*calls out the different commands using the paarser later on*/
+
 void Logic::setupMap(){
 	stringToCommand[USER_COMMAND_ADD] = CommandAdd;
 	stringToCommand[USER_COMMAND_DELETE] = CommandDelete;
@@ -136,6 +140,7 @@ bool checkPast(Event* event, bool mode){
     else{return !res;}
 }
 
+//marks if each event is done or not and if it is complete
 bool isDone(Event* event){
     return checkDone(event, true);
 }

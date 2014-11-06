@@ -19,6 +19,7 @@ std::string Action::undo(std::vector<Event*>&){
 	return "";
 }
 
+//deletes the event 
 void Action::deleteEvent(std::vector<Event*> &events, Event* event){
     for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
 		if(*iter == event){
@@ -28,6 +29,7 @@ void Action::deleteEvent(std::vector<Event*> &events, Event* event){
 	}
 }
 
+//search through the indexes to find a specific index through search
 Event* Action::findEventByIdx(int idx, std::vector<Event*> &events){
     Event* event = NULL;
     if(idx <= events.size() && idx > 0){
@@ -37,6 +39,7 @@ Event* Action::findEventByIdx(int idx, std::vector<Event*> &events){
     return event;
 }
 
+//searching the indes by inputs of name and end date 
 Event* Action::findEventByNameAndEndDate(std::string name, std::string endDate, std::vector<Event*> &events){
     Event* event = NULL;
     for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){

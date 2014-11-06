@@ -60,6 +60,9 @@ string Parser::getIndex(){
 	return index;
 }
 
+/* this method search through a if/else statement to determine if one of the function call is there
+*if it is detected, it will return the keyword
+*logic for the controller later*/
 Parser::KEYWORD Parser::getKeyword(string keyword){
 	int i = 0;
 	if (boost::iequals(keyword, "Add"))
@@ -90,6 +93,7 @@ string Parser::getFirstWord(string command){
 	return firstWord;
 }
 
+//using the strings, and the looping to find the date based on the array
 int Parser::getDateIndex(string command){
 	int index;
 	string date[] = { " today", " tomorrow", " monday",
@@ -124,6 +128,7 @@ bool Parser::isKeyword(string word){
 	return value;
 }
 
+//these help find name, location, index, time,date for the edit function later on
 bool Parser::hasName(){
 	if (name == "")
 		return false;
@@ -185,6 +190,7 @@ bool Parser::canAdd(){
 	return false;
 }
 
+//checks if the name/time/date are valid
 bool Parser::isValidName(){
 	//stub
 	return true;
@@ -200,6 +206,7 @@ bool Parser::isValidDate(){
 	return true;
 }
 
+//check if the edit is valid, if it is not valid, it will not work otherwie it will return the new edit to the user
 bool Parser::canEdit(){
 	bool value = false;
 	if (hasName())
