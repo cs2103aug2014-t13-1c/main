@@ -1,2 +1,11 @@
 [
+    {
+        "Name" : "lecture",
+        "Start_Date" : "2014-Nov-07",
+        "End_Date" : "2014-Nov-07",
+        "Start_Time" : "19:00",
+        "End_Time" : "22:00",
+        "Place" : "",
+        "Done" : false
+    }
 ]

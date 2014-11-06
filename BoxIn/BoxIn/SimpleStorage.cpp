@@ -6,8 +6,7 @@ SimpleStorage::SimpleStorage(){
     file = FileStorage(BOXIN_DATA_FILENAME);
     try{
         events = file.readFile();
-    }
-    catch(std::exception &e){
+    }catch(std::exception &e){
         // exists in case file does not exist, then events can just be an empty vector
     }
     sortCriteria = CriteriaTime;

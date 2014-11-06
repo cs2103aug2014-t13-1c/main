@@ -158,17 +158,19 @@ void Event::setEndDate(std::string newDate){
 void Event::setStartTime(std::string newTime){
     boost::gregorian::date date = sdate;
     if(sdate.is_special() && !newTime.empty()){date = boost::gregorian::day_clock::local_day();}
-    boost::posix_time::ptime time = timeParser.convertToTime(sdate, newTime);
-    if(time <= etime){
+    boost::posix_time::ptime time = timeParser.convertToTime(date, newTime);
+    if(time <= etime || etime.is_special() || etime == boost::posix_time::ptime(edate, boost::posix_time::time_duration(0,0,0))){
         sdate = date;
         stime = time;
     }
 }
 
 void Event::setEndTime(std::string newTime){
-    if(edate.is_special() && !newTime.empty()){edate = boost::gregorian::day_clock::local_day();}
+    boost::gregorian::date date = edate;
+    if(edate.is_special() && !newTime.empty()){date = boost::gregorian::day_clock::local_day();}
     boost::posix_time::ptime time = timeParser.convertToTime(edate, newTime);
-    if(time >= stime){
+    if(time >= stime || stime.is_special() || stime == boost::posix_time::ptime(sdate, boost::posix_time::time_duration(0,0,0))){
+        edate = edate;
         etime = time;
     }
 }

@@ -9,7 +9,6 @@ DisplayFeed::DisplayFeed(QWidget *parent, DisplayField field) : QListWidget(pare
 	show();
 }
 
-
 DisplayFeed::~DisplayFeed(void){
 }
 
