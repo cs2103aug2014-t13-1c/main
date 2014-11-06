@@ -111,14 +111,14 @@ The \texttt{CommandLine} component of the GUI is the controller for majority of 
 
 \includegraphics[width=\textwidth]{add_call_diagram}
 
-The logic of the system is explained by the above sequence diagram.
+The logic of the system is explained by the above sequence diagram. The GUI will process the user input into the logic, and it will parse to the controller for the add which later stores it into the storage.
 
 \subsection{Key API}
 The only call to the \texttt{Logic} component is made by the \texttt{GUI} when the \texttt{CommandLine::returnPressed()} signal is emitted. The function \texttt{Logic::handleUserInput(std::string)} will then proceed to process the input internally.
 
 \subsection{Controller}
 
-The controller is responsible for creating and executing commands. The user input is received by the controller and passed to the parser. The controller then receives the details of the user command from the parser and performs the action required (add, delete, edit, etc) detailed in the use cases in the appendix.
+The controller(Logic component) is responsible for creating and executing commands. The user input is received by the controller and passed to the parser. The controller then receives the details of the user command from the parser and performs the action required (add, delete, edit, etc) detailed in the use cases in the appendix.
 
 \begin{center}
 \begin{tabular}{|l|r|}
@@ -149,7 +149,7 @@ parse(string input) & pointer
 
 \subsection{Commands}
 BoxIn currently recognizes the following user commands
-
+//add a class diagram here 
 \subparagraph{Sort}
 Within the Command class, the information will be sorted out so it would be easier to parse out later.
 
@@ -298,5 +298,7 @@ sure that the correct version of QT is selected.
 You can download git from Github.com and register as a member, then clone the software and open the file and it should work out!
 
 \section{Appendix C: Testing Instructions}
+\subsection{Unit Tests}
+\subsection{System Tests}
 
 \end{document}
