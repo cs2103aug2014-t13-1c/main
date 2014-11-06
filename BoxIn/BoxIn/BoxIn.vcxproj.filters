@@ -128,7 +128,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QHelpWindow.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
+    <ClCompile Include="TimeData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -235,7 +235,7 @@
     <ClInclude Include="GeneratedFiles\ui_QHelpWindow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
+    <ClInclude Include="TimeData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

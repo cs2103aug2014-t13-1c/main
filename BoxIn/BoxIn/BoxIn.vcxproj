@@ -48,7 +48,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_QML_LIB;QT_TESTLIB_LIB;QT_HELP_LIB;QT_OPENGL_LIB;QT_SCRIPT_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>      <AdditionalIncludeDirectories>.\GeneratedFiles;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtTest;$(QTDIR)\include\QtHelp;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtScript;$(QTDIR)\include\QtWidgets;C:\Boost;%(AdditionalIncludeDirectories);./;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_QML_LIB;QT_TESTLIB_LIB;QT_HELP_LIB;QT_OPENGL_LIB;QT_SCRIPT_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtTest;$(QTDIR)\include\QtHelp;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtScript;$(QTDIR)\include\QtWidgets;C:\Boost;%(AdditionalIncludeDirectories);./;</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -134,7 +135,7 @@
     <ClCompile Include="Search.cpp" />
     <ClCompile Include="SimpleParser.cpp" />
     <ClCompile Include="SimpleStorage.cpp" />
-    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="TimeData.cpp" />
     <ClCompile Include="TimeParser.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -606,7 +607,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_QHelpWindow.h" />
-    <ClInclude Include="Time.h" />
+    <ClInclude Include="TimeData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
