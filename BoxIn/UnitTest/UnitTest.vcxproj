@@ -50,6 +50,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -58,6 +59,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>qtmaind.lib;Qt5Guid.lib;Qt5Multimediad.lib;Qt5MultimediaWidgetsd.lib;Qt5Quickd.lib;Qt5Testd.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;qtmaind.lib;Qt5Qmld.lib;Qt5Testd.lib;Qt5Helpd.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5Scriptd.lib;Qt5Widgetsd.lib;C:\Boost\lib\libboost_date_time-vc110-mt-gd-1_57.lib;C:\Users\Emmanuel\Documents\GitHub\main\BoxIn\BoxIn\Debug\JsonSpirit.lib;C:\Qt\Qt5.3.1\5.3\msvc2012_opengl\lib\Qt5Cored.lib;</AdditionalDependencies>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

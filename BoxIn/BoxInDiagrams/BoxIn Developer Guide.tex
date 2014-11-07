@@ -52,7 +52,6 @@ All namespaces should be marked out to avoid confusion with the Boost library wh
 \section{Anatomy}
 
 \includegraphics[width=\textwidth]{architecture} 
-//change the double arrows here
 
 BoxIn has 3 major components, the GUI, the Logic and the Storage components. The components are divided in a way that follows two guiding principles. We also apply the Model View Controller pattern. A full class diagram is available in the Appendix
 
@@ -61,7 +60,7 @@ In BoxIn, the GUI component acts as both the View and the Controller. Users view
 The Model in the system is the Event class. More details are found in Section 5.
 
 \subsection{Separation of Concerns}
-Each major component of the application handles it's own concerns. For example, the GUI or Storage components do not process any command line input, only the Logic does.
+Each major component of the application handles it's own concerns. For example, the GUI or Storage components do not process any command line input, only the Logic and parsers do.
 
 \subsection{Law of Demeter}
 This law is particularly effected in the fact that the GUI and the Storage classes have no knowledge of each other - neither calls any functions of the other.
@@ -74,22 +73,22 @@ This law is particularly effected in the fact that the GUI and the Storage class
 \includegraphics[width=\textwidth]{gui_sequence_diagram}
 The GUI component acts as both the controller and the view in the MVC pattern. The library used to is the Qt library. The documentation for the Qt library is available here: \href{http://qt-project.org/doc/}{http://qt-project.org/doc/}\\
 The above diagrams give a graphical representation of how the \texttt{GUI} is designed in both the sequential calls on user actions and as a component.
-The GUI is divided into 5 components, discussed below
+The GUI is divided into 7 components, discussed below
 
 \subsection{BoxIn (main window)}
-The \texttt{BoxIn} class is the main window. The majority of setup for this window is done in a \texttt{.ui} file generated using Qt Creator. All other sub-components found in this window should also have this window as a parent window. This class inherits from \texttt{QWidget}. The \texttt{BoxIn} class mainly acts as a container for all other classes for presentation's sake.\\
+The \texttt{BoxIn} class is the main window. The majority of setup for this window is done in a \texttt{.ui} file generated using Qt Creator. All other sub-components found in this window should also have this window as a parent window. This class inherits from \texttt{QWidget}. The \texttt{BoxIn} class mainly acts as a container for most of the GUI components\\
 The BoxIn class also  supports the following features
 \subparagraph{Application icon}
 The entire application has a predefined icon initialized in the constructor of BoxIn
 \pagebreak
 \subparagraph{Fixed Size}
-The \texttt{BoxIn} main window is of a fixed size (800 x 600), which is also the minimum resolution for most computers. This size is implemented as the constants \texttt{WIDTH\_WINDOW} and \texttt{HEIGHT\_WINDOW}
+The \texttt{BoxIn} main window is of a fixed size (1000 x 600). This size is implemented as the constants \texttt{WIDTH\_WINDOW} and \texttt{HEIGHT\_WINDOW}
 \subparagraph{Minimize to System Tray}
 \texttt{BoxIn} also has a Windows system tray icon that it can be minimized to. This code is initiated in the constructor and makes use of \texttt{BoxIn::createActions()}, \texttt{BoxIn::createTrayIcon()} and\\ \texttt{BoxIn::linkEvents()} to achieve
 \subparagraph{BoxIn::commandLineReturnPressed()}This slot captures the signal from the \texttt{CommandLine} and calls the \texttt{Logic} API for processing the user input by passing on a \texttt{std::string} containing the user's input.
 \subsection{DisplayFeed}
 The \texttt{DisplayFeed} inherits from \texttt{QListWidget}. This widget contains data members of type QEventStore, which make up the View component of the MVC design pattern. \texttt{DisplayFeed} is designed in its' own constructor, without a \texttt{.ui} file. \texttt{DisplayFeed}'s purpose is to display all events the user wishes to view. At the moment, it simply displays everything.
-\subparagraph{DisplayFeed::refresh(\&EventList)} This is the function called by the BoxIn main window after every user input. \texttt{refresh(\&EventList)} basically re-loads the entire EventList and converts the underlying information into string representations that can be understood by the reader using the \texttt{QEventStore::repr()} function.
+\subparagraph{DisplayFeed::refresh(\&std::vector<Event*>)} This is the function called by the BoxIn main window after every user input. \texttt{refresh(\&std::vector<Event*>)} basically re-loads the entire vector of events and converts the underlying information into string representations that can be understood by the reader using the \texttt{QEventStore::repr()} function. Furthermore, the QEventStore is linked to the event pointer itself, and emitting the doubleClicked() signal from the DisplayFeed will create a QEventEditor to edit the data
 
 \subsection{FeedbackLine}
 The FeedbackLine inherits from QLabel and is a simple instant feedback system for the user. It simply displays messages coming from the Logic component regarding the success or failure of user commands.
@@ -106,6 +105,9 @@ The \texttt{CommandLine} component of the GUI is the controller for majority of 
 
 \subparagraph{QEventStore::repr()} This function takes any information available from the stored event and returns a \texttt{QString} representation of it.
 
+\subsection{QHelpWindow}
+This window provides an interface for the user to view examples and various help regarding the usage of BoxIn. It is created by the \texttt{Logic} component when the user passes in the command \texttt{help}.\\
+The \texttt{QHelpWindow} contains a QComboBox which the user uses to select a function he wishes to view help for, and the \texttt{currentIndexChanged()} signal is emitted and caught by the \texttt{QHelpWindow} to change the text contained in the \texttt{QTextEdit}
 \newpage
 
 \section{Logic}
@@ -157,9 +159,9 @@ Within the Command class, the information will be sorted out so it would be easi
 \begin{center}
 \begin{tabular}{  lrrl}
 \hline
-Add & Edit & Delete & Undo \\
+add & edit & delete\\
 \hline
-Sort & Search & Display\\
+undo & view\\
 \hline     
 \end{tabular}
 \end{center}

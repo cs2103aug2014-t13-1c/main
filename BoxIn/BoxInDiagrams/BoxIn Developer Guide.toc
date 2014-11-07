@@ -17,15 +17,16 @@
 \contentsline {subparagraph}{Minimize to System Tray}{6}{section*.9}
 \contentsline {subparagraph}{BoxIn::commandLineReturnPressed()}{6}{section*.10}
 \contentsline {subsection}{\numberline {3.2}DisplayFeed}{6}{subsection.3.2}
-\contentsline {subparagraph}{DisplayFeed::refresh(\&EventList)}{6}{section*.11}
+\contentsline {subparagraph}{DisplayFeed::refresh(\&std::vector<Event*>)}{6}{section*.11}
 \contentsline {subsection}{\numberline {3.3}FeedbackLine}{6}{subsection.3.3}
 \contentsline {subparagraph}{FeedbackLine::setText(QString)}{6}{section*.12}
 \contentsline {subsection}{\numberline {3.4}CommandLine}{6}{subsection.3.4}
 \contentsline {subparagraph}{CommandLine::returnPressed()}{6}{section*.13}
 \contentsline {subparagraph}{CommandLine::getText()}{6}{section*.14}
-\contentsline {subsection}{\numberline {3.5}DigitalClock}{6}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.5}DigitalClock}{7}{subsection.3.5}
 \contentsline {subsection}{\numberline {3.6}QEventStore}{7}{subsection.3.6}
 \contentsline {subparagraph}{QEventStore::repr()}{7}{section*.15}
+\contentsline {subsection}{\numberline {3.7}QHelpWindow}{7}{subsection.3.7}
 \contentsline {section}{\numberline {4}Logic}{8}{section.4}
 \contentsline {subsection}{\numberline {4.1}Key API}{8}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Controller}{8}{subsection.4.2}
