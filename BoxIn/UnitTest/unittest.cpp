@@ -1,18 +1,15 @@
 #include "unittest.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-UnitTest::UnitTest()
-{
-
+UnitTest::UnitTest(){
 }
 
-UnitTest::~UnitTest()
-{
-
+UnitTest::~UnitTest(){
 }
 
+//@author A0111994
 int a = 1;
 
-int& foo(){
+int& foo(){ // just to generate the reference to integer
     return a;
 }
 
@@ -22,7 +19,7 @@ namespace UnitTests
 	{
 	public:
         // System level tests
-        TEST_METHOD(TestAdd){
+        TEST_METHOD(TestAddFloating){
             int& argc = foo();
             char** argv;
             QApplication app(argc, argv);
@@ -32,6 +29,30 @@ namespace UnitTests
             Event *expected = new Event("something","","","","","",1, false);
             Event *actual = logic.getEvents()[0];
             Assert::AreEqual(expected->repr(), actual->repr());
+            file.close();
+        }
+        TEST_METHOD(TestAddWithEndDate){
+            int& argc = foo();
+            char** argv;
+            QApplication app(argc, argv);
+            std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
+            Logic logic;
+            logic.handleUserInput("add something edate 311214");
+            Event *actual = logic.getEvents()[0];
+            std::string expected = "something at  from ,  to 2014-Dec-31, 00:00";
+            Assert::AreEqual(expected, actual->repr());
+            file.close();
+        }
+        TEST_METHOD(TestAddWithStartDate){
+            int& argc = foo();
+            char** argv;
+            QApplication app(argc, argv);
+            std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
+            Logic logic;
+            logic.handleUserInput("add something sdate 311214");
+            Event *actual = logic.getEvents()[0];
+            std::string expected = "something at  from 2014-Dec-31, 00:00 to , ";
+            Assert::AreEqual(expected, actual->repr());
             file.close();
         }
         TEST_METHOD(TestEdit){
@@ -86,7 +107,7 @@ namespace UnitTests
             file.close();
         }
 
-        // Tests for the parser
+        // Tests for the parsers
 		TEST_METHOD(SimpleParserTestDDMMYY){
 		    SimpleParser* parse = new SimpleParser();
             boost::gregorian::date expected(2004, boost::gregorian::Feb, 1);

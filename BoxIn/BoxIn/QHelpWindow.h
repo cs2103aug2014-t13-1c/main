@@ -33,7 +33,6 @@ private:
     Ui::QHelpWindow ui;
     QComboBox* selector;
     QTextEdit* display;
-
 };
 
 #endif // QHELPWINDOW_H
