@@ -112,33 +112,79 @@ void & createTrayIcon()\\
 void & createActions()\\
 void & iconActivatd()\\
 void & changeEvent(QEvent *event);\\
+\end{tabular}\\
+
+\subparagraph{Key API}
+The following are the key methods that deal with functionality of the GUI\\
+\begin{tabular}{p{6cm} p{12cm}}
+Method & Description\\
+\hline
+returnPressed() & This signal is by the Qt framework whenever the user presses return with the command line in focus\\
+linkEvents() & This method is a setup method linking all the relevant signals to the respective slots for processing\\
+commandLineReturnPressed() & The slot connected to the returnPressed() signal mentioned above. This starts the chain of events which result in event processing, by reading the line and sending it to the Logic component\\
+readCommandLine() & Returns the string held by the command line. Called exclusively by commandLineReturnPressed()\\
+clearCommandLine() & Removes any text in the commandLine. Also called exclusively by commandLineReturnPressed()\\
 \end{tabular}
+
 \subparagraph{Application icon}
-The entire application has a predefined icon initialized in the constructor of BoxIn
-\pagebreak
+The entire application has a predefined icon initialized in the constructor of BoxIn and packaged together with the application. The entire program can be minimized to the System Tray\\
+\begin{tabular}{p{6cm} p{12cm}}
+Method & Description\\
+\hline
+createActions() & Creates the actions achievable by right-clicking the system tray icon. The actions supported are Minimize, Restore and Quit. These actions are then connected to the relevant slots to apply them\\
+createTrayIcon() & Creates the icon itself and the supported menu, adding items in\\
+setVisible() & Handles the minimize / maximize actions\\
+iconActivated() & Handles the double-click event from the user
+\end{tabular}
+
 \subparagraph{Fixed Size}
 The \texttt{BoxIn} main window is of a fixed size (1000 x 600). This size is implemented as the constants \texttt{WIDTH\_WINDOW} and \texttt{HEIGHT\_WINDOW}
-\subparagraph{Minimize to System Tray}
-\texttt{BoxIn} also has a Windows system tray icon that it can be minimized to. This code is initiated in the constructor and makes use of \texttt{BoxIn::createActions()}, \texttt{BoxIn::createTrayIcon()} and\\ \texttt{BoxIn::linkEvents()} to achieve
-\subparagraph{BoxIn::commandLineReturnPressed()}This slot captures the signal from the \texttt{CommandLine} and calls the \texttt{Logic} API for processing the user input by passing on a \texttt{std::string} containing the user's input.
+
 \subsection{DisplayFeed}
 The \texttt{DisplayFeed} inherits from \texttt{QListWidget}. This widget contains data members of type QEventStore, which make up the View component of the MVC design pattern. \texttt{DisplayFeed} is designed in its' own constructor, without a \texttt{.ui} file. \texttt{DisplayFeed}'s purpose is to display all events the user wishes to view. At the moment, it simply displays everything.
-\subparagraph{DisplayFeed::refresh(\&std::vector<Event*>)} This is the function called by the BoxIn main window after every user input. \texttt{refresh(\&std::vector<Event*>)} basically re-loads the entire vector of events and converts the underlying information into string representations that can be understood by the reader using the \texttt{QEventStore::repr()} function. Furthermore, the QEventStore is linked to the event pointer itself, and emitting the doubleClicked() signal from the DisplayFeed will create a QEventEditor to edit the data
+\subparagraph{Public methods}
+\begin{tabular}{c c}
+Return type & Method\\
+\hline
+void & addItem(QListWidgetItem* item) (Inherited)\\
+void & setBorder()\\
+void & refresh(std::vector<Event*> *thingsToInclude)\\
+void & setItemColors()\\
+std::string & pad(std::string str, int spaces)\\
+std::string & reprDate(std::string date)\\
+std::string & formatEvent(Event* event)\\
+\end{tabular}
+
+\subparagraph{Key API}The DisplayFeed uses the following key methods to display input\\
+\begin{tabular}{p{6cm} p{12cm}}
+Method & Description\\
+\hline
+refresh() & This is the function call made by BoxIn's commandLineReturnPressed(). This sets of the chain of other methods used to display the input. It creates a QEventStore pointer for each item to display and adds them to its' internal display\\
+formatEvent() & This method takes an event, extracts its' data and turns into a equally spaced string representation of the event\\
+setItemColors() & Changes the text color for the items - Red for past and undone items, purple for the latest change and the rest alternate between black and grey so as to differentiate rows\\
+pad() & Adds whitespace or truncates overly long strings to give even sizing\\
+reprDate() & Replaces dates with Today / Tomorrow for the matching dates
+\end{tabular}
 
 \subsection{FeedbackLine}
 The FeedbackLine inherits from QLabel and is a simple instant feedback system for the user. It simply displays messages coming from the Logic component regarding the success or failure of user commands.
 \subparagraph{FeedbackLine::setText(QString)} Changes the current display text to whatever was in the \texttt{QString}. This is the only method of note for this class.
 
 \subsection{CommandLine}
-The \texttt{CommandLine} component of the GUI is the controller for majority of the system. Since the target audience prefers to use a command line style input, this becomes the main input interface. This component inherits from \texttt{QLineEdit}.
-\subparagraph{CommandLine::returnPressed()} This is the signal emitted anytime the user presses the enter key with the \texttt{CommandLine} in focus. This is the trigger event for all data processing, and it calls the Logic Controller component to handle whatever input was given by the user.
-\subparagraph{CommandLine::getText()} This is called when the previous signal is emitted, and the text is retrieved and passed on as a QString.
+The \texttt{CommandLine} component of the GUI is the controller for majority of the system. Since the target audience prefers to use a command line style input, this becomes the main input interface. This component inherits from \texttt{QLineEdit}. It's key API is discussed at a wider level with BoxIn above\\
+
 \subsection{DigitalClock}
-\texttt{DigitalClock} is simply a digital clock displayed on the main window. It tells the time with a flashing colon, and will be used for further extensions in future.
+\texttt{DigitalClock} is simply a digital clock displayed on the main window. It tells the time with a flashing colon. This object inherits from QLCDNumber\\
+
 \subsection{QEventStore}
 \texttt{QEventStore} is the wrapper class for the \texttt{Event} class implemented. This class allows \texttt{Event} objects to be added to the \texttt{DisplayFeed} so that a direct association is kept between the objects in the \texttt{DisplayFeed} and the \texttt{Event} objects themselves. \texttt{QEventStore} inherits from \texttt{QListWidgetItem}
 
-\subparagraph{QEventStore::repr()} This function takes any information available from the stored event and returns a \texttt{QString} representation of it.
+\subparagraph{Key API} This class only implements one key method.\\
+\begin{tabular}{p{6cm} p{12cm}}
+Method & Description\\
+\hline
+getEvent() & This function takes any information available from the stored event and returns a \texttt{QString} representation of it.
+\end{tabular}
 
 \subsection{QHelpWindow}
 This window provides an interface for the user to view examples and various help regarding the usage of BoxIn. It is created by the \texttt{Logic} component when the user passes in the command \texttt{help}.\\

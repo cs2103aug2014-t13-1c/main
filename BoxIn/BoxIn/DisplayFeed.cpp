@@ -1,9 +1,7 @@
 //@author A0111994B
 #include "DisplayFeed.h"
 
-DisplayFeed::DisplayFeed(QWidget *parent, DisplayField field) : QListWidget(parent){
-	this->logic = logic;
-    this->field = field;
+DisplayFeed::DisplayFeed(QWidget *parent) : QListWidget(parent){
 	setBorder();
     setFont(QFont("Courier New", 9));
 	show();
@@ -26,15 +24,8 @@ void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
 	clear();
 	for(std::vector<Event*>::iterator iter = thingsToInclude->begin(); iter != thingsToInclude->end(); iter++){		
 		assert(*iter!=NULL && "Null event floating around in storage?");
-        std::string index = boost::lexical_cast<std::string>((*iter)->getIdx());
-        std::string name = (*iter)->getName();
-        std::string place = (*iter)->getLocation();
-        std::string startDate = reprDate((*iter)->getStartDate());
-        std::string startTime = (*iter)->getStartTime();
-        std::string endDate = reprDate((*iter)->getEndDate());
-        std::string endTime = (*iter)->getEndTime();
 		QEventStore *item = new QEventStore(this, *iter);
-        std::string itemText = formatEvent(index, name, place, startDate, startTime, endDate, endTime);
+        std::string itemText = formatEvent(*iter);
 		item->setText(QString(itemText.c_str()));
 		addItem(item);
 	}
@@ -92,12 +83,20 @@ std::string DisplayFeed::reprDate(std::string date){
 /*
 * Formats data from a event into a uniformly spaced manner for display
 */
-std::string DisplayFeed::formatEvent(std::string index, std::string name, std::string place, std::string startDate, std::string startTime, std::string endDate, std::string endTime){
+std::string DisplayFeed::formatEvent(Event* event){
+    
+    std::string index = boost::lexical_cast<std::string>((event)->getIdx());
+    std::string name = event->getName();
+    std::string place = event->getLocation();
+    std::string startDate = reprDate(event->getStartDate());
+    std::string startTime = event->getStartTime();
+    std::string endDate = reprDate(event->getEndDate());
+    std::string endTime = event->getEndTime();
     std::string filler = "";
     if(endDate == startDate){endDate = "";}
     if(startTime == NULL_TIME){startTime = "";}
     if(endTime == NULL_TIME){endTime = "";}
     if(!(endDate.empty() && endTime.empty()) && !(startDate.empty() && startTime.empty())){filler = "to ";}
     if(place.empty()){place = "-";}
-    return pad(index, 5) + pad(name, 49) + pad(place, 21) +pad(startDate, 13) + pad(startTime, 6) + filler + pad(endDate, 13) + pad(endTime, 6);
+    return pad(index, PadSizes::INDEX) + pad(name, PadSizes::NAME) + pad(place, PadSizes::PLACE) +pad(startDate, PadSizes::DATE) + pad(startTime, PadSizes::TIME) + filler + pad(endDate, PadSizes::DATE) + pad(endTime, PadSizes::TIME);
 }

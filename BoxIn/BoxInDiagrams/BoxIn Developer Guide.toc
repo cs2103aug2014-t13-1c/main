@@ -14,40 +14,38 @@
 \contentsline {subsection}{\numberline {3.1}BoxIn (main window)}{7}{subsection.3.1}
 \contentsline {subparagraph}{Private attributes}{8}{section*.7}
 \contentsline {subparagraph}{Public methods}{8}{section*.8}
-\contentsline {subparagraph}{Application icon}{8}{section*.9}
-\contentsline {subparagraph}{Fixed Size}{9}{section*.10}
-\contentsline {subparagraph}{Minimize to System Tray}{9}{section*.11}
-\contentsline {subparagraph}{BoxIn::commandLineReturnPressed()}{9}{section*.12}
+\contentsline {subparagraph}{Key API}{8}{section*.9}
+\contentsline {subparagraph}{Application icon}{8}{section*.10}
+\contentsline {subparagraph}{Fixed Size}{9}{section*.11}
 \contentsline {subsection}{\numberline {3.2}DisplayFeed}{9}{subsection.3.2}
-\contentsline {subparagraph}{DisplayFeed::refresh(\&std::vector<Event*>)}{9}{section*.13}
+\contentsline {subparagraph}{Public methods}{9}{section*.12}
+\contentsline {subparagraph}{Key API}{9}{section*.13}
 \contentsline {subsection}{\numberline {3.3}FeedbackLine}{9}{subsection.3.3}
 \contentsline {subparagraph}{FeedbackLine::setText(QString)}{9}{section*.14}
-\contentsline {subsection}{\numberline {3.4}CommandLine}{9}{subsection.3.4}
-\contentsline {subparagraph}{CommandLine::returnPressed()}{9}{section*.15}
-\contentsline {subparagraph}{CommandLine::getText()}{9}{section*.16}
+\contentsline {subsection}{\numberline {3.4}CommandLine}{10}{subsection.3.4}
 \contentsline {subsection}{\numberline {3.5}DigitalClock}{10}{subsection.3.5}
 \contentsline {subsection}{\numberline {3.6}QEventStore}{10}{subsection.3.6}
-\contentsline {subparagraph}{QEventStore::repr()}{10}{section*.17}
+\contentsline {subparagraph}{Key API}{10}{section*.15}
 \contentsline {subsection}{\numberline {3.7}QHelpWindow}{10}{subsection.3.7}
 \contentsline {section}{\numberline {4}Logic}{11}{section.4}
 \contentsline {subsection}{\numberline {4.1}Key API}{11}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Controller}{11}{subsection.4.2}
 \contentsline {subsection}{\numberline {4.3}Parser}{11}{subsection.4.3}
-\contentsline {subparagraph}{1}{11}{section*.18}
-\contentsline {subparagraph}{2}{12}{section*.19}
-\contentsline {subparagraph}{3}{12}{section*.20}
-\contentsline {subparagraph}{4}{12}{section*.21}
+\contentsline {subparagraph}{1}{11}{section*.16}
+\contentsline {subparagraph}{2}{12}{section*.17}
+\contentsline {subparagraph}{3}{12}{section*.18}
+\contentsline {subparagraph}{4}{12}{section*.19}
 \contentsline {subsection}{\numberline {4.4}Commands}{12}{subsection.4.4}
-\contentsline {subparagraph}{Sort}{12}{section*.22}
+\contentsline {subparagraph}{Sort}{12}{section*.20}
 \contentsline {section}{\numberline {5}Storage}{13}{section.5}
 \contentsline {subsection}{\numberline {5.1}Event}{13}{subsection.5.1}
-\contentsline {subparagraph}{set-parts}{13}{section*.23}
-\contentsline {subparagraph}{setFinish}{13}{section*.24}
+\contentsline {subparagraph}{set-parts}{13}{section*.21}
+\contentsline {subparagraph}{setFinish}{13}{section*.22}
 \contentsline {subsection}{\numberline {5.2}EventList}{13}{subsection.5.2}
-\contentsline {subparagraph}{eventList::contains(Events event)}{13}{section*.25}
-\contentsline {subparagraph}{eventCompare}{13}{section*.26}
+\contentsline {subparagraph}{eventList::contains(Events event)}{13}{section*.23}
+\contentsline {subparagraph}{eventCompare}{13}{section*.24}
 \contentsline {subsection}{\numberline {5.3}ActionStack}{13}{subsection.5.3}
-\contentsline {subparagraph}{undo}{13}{section*.27}
+\contentsline {subparagraph}{undo}{13}{section*.25}
 \contentsline {section}{\numberline {6}Appendix A}{13}{section.6}
 \contentsline {subsection}{\numberline {6.1}Use cases}{13}{subsection.6.1}
 \contentsline {section}{\numberline {7}Appendix B:setting up}{13}{section.7}

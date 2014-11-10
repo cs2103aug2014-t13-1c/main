@@ -12,35 +12,26 @@
 #include "assert.h"
 #include <boost/lexical_cast.hpp>
 
-enum DisplayField{
-    Name = 1,
-    StartDate,
-    EndDate,
-    StartTime,
-    EndTime,
-    Place,
-    Index
+namespace PadSizes{
+    static const int INDEX = 5;
+    static const int NAME = 49;
+    static const int PLACE = 21;
+    static const int DATE = 13;
+    static const int TIME = 6;
 };
-
 
 class DisplayFeed : public QListWidget{
 	Q_OBJECT
-private:
-	Logic *logic;
-    std::map<std::string, DisplayField> displayFieldMap;
-    DisplayField field;
-    
 public:
-	DisplayFeed(QWidget *parent, DisplayField field);
+	DisplayFeed(QWidget *parent);
 	~DisplayFeed(void);
 
 	void setBorder();
 	void refresh(std::vector<Event*> *thingsToInclude);
-    std::map<std::string, DisplayField> setupMap();
     void setItemColors();
     std::string pad(std::string str, int spaces);
     std::string reprDate(std::string date);
-    std::string formatEvent(std::string index, std::string name, std::string place, std::string startDate, std::string startTime, std::string endDate, std::string endTime);
+    std::string formatEvent(Event* event);
 };
 
 #endif // DisplayFeed.h

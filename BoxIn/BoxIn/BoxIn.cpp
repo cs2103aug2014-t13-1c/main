@@ -31,7 +31,7 @@ void BoxIn::createComponents(){
 	startLabel = new QLabel("Time / Date", this);
     idxLabel = new QLabel("Index", this);
 	commandLine = new QLineEdit(this);
-    displayFeedIdx = new DisplayFeed(this, Index);
+    displayFeedIdx = new DisplayFeed(this);
 	setComponentSizes();
 	setComponentColors();
 }
