@@ -327,33 +327,32 @@ convertToTime() & Converts a string into a boost::posix\_time::ptime object by i
 \newpage
 
 \section{Storage}
-The Storage class has only one purpose: to write all data stored in the Tasklist class into a file, and to retrieve the data in the file for BoxIn to use in the next session. 
+The Storage class keeps both the internal representaion and the json representation of the Event classes. There are 3 major components, discussed below
+
+\subsection{SimpleStorage}
+SimpleStorage is the highest level structure of the Storage component of BoxIn. It handles all the interactions with the Logic component.
+\subparagraph{Type Definitions}
+\begin{tabular}{c c}
+Type Name & Purpose\\
+\hline
+SortCriteria & Determines the sorting method\\
+\end{tabular}
+\subparagraph{Private attributes}
+\begin{tabular}{c c}
+Attribute type & Name\\
+\hline
+std::vector<Event*> & events\\
+std::stack<Action*> & actionStack\\
+FileStorage & file\\
+SortCriteria & criteria \\
+\end{tabular}
+\subparagraph{Public methods}
+\subparagraph{Key API}
 
 \subsection{Event}	 					
-The Event class stores data created by the user. All of the data created by the user will be included here.
-\subparagraph{set-parts}
-The different set functions are vectors that stores the different sections of the user's data. \texttt{setName} for example, sets the name of the event to be inside a name folder. This allows the parser to use the data later on in a more efficient way.
-\subparagraph{setFinish}
-The \texttt{setFinish} function of the Event class saves the data completely when the user puts in all the parameter that is needed. It uses a vector as the structure to store all the information the user needs. 
-\subsection{EventList}
-The EventList implements a list based on the content the user inputs as data. It also returns the functions such as returning the data as vectors and sorting the data.
-\subparagraph{eventList::contains(Events event)}
-This method under event list returns a boolean of true or false and it works with logic to provide feedback if the event class is stored inside storage or not. If the event is already in the list, it can be use to edit later on.
-\subparagraph{eventCompare}
-The function of eventCompare allows the event storage class to determine which data goes to which category, it allows the data to sort based on date, location, time to store the data in a specific order.
-\subsection{ActionStack}
-The ActionStack Class saves the different events into files as well as returns the data when it is needed to be edited.
-\subparagraph{undo}
-When the user wants to undo a mistake that they have, they can undo using the undo method. This allows the stack to be popped off and be erased from the storage data. The stack will be popped off.
+The Event class stores data of one Event.
+\subsection{FileStorage}
 
-
-\begin{center}
-\begin{tabular}{|l|r|}
-Return Type                     & Method                                         \\
-Vector<Event>                   & add(stringName)                                \\
-Bool                            & delete(vector<Event> event)
-\end{tabular}
-\end{center}
 
 \newpage
 
