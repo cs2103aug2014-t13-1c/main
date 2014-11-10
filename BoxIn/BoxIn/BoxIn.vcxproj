@@ -129,7 +129,6 @@
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mark.cpp" />
-    <ClCompile Include="parser.cpp" />
     <ClCompile Include="QEventEditor.cpp" />
     <ClCompile Include="QEventStore.cpp" />
     <ClCompile Include="QHelpWindow.cpp" />

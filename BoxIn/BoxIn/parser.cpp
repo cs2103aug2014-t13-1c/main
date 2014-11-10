@@ -1,4 +1,3 @@
-//@author A0086002U
 #include "parser.h"
 
 using namespace std;
