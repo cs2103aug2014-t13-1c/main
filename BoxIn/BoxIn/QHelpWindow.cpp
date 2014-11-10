@@ -1,4 +1,4 @@
-//@author A0111994
+//@author A0111994B
 #include "QHelpWindow.h"
 
 QHelpWindow::QHelpWindow(QWidget *parent) : QWidget(parent){

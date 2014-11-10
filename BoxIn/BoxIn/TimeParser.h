@@ -1,4 +1,4 @@
-//@author A0111994
+//@author A0111994B
 #pragma once
 #include "boost\date_time\posix_time\posix_time.hpp"
 #include "boost\date_time\gregorian\gregorian.hpp"
@@ -7,8 +7,7 @@ static const int SIZE_HHMM = 4;
 static const int SIZE_HH_MM = 5;
 static const int SIZE_EMPTY = 0;
 
-class TimeParser
-{
+class TimeParser{
 public:
     TimeParser(void);
     ~TimeParser(void);

@@ -1,11 +1,9 @@
-//@author A0111994
+//@author A0111994B
 #include "SimpleParser.h"
-
 
 SimpleParser::SimpleParser(void){
     setupMaps();
 }
-
 
 SimpleParser::~SimpleParser(void){
 }

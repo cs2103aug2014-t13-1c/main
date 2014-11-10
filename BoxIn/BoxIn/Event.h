@@ -1,4 +1,4 @@
-//@author A0111994
+//@author A0111994B
 #pragma once
 
 #include <string>
@@ -63,18 +63,7 @@ public:
     boost::gregorian::date getDateFromInput(std::string date, std::string time);
     boost::gregorian::date getDateFromInput(std::string date, std::string time, std::string preDate);
     boost::posix_time::ptime getTimeFromInput(boost::gregorian::date date, std::string time);
-    std::string repr(); // for testing purposes
-	/*
-	std::string getDescription();
-	std::string getCategory();
-	int getPriority();
-	bool getStatus();
-	bool setName(std::string);
-	bool setPriority(int);
-	bool setCategory(std::string);
-	bool setDescription(std::string);
-	bool setFinish(bool);
-	bool contains(std::string);*/
+    std::string repr();
 private:
 	std::map<std::string, Field> fieldMap;
 	std::string name;
@@ -89,10 +78,4 @@ private:
     int idx;
     bool recent;
     bool done;
-	/*
-	std::string _description;
-	std::string _category;
-	int _priority;
-	bool _isFinish;
-	*/
 };

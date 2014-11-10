@@ -1,4 +1,4 @@
-//@author A0111994
+//@author A0111994B
 #include "Event.h"
 
 
@@ -206,10 +206,12 @@ void Event::removeRecent(){
     recent = false;
 }
 
+//@author A0128233M
 void Event::setDone(bool newValue){
     done = newValue;
 }
 
+//@author A0111994B
 bool Event::getDone(){
     return done;
 }

@@ -1,7 +1,7 @@
 #include <QApplication>
 #include "BoxIn.h"
 #include "easylogging++.h"
-
+//@author A0128233M
 _INITIALIZE_EASYLOGGINGPP
 //@author A0111994B
 void setIcon(QApplication &app);

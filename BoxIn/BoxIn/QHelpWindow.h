@@ -1,4 +1,4 @@
-//@author A0111994
+//@author A0111994B
 #ifndef QHELPWINDOW_H
 #define QHELPWINDOW_H
 

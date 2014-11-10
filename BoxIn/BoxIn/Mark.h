@@ -1,4 +1,4 @@
-//@author A0111994
+//@author A0111994B
 #pragma once
 #include "edit.h"
 class Mark : public Edit{

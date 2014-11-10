@@ -1,4 +1,4 @@
-//@author A0111994
+//@author A0111994B
 #include "Delete.h"
 
 Delete::Delete(std::string input){

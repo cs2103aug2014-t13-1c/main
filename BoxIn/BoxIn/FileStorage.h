@@ -1,4 +1,4 @@
-//@author A0111994
+//@author A0111994B
 #pragma once
 
 #include "json_spirit.h"
@@ -16,8 +16,7 @@ static const std::string TAG_END_TIME = "End_Time";
 static const std::string TAG_PLACE = "Place";
 static const std::string TAG_DONE = "Done";
 
-class FileStorage
-{
+class FileStorage{
 public:
     FileStorage();
 	FileStorage(std::string filename);
