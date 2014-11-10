@@ -42,18 +42,16 @@ Code should be written such that is is cross platform and compatible with differ
 BoxIn code follows the coding standard listed out here: \href{https://docs.google.com/document/pub?id=1tJD2XQo3hUb0SZniswLqg0vkmccv7vGBV7\_1AhTYK04\&amp\&embedded=true}{C++ coding standards}.
 
 \subparagraph{Namespaces}
-All namespaces should be marked out to avoid confusion with the Boost library which is used in many parts of the code. For example, \texttt{std::string} rather than simply \texttt{string}
-
-\subsection{Full class diagram}
-\includegraphics[width=\textwidth]{class_diagram}
-
+All namespaces should be marked out to avoid confusion with the Boost library which is used in many parts of the code. For example, \texttt{std::string} rather than simply \texttt{string}\\
 \newpage
+\subsection{Full class diagram}
+\includegraphics[width=\textwidth, height=\textheight]{class_diagram}
 
 \section{Anatomy}
 
-\includegraphics[width=\textwidth]{architecture} 
+\includegraphics[width=\textwidth]{architecture}
 
-BoxIn has 3 major components, the GUI, the Logic and the Storage components. The components are divided in a way that follows two guiding principles. We also apply the Model View Controller pattern. A full class diagram is available in the Appendix
+BoxIn has 4 major components, the GUI, the Logic, the Storage and the Parser components. The components are divided in a way that follows two guiding principles. We also apply the Model View Controller pattern.
 
 \subsection{Model View Controller pattern}
 In BoxIn, the GUI component acts as both the View and the Controller. Users view all events through the GUI and the GUI is also responsible for taking care of all user interaction, including mouse clicks and information sent through the command line. More details are found in Section 3.
@@ -63,7 +61,7 @@ The Model in the system is the Event class. More details are found in Section 5.
 Each major component of the application handles it's own concerns. For example, the GUI or Storage components do not process any command line input, only the Logic and parsers do.
 
 \subsection{Law of Demeter}
-This law is particularly effected in the fact that the GUI and the Storage classes have no knowledge of each other - neither calls any functions of the other.
+This law is particularly effected in the fact that the GUI and the Storage classes have no knowledge of each other - neither calls any functions of the other. Essentially, classes which do not have any direct relation with each other should not be calling each other.
 
 
 \newpage
@@ -76,8 +74,45 @@ The above diagrams give a graphical representation of how the \texttt{GUI} is de
 The GUI is divided into 7 components, discussed below
 
 \subsection{BoxIn (main window)}
-The \texttt{BoxIn} class is the main window. The majority of setup for this window is done in a \texttt{.ui} file generated using Qt Creator. All other sub-components found in this window should also have this window as a parent window. This class inherits from \texttt{QWidget}. The \texttt{BoxIn} class mainly acts as a container for most of the GUI components\\
-The BoxIn class also  supports the following features
+The \texttt{BoxIn} class is the main window. All sub-components found in this window should also have this window as a parent window. This class inherits from \texttt{QWidget}. The \texttt{BoxIn} class mainly acts as a container for most of the GUI components\\
+The above sequence diagram shows the generic flow of events within the GUI component everytime the user presses the return key\\
+\subparagraph{Private attributes}
+\begin{tabular}{l r}
+Attribute type & Name\\
+\hline
+Ui::BoxInClass & ui\\
+Logic & logic\\
+QAction* & minimizeAction\\
+QAction* & restoreAction\\
+QAction* & quitAction\\
+DigitalClock & clock\\
+QLabel* & nameLabel\\
+QLabel* & placeLabel\\
+QLabel* & startLabel\\
+QLabel* & idxLabel\\
+QSystemTrayIcon* & trayIcon\\
+QMenu* & trayIconMenu\\
+DisplayFeed* & displayFeedIdx\\
+QLineEdit* & commandLine\\
+\end{tabular}
+\subparagraph{Public methods}
+\begin{tabular}{l r}
+Return type & Method\\
+\hline
+void & displayFeedback(QString feedback)\\
+void & clearCommandLine()\\
+QString & readCommandLine()\\
+void & setVisible(bool visible)\\
+void & updateGUI()\\
+void & createComponents()\\
+void & setComponentSizes()\\
+void & setComponentColors()\\
+void & linkEvents()\\
+void & createTrayIcon()\\
+void & createActions()\\
+void & iconActivatd()\\
+void & changeEvent(QEvent *event);\\
+\end{tabular}
 \subparagraph{Application icon}
 The entire application has a predefined icon initialized in the constructor of BoxIn
 \pagebreak

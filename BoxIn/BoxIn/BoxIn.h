@@ -44,11 +44,6 @@ public:
 	QString readCommandLine();
 	void setVisible(bool visible);
 	void updateGUI();
-
-private:
-	Ui::BoxInClass ui;
-	Logic logic;
-	
 	void createComponents();
 	void setComponentSizes();
 	void setComponentColors();
@@ -58,6 +53,10 @@ private:
 	void createActions();
 	void iconActivatd();
 	void changeEvent(QEvent *event);
+
+private:
+	Ui::BoxInClass ui;
+	Logic logic;
 
 	QAction *minimizeAction;
 	QAction *restoreAction;
