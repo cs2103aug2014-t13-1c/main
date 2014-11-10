@@ -13,7 +13,7 @@
 \usepackage{breakurl}
 \fontencoding{T1}
 \fontfamily{garamond}
-\fontsize{12}{15}
+\fontsize{10}{12}
 \selectfont
 
 \begin{document}
@@ -46,7 +46,7 @@ All namespaces should be marked out to avoid confusion with the Boost library wh
 
 \section{Anatomy}
 
-\includegraphics[width=\textwidth/2]{architecture}\\
+\includegraphics[width=\textwidth]{architecture}\\
 
 BoxIn has four major components, the GUI, the Logic, the Storage and the Parser components. The division of these components is done in a way that follows two guiding principles. We also apply the Model View Controller pattern.
 
@@ -62,11 +62,9 @@ Classes which do not have any direct relation with each other should not be call
 
 
 \section{GUI}
-\includegraphics[width=\textwidth / 2]{GUI_class_diagram}
-\includegraphics[width=\textwidth / 2]{gui_sequence_diagram}
-
-
-
+\includegraphics[width=\textwidth]{GUI_class_diagram}
+\includegraphics[width=\textwidth]{gui_sequence_diagram}
+\newpage
 The GUI component acts as both the controller and the view in the MVC pattern. The library used to display the graphics is the Qt library. The documentation for the Qt library is available here:\\ \href{http://qt-project.org/doc/}{http://qt-project.org/doc/}\\
 The above diagrams give a graphical representation of how the GUI is designed in both the sequential calls on user actions and as a component.
 The GUI is divided into 7 components, discussed separately below:
@@ -195,11 +193,11 @@ getEvent() & This function takes any information available from the stored event
 This window provides an interface for the user to view examples and various help options regarding the usage of BoxIn. It is created by the \texttt{Logic} component when the user enters the command \texttt{help}.\\
 The \texttt{QHelpWindow} contains a QComboBox which the user uses to select a function he wishes to view help for, and the \texttt{currentIndexChanged()} signal is emitted and caught by the \texttt{QHelpWindow} to change the text contained in the \texttt{QTextEdit}.\\
 
-
 \section{Logic}
-\includegraphics[width=\textwidth /2, height=\textheight / 3]{logic_class_diagram}
-\includegraphics[width=\textwidth /2, height = \textheight / 3]{add_call_diagram}
+\includegraphics[width=\textwidth - 1cm, height=\textheight / 2 - 1cm]{logic_class_diagram}\\
+\includegraphics[width=\textwidth, height = \textheight / 2 - 1cm]{add_call_diagram}
 
+\newpage
 
 The logic of the system is explained by the above sequence diagram as an example call to the add functionality of the system. The user input triggers the add command and the add command is passed to the storage to be executed.\\
 The Logic component is made up of 2 major classes - the Logic class and the Action class (which is subclassed out to different actions).
@@ -341,7 +339,7 @@ convertToTime() & Converts a string into a boost::posix\_time::ptime object by i
 
 
 \section{Storage}
-\includegraphics[width=\textwidth/2]{storage_class_diagram}\\
+\includegraphics[width=\textwidth]{storage_class_diagram}\\
 The Storage class keeps both the internal representaion and the \texttt{json} representation of the Event classes. There are 3 major components, discussed below:
 
 \subsection{SimpleStorage}
