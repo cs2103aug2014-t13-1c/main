@@ -206,7 +206,7 @@ The \texttt{QHelpWindow} contains a QComboBox which the user uses to select a fu
 
 \includegraphics[width=\textwidth]{add_call_diagram}
 
-The logic of the system is explained by the above sequence diagram. The GUI will process the user input into the logic, and it will parse to the controller for the add which later stores it into the storage.
+The logic of the system is explained by the above sequence diagram as an example call to the add functionality of the system. The user input triggers the add command and the add command is passed to the storage to be executed.
 
 \subsection{Key API}
 The only call to the \texttt{Logic} component is made by the \texttt{GUI} when the \texttt{CommandLine::returnPressed()} signal is emitted. The function \texttt{Logic::handleUserInput(std::string)} will then proceed to process the input internally.
@@ -327,10 +327,11 @@ convertToTime() & Converts a string into a boost::posix\_time::ptime object by i
 \newpage
 
 \section{Storage}
+\includegraphics[width=\textwidth]{storage_class_diagram}
 The Storage class keeps both the internal representaion and the json representation of the Event classes. There are 3 major components, discussed below
 
 \subsection{SimpleStorage}
-SimpleStorage is the highest level structure of the Storage component of BoxIn. It handles all the interactions with the Logic component.
+SimpleStorage is the highest level structure of the Storage component of BoxIn. It handles all the interactions with the Logic component. The json storage file is declared as a constant here as \texttt{BoxInData.json}
 \subparagraph{Type Definitions}
 \begin{tabular}{c c}
 Type Name & Purpose\\
@@ -347,11 +348,123 @@ FileStorage & file\\
 SortCriteria & criteria \\
 \end{tabular}
 \subparagraph{Public methods}
+\begin{tabular}{c c}
+Return Type & Method\\
+\hline
+std::vector<Event*> & getEvents()\\
+void & pushStack(Action* action)\\
+Action* & popLastAction()\\
+void & sortEvents()\\
+std::string & execute(Action* action)\\
+std::string & undo(Action* action)\\
+void & saveFile()\\
+\end{tabular}
 \subparagraph{Key API}
+SimpleStorage implements the following key API to store and undo events. These are called from the Logic component. In addition, in the initializer, the FileStorage is read.\\
+\begin{tabular}{p{6cm} p{12cm}}
+Method & Description\\
+\hline
+getEvents() & Returns all events found in Storage\\
+pushStack() & Adds an executed Action to the stack of things done\\
+popLastAction() & Removes the most recent Action and returns it. Used in \texttt{undo}\\
+sortEvents() & Arranges all the events in \texttt{events} by their end date\\
+execute(Action* action) & Executes action onto \texttt{events} (see Action class for details)\\ 
+undo(Action* action) & Undo-es action from \texttt{events}\\
+saveFile() & Calls the FileStorage class to write all events to the json file\\
+\end{tabular}
 
-\subsection{Event}	 					
-The Event class stores data of one Event.
+\subsection{Event}
+The Event class stores data of one Event. It is the model class being passed around the entire system and is therefore included in almost every component.
+\subparagraph{Private attributes}
+\begin{tabular}{c c}
+Attribute Type & Name\\
+\hline
+std::map<std::string, Field> & fieldMap (used in generic edit)\\
+std::string & name\\
+boost::gregorian::date & sdate (start date)\\
+boost::gregorian::date & edate (end date)\\
+boost::posix\_time::ptime & stime\\
+boost::posix\_time::ptime & etime\\
+std::string & nonformattime\\
+std::string & location\\
+SimpleParser & parser\\
+TimeParser & timeParser\\
+int & idx\\
+bool & recent\\
+bool & done\\
+\end{tabular}
+\subparagraph{Public methods}
+\begin{tabular}{c p{8.5cm}}
+Return Type & Method\\
+\hline
+Event* & copy()\\
+std::map<std::string, Field> & setupMap()\\
+std::string & getName()\\
+std::string & getStartDate()\\
+std::string & getEndDate()\\
+std::string & getStartTime()\\
+std::string & getEndTime()\\
+std::string & getLocation()\\
+int & getIdx()\\
+bool & isRecent()\\
+boost::posix\_time::ptime & getPosixStartTime()\\
+boost::posix\_time::ptime & getPosixEndTime()\\
+void & editField(std::string field, std::string newValue)\\
+void & setName(std::string newName)\\
+void & setStartDate(std::string newDate)\\
+void & setEndDate(std::string newDate)\\
+void & setStartTime(std::string newTime)\\
+void & setEndTime(std::string newTime)\\
+void & setLocation(std::string newLocation)\\
+void & setIdx(int newIdx)\\
+void & removeRecent()\\
+void & setDone(bool newValue)\\
+bool & getDone()\\
+boost::gregorian::date & getDateFromInput(std::string date, std::string time)\\
+boost::gregorian::date & getDateFromInput(std::string date,  std::string time, std::string preDate)\\
+boost::posix\_time::ptime & getTimeFromInput(boost::gregorian::date date, std::string time)\\
+std::string & repr()\\
+\end{tabular}
+
+\subparagraph{Key API}
+The Event class implements the following key API which helps it store data accurately.\\
+\begin{tabular}{p{6cm} p{12cm}}
+Method & Description\\
+\hline
+editField() & Identifies the correct field to edit and from there calls the appropriate function. This allows for a more generic edit call\\
+repr() & Gives a textual representation of the data in the event. Used for testing purposes, but not in the main program\\
+getDateFromInput() & Makes use of the SimpleParser to convert a date to the appropriate date, failing which will put the default date (today if none is specified) if there is a time associated to the date. Used in the constructor, and overloaded for the case where there is no default date\\
+getTimeFromInput() & Returns the appropriate boost::posix\_time::ptime object that tallies with the associated date and time given. Used in the constructor\\
+\end{tabular}
+
 \subsection{FileStorage}
+The FileStorage class deals exclusively with reading and writing files to and from a json file.
+\subparagraph{Private attributes}
+\begin{tabular}{c c}
+Attribute Type & Name\\
+\hline
+std::string & filename\\
+\end{tabular}
+
+\subparagraph{Public Methods}
+\begin{tabular}{c c}
+Return Type & Method\\
+\hline
+void & saveFile(std::vector<Event*>)\\
+void & writeEvent(json\_spirit::Array \&eventArray, Event* event)\\
+std::vector<Event*> & readFile()\\
+Event* & readEvent(const json\_spirit::Object\& obj, unsigned int idx)\\
+\end{tabular}
+
+\subparagraph{Key API}All methods are critical to the correct reading and writing of the json file.\\
+\begin{tabular}{p{6cm} p{12cm}}
+Method & Description\\
+\hline
+saveFile() & Takes in a vector of events and writes all of them to the json file\\
+writeEvent() & Takes in an json\_spirit Array and a single Event pointer and adds that pointer to the Array\\
+readFile() & Returns a vector of Event pointers stored in the json file\\
+readEvent() & Reads and creates a single Event pointer from the json file as a json\_spirit Object\\
+\end{tabular}
 
 
 \newpage

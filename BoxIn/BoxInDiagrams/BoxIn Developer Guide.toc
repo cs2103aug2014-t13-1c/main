@@ -48,20 +48,26 @@
 \contentsline {subsection}{\numberline {6.1}SimpleStorage}{14}{subsection.6.1}
 \contentsline {subparagraph}{Type Definitions}{14}{section*.26}
 \contentsline {subparagraph}{Private attributes}{14}{section*.27}
-\contentsline {subparagraph}{Public methods}{14}{section*.28}
-\contentsline {subparagraph}{Key API}{14}{section*.29}
-\contentsline {subsection}{\numberline {6.2}Event}{14}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}FileStorage}{14}{subsection.6.3}
-\contentsline {section}{\numberline {7}Appendix A}{15}{section.7}
-\contentsline {subsection}{\numberline {7.1}Use cases}{15}{subsection.7.1}
-\contentsline {section}{\numberline {8}Appendix B: Setting up}{17}{section.8}
-\contentsline {subsection}{\numberline {8.1}Qt 5.3.1}{17}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Boost}{17}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}3.Visual Studio plugin}{17}{subsection.8.3}
-\contentsline {subsection}{\numberline {8.4}4.Git}{17}{subsection.8.4}
-\contentsline {section}{\numberline {9}Appendix C: Testing Instructions}{17}{section.9}
-\contentsline {subparagraph}{Setting up}{17}{section*.30}
-\contentsline {subparagraph}{Prerequisites to testing}{17}{section*.31}
-\contentsline {subparagraph}{Testing policy}{17}{section*.32}
-\contentsline {subparagraph}{Note on Qt}{17}{section*.33}
-\contentsline {section}{\numberline {10}Appendix D: Full Class Diagram}{18}{section.10}
+\contentsline {subparagraph}{Public methods}{15}{section*.28}
+\contentsline {subparagraph}{Key API}{15}{section*.29}
+\contentsline {subsection}{\numberline {6.2}Event}{15}{subsection.6.2}
+\contentsline {subparagraph}{Private attributes}{15}{section*.30}
+\contentsline {subparagraph}{Public methods}{16}{section*.31}
+\contentsline {subparagraph}{Key API}{16}{section*.32}
+\contentsline {subsection}{\numberline {6.3}FileStorage}{16}{subsection.6.3}
+\contentsline {subparagraph}{Private attributes}{17}{section*.33}
+\contentsline {subparagraph}{Public Methods}{17}{section*.34}
+\contentsline {subparagraph}{Key API}{17}{section*.35}
+\contentsline {section}{\numberline {7}Appendix A}{18}{section.7}
+\contentsline {subsection}{\numberline {7.1}Use cases}{18}{subsection.7.1}
+\contentsline {section}{\numberline {8}Appendix B: Setting up}{20}{section.8}
+\contentsline {subsection}{\numberline {8.1}Qt 5.3.1}{20}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Boost}{20}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}3.Visual Studio plugin}{20}{subsection.8.3}
+\contentsline {subsection}{\numberline {8.4}4.Git}{20}{subsection.8.4}
+\contentsline {section}{\numberline {9}Appendix C: Testing Instructions}{20}{section.9}
+\contentsline {subparagraph}{Setting up}{20}{section*.36}
+\contentsline {subparagraph}{Prerequisites to testing}{20}{section*.37}
+\contentsline {subparagraph}{Testing policy}{20}{section*.38}
+\contentsline {subparagraph}{Note on Qt}{20}{section*.39}
+\contentsline {section}{\numberline {10}Appendix D: Full Class Diagram}{21}{section.10}
