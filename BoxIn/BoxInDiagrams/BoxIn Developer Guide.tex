@@ -11,6 +11,10 @@
 \usepackage{tabularx}
 \usepackage[margin=0.5in]{geometry}
 \usepackage{breakurl}
+\fontencoding{T1}
+\fontfamily{calibri}
+\fontsize{12}{15}
+\selectfont
 
 \begin{document}
 \begin{center}
@@ -44,8 +48,7 @@ BoxIn code follows the coding standard listed out here: \href{https://docs.googl
 \subparagraph{Namespaces}
 All namespaces should be marked out to avoid confusion with the Boost library which is used in many parts of the code. For example, \texttt{std::string} rather than simply \texttt{string}\\
 \newpage
-\subsection{Full class diagram}
-\includegraphics[width=\textwidth, height=\textheight - 2cm]{class_diagram}
+
 
 \section{Anatomy}
 
@@ -63,12 +66,13 @@ Each major component of the application handles it's own concerns. For example, 
 \subsection{Law of Demeter}
 This law is particularly effected in the fact that the GUI and the Storage classes have no knowledge of each other - neither calls any functions of the other. Essentially, classes which do not have any direct relation with each other should not be calling each other.
 
-
-\pagebreak
+\newpage
 \section{GUI}
-
-\includegraphics[width=\textwidth]{component_design_gui}
+\includegraphics[width=\textwidth]{GUI_class_diagram}
 \includegraphics[width=\textwidth]{gui_sequence_diagram}
+
+\newpage
+
 The GUI component acts as both the controller and the view in the MVC pattern. The library used to is the Qt library. The documentation for the Qt library is available here: \href{http://qt-project.org/doc/}{http://qt-project.org/doc/}\\
 The above diagrams give a graphical representation of how the \texttt{GUI} is designed in both the sequential calls on user actions and as a component.
 The GUI is divided into 7 components, discussed below
@@ -166,7 +170,7 @@ setItemColors() & Changes the text color for the items - Red for past and undone
 pad() & Adds whitespace or truncates overly long strings to give even sizing\\
 reprDate() & Replaces dates with Today / Tomorrow for the matching dates
 \end{tabular}
-\pagebreak
+
 \subsection{FeedbackLine}
 The FeedbackLine inherits from QLabel and is a simple instant feedback system for the user. It simply displays messages coming from the Logic component regarding the success or failure of user commands.
 
@@ -256,6 +260,72 @@ undo & view\\
 
 \newpage
 
+\section{Parsers}
+The parsers for BoxIn deal with extracting information out of a user-given string. There are two parsers used in BoxIn - the SimpleParser (for generic items) and the TimeParser, which deals exclusively with times
+
+\subsection{SimpleParser}
+The SimpleParser deals more with dates and basic parsing. The following date formats are accepted: \texttt{DDMMYY, YYYYMMDD, YYYY/Jan/DD, monday, tuesday etc, today, tomorrow}.\\
+
+\subparagraph{Type Definitions}
+\begin{tabular}{c c}
+Type Name & Purpose\\
+\hline
+InfoType & Determines the information to be extracted\\
+DateFormat & Matches the date format to the correct parsing algorithm\\
+\end{tabular}
+
+\subparagraph{Private attributes}
+\begin{tabular}{c c}
+Attribute type & Name\\
+\hline
+std::map<InfoType, std::string> & keywordMap\\
+std::map<std::string, std::string> & monthMap\\
+std::map<std::string, boost::date\_time::weekdays> & dayMap\\
+\end{tabular}
+
+\subparagraph{Public methods}
+\begin{tabular}{c c}
+Return Type & Method\\
+\hline
+std::string & getField(std::string input, InfoType info)\\
+void & setupMaps()\\
+bool & isKeyword(std::string word)\\
+bool & isInteger(std::string text)\\
+boost::gregorian::date & convertToDate(std::string date)\\
+DateFormat & matchFormat(std::string date)\\
+bool & isNumericalFormat(std::string date)\\
+bool & isDayOfWeek(std::string day)\\
+bool & isToday(std::string day)\\
+bool & isTomorrow(std::string day)\\
+std::string & removeEscapeChar(std::string word)\\
+std::string & removeWhitespace(std::string text)\\
+\end{tabular}
+
+\subparagraph{Key API}The \texttt{SimpleParser} implements the following key API to extract data. Many of the functions are used to match dates\\
+\begin{tabular}{p{6cm} p{12cm}}
+Method & Description\\
+\hline
+getField() & Retrieves the information matching the InfoType provided by the caller\\
+isKeyword() & Returns \texttt{true} if the word given is a keyword\\
+removeEscapeChar() & Returns the word removing the escape character \texttt{.}\\
+removeWhitespace() & Trims trailing whitespace on a string\\
+convertToDate() & Converts a string into a boost::gregorian::date object by matching formats using the other functions. If a match is not found, returns boost::gregorian::not\_a\_date\_time\\
+matchFormat() & Returns the format which matches the string it was given. If an appropriate format is not found, returns \texttt{FormatNotRecognised}\\
+\end{tabular}
+
+\subsection{TimeParser}
+The TimeParser deals in particular with the parsing of times from user strings. The following formats are accepted: \texttt{HHMM, HH:MM}
+
+\subparagraph{Key API}
+The TimeParser only implements one key method\\
+\begin{tabular}{p{6cm} p{12cm}}
+Method & Description\\
+\hline
+convertToTime() & Converts a string into a boost::posix\_time::ptime object by identifying it by length. Returns boost::date\_time::not\_a\_date\_time
+\end{tabular}
+
+\newpage
+
 \section{Storage}
 The Storage class has only one purpose: to write all data stored in the Tasklist class into a file, and to retrieve the data in the file for BoxIn to use in the next session. 
 
@@ -285,10 +355,11 @@ Bool                            & delete(vector<Event> event)
 \end{tabular}
 \end{center}
 
+\newpage
+
 \section{Appendix A}
 
 \subsection{Use cases}
-\begin{table}[ht]
 \begin{tabular}{l|l}
 Name                  & UC01:Add a new task                                                                                                                                                                                                                \\
 Description           & To add a new task                                                                                                                                                                                                                  \\
@@ -297,9 +368,8 @@ Basic course of event & \begin{tabular}[c]{@{}l@{}}1. User indicates the event t
 Alternative path      & \begin{tabular}[c]{@{}l@{}}1. One of the parameter is missing :\\ \\      1a. BoxIn responds that a parameter is missing and ask the user to try again\end{tabular}                                                                \\
 Post Condition        & A new event is added and saved.                                                                                                                                                                                                   
 \end{tabular}
-\end{table}
-
-\begin{table}[h]
+\linebreak
+\\[1cm]
 \begin{tabular}{l|l}
 
 Name                  & UC02: Delete a task                                                                                                                        \\
@@ -309,9 +379,8 @@ Basic Course of Event & \begin{tabular}[c]{@{}l@{}}1. User types the command to 
 Alternative Path      & \begin{tabular}[c]{@{}l@{}}1. If the task does not exist, the program displays the relevant message.\\ 2. Prompts the user to re-enter the command.\end{tabular}   \\
 Post Condition        & The task is updated                                                                                                                                               
 \end{tabular}
-\end{table}
-
-\begin{table}[h]
+\linebreak
+\\[1cm]
 \begin{tabular}{l|l}
 
 Name                  & Edit a task                                                                                                                                                                     \\
@@ -321,9 +390,8 @@ Basic Course of Event & \begin{tabular}[c]{@{}l@{}}1. User types the command to 
 Alternative Path      & \begin{tabular}[c]{@{}l@{}}1. If the task does not exist, the program displays the relevant message.\\ 2. Prompts the user to re-enter the command.\end{tabular}                                              \\
 Post Condition        & The task is updated                                                                                                                                                                                          
 \end{tabular}
-\end{table}
-
-\begin{table}[h]
+\linebreak
+\\[1cm]
 \begin{tabular}{l|l}
 Name                  & UC04: Undo action                                                                                                                                   \\
 Description           & To undo the previous command                                                                                                                                                \\
@@ -332,9 +400,8 @@ Basic Course of Event & 1. User types the command to undo the previous command. 
 Alternative Path      & \begin{tabular}[c]{@{}l@{}}1. If the previous action does not exist, the program displays the relevant \\message.\\ 2. Prompts the user to re-enter the command.\end{tabular} \\
 Post Condition        & The task is deleted.                                                                                                                                                       
 \end{tabular}
-\end{table}
-
-\begin{table}[h]
+\linebreak
+\\[1cm]
 \begin{tabular}{l|l}
 
 Name                  & UC05: Search task                                                                                                                                          \\
@@ -344,9 +411,8 @@ Basic Course of Event & \begin{tabular}[c]{@{}l@{}}1. User types the command to 
 Alternative Path      & \begin{tabular}[c]{@{}l@{}}1. If the syntax does not match, prompts the user to re-enter the command.\\ 2. If the task does not exist, relevant message is displayed.\end{tabular} \\
 Post Condition        & The task is undone.                                                                                                                                                               
 \end{tabular}
-\end{table}
-
-\begin{table}[h]
+\linebreak
+\\[1cm]
 \begin{tabular}{l|l}
 Name                  & UC06: Sort task                                                                                                  \\
 Description           & To sort tasks                                                                                                                            \\
@@ -355,9 +421,8 @@ Basic Course of Event & \begin{tabular}[c]{@{}l@{}}1. User types the command to 
 Alternative Path        & 1. Sort criteria is not specified and tasks are sorted using the default order.             	                                                                                                                       \\
 Post Condition        & -                                                                                                                                       
 \end{tabular}
-\end{table}
-
-\begin{table}[h]
+\linebreak
+\\[1cm]
 \begin{tabular}{l|l}
 
 Name                  & UC07: Display task                                                                                      \\
@@ -367,9 +432,9 @@ Basic Course of Event & \begin{tabular}[c]{@{}l@{}}1. User types the command to 
 Alternative Path      & \begin{tabular}[c]{@{}l@{}}1. The relevant task does not exist.\\ 2. Program prompts the user to re-enter command.\end{tabular} \\
 Post Condition        & -                                                                                                                              
 \end{tabular}
-\end{table}
+\newpage
 
-\section{Appendix B:setting up}
+\section{Appendix B: Setting up}
 To set up, you will need Windows Operating System, VS2012, Boost, and Git.
 \subsection{Qt 5.3.1}
 The Visual Studio plugin for Qt. You can find it at http://qt-project.org/downloads. 
@@ -381,7 +446,7 @@ Install Qt to C:/Qt
 Boost libraries - version 1.57, vc2012 (vc11.0), 32 bit. You can find it at\\
 \url{http://tinyurl.com/BoxInDevBoost}\\ and install to \texttt{C:/Boost}
 \subsection{3.Visual Studio plugin}
-The Visual Studio plugin for qt. You can find it at http://qt-project.org/downloads. 
+The Visual Studio plugin for Qt. You can find it at http://qt-project.org/downloads. 
 Scroll to the bottom of the page and look for qt-vs-addin-1.2.3-opensource.exe. 
 Then open Visual Studio. The top bar should show QT5 -> QT Options. Make 
 sure that the correct version of QT is selected. 
@@ -389,7 +454,23 @@ sure that the correct version of QT is selected.
 You can download git from Github.com and register as a member, then clone the software and open the file and it should work out!
 
 \section{Appendix C: Testing Instructions}
-\subsection{Unit Tests}
-\subsection{System Tests}
+Both unit tests and system tests are held in the same project file \texttt{(UnitTest)} and all code is contained in \texttt{unittest.cpp}, with headers in \texttt{unittest.h}
+\subparagraph{Setting up}
+Change the directory of the include directory to match that of the project directory
+\subparagraph{Prerequisites to testing}
+To create any unit test that would include any GUI components, it is necessary to first start a QApplication. Refer to the following code example. \texttt{foo} is a defined function used to create the integer reference, but has no further use. The application need not be used further.\\
+\texttt{int\& argc = foo();\\
+char** argv;\\
+QApplication app(argc, argv);
+}
+\subparagraph{Testing policy}
+All newly added code should come together with a series of unit tests to prove it works for both the general and the borderline cases. Also, before committing any new code, it must clear all system level tests.
+
+\subparagraph{Note on Qt}
+It is possible to get the system to run events by using the emit function to generate te signals that normally would be generated from user activity
+
+\newpage
+\section{Appendix D: Full Class Diagram}
+\includegraphics[width=\textwidth, height=\textheight - 2cm]{class_diagram}
 
 \end{document}
