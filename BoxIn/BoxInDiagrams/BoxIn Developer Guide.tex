@@ -45,7 +45,7 @@ BoxIn code follows the coding standard listed out here: \href{https://docs.googl
 All namespaces should be marked out to avoid confusion with the Boost library which is used in many parts of the code. For example, \texttt{std::string} rather than simply \texttt{string}\\
 \newpage
 \subsection{Full class diagram}
-\includegraphics[width=\textwidth, height=\textheight]{class_diagram}
+\includegraphics[width=\textwidth, height=\textheight - 2cm]{class_diagram}
 
 \section{Anatomy}
 
@@ -64,7 +64,7 @@ Each major component of the application handles it's own concerns. For example, 
 This law is particularly effected in the fact that the GUI and the Storage classes have no knowledge of each other - neither calls any functions of the other. Essentially, classes which do not have any direct relation with each other should not be calling each other.
 
 
-\newpage
+\pagebreak
 \section{GUI}
 
 \includegraphics[width=\textwidth]{component_design_gui}
@@ -124,6 +124,7 @@ linkEvents() & This method is a setup method linking all the relevant signals to
 commandLineReturnPressed() & The slot connected to the returnPressed() signal mentioned above. This starts the chain of events which result in event processing, by reading the line and sending it to the Logic component\\
 readCommandLine() & Returns the string held by the command line. Called exclusively by commandLineReturnPressed()\\
 clearCommandLine() & Removes any text in the commandLine. Also called exclusively by commandLineReturnPressed()\\
+displayFeedback(QString feedback) & Calls setText() on the FeedbackLine to display feedback\\
 \end{tabular}
 
 \subparagraph{Application icon}
@@ -165,10 +166,16 @@ setItemColors() & Changes the text color for the items - Red for past and undone
 pad() & Adds whitespace or truncates overly long strings to give even sizing\\
 reprDate() & Replaces dates with Today / Tomorrow for the matching dates
 \end{tabular}
-
+\pagebreak
 \subsection{FeedbackLine}
 The FeedbackLine inherits from QLabel and is a simple instant feedback system for the user. It simply displays messages coming from the Logic component regarding the success or failure of user commands.
-\subparagraph{FeedbackLine::setText(QString)} Changes the current display text to whatever was in the \texttt{QString}. This is the only method of note for this class.
+
+\subparagraph{Key API} This object only implements one important method\\
+\begin{tabular}{p{6cm} p{12cm}}
+Method & Description\\
+\hline
+setText(QString feedback) & Sets the text on the feedback line to the given input\\
+\end{tabular}
 
 \subsection{CommandLine}
 The \texttt{CommandLine} component of the GUI is the controller for majority of the system. Since the target audience prefers to use a command line style input, this becomes the main input interface. This component inherits from \texttt{QLineEdit}. It's key API is discussed at a wider level with BoxIn above\\
