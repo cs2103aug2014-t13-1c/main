@@ -1095,7 +1095,7 @@
      </palette>
     </property>
     <property name="text">
-     <string>Welcome to BoxIn v0.1</string>
+     <string>Welcome to BoxIn!</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
