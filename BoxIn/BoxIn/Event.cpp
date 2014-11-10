@@ -254,7 +254,7 @@ boost::posix_time::ptime Event::getTimeFromInput(boost::gregorian::date date, st
     }
     return result;
 }
-
+//@author A0128233M
 /*
 std::string Event::getDescription() {
     return description;
