@@ -55,6 +55,18 @@ namespace UnitTests
             Assert::AreEqual(expected, actual->repr());
             file.close();
         }
+        TEST_METHOD(TestAddInvalidDatePair){
+            int& argc = foo();
+            char** argv;
+            QApplication app(argc, argv);
+            std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
+            Logic logic;
+            logic.handleUserInput("add something sdate 311214 edate 301214");
+            Event *actual = logic.getEvents()[0];
+            std::string expected = "something at  from ,  to 2014-Dec-30, 00:00";
+            Assert::AreEqual(expected, actual->repr());
+            file.close();
+        }
         TEST_METHOD(TestEdit){
             int& argc = foo();
             char** argv;
@@ -80,7 +92,7 @@ namespace UnitTests
             Assert::AreEqual(expected, logic.getEvents().size());
             file.close();
         }
-        TEST_METHOD(TestUndo){
+        TEST_METHOD(TestUndoForAdd){
             int& argc = foo();
             char** argv;
             QApplication app(argc, argv);
@@ -106,7 +118,20 @@ namespace UnitTests
             Assert::AreEqual(expected->repr(), actual->repr());
             file.close();
         }
-
+        TEST_METHOD(TestUndoForDelete){
+            int& argc = foo();
+            char** argv;
+            QApplication app(argc, argv);
+            std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
+            Logic logic;
+            logic.handleUserInput("add something");
+            logic.handleUserInput("delete something");
+            logic.handleUserInput("undo");
+            Event *expected = new Event("something","","","","","",1, false);
+            Event *actual = logic.getEvents()[0];
+            Assert::AreEqual(expected->repr(), actual->repr());
+            file.close();
+        }
         // Tests for the parsers
 		TEST_METHOD(SimpleParserTestDDMMYY){
 		    SimpleParser* parse = new SimpleParser();
@@ -197,6 +222,21 @@ namespace UnitTests
             std::string expected = "date with you";
             std::string ans = parser.getField("delete .date with you", TypeName);
             Assert::AreEqual(expected, ans);
+        }
+
+        // FileStorage Tests
+        TEST_METHOD(ReadFile){
+            int& argc = foo();
+            char** argv;
+            QApplication app(argc, argv);
+            std::fstream file = std::fstream("BoxInData.json", std::fstream::out | std::fstream::trunc);
+            Logic logic;
+            logic.handleUserInput("add something etime 2359");
+            Logic anotherLogic;
+            Assert::AreEqual(logic.getEvents().size(), anotherLogic.getEvents().size());
+            Event* expected = logic.getEvents()[0];
+            Event* actual = anotherLogic.getEvents()[0];
+            Assert::AreEqual(expected->repr(), actual->repr());
         }
     };
 };

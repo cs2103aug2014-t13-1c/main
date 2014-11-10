@@ -57,8 +57,7 @@
 \contentsline {subparagraph}{Private attributes}{17}{section*.34}
 \contentsline {subparagraph}{Public Methods}{17}{section*.35}
 \contentsline {subparagraph}{Key API}{17}{section*.36}
-\contentsline {section}{\numberline {7}Appendix A}{18}{section.7}
-\contentsline {subsection}{\numberline {7.1}Use cases}{18}{subsection.7.1}
+\contentsline {section}{\numberline {7}Appendix A: Use Cases}{18}{section.7}
 \contentsline {section}{\numberline {8}Appendix B: Setting up}{19}{section.8}
 \contentsline {subsection}{\numberline {8.1}Qt 5.3.1}{19}{subsection.8.1}
 \contentsline {subsection}{\numberline {8.2}Boost}{19}{subsection.8.2}

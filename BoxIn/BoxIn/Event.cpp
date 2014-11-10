@@ -21,7 +21,7 @@ Event::Event(std::string name, std::string location, std::string sdate, std::str
     this->edate = getDateFromInput(edate, etime, sdate);
     this->stime = getTimeFromInput(this->sdate, stime);
     this->etime = getTimeFromInput(this->edate, etime);
-    if((etime<stime) && !this->etime.is_special() && !this->stime.is_special()){
+    if((this->etime < this->stime) && !this->etime.is_special() && !this->stime.is_special()){
         this->sdate = boost::gregorian::date();
         this->stime = boost::posix_time::ptime();
     }
