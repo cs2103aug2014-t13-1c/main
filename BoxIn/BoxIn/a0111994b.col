@@ -1,0 +1,2648 @@
+//@author: a0111994b
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Action.cpp
+	 */
+
+
+#include "Action.h"
+
+Action::Action(void){
+}
+
+
+Action::~Action(void){
+}
+
+std::string Action::execute(std::vector<Event*>&){
+	// stub
+	return "";
+}
+
+std::string Action::undo(std::vector<Event*>&){
+	// stub
+	return "";
+}
+
+//deletes the event 
+void Action::deleteEvent(std::vector<Event*> &events, Event* event){
+    for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
+		if(*iter == event){
+			events.erase(iter);
+			break;
+		}
+	}
+}
+
+//search through the indexes to find a specific index through search
+Event* Action::findEventByIdx(int idx, std::vector<Event*> &events){
+    Event* event = NULL;
+    if(idx <= events.size() && idx > 0){
+        std::vector<Event*>::iterator iter = events.begin() + idx - 1;
+        event = *iter;
+    }
+    return event;
+}
+
+//searching the indes by inputs of name and end date 
+Event* Action::findEventByNameAndEndDate(std::string name, std::string endDate, std::vector<Event*> &events){
+    Event* event = NULL;
+    for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
+	    if((*iter)->getEndDate() == endDate && (*iter)->getName() == name){
+    		event = *iter;
+            break;
+    	}
+    }
+    return event;
+}
+
+/*
+std::vector<std::string> Action::splitWords(std::string input){
+	std::vector<std::string> words;
+	boost::algorithm::split(words, input, boost::algorithm::is_any_of(WHITESPACE), boost::algorithm::token_compress_on);
+	return words;
+}
+
+int Action::indexOf(std::vector<std::string> words, std::string toFind){
+	return std::distance(words.begin(), std::find(words.begin(), words.end(), toFind));
+}
+
+std::string Action::vectorToString(std::vector<std::string> vec){
+	std::string result = "";
+	for(std::vector<std::string>::iterator iter = vec.begin(); iter != vec.end(); iter++){
+		result = result + *iter + " ";
+	}
+	return result.substr(0, result.length() - 1);
+}
+
+std::string Action::extractField(std::vector<std::string> words, int startPos, int endPos){
+	if(endPos - startPos < 1){
+		return "";
+	}else{
+		std::vector<std::string> result(endPos - startPos - 1);
+		assert(startPos >= 0 && "Invalid start position");
+		assert(endPos <= words.size() && "Invalid end position");
+		std::copy(words.begin() + startPos + 1, words.begin() + endPos, result.begin());
+		return vectorToString(result);
+	}
+}
+*/
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Action.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Action.h
+	 */
+
+
+#pragma once
+
+#include <string>
+#include <Event.h>
+#include <vector>
+#include <boost\algorithm\string.hpp>
+#include "boost/date_time/gregorian/gregorian.hpp"
+#include <SimpleParser.h>
+
+static const std::string KEYWORD_LOCATION = "place";
+static const std::string KEYWORD_DATE = "date";
+static const std::string KEYWORD_TIME = "time";
+static const std::string KEYWORD_FIELD = "field";
+
+static const int POSITION_FIRST_WORD = 0;
+static const std::string WHITESPACE = " ";
+
+
+/*
+* The Action class is an interface for the different actions available
+*/
+class Action{
+public:
+	Action(void);
+	~Action(void);
+	virtual std::string execute(std::vector<Event*>&);
+	virtual std::string undo(std::vector<Event*>&);
+
+    void deleteEvent(std::vector<Event*> &events, Event* event);
+    Event* findEventByIdx(int idx, std::vector<Event*> & events);
+    Event* findEventByNameAndEndDate(std::string name, std::string endDate, std::vector<Event*> & events);
+private:
+    SimpleParser parser;
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Action.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Add.cpp
+	 */
+
+
+#include "Add.h"
+
+/*
+* Extracts the relevant info about the event to be added using the parser
+* Creates the event and holds it
+*
+*/
+Add::Add(std::string input){
+	std::string name = parser.getField(input, TypeName);
+    std::string startDate = parser.getField(input, TypeStartDate);
+    std::string endDate = parser.getField(input, TypeEndDate);
+    std::string startTime = parser.getField(input, TypeStartTime);
+    std::string endTime = parser.getField(input, TypeEndTime);
+    std::string location = parser.getField(input, TypePlace);
+	event = new Event(name, location, startDate, endDate, startTime, endTime, 0, true);
+}
+
+Add::~Add(void){
+}
+
+/*
+* Adds the event held by the Add command to the vector of events given
+* Sets the index to the last event (will be sorted internally by the storage and
+* reassigned the appropriate index)
+*/
+std::string Add::execute(std::vector<Event*> &events){
+	events.push_back(event);
+    event->setIdx(events.size());
+	return event->getName() + " has been added!";
+}
+
+std::string Add::undo(std::vector<Event*> &events){
+    deleteEvent(events, event);
+	return event->getName() + " was deleted";
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Add.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Add.h
+	 */
+
+#pragma once
+
+#include "action.h"
+
+class Add :
+	public Action
+{
+private:
+	Event *event;
+    SimpleParser parser;
+public:
+	Add(std::string input);
+	~Add(void);
+	std::string execute(std::vector<Event*> &events);
+	std::string undo(std::vector<Event*> &events);
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Add.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\BoxIn.cpp
+	 */
+
+
+#include "BoxIn.h"
+
+/*
+* Constructor method for BoxIn.
+* Sets up the main window making use of the ui xml and fixes sizes
+* Links events
+*/
+BoxIn::BoxIn(QWidget *parent) : QMainWindow(parent){
+	createActions();
+	ui.setupUi(this);
+	setFixedSize(WIDTH_WINDOW, HEIGHT_WINDOW); //size is not variable.
+	createComponents();
+	createTrayIcon();
+	linkEvents();
+	trayIcon->show();
+    updateGUI();
+}
+
+BoxIn::~BoxIn(){
+}
+
+/*
+* Initializes the relevant components of the UI
+*/
+void BoxIn::createComponents(){
+	clock = new DigitalClock(this);
+	nameLabel = new QLabel("Name", this);
+	placeLabel = new QLabel("Place", this);
+	startLabel = new QLabel("Time / Date", this);
+    idxLabel = new QLabel("Index", this);
+	commandLine = new QLineEdit(this);
+    displayFeedIdx = new DisplayFeed(this);
+	setComponentSizes();
+	setComponentColors();
+}
+
+/*
+* Setup method
+* setComponentSizes deals with the sizes of the various items in the window. These are fixed constants
+* declared in BoxIn.h
+*/
+void BoxIn::setComponentSizes(){
+	clock->move(WIDTH_WINDOW - 100, 450);
+    idxLabel->setGeometry(20, 40, 40, 20);
+	nameLabel->setGeometry(60, 40, 50, 20);
+	placeLabel->setGeometry(400, 40, 50, 20);
+	startLabel->setGeometry(550, 40, 100, 20);
+	commandLine->setGeometry(80, 540, WIDTH_WINDOW - 80, 20);
+    ui.feedbackBox->setGeometry(0, 500, WIDTH_WINDOW, 20);
+    displayFeedIdx->setGeometry(20, 70, WIDTH_WINDOW - 2 * WIDTH_BUFFER, 350);
+}
+
+/*
+* Makes use of stylesheets to set up background colors for the various components
+*/
+void BoxIn::setComponentColors(){
+	nameLabel->setStyleSheet(TRANSPARENT);
+	placeLabel->setStyleSheet(TRANSPARENT);
+	startLabel->setStyleSheet(TRANSPARENT);
+    idxLabel->setStyleSheet(TRANSPARENT);
+	commandLine->setStyleSheet(WHITE);
+    displayFeedIdx->setStyleSheet(TRANSPARENT);
+}
+
+/**
+* Setup method
+* linkEvents deals with the events from keypresses and such, connecting them to the relevant function call
+*/
+void BoxIn::linkEvents(){
+	QObject::connect(commandLine, SIGNAL(returnPressed()), this, SLOT(commandLineReturnPressed()));
+    QObject::connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+    QObject::connect(displayFeedIdx, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
+}
+
+/**
+* Handles the event changes - particularly the minimizing and maximizing of the window to system tray.
+*/
+void BoxIn::changeEvent(QEvent *event){
+	if(event->type() == QEvent::Close){
+        event->ignore();
+        this->hide();
+    }
+    else{event->accept();}
+	if(windowState() == Qt::WindowMinimized){
+		this->hide();
+	}else if(windowState() == Qt::WindowMaximized){
+		this->show();
+	}
+}
+
+void BoxIn::displayFeedback(QString feedback){
+	ui.feedbackBox->setText(feedback);
+}
+
+QString BoxIn::readCommandLine(){
+	return commandLine->text();
+}
+
+void BoxIn::clearCommandLine(){
+	commandLine->setText("");
+}
+
+/*
+* The main method for capturing the enter keypress from the user
+* Calls the logic component to process user input and retrieve the appropriate feedback
+* This is also the refresh signal for the display
+*/
+void BoxIn::commandLineReturnPressed(){
+	std::string feedback = logic.handleUserInput(readCommandLine().toStdString());
+	displayFeedback(QString(feedback.c_str()));
+	clearCommandLine();
+	updateGUI();
+}
+
+void BoxIn::updateGUI(){
+	std::vector<Event*> thingsToInclude = logic.getEvents();
+    displayFeedIdx->refresh(&thingsToInclude);
+}
+
+/*
+* Sets up the system tray icon
+*/
+void BoxIn::createTrayIcon(){
+	trayIcon = new QSystemTrayIcon(this);
+	trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction(minimizeAction);
+    trayIconMenu->addAction(restoreAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(quitAction);
+	trayIcon->setIcon(QIcon("BoxInSysTrayIco.png"));
+    trayIcon->setContextMenu(trayIconMenu);
+}
+
+/*
+* Sets up the system tray icon's menu
+*/
+void BoxIn::createActions(){
+     minimizeAction = new QAction(tr("Minimize"), this);
+     QObject::connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
+
+     restoreAction = new QAction(tr("Restore"), this);
+     QObject::connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
+
+     quitAction = new QAction(tr("Quit"), this);
+     QObject::connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+ }
+
+/*
+* Sets up the double click event for the icon to reopen the window
+*/
+ void BoxIn::iconActivated(QSystemTrayIcon::ActivationReason reason){
+	 if(reason == QSystemTrayIcon::DoubleClick){
+		 this->showNormal();
+		 this->raise();
+		 this->activateWindow();
+	 }
+ }
+
+ void BoxIn::setVisible(bool visible){
+    minimizeAction->setEnabled(visible);
+    restoreAction->setEnabled(isMaximized() || !visible);
+    QMainWindow::setVisible(visible);
+}
+
+ /*
+ * Connects the clicking of any event on the display to the QEventEditor
+ * Captures the formatted input and passes it through the command line as per normal
+ */
+void BoxIn::editItem(QListWidgetItem *item){
+	QEventEditor *editor = new QEventEditor(dynamic_cast<QEventStore*>(item)->getEvent());
+	QObject::connect(editor, SIGNAL(infoOut(std::string)), this, SLOT(setCommand(std::string)));
+	QObject::connect(editor, SIGNAL(accepted()), this, SLOT(commandLineReturnPressed()));
+	editor->exec();
+}
+
+void BoxIn::setCommand(std::string command){
+	commandLine->setText(QString(command.c_str()));
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\BoxIn.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\BoxIn.h
+	 */
+
+#ifndef BOXIN_H
+#define BOXIN_H
+
+#include <QMainWindow>
+#include <QString>
+#include <qlistview.h>
+#include "qsystemtrayicon.h"
+#include <QMenu>
+#include <qmessagebox.h>
+#include <QCloseEvent>
+#include "ui_BoxIn.h"
+#include "Logic.h"
+#include "digitalclock.h"
+#include <qapplication.h>
+#include "DisplayFeed.h"
+#include <QLineEdit>
+#include <QLabel>
+
+static const int HEIGHT_WINDOW = 600;
+static const int WIDTH_WINDOW = 1000;
+
+static const int HEIGHT_BUFFER = 10;
+static const int WIDTH_BUFFER = 20;
+static const int HEIGHT_NO_CLICK_ZONE = 60;
+
+static const int HEIGHT_SMALL = 20;
+static const int HEIGHT_LARGE = 400;
+
+static const int WIDTH_LABEL = 60;
+
+static const QString PASTEL_BLUE = "rgb(141, 199, 187)";
+static const QString TRANSPARENT = "background-color: rgba(255, 255, 255, 0)";
+static const QString WHITE = "background-color: rgb(255, 255, 255)";
+
+class BoxIn : public QMainWindow{
+	Q_OBJECT
+public:
+	explicit BoxIn(QWidget *parent = 0);
+	~BoxIn();
+
+	void displayFeedback(QString feedback);
+	void clearCommandLine();
+	QString readCommandLine();
+	void setVisible(bool visible);
+	void updateGUI();
+	void createComponents();
+	void setComponentSizes();
+	void setComponentColors();
+	void linkEvents();
+
+	void createTrayIcon();
+	void createActions();
+	void iconActivatd();
+	void changeEvent(QEvent *event);
+
+private:
+	Ui::BoxInClass ui;
+	Logic logic;
+
+	QAction *minimizeAction;
+	QAction *restoreAction;
+	QAction *quitAction;
+
+	DigitalClock *clock;
+	QLabel *nameLabel;
+	QLabel *placeLabel;
+	QLabel *startLabel;
+    QLabel *idxLabel;
+
+	QSystemTrayIcon *trayIcon;
+	QMenu *trayIconMenu;
+    DisplayFeed *displayFeedIdx;
+	QLineEdit *commandLine;
+
+public slots:
+	void commandLineReturnPressed();
+	void iconActivated(QSystemTrayIcon::ActivationReason reason);
+	void editItem(QListWidgetItem *item);
+	void setCommand(std::string command);
+};
+
+#endif // BOXIN_H
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\BoxIn.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Delete.cpp
+	 */
+
+#include "Delete.h"
+
+Delete::Delete(std::string input){
+    name = parser.getField(input, TypeName);
+    date = to_simple_string(parser.convertToDate(parser.getField(input, TypeEndDate)));
+	if(date == to_simple_string(boost::gregorian::date())){date = "";}
+	event = NULL;
+}
+
+
+Delete::~Delete(void){
+}
+
+/*
+* Searches the event vector for the matching event and removes it
+* Stores the original event for undoing later on
+*/
+std::string Delete::execute(std::vector<Event*> &events){
+    if(parser.isInteger(name)){event = findEventByIdx(stoi(name), events);}
+    else{event = findEventByNameAndEndDate(name, date, events);}
+    if(event != NULL){
+        deleteEvent(events, event);
+        return event->getName() + " has been deleted!";
+    }
+    else{
+		return "No item matching " + name + " found.";
+	}
+}
+
+/*
+* Adds the previously deleted event pointer back to the vector of events
+*/
+std::string Delete::undo(std::vector<Event*> &events){
+	assert(event != NULL);
+	events.push_back(event);
+	return event->getName() + " has been reinstated!";
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Delete.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Delete.h
+	 */
+
+#pragma once
+#include "action.h"
+
+class Delete :
+	public Action
+{
+private:
+	Event *event;
+	std::string name;
+	std::string date;
+    SimpleParser parser;
+public:
+	Delete(std::string input);
+	~Delete(void);
+	std::string execute(std::vector<Event*> &events);
+	std::string undo(std::vector<Event*> &events);
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Delete.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Digitalclock.cpp
+	 */
+
+#include "digitalclock.h"
+
+DigitalClock::DigitalClock(QWidget *parent)
+	: QLCDNumber(parent)
+{
+	ui.setupUi(this);
+	setSegmentStyle(Filled);
+    QTimer *timer = new QTimer(this);
+    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(showTime()));
+    timer->start(1000);
+    showTime();
+    resize(WIDTH_TIMER, HEIGHT_TIMER);
+}
+
+DigitalClock::~DigitalClock(){
+}
+
+void DigitalClock::showTime(){
+	QTime time = QTime::currentTime();
+    QString text = time.toString("hh:mm");
+    text = flashColon(text, time);
+    display(text);
+}
+
+QString DigitalClock::flashColon(QString text, QTime time){
+	if ((time.second() % 2) == 0){
+        text[2] = ' ';
+	}
+	return text;
+}
+
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Digitalclock.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Digitalclock.h
+	 */
+
+#ifndef DIGITALCLOCK_H
+#define DIGITALCLOCK_H
+
+#include <QLCDNumber>
+#include "ui_digitalclock.h"
+#include <qtimer.h>
+#include <QTime>
+
+static const int REFRESH_TIME = 1000;
+static const int WIDTH_TIMER = 100;
+static const int HEIGHT_TIMER = 50;
+
+class DigitalClock : public QLCDNumber
+{
+	Q_OBJECT
+
+public:
+	DigitalClock(QWidget *parent = 0);
+	~DigitalClock();
+
+private:
+	Ui::DigitalClock ui;
+	QString flashColon(QString text, QTime time);
+
+private slots:
+	void showTime();
+};
+
+#endif // DIGITALCLOCK_H
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Digitalclock.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\DisplayFeed.cpp
+	 */
+
+#include "DisplayFeed.h"
+
+DisplayFeed::DisplayFeed(QWidget *parent) : QListWidget(parent){
+	setBorder();
+    setFont(QFont("Courier New", 9));
+	show();
+}
+
+DisplayFeed::~DisplayFeed(void){
+}
+
+void DisplayFeed::setBorder(){
+	setFrameShape(QFrame::NoFrame);
+    setUniformItemSizes(true);
+}
+
+/*
+* Takes in a vector of event pointers to the things to display
+* Converts their respective elements to text and links the event to QEventStore
+* Creates the textual representation and displays it
+*/
+void DisplayFeed::refresh(std::vector<Event*> *thingsToInclude){
+	clear();
+	for(std::vector<Event*>::iterator iter = thingsToInclude->begin(); iter != thingsToInclude->end(); iter++){		
+		assert(*iter!=NULL && "Null event floating around in storage?");
+		QEventStore *item = new QEventStore(this, *iter);
+        std::string itemText = formatEvent(*iter);
+		item->setText(QString(itemText.c_str()));
+		addItem(item);
+	}
+    setItemColors();
+}
+
+/*
+* Goes through all the items in the display
+* Sets colors based on status
+* New - Purple
+* Overdue and undone - Red
+* The rest alternate between grey and black
+*/
+void DisplayFeed::setItemColors(){
+    QBrush gray(QColor(100, 100, 100));
+    for(unsigned int i = 0; i < count(); i++){
+        Event* event = dynamic_cast<QEventStore*>(item(i))->getEvent();
+        boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();
+        if(event->isRecent()){
+            item(i)->setForeground(Qt::darkMagenta);
+            dynamic_cast<QEventStore*>(item(i))->getEvent()->removeRecent();
+        }else if((event->getPosixStartTime() < now || event->getPosixEndTime() < now) && !event->getDone()){
+            // only undone and overdue tasks to be in red
+            item(i)->setForeground(Qt::red);
+        }else if(i % 2 == 1){
+            item(i)->setForeground(gray);
+        }else{
+            item(i)->setForeground(Qt::black);
+        }
+    }
+}
+
+/*
+* Pads up a string to spaces number of characters with whitespace
+* Strings above the max length are truncated with one spare whitespace
+*/
+std::string DisplayFeed::pad(std::string str, int spaces){
+    if(str.empty()){return str;}
+    while(str.size() < spaces){
+        str += " ";
+    }
+    if(str.size() > spaces){return str.substr(0, spaces - 1) + " ";}
+    return str;
+}
+
+/*
+* Converts a date to today / tomorrow if it happens to match those dates
+*/
+std::string DisplayFeed::reprDate(std::string date){
+    if(date == to_simple_string(boost::gregorian::day_clock::local_day())){date = "Today";}
+    else if(date == to_simple_string(boost::gregorian::day_clock::local_day()+boost::gregorian::date_duration(1))){date = "Tomorrow";}
+    return date;
+}
+
+/*
+* Formats data from a event into a uniformly spaced manner for display
+*/
+std::string DisplayFeed::formatEvent(Event* event){
+    
+    std::string index = boost::lexical_cast<std::string>((event)->getIdx());
+    std::string name = event->getName();
+    std::string place = event->getLocation();
+    std::string startDate = reprDate(event->getStartDate());
+    std::string startTime = event->getStartTime();
+    std::string endDate = reprDate(event->getEndDate());
+    std::string endTime = event->getEndTime();
+    std::string filler = "";
+    if(endDate == startDate){endDate = "";}
+    if(startTime == NULL_TIME){startTime = "";}
+    if(endTime == NULL_TIME){endTime = "";}
+    if(!(endDate.empty() && endTime.empty()) && !(startDate.empty() && startTime.empty())){filler = "to ";}
+    if(place.empty()){place = "-";}
+    return pad(index, PadSizes::INDEX) + pad(name, PadSizes::NAME) + pad(place, PadSizes::PLACE) +pad(startDate, PadSizes::DATE) + pad(startTime, PadSizes::TIME) + filler + pad(endDate, PadSizes::DATE) + pad(endTime, PadSizes::TIME);
+}
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\DisplayFeed.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\DisplayFeed.h
+	 */
+
+#ifndef DISPLAYFEED_H
+#define DISPLAYFEED_H
+
+#include "qlistwidget.h"
+#include "Event.h"
+#include "QEventStore.h"
+#include "QEventEditor.h"
+#include "qmessagebox.h"
+#include "qlabel.h"
+#include "qeventloop.h"
+#include "assert.h"
+#include <boost/lexical_cast.hpp>
+
+namespace PadSizes{
+    static const int INDEX = 5;
+    static const int NAME = 49;
+    static const int PLACE = 21;
+    static const int DATE = 13;
+    static const int TIME = 6;
+};
+
+class DisplayFeed : public QListWidget{
+	Q_OBJECT
+public:
+	DisplayFeed(QWidget *parent);
+	~DisplayFeed(void);
+
+	void setBorder();
+	void refresh(std::vector<Event*> *thingsToInclude);
+    void setItemColors();
+    std::string pad(std::string str, int spaces);
+    std::string reprDate(std::string date);
+    std::string formatEvent(Event* event);
+};
+
+#endif // DisplayFeed.h
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\DisplayFeed.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Edit.cpp
+	 */
+
+#include "Edit.h"
+
+Edit::Edit(){
+}
+
+Edit::Edit(std::string input){
+    name = parser.getField(input, TypeName);
+    date = to_simple_string(parser.convertToDate(parser.getField(input, TypeEndDate)));
+    field = parser.getField(input, TypeField);
+    newValue = parser.getField(input, TypeNewValue);
+    if(date == to_simple_string(boost::gregorian::date())){date = "";}
+}
+
+
+Edit::~Edit(void){
+}
+
+/*
+* Searches the event vector for the matching event and deletes it, storing it for undoing
+* Makes a deep copy of the event and edits the field to change
+* Adds the new event into the vector
+* Can be found either by index or by end date
+*/
+std::string Edit::execute(std::vector<Event*> &events){
+	bool success = false;
+    if(field.empty()){return "Missing field key word";}
+    if(parser.isInteger(name)){oldEvent = findEventByIdx(stoi(name), events);}
+    else{oldEvent = findEventByNameAndEndDate(name, date, events);}
+    if(oldEvent != NULL){deleteEvent(events, oldEvent);}
+	if(oldEvent != NULL){
+		newEvent = oldEvent->copy();
+		newEvent->editField(field, newValue);
+		events.push_back(newEvent);
+		return newEvent->getName() + " has been edited!";
+	}else{
+		return "No item matching " + name + " found.";
+	}
+}
+
+/*
+* Searches the event vector for the previously created event
+* Deletes it and adds the stored old event back
+*/
+std::string Edit::undo(std::vector<Event*> &events){
+	assert(oldEvent != NULL);
+	assert(newEvent != NULL);
+	deleteEvent(events, newEvent);
+	events.push_back(oldEvent);
+	return oldEvent->getName() + " has been un-edited!";
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Edit.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Edit.h
+	 */
+
+#pragma once
+#include "action.h"
+class Edit :
+	public Action
+{
+protected:
+	Event* oldEvent;
+	Event* newEvent;
+	std::string name;
+	std::string date;
+	std::string field;
+	std::string newValue;
+    SimpleParser parser;
+public:
+    Edit();
+	Edit(std::string input);
+	~Edit(void);
+	std::string execute(std::vector<Event*> &events);
+	std::string undo(std::vector<Event*> &events);
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Edit.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Event.cpp
+	 */
+
+#include "Event.h"
+
+
+Event::Event(){
+	fieldMap = setupMap();
+    recent = false;
+    done = false;
+}
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Event.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Event.cpp
+	 */
+
+/*
+* Constructor for the Event class
+* If the end time / date is before the start time / date, we only keep the end
+* This assumes that the end time is more important than the start
+*/
+Event::Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent){
+    boost::gregorian::date today = boost::gregorian::day_clock::local_day();
+	this->name = name;
+    this->sdate = getDateFromInput(sdate, stime);
+    this->edate = getDateFromInput(edate, etime, sdate);
+    this->stime = getTimeFromInput(this->sdate, stime);
+    this->etime = getTimeFromInput(this->edate, etime);
+    if((this->etime < this->stime) && !this->etime.is_special() && !this->stime.is_special()){
+        this->sdate = boost::gregorian::date();
+        this->stime = boost::posix_time::ptime();
+    }
+	this->location = location;
+    this->idx = idx;
+    this->recent = recent;
+    this->done = false;
+	fieldMap = setupMap();
+}
+
+Event::Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent, bool done){
+    boost::gregorian::date today = boost::gregorian::day_clock::local_day();
+	this->name = name;
+    this->sdate = getDateFromInput(sdate, stime);
+    this->edate = getDateFromInput(edate, etime, sdate);
+    this->stime = getTimeFromInput(this->sdate, stime);
+    this->etime = getTimeFromInput(this->edate, etime);
+    if(etime<stime){
+        this->sdate = boost::gregorian::date();
+        this->stime = boost::posix_time::ptime();
+    }
+	this->location = location;
+    this->idx = idx;
+    this->recent = recent;
+    this->done = done;
+	fieldMap = setupMap();
+}
+
+Event::~Event(){
+}
+
+Event* Event::copy(){
+	return new Event(name, location, to_iso_string(sdate), to_iso_string(edate), getStartTime(), getEndTime(), idx, true, done);
+}
+
+std::map<std::string, Field> Event::setupMap(){
+	std::map<std::string, Field> fieldMap;
+	fieldMap[FIELD_NAME] = FieldName;
+	fieldMap[FIELD_START_DATE] = FieldStartDate;
+    fieldMap[FIELD_END_DATE] = FieldEndDate;
+	fieldMap[FIELD_START_TIME] = FieldStartTime;
+	fieldMap[FIELD_END_TIME] = FieldEndTime;
+    fieldMap[FIELD_LOCATION] = FieldLocation;
+    fieldMap[FIELD_DONE] = FieldDone;
+	return fieldMap;
+}
+
+std::string Event::getName(){
+	return name;
+}
+
+std::string Event::getStartDate(){
+    if(sdate != boost::gregorian::date(boost::gregorian::not_a_date_time)){return boost::gregorian::to_simple_string(sdate);}
+    return "";
+}
+
+std::string Event::getEndDate(){
+    if(edate != boost::gregorian::date(boost::gregorian::not_a_date_time)){return boost::gregorian::to_simple_string(edate);}
+    return "";
+}
+
+std::string Event::getStartTime(){
+    if(stime != boost::posix_time::ptime(boost::posix_time::not_a_date_time)){return boost::posix_time::to_iso_extended_string(stime).substr(11,5);}
+    return "";
+}
+
+std::string Event::getEndTime(){
+    if(etime != boost::posix_time::ptime(boost::posix_time::not_a_date_time)){return boost::posix_time::to_iso_extended_string(etime).substr(11,5);}
+    return "";
+}
+
+std::string Event::getLocation(){
+	return location;
+}
+
+int Event::getIdx(){
+    return idx;
+}
+
+/*
+* Calls the appropriate setter method based on the field given as a tag string
+*/
+void Event::editField(std::string field, std::string newValue){
+	switch(fieldMap[field]){
+		case FieldName :
+			setName(newValue);
+			break;
+		case FieldStartDate :
+			setStartDate(newValue);
+			break;
+        case FieldEndDate :
+            setEndDate(newValue);
+            break;
+        case FieldStartTime :
+            setStartTime(newValue);
+            break;
+		case FieldEndTime :
+			setEndTime(newValue);
+			break;
+		case FieldLocation :
+			setLocation(newValue);
+            break;
+        case FieldDone :
+            setDone(!done);
+            break;
+	}
+}
+
+void Event::setName(std::string newName){
+	name = newName;
+}
+
+/*
+* Takes in a string containing the new date
+* For all below functions, only modifies if the new entry preserves
+* The correct start/end ordering
+*/
+void Event::setStartDate(std::string newDate){
+	boost::gregorian::date date = parser.convertToDate(newDate);
+    if(date <= edate || edate.is_special()){
+        sdate = date;
+        stime = timeParser.convertToTime(sdate, getStartTime());
+    }
+}
+
+void Event::setEndDate(std::string newDate){
+	boost::gregorian::date date = parser.convertToDate(newDate);
+    if(date >= sdate || sdate.is_special()){
+        edate = date;
+        etime = timeParser.convertToTime(edate, getEndTime());
+    }
+}
+
+void Event::setStartTime(std::string newTime){
+    boost::gregorian::date date = sdate;
+    if(sdate.is_special() && !newTime.empty()){date = boost::gregorian::day_clock::local_day();}
+    boost::posix_time::ptime time = timeParser.convertToTime(date, newTime);
+    if(time <= etime || etime.is_special() || etime == boost::posix_time::ptime(edate, boost::posix_time::time_duration(0,0,0))){
+        sdate = date;
+        stime = time;
+    }
+}
+
+void Event::setEndTime(std::string newTime){
+    boost::gregorian::date date = edate;
+    if(edate.is_special() && !newTime.empty()){date = boost::gregorian::day_clock::local_day();}
+    boost::posix_time::ptime time = timeParser.convertToTime(edate, newTime);
+    if(time >= stime || stime.is_special() || stime == boost::posix_time::ptime(sdate, boost::posix_time::time_duration(0,0,0))){
+        edate = edate;
+        etime = time;
+    }
+}
+
+void Event::setLocation(std::string newLocation){
+	location = newLocation;
+}
+
+void Event::setIdx(int newIdx){
+    idx = newIdx;
+}
+
+/*
+* Gives a textual representation of all data in a event. Used for unit testing
+*/
+std::string Event::repr(){
+    return name + " at " + location + " from " + getStartDate() + ", " + getStartTime() + " to " + getEndDate() + ", " + getEndTime();
+}
+
+boost::posix_time::ptime Event::getPosixStartTime(){
+    return stime;
+}
+
+boost::posix_time::ptime Event::getPosixEndTime(){
+    return etime;
+}
+
+bool Event::isRecent(){
+    return recent;
+}
+
+void Event::removeRecent(){
+    recent = false;
+}
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Event.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Event.cpp
+	 */
+
+bool Event::getDone(){
+    return done;
+}
+
+/*
+* Takes in the strings for date and time
+* Returns the appropriate date based off date
+* Or today's date if a time is specified but a date is not
+* This method is overloaded
+*/
+boost::gregorian::date Event::getDateFromInput(std::string date, std::string time){
+    boost::gregorian::date today = boost::gregorian::day_clock::local_day();
+    boost::gregorian::date result;
+    if(!date.empty() && date != NULL_DATE_TIME){result = parser.convertToDate(date);}
+    else if(!(time.empty() || time == NULL_DATE_TIME)){result = today;}
+    return result;
+}
+
+/*
+* Takes in the strings for date and time and a third input for the default date if not specified
+* Returns the appropriate date based off date
+* Or the default date if the time is specified but date is not
+* This method is overloaded
+*/
+boost::gregorian::date Event::getDateFromInput(std::string date, std::string time, std::string predate){
+    boost::gregorian::date result;
+    if(!date.empty() && date != NULL_DATE_TIME){result = parser.convertToDate(date);}
+    else if(!(time.empty() || time == NULL_DATE_TIME)){result = getDateFromInput(predate, time);}
+    return result;
+}
+
+/*
+* Takes in the date as a boost::gregorian::date and the time as a string
+* Returns the matching time or 00:00 when the time is not specified
+*/
+boost::posix_time::ptime Event::getTimeFromInput(boost::gregorian::date date, std::string time){
+    boost::posix_time::ptime result;
+    if((time.empty() || time == NULL_DATE_TIME) && !date.is_special()){
+        result = timeParser.convertToTime(date, NULL_TIME);
+    }else if(!(time.empty() || time == NULL_DATE_TIME)){
+        result = timeParser.convertToTime(date, time);
+    }
+    return result;
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Event.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Event.h
+	 */
+
+#pragma once
+
+#include <string>
+#include <map>
+#include "SimpleParser.h"
+#include "TimeParser.h"
+#include "boost/date_time/gregorian/gregorian.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
+
+static const std::string FIELD_NAME = "name";
+static const std::string FIELD_LOCATION = "place";
+static const std::string FIELD_START_DATE = "sdate";
+static const std::string FIELD_END_DATE = "edate";
+static const std::string FIELD_START_TIME = "stime";
+static const std::string FIELD_END_TIME = "etime";
+static const std::string FIELD_DONE = "done";
+
+const static std::string NULL_DATE_TIME = "not-a-date-time";
+const static std::string NULL_TIME = "00:00";
+
+enum Field {
+	FieldName = 1,
+	FieldStartDate,
+    FieldEndDate,
+	FieldStartTime,
+    FieldEndTime,
+	FieldLocation,
+    FieldDone
+};
+
+class Event{
+public:
+	Event();
+	Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent);
+	Event(std::string name, std::string location, std::string sdate, std::string edate, std::string stime, std::string etime, int idx, bool recent, bool done);
+	~Event();
+	Event* copy();
+
+	std::map<std::string, Field> setupMap();
+
+	std::string getName();
+	std::string getStartDate();
+    std::string getEndDate();
+	std::string getStartTime();
+    std::string getEndTime();
+	std::string getLocation();
+	void editField(std::string field, std::string newValue);
+	void setName(std::string newName);
+	void setStartDate(std::string newDate);
+    void setEndDate(std::string newDate);
+	void setStartTime(std::string newTime);
+    void setEndTime(std::string newTime);
+	void setLocation(std::string newLocation);
+    int getIdx();
+    boost::posix_time::ptime getPosixStartTime();
+    boost::posix_time::ptime getPosixEndTime();
+    void setIdx(int newIdx);
+    void removeRecent();
+    bool isRecent();
+    void setDone(bool newValue);
+    bool getDone();
+    boost::gregorian::date getDateFromInput(std::string date, std::string time);
+    boost::gregorian::date getDateFromInput(std::string date, std::string time, std::string preDate);
+    boost::posix_time::ptime getTimeFromInput(boost::gregorian::date date, std::string time);
+    std::string repr();
+private:
+	std::map<std::string, Field> fieldMap;
+	std::string name;
+	boost::gregorian::date sdate;
+    boost::gregorian::date edate;
+	boost::posix_time::ptime stime;
+    boost::posix_time::ptime etime;
+    std::string nonformattime;
+	std::string location;
+    SimpleParser parser;
+    TimeParser timeParser;
+    int idx;
+    bool recent;
+    bool done;
+};
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Event.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\FileStorage.cpp
+	 */
+
+#include "FileStorage.h"
+
+FileStorage::FileStorage(){
+    // non-working constructor
+}
+
+FileStorage::FileStorage(std::string filename){
+	this->filename = filename;
+}
+
+FileStorage::~FileStorage(void){
+}
+
+/*
+* Takes in a vector of events
+* Converts each event into an json object and stores it on an array
+* Writes the array into the file
+*/
+void FileStorage::saveFile(std::vector<Event*> events){
+    std::fstream file = std::fstream(filename, std::fstream::out | std::fstream::trunc);
+    json_spirit::Array eventArray;
+    for(std::vector<Event*>::iterator iter = events.begin(); iter != events.end(); iter++){
+        writeEvent(eventArray, *iter);
+    }
+    write_formatted(eventArray, file);
+    file.close();
+}
+
+/*
+* Converts an event into a json_spirit Object
+* Copying all information about that event
+* Pushes the object onto the array passed in
+*/
+void FileStorage::writeEvent(json_spirit::Array &eventArray, Event* event){
+    json_spirit::Object eventObj;
+    eventObj.push_back(json_spirit::Pair(TAG_NAME, event->getName()));
+    eventObj.push_back(json_spirit::Pair(TAG_START_DATE, event->getStartDate()));
+    eventObj.push_back(json_spirit::Pair(TAG_END_DATE, event->getEndDate()));
+    eventObj.push_back(json_spirit::Pair(TAG_START_TIME, event->getStartTime()));
+    eventObj.push_back(json_spirit::Pair(TAG_END_TIME, event->getEndTime()));
+    eventObj.push_back(json_spirit::Pair(TAG_PLACE, event->getLocation()));
+    eventObj.push_back(json_spirit::Pair(TAG_DONE, event->getDone()));
+    eventArray.push_back(eventObj);
+}
+
+/*
+* Collects the array from the json file
+* Reads individual events and pushes them onto a vector
+* Returns the vector of event pointers
+*/
+std::vector<Event*> FileStorage::readFile(){
+    std::fstream file = std::fstream(filename, std::fstream::in);
+    json_spirit::Value value;
+    std::vector<Event*> events;
+    read(file, value);
+    const json_spirit::Array& eventArray = value.get_array();
+    for(unsigned int i = 0; i < eventArray.size(); i++){
+        events.push_back(readEvent(eventArray[i].get_obj(), i + 1));
+    }
+    return events;
+}
+
+Event* FileStorage::readEvent(const json_spirit::Object& obj, unsigned int idx){
+    Event *event = new Event;
+    for(json_spirit::Object::size_type i = 0; i != obj.size(); i++){
+        const json_spirit::Pair &pair = obj[i];
+        const std::string &name = pair.name_;
+        const json_spirit::Value &value = pair.value_;
+        if(name == TAG_NAME){event->setName(value.get_str());}
+        else if(name == TAG_START_DATE){event->setStartDate(value.get_str());}
+        else if(name == TAG_END_DATE){event->setEndDate(value.get_str());}
+        else if(name == TAG_START_TIME){event->setStartTime(value.get_str());}
+        else if(name == TAG_END_TIME){event->setEndTime(value.get_str());}
+        else if(name == TAG_PLACE){event->setLocation(value.get_str());}
+        else if(name == TAG_DONE){event->setDone(value.get_bool());}
+        else{assert(false&&"Json file corrupted");}
+    }
+    event->setIdx(idx);
+    return event;
+}
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\FileStorage.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\FileStorage.h
+	 */
+
+#pragma once
+
+#include "json_spirit.h"
+#include <fstream>
+#include <string>
+#include <vector>
+#include "Event.h"
+#include <iostream>
+
+static const std::string TAG_NAME = "Name";
+static const std::string TAG_START_DATE = "Start_Date";
+static const std::string TAG_END_DATE = "End_Date";
+static const std::string TAG_START_TIME = "Start_Time";
+static const std::string TAG_END_TIME = "End_Time";
+static const std::string TAG_PLACE = "Place";
+static const std::string TAG_DONE = "Done";
+
+class FileStorage{
+public:
+    FileStorage();
+	FileStorage(std::string filename);
+	~FileStorage(void);
+	void saveFile(std::vector<Event*>);
+    void writeEvent(json_spirit::Array &eventArray, Event* event);
+	std::vector<Event*> readFile();
+    Event* readEvent(const json_spirit::Object& obj, unsigned int idx);
+private:
+	std::string filename;
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\FileStorage.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Logic.cpp
+	 */
+
+#include "Logic.h"
+
+
+Logic::Logic(){
+	setupMap();
+    filter = Filter::None;
+}
+
+Logic::~Logic(){
+}
+
+/*different commands
+*put the commands into different commands 
+*calls out the different commands using the paarser later on*/
+
+void Logic::setupMap(){
+	stringToCommand[USER_COMMAND_ADD] = CommandAdd;
+	stringToCommand[USER_COMMAND_DELETE] = CommandDelete;
+	stringToCommand[USER_COMMAND_EDIT] = CommandEdit;
+	stringToCommand[USER_COMMAND_UNDO] = CommandUndo;
+	stringToCommand[USER_COMMAND_EXIT] = CommandExit;
+	stringToCommand[USER_COMMAND_SEARCH] = CommandSearch;
+    stringToCommand[USER_COMMAND_UNDO] = CommandUndo;
+    stringToCommand[USER_COMMAND_MARK] = CommandMark;
+    stringToCommand[USER_COMMAND_FILTER] = CommandFilter;
+    stringToCommand[USER_COMMAND_HELP] = CommandHelp;
+
+    stringToFilter[Filter::FILTER_NONE] = Filter::None;
+    stringToFilter[Filter::FILTER_DONE] = Filter::Done;
+    stringToFilter[Filter::FILTER_NOT_DONE] = Filter::NotDone;
+    stringToFilter[Filter::FILTER_PAST] = Filter::Past;
+    stringToFilter[Filter::FILTER_UPCOMING] = Filter::Upcoming;
+}
+/*
+std::vector<std::string> Logic::splitWords(std::string input){
+	std::vector<std::string> words;
+	boost::algorithm::split(words, input, boost::algorithm::is_any_of(WHITESPACE), boost::algorithm::token_compress_on);
+	return words;
+}
+*/
+
+/*
+* Extracts the first word from the user command and creates the appropriate
+* Command type and executes it, also pushing undo-able commands onto the stack
+* Then saves the file to the json file
+*/
+std::string Logic::handleUserInput(std::string input){
+	std::string firstWord = parser.getField(input, TypeCommand);
+	std::string feedback = "Done!";
+	Action *action = NULL;
+    QHelpWindow* help = new QHelpWindow();
+	switch(stringToCommand[firstWord]){
+		case CommandAdd :
+			action = new Add(input);
+			break;
+		case CommandDelete :
+			action = new Delete(input);
+			break;
+		case CommandEdit :
+			action = new Edit(input);
+			break;
+		case CommandExit :
+			break;
+		case CommandUndo :
+            try{
+                action = storage.popLastAction();
+                feedback = storage.undo(action);
+                delete action;
+                action = NULL;
+            }catch(std::exception &e){
+                feedback = "Nothing to undo";
+            }
+			break;
+		case CommandSearch :
+			action = new Search(input);
+			storage.execute(action);
+			action = NULL;
+			break;
+        case CommandMark :
+            action = new Mark(input);
+            break;
+        case CommandFilter :
+            filter = stringToFilter[parser.getField(input, TypeName)];
+            break;
+        case CommandHelp :
+            help->show();
+            feedback = "";
+            break;
+		default :
+			feedback = "Command is not recognised";
+			break;
+	}
+	if(action != NULL){
+		feedback = storage.execute(action);
+	}
+    storage.saveFile();
+	return feedback;
+}
+
+/*
+* Returns the vector of events in storage that fulfill the filter criteria
+* The default filter is None
+*/
+std::vector<Event*> Logic::getEvents(){
+    std::vector<Event*> events = storage.getEvents();
+    std::vector<Event*> filteredEvents;
+    switch(filter){
+    case Filter::None :
+	    filteredEvents = events;
+        break;
+    case Filter::Done :
+        std::copy_if(events.begin(), events.end(), std::back_inserter(filteredEvents), isDone);
+        break;
+    case Filter::NotDone :
+        std::copy_if(events.begin(), events.end(), std::back_inserter(filteredEvents), isNotDone);
+        break;
+    case Filter::Past :
+        std::copy_if(events.begin(), events.end(), std::back_inserter(filteredEvents), isPast);
+        break;
+    case Filter::Upcoming :
+        std::copy_if(events.begin(), events.end(), std::back_inserter(filteredEvents), isFuture);
+        break;
+    default :
+        filteredEvents = events;
+        break;
+    }
+    return filteredEvents;
+}
+
+bool checkDone(Event* event, bool mode){    
+    if(mode){return event->getDone();}
+    else{return !event->getDone();}
+}
+
+bool checkPast(Event* event, bool mode){
+    boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();
+    bool res = (event->getPosixStartTime() < now || event->getPosixEndTime() < now);
+     if(mode){return res;}
+    else{return !res;}
+}
+
+//marks if each event is done or not and if it is complete
+bool isDone(Event* event){
+    return checkDone(event, true);
+}
+
+bool isNotDone(Event* event){
+    return checkDone(event, false);
+}
+
+bool isPast(Event* event){
+    return checkPast(event, true);
+}
+
+bool isFuture(Event* event){
+    return checkPast(event, false);
+}
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Logic.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Logic.h
+	 */
+
+#pragma once
+
+#include "Add.h"
+#include "Delete.h"
+#include "Edit.h"
+#include "Search.h"
+#include "Mark.h"
+#include <boost/algorithm/string.hpp>
+#include <algorithm>
+#include <string>
+#include <vector>
+#include <map>
+#include "SimpleStorage.h"
+#include "QHelpWindow.h"
+
+static const std::string USER_COMMAND_ADD = "add";
+static const std::string USER_COMMAND_DELETE = "delete";
+static const std::string USER_COMMAND_EDIT = "edit";
+static const std::string USER_COMMAND_EXIT = "exit";
+static const std::string USER_COMMAND_UNDO = "undo";
+static const std::string USER_COMMAND_SEARCH = "search";
+static const std::string USER_COMMAND_MARK = "mark";
+static const std::string USER_COMMAND_FILTER = "view";
+static const std::string USER_COMMAND_HELP = "help";
+
+enum CommandType {
+	CommandAdd = 1,
+	CommandDelete,
+	CommandEdit,
+	CommandUndo,
+	CommandExit,
+	CommandSearch,
+    CommandMark,
+    CommandFilter,
+    CommandHelp
+};
+
+namespace Filter{
+    enum FilterType{
+        None = 1,
+        Done,
+        NotDone,
+        Upcoming,
+        Past
+    };
+
+    static const std::string FILTER_NONE = "all";
+    static const std::string FILTER_DONE = "done";
+    static const std::string FILTER_NOT_DONE = "pending";
+    static const std::string FILTER_UPCOMING = "upcoming";
+    static const std::string FILTER_PAST = "past";
+};
+
+bool checkDone(Event* event, bool mode);
+bool checkPast(Event* event, bool mode);
+
+bool isDone(Event* event);
+bool isNotDone(Event* event);
+bool isPast(Event* event);
+bool isFuture(Event* event);
+
+class Logic{
+private:
+	SimpleStorage storage;
+	std::map<std::string, CommandType> stringToCommand;
+    std::map<std::string, Filter::FilterType> stringToFilter;
+    SimpleParser parser;
+    Filter::FilterType filter;
+
+public:
+	Logic();
+	~Logic();
+
+	void setupMap();
+	std::string handleUserInput(std::string input);
+	std::vector<Event*> getEvents();
+
+};
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Logic.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\main.cpp
+	 */
+
+void setIcon(QApplication &app);
+
+int main(int argc, char *argv[]){
+	QApplication app(argc, argv);
+	BoxIn w;
+	setIcon(app);
+	w.show();
+	return app.exec();
+}
+
+void setIcon(QApplication &app){
+	QIcon icon("BoxIn.png");
+	app.setWindowIcon(icon);
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\main.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Mark.cpp
+	 */
+
+#include "Mark.h"
+
+
+Mark::Mark(std::string input){
+    name = parser.getField(input, TypeName);
+    field = FIELD_DONE;
+    newValue = ""; // placeholder. Doesn't really matter since will just mark  as opposite
+}
+
+
+Mark::~Mark(void){
+}
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Mark.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Mark.h
+	 */
+
+#pragma once
+#include "edit.h"
+class Mark : public Edit{
+public:
+    Mark(std::string input);
+    ~Mark(void);
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Mark.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QEventEditor.cpp
+	 */
+
+#include "QEventEditor.h"
+
+QEventEditor::QEventEditor(Event* event, QWidget *parent)
+{
+	this->event = event;
+	setModal(true);
+	createObjects();
+	arrangeObjects();
+	setupComboBox();
+	setupButtons();
+    setupMap();
+	show();
+}
+
+QEventEditor::~QEventEditor(void){
+}
+
+void QEventEditor::createObjects(){
+	fieldLabel = new QLabel("Field:", this);
+	fieldSelector = new QComboBox(this);
+	valueLine = new QLineEdit(QString(event->getName().c_str()), this);
+	saveButton = new QPushButton("Save", this);
+	cancelButton = new QPushButton("Cancel", this);
+}
+
+void QEventEditor::arrangeObjects(){
+	setFixedSize(WIDTH_POPUP, HEIGHT_POPUP);
+	fieldLabel->setGeometry(0, HEIGHT_TEXT, WIDTH_POPUP / 8, HEIGHT_TEXT);
+	fieldSelector->setGeometry(WIDTH_POPUP / 8, HEIGHT_TEXT, 100, HEIGHT_TEXT);
+	valueLine->setGeometry(WIDTH_POPUP / 8 + 100, HEIGHT_TEXT, WIDTH_POPUP - (WIDTH_POPUP / 8 + 100), HEIGHT_TEXT);
+	saveButton->setGeometry(0, HEIGHT_POPUP - 2 * HEIGHT_TEXT, WIDTH_POPUP / 2, HEIGHT_TEXT);
+	cancelButton->setGeometry(WIDTH_POPUP / 2, HEIGHT_POPUP - 2 * HEIGHT_TEXT, WIDTH_POPUP / 2, HEIGHT_TEXT);
+}
+
+void QEventEditor::setupComboBox(){
+	fieldSelector->addItem(QString(Editor::FIELD_NAME.c_str()));
+	fieldSelector->addItem(QString(Editor::FIELD_START_DATE.c_str()));
+    fieldSelector->addItem(QString(Editor::FIELD_START_TIME.c_str()));
+    fieldSelector->addItem(QString(Editor::FIELD_END_DATE.c_str()));
+	fieldSelector->addItem(QString(Editor::FIELD_END_TIME.c_str()));
+	fieldSelector->addItem(QString(Editor::FIELD_LOCATION.c_str()));
+	QObject::connect(fieldSelector, SIGNAL(currentIndexChanged(QString)), this, SLOT(setField(QString)));
+}
+
+void QEventEditor::setupButtons(){
+	QObject::connect(saveButton, SIGNAL(pressed()), this, SLOT(saveInfo()));
+	QObject::connect(saveButton, SIGNAL(pressed()), this, SLOT(accept()));
+	QObject::connect(cancelButton, SIGNAL(pressed()), this, SLOT(reject()));
+}
+
+void QEventEditor::setField(QString text){
+	if(text == QString(Editor::FIELD_NAME.c_str())){
+		valueLine->setText(QString(event->getName().c_str()));
+	}else if(text == QString(Editor::FIELD_START_DATE.c_str())){
+		valueLine->setText(QString(event->getStartDate().c_str()));
+	}else if(text == QString(Editor::FIELD_END_DATE.c_str())){
+		valueLine->setText(QString(event->getEndDate().c_str()));
+	}else if(text == QString(Editor::FIELD_START_TIME.c_str())){
+		valueLine->setText(QString(event->getStartTime().c_str()));
+	}else if(text == QString(Editor::FIELD_END_TIME.c_str())){
+		valueLine->setText(QString(event->getEndTime().c_str()));
+	}else if(text == QString(Editor::FIELD_LOCATION.c_str())){
+		valueLine->setText(QString(event->getLocation().c_str()));
+	}
+}
+
+/*
+* Converts the edited item in the editor to a string which contains the standard
+* Command for handling edits, and pushes the command to the commandLine
+* The signal is caught in BoxIn.cpp and the command is processed as per normal
+*/
+void QEventEditor::saveInfo(){
+    std::stringstream stream;
+    stream << event->getIdx();
+    std::string idx;
+    stream >> idx;
+    std::string input = "edit " + idx + " field " + fieldToEditor[fieldSelector->currentText().toStdString()] + " " + valueLine->text().toStdString();
+	emit infoOut(input);
+	close();
+}
+
+void QEventEditor::changeEvent(QEvent *event){
+	if(event->type() == QEvent::Close){emit destroyed();}
+	event->accept();
+}
+
+void QEventEditor::setupMap(){
+    fieldToEditor[Editor::FIELD_NAME] = "name";
+    fieldToEditor[Editor::FIELD_START_DATE] = "sdate";
+    fieldToEditor[Editor::FIELD_END_DATE] = "edate";
+    fieldToEditor[Editor::FIELD_START_TIME] = "stime";
+    fieldToEditor[Editor::FIELD_END_TIME] = "etime";
+    fieldToEditor[Editor::FIELD_LOCATION] = "place";
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QEventEditor.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QEventEditor.h
+	 */
+
+#pragma once
+#include "qcombobox.h"
+#include "Event.h"
+#include "qlabel.h"
+#include "qlineedit.h"
+#include "qpushbutton.h"
+#include "Logic.h"
+#include "qdialog.h"
+#include "QEvent.h"
+#include <map>
+#include <sstream>
+
+static const int WIDTH_POPUP = 400;
+static const int HEIGHT_POPUP = 200;
+static const int HEIGHT_TEXT = 20;
+
+namespace Editor{
+    static const std::string FIELD_NAME = "Name";
+    static const std::string FIELD_LOCATION = "Place";
+    static const std::string FIELD_START_DATE = "Start Date";
+    static const std::string FIELD_END_DATE = "End Date";
+    static const std::string FIELD_START_TIME = "Start Time";
+    static const std::string FIELD_END_TIME = "End Time";
+}
+
+class QEventEditor :
+	public QDialog
+{
+	Q_OBJECT
+public:
+	QEventEditor(Event* event, QWidget *parent = 0);
+	~QEventEditor(void);
+    void setupMap();
+
+private:
+	Event *event;
+	QLabel *fieldLabel;
+	QComboBox *fieldSelector;
+	QLineEdit *valueLine;
+	QPushButton *saveButton;
+	QPushButton *cancelButton;
+	QLineEdit *commandLine;
+
+    std::map<std::string, std::string> fieldToEditor;
+
+	void createObjects();
+	void arrangeObjects();
+	void setupComboBox();
+	void setupButtons();
+	void changeEvent(QEvent* event);
+signals:
+	void infoOut(std::string);
+	void destroyed();
+public slots:
+	void setField(QString text);
+	void saveInfo();
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QEventEditor.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QEventStore.cpp
+	 */
+
+#include "QEventStore.h"
+
+QEventStore::QEventStore(QWidget *parent, Event* event){
+	assert(event!=NULL);
+	this->event = event;
+}
+
+QEventStore::~QEventStore(void){
+}
+
+Event* QEventStore::getEvent(){
+	return event;
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QEventStore.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QEventStore.h
+	 */
+
+#pragma once
+#include <QObject>
+#include "qlistwidget.h"
+#include "Event.h"
+#include "assert.h"
+
+class QEventStore :
+	public QObject, public QListWidgetItem
+{
+	Q_OBJECT
+public:
+	QEventStore(QWidget* parent, Event* event);
+	~QEventStore(void);
+	Event* getEvent();
+private:
+	Event *event;
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QEventStore.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QHelpWindow.cpp
+	 */
+
+#include "QHelpWindow.h"
+
+QHelpWindow::QHelpWindow(QWidget *parent) : QWidget(parent){
+    ui.setupUi(this);
+    setFixedSize(400, 200);
+    selector = new QComboBox(this);
+    setupSelector();
+    display = new QTextEdit(this);
+    display->setReadOnly(true);
+    display->setGeometry(50, 40, 300, 150);
+    changed(HelpOptions::GENERAL);
+}
+
+QHelpWindow::~QHelpWindow(){
+}
+
+//add the options for each components so people can get the help window
+void QHelpWindow::setupSelector(){
+    selector->addItem(HelpOptions::GENERAL);
+    selector->addItem(HelpOptions::ADD);
+    selector->addItem(HelpOptions::DELETE);
+    selector->addItem(HelpOptions::EDIT);
+    selector->addItem(HelpOptions::MARK);
+    selector->addItem(HelpOptions::VIEW);
+    selector->addItem(HelpOptions::UNDO);
+    selector->setGeometry(150, 10, 100, 20);
+    QObject::connect(selector, SIGNAL(currentIndexChanged(QString)), this, SLOT(changed(QString)));
+}
+
+//this is the text displayed after clicking on the selectors above
+void QHelpWindow::changed(QString option){
+    if(option == HelpOptions::GENERAL){
+        display->setText("BoxIn commands have the first word as the type of action desired.\n\nDifferent options are prefixed by the tags place, sdate (start date), stime (start time), edate (end date) and etime (endtime)\n\nDates are represented in the format DDMMYY or YYYY-Mon-DD where Mon is the 3-letter representation of the month\nAlternatively, it is possible to use special days such as today or tomorrow\nUsing a day of week (for example, tuesday) will return the nearest (tuesday) to today, today inclusive.\n\nTimes are stored in a 24-hour format HHMM or HH:MM\n\nIn the case where a word the user intends to type is a keyword, it can be escaped by prefixing the word with a . - for example, .place");
+    }else if(option == HelpOptions::ADD){
+        display->setText("The add command follows the following syntax:\n\nadd <name> <optional fields>\n\nA full example is given below\nadd Change the world edate 311299 place Mars\n\nThis represents a plan to change the world before 31st December 2099 on Mars");
+    }else if(option == HelpOptions::DELETE){
+        display->setText("The delete command follows the following syntax:\n\ndelete <indexnumber>\nFor example:\ndelete 1\n\nThis deletes the item which matches the index 1. The index is found to the left of the event name.");
+    }else if(option == HelpOptions::EDIT){
+        display->setText("The easiest way to edit an event is to double click it and use the GUI interface\nAlternatively, the format for doing so is \nedit <indexnumber> field <fieldtag> <newvalue>\n\nA full example is given below\nedit 1 field name Change the Universe");
+    }else if(option == HelpOptions::MARK){
+        display->setText("The mark command changes the done/undone status of an event. The syntax for doing so is \nmark <indexnumber>\n\nFor example,\nmark 1\nwill mark the Change the Universe event as done");
+    }else if(option == HelpOptions::VIEW){
+        display->setText("The view command shows only specific events. By default, all events are displayed. The different options to view are\n\nall, past, upcoming, done and pending\n\nThe format for doing so is \nview <option>\nFor example,\nview done");
+    }else if(option == HelpOptions::UNDO){
+        display->setText("The undo function allows a user to undo as many actions as they want up to the point the app was started. The syntax for doing so is simply to type \nundo");
+    }
+}
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QHelpWindow.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QHelpWindow.h
+	 */
+
+#ifndef QHELPWINDOW_H
+#define QHELPWINDOW_H
+
+#include "qwidget.h"
+#include "ui_QHelpWindow.h"
+#include "qcombobox.h"
+#include "qtextedit.h"
+#include "qstring.h"
+
+namespace HelpOptions{
+    static const QString GENERAL = "General";
+    static const QString ADD = "Add";
+    static const QString DELETE = "Delete";
+    static const QString EDIT = "Edit";
+    static const QString MARK = "Mark";
+    static const QString VIEW = "View";
+    static const QString UNDO = "Undo";
+}
+
+class QHelpWindow : public QWidget{
+    Q_OBJECT
+
+public:
+    QHelpWindow(QWidget *parent = 0);
+    ~QHelpWindow();
+
+public slots:
+    void changed(QString option);
+    void setupSelector();
+
+private:
+    Ui::QHelpWindow ui;
+    QComboBox* selector;
+    QTextEdit* display;
+};
+
+#endif // QHELPWINDOW_H
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\QHelpWindow.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Search.cpp
+	 */
+
+#include "Search.h"
+
+Search::Search(std::string input){
+    criteria = parser.getField(input, TypeName);
+}
+
+
+Search::~Search(void){
+}
+
+std::string Search::execute(){
+	return "";
+}
+
+std::string Search::undo(){
+	// will never be called
+	return "";
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Search.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Search.h
+	 */
+
+#pragma once
+#include "action.h"
+
+class Search :
+	public Action
+{
+public:
+	Search(std::string input);
+	~Search(void);
+	std::string execute();
+	std::string undo();
+private:
+	std::string criteria;
+    SimpleParser parser;
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\Search.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\SimpleParser.cpp
+	 */
+
+#include "SimpleParser.h"
+
+SimpleParser::SimpleParser(void){
+    setupMaps();
+}
+
+SimpleParser::~SimpleParser(void){
+}
+
+void SimpleParser::setupMaps(){
+    keywordMap[TypeName] = "name";
+    keywordMap[TypeStartDate] = "sdate";
+    keywordMap[TypeEndDate] = "edate";
+    keywordMap[TypeStartTime] = "stime";
+    keywordMap[TypeEndTime] = "etime";
+    keywordMap[TypePlace] = "place";
+    keywordMap[TypeField] = "field";
+    keywordMap[TypeNewValue] = "field";
+    monthMap["Jan"] = "01";
+    monthMap["Feb"] = "02";
+    monthMap["Mar"] = "03";
+    monthMap["Apr"] = "04";
+    monthMap["May"] = "05";
+    monthMap["Jun"] = "06";
+    monthMap["Jul"] = "07";
+    monthMap["Aug"] = "08";
+    monthMap["Sep"] = "09";
+    monthMap["Oct"] = "10";
+    monthMap["Nov"] = "11";
+    monthMap["Dec"] = "12";
+    dayMap[Days::MONDAY] = boost::date_time::Monday;
+    dayMap[Days::TUESDAY] = boost::date_time::Tuesday;
+    dayMap[Days::WEDNESDAY] = boost::date_time::Wednesday;
+    dayMap[Days::THURSDAY] = boost::date_time::Thursday;
+    dayMap[Days::FRIDAY] = boost::date_time::Friday;
+    dayMap[Days::SATURDAY] = boost::date_time::Saturday;
+    dayMap[Days::SUNDAY] = boost::date_time::Sunday;
+}
+
+/*
+* Returns the value belonging to the field given by InfoType
+* as per extracted from an input string
+*/
+std::string SimpleParser::getField(std::string input, InfoType info){
+    std::string keyword = keywordMap[info];
+    std::stringstream stream(input);
+    bool found = false;
+    std::string command;
+    stream >> command;
+    if(info == TypeCommand){
+        return command;
+    }
+    if(info != TypeName){
+        while(stream){
+            std::string currentWord;
+            stream >> currentWord;
+            if(currentWord == keyword){
+                found = true;
+                break;
+            }
+        }
+        if(!found){return "";}
+    }
+    std::string result;
+    if(info == TypeField){
+        std::string res;
+        stream >> res;
+        return res;
+    }else if(info == TypeNewValue){
+        std::string wasteWord;
+        stream >> wasteWord;
+    }
+    while(stream){
+        std::string currentWord;
+        stream >> currentWord;
+        if(isKeyword(currentWord)){
+            break;
+        }
+        result = result + removeEscapeChar(currentWord) + " ";
+    }
+    return removeWhitespace(result);
+}
+
+/*
+* Converts a string to a date
+* Can accept DDMMYY, YYYYMMDD, YYYY_Mon_DD formats
+* As well as special strings such as today, tomorrow, and days of the week
+* Returns the date as a boost::gregorian::date
+*/
+boost::gregorian::date SimpleParser::convertToDate(std::string date){
+    std::string year, month, day;
+    boost::gregorian::date today;
+    try{
+        switch(matchFormat(date)){
+            case DDMMYY :
+                year = CURRENT_CENTURY + date.substr(4, 2);
+                month = date.substr(2, 2);
+                day = date.substr(0, 2);
+                return boost::gregorian::date(boost::gregorian::from_undelimited_string(year + month + day));
+                break;
+            case YYYYMMDD :
+                year = date.substr(0, 4);
+                month = date.substr(4, 2);
+                day = date.substr(6, 2);
+                return boost::gregorian::date(boost::gregorian::from_undelimited_string(year + month + day));
+                break;
+            case FormatNotRecognised:
+                return boost::gregorian::date();
+            case DayOfWeek :
+                today = boost::gregorian::day_clock::local_day();
+                while(today.day_of_week() != dayMap[date]){
+                    today = today + boost::gregorian::days(1);
+                }
+                return today;
+                break;
+            case Today :
+                return boost::gregorian::day_clock::local_day();
+                break;
+            case Tomorrow :
+                return boost::gregorian::day_clock::local_day() + boost::gregorian::days(1);
+                break;
+        }
+        year = date.substr(0, 4);
+        month = monthMap[date.substr(5, 3)];
+        day = date.substr(9, 2);
+        return boost::gregorian::date(boost::gregorian::from_undelimited_string(year + month + day));
+    }catch(std::exception &e){
+        return boost::gregorian::date();
+    }
+    return boost::gregorian::date();
+}
+
+/*
+* Identifies the format of a string
+* Returns FormatNotRecognised if it does not match any format
+*/
+DateFormat SimpleParser::matchFormat(std::string date){
+    if(isDayOfWeek(date)){return DayOfWeek;}
+    else if(isToday(date)){return Today;}
+    else if(isTomorrow(date)){return Tomorrow;}
+    else if(date.size()==lenDDMMYY && isInteger(date)){return DDMMYY;}
+    else if(date.size()==lenYYYYMMDD && isInteger(date)){return YYYYMMDD;}
+    else if(date.size()==lenYYYY_MMM_DD){return YYYY_MMM_DD;}
+    else{return FormatNotRecognised;}
+}
+
+bool SimpleParser::isNumericalFormat(std::string date){
+    for(std::string::iterator iter = date.begin(); iter != date.end(); iter++){
+        bool found = false;
+        for(unsigned int i = 0; i < LEGIT_DATE_NUMBERS.size(); i++){
+            if(*iter == LEGIT_DATE_NUMBERS[i]){
+                found = true;
+            }
+        }
+        if(!found){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool SimpleParser::isInteger(std::string num){
+    for(std::string::iterator iter = num.begin(); iter != num.end(); iter++){
+        bool found = false;
+        for(unsigned int i = 0; i < LEGIT_NUMBERS.size(); i++){
+            if(*iter == LEGIT_NUMBERS[i]){
+                found = true;
+            }
+        }
+        if(!found){
+            return false;
+        }
+    }
+    if(num.empty()){return false;}
+    if(stoi(num)<1){return false;}
+    return true;
+}
+
+bool SimpleParser::isKeyword(std::string word){
+    for(unsigned int i = 0; i < KEYWORDS.size(); i++){
+        if(word == KEYWORDS[i]){return true;}
+    }
+    return false;
+}
+
+std::string SimpleParser::removeEscapeChar(std::string word){
+    if(word[0]=='.'){return word.substr(1, word.size() - 1);}
+    return word;
+}
+
+std::string SimpleParser::removeWhitespace(std::string text){
+    if(text.empty()){return text;}
+    if(text[text.size()-1] == ' '){return removeWhitespace(text.substr(0, text.size() - 1));}
+    return text;
+}
+
+bool SimpleParser::isDayOfWeek(std::string day){
+    return (day == Days::MONDAY || day == Days::TUESDAY || day == Days::WEDNESDAY || day == Days::THURSDAY || day == Days::FRIDAY || day == Days::SATURDAY || day == Days::SUNDAY);
+}
+
+bool SimpleParser::isToday(std::string day){
+    return day == Days::TODAY;
+}
+
+bool SimpleParser::isTomorrow(std::string day){
+    return day == Days::TOMORROW;
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\SimpleParser.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\SimpleParser.h
+	 */
+
+#pragma once
+
+#include <string>
+#include <sstream>
+#include <map>
+#include <vector>
+#include "boost\date_time\gregorian\gregorian.hpp"
+#include "boost\date_time\posix_time\posix_time.hpp"
+
+static const std::string KEYWORD_ARRAY[] = {"name", "edate", "etime", "place", "field", "stime", "sdate"};
+static const std::vector<std::string> KEYWORDS(KEYWORD_ARRAY, KEYWORD_ARRAY+7);
+
+static const std::string CURRENT_CENTURY = "20";
+static const int lenDDMMYY = 6;
+static const int lenYYYYMMDD = 8;
+static const int lenYYYY_MMM_DD = 11;
+static const int LEN_DAY_OF_WEEK = 3;
+static const std::string LEGIT_DATE_NUMBERS = "0123456789-/";
+static const std::string LEGIT_NUMBERS = "0123456789";
+
+namespace Days{
+    static const std::string MONDAY = "monday";
+    static const std::string TUESDAY = "tuesday";
+    static const std::string WEDNESDAY = "wednesday";
+    static const std::string THURSDAY = "thursday";
+    static const std::string FRIDAY = "friday";
+    static const std::string SATURDAY = "saturday";
+    static const std::string SUNDAY = "sunday";
+    static const std::string TODAY = "today";
+    static const std::string TOMORROW = "tomorrow";
+};
+
+enum InfoType{
+    TypeCommand = 1,
+    TypeName,
+    TypeStartDate,
+    TypeStartTime,
+    TypeEndDate,
+    TypeEndTime,
+    TypePlace,
+    TypeField,
+    TypeNewValue
+};
+
+// Some formats are not in naming convention to preserve the DDMMYYYY etc in caps
+enum DateFormat{
+    DDMMYY = 1,
+    YYYYMMDD,
+    YYYY_MMM_DD,
+    TextDateFormat,
+    DayOfWeek,
+    Today,
+    Tomorrow,
+    FormatNotRecognised
+};
+
+class SimpleParser
+{
+private:
+    std::map<InfoType, std::string> keywordMap;
+    std::map<std::string, std::string> monthMap;
+    std::map<std::string, boost::date_time::weekdays> dayMap;
+public:
+    SimpleParser(void);
+    ~SimpleParser(void);
+    std::string getField(std::string input, InfoType info);
+    void setupMaps();
+    bool isKeyword(std::string word);
+    bool isInteger(std::string text);
+
+    boost::gregorian::date convertToDate(std::string date);
+    DateFormat matchFormat(std::string date);
+    bool isNumericalFormat(std::string date);
+    bool isDayOfWeek(std::string day);
+    bool isToday(std::string day);
+    bool isTomorrow(std::string day);
+
+    std::string removeEscapeChar(std::string word);
+    std::string removeWhitespace(std::string text);
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\SimpleParser.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\SimpleStorage.cpp
+	 */
+
+#include "SimpleStorage.h"
+#include "boost\date_time\gregorian\gregorian.hpp"
+
+SimpleStorage::SimpleStorage(){
+    file = FileStorage(BOXIN_DATA_FILENAME);
+    try{
+        events = file.readFile();
+    }catch(std::exception &e){
+        // exists in case file does not exist, then events can just be an empty vector
+    }
+    sortCriteria = CriteriaTime;
+}
+
+SimpleStorage::~SimpleStorage(){
+}
+
+bool idxComp(Event* item1, Event* item2){
+    return item1->getIdx() < item2->getIdx();
+}
+
+bool alphaComp(Event* item1, Event* item2){
+    if(item1->getName() == item2->getName()){return idxComp(item1, item2);}
+    return item1->getName() <= item2->getName();
+}
+
+bool startTimeComp(Event* item1, Event* item2){
+    if(item1->getStartDate().empty() && item2->getStartDate().empty()){return alphaComp(item1, item2);}
+    else if(item1->getStartDate().empty()){return true;}
+    else if(item2->getStartDate().empty()){return false;}
+    boost::gregorian::date date1 = boost::gregorian::date(boost::gregorian::from_simple_string(item1->getStartDate()));
+    boost::gregorian::date date2 = boost::gregorian::date(boost::gregorian::from_simple_string(item2->getStartDate()));
+    if(date1==date2 && item1->getStartTime()==item2->getStartTime()){return alphaComp(item1, item2);}
+    return (date1 < date2) || (item1->getStartTime() <= item2->getStartTime() && date1 == date2);
+}
+
+bool endTimeComp(Event* item1, Event* item2){
+    if(item1->getEndDate().empty() && item2->getEndDate().empty()){return startTimeComp(item1, item2);}
+    else if(item1->getEndDate().empty()){return true;}
+    else if(item2->getEndDate().empty()){return false;}
+    boost::gregorian::date date1 = boost::gregorian::date(boost::gregorian::from_simple_string(item1->getEndDate()));
+    boost::gregorian::date date2 = boost::gregorian::date(boost::gregorian::from_simple_string(item2->getEndDate()));
+    if(date1==date2 && item1->getEndTime()==item2->getEndTime()){return startTimeComp(item1, item2);}
+    return (date1 < date2) || (item1->getEndTime() <= item2->getEndTime() && date1 == date2);
+}
+
+std::vector<Event*> SimpleStorage::getEvents(){
+    return events;
+}
+
+void SimpleStorage::pushStack(Action* action){
+    actionStack.push(action);
+}
+
+Action* SimpleStorage::popLastAction(){
+    if(actionStack.empty()){throw std::exception("Nothing to undo");}
+    Action* action = actionStack.top();
+    actionStack.pop();
+    return action;
+}
+
+void SimpleStorage::sortEvents(){
+    std::stable_sort(events.begin(), events.end(), alphaComp);
+    std::stable_sort(events.begin(), events.end(), startTimeComp);
+    std::stable_sort(events.begin(), events.end(), endTimeComp);
+    switch(sortCriteria){
+    case CriteriaTime:
+        break;
+    }
+    for(unsigned int i = 0; i < events.size(); i++){
+        events[i]->setIdx(i+1);
+    }
+}
+
+std::string SimpleStorage::execute(Action* action){
+    std::string feedback = action->execute(events);
+    pushStack(action);
+    sortEvents();
+    return feedback;
+}
+
+std::string SimpleStorage::undo(Action* action){
+    std::string feedback = action->undo(events);
+    sortEvents();
+    return feedback;
+}
+
+void SimpleStorage::saveFile(){
+    file.saveFile(events);
+}
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\SimpleStorage.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\SimpleStorage.h
+	 */
+
+#pragma once
+#include "Event.h"
+#include <vector>
+#include <stack>
+#include <Add.h>
+#include <Delete.h>
+#include <Edit.h>
+#include "FileStorage.h"
+#include <algorithm>
+#include "CommonFunctions.h"
+
+enum SortCriteria{
+    CriteriaTime = 1,
+    CriteriaPriority,
+    CriteriaName
+};
+
+bool alphaComp(Event* item1, Event* item2);
+bool timeComp(Event* item1, Event* item2);
+//bool priorityComp(Event* item1, Event* item2); // not yet implemented
+
+static const std::string BOXIN_DATA_FILENAME = "BoxInData.json";
+
+class SimpleStorage{
+private:
+    std::vector<Event*> events;
+    std::stack<Action*> actionStack;
+    FileStorage file;
+    SortCriteria sortCriteria;
+    // always use alphabetical as secondary sort
+
+public:
+	SimpleStorage();
+	~SimpleStorage();
+
+    std::vector<Event*> getEvents();
+    
+    void pushStack(Action* action);
+    Action* popLastAction();
+
+    void sortEvents();
+
+    std::string execute(Action* action);
+    std::string undo(Action* action);
+    
+    void saveFile();
+};
+
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\SimpleStorage.h
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\TimeParser.cpp
+	 */
+
+#include "TimeParser.h"
+
+
+TimeParser::TimeParser(void){
+}
+
+
+TimeParser::~TimeParser(void){
+}
+
+boost::posix_time::ptime TimeParser::convertToTime(boost::gregorian::date date, std::string time){
+    if(time.size() == SIZE_HHMM){
+        int hours = stoi(time.substr(0,2));
+        int minutes = stoi(time.substr(2,2));
+        return boost::posix_time::ptime(date, boost::posix_time::time_duration(hours, minutes, 0));
+    }else if(time.size() == SIZE_EMPTY){
+        boost::posix_time::ptime time = boost::posix_time::ptime(date, boost::posix_time::time_duration(0, 0, 0));
+        return time;
+    }else{
+        return boost::posix_time::ptime(date, boost::posix_time::time_duration(stoi(time.substr(0,2)), stoi(time.substr(3,2)),0));
+    }
+}
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\TimeParser.cpp
+
+
+
+
+
+	/**
+	 * origin: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\TimeParser.h
+	 */
+
+#pragma once
+#include "boost\date_time\posix_time\posix_time.hpp"
+#include "boost\date_time\gregorian\gregorian.hpp"
+
+static const int SIZE_HHMM = 4;
+static const int SIZE_HH_MM = 5;
+static const int SIZE_EMPTY = 0;
+
+class TimeParser{
+public:
+    TimeParser(void);
+    ~TimeParser(void);
+    boost::posix_time::ptime convertToTime(boost::gregorian::date date, std::string time);
+};
+
+	// End of segment: C:\Users\Emmanuel\Documents\Github\main\BoxIn\BoxIn\TimeParser.h
+
+
+
+
+
