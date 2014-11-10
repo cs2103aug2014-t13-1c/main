@@ -14,4 +14,3 @@ public:
     ~TimeParser(void);
     boost::posix_time::ptime convertToTime(boost::gregorian::date date, std::string time);
 };
-

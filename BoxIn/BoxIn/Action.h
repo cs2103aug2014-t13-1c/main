@@ -20,8 +20,6 @@ static const std::string WHITESPACE = " ";
 
 /*
 * The Action class is an interface for the different actions available
-* All functions are virtual and are implemented in the respective subclasses
-*
 */
 class Action{
 public:
@@ -30,10 +28,6 @@ public:
 	virtual std::string execute(std::vector<Event*>&);
 	virtual std::string undo(std::vector<Event*>&);
 
-	std::vector<std::string> splitWords(std::string input);
-	int indexOf(std::vector<std::string> words, std::string toFind);
-	std::string vectorToString(std::vector<std::string> vec);
-	std::string extractField(std::vector<std::string> words, int startPos, int endPos);
     void deleteEvent(std::vector<Event*> &events, Event* event);
     Event* findEventByIdx(int idx, std::vector<Event*> & events);
     Event* findEventByNameAndEndDate(std::string name, std::string endDate, std::vector<Event*> & events);

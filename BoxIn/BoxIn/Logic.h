@@ -74,7 +74,6 @@ public:
 
 	void setupMap();
 	std::string handleUserInput(std::string input);
-	std::vector<std::string> splitWords(std::string input);
 	std::vector<Event*> getEvents();
 
 };
