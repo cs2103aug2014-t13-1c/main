@@ -1,3 +1,4 @@
+//@author A0086002U
 #include "TimeData.h"
 
 Time::Time(void)
