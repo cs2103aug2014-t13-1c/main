@@ -300,7 +300,7 @@ public:
 
     void retranslateUi(QMainWindow *BoxInClass)
     {
-        BoxInClass->setWindowTitle(QApplication::translate("BoxInClass", "BoxIn v0.1", 0));
+        BoxInClass->setWindowTitle(QApplication::translate("BoxInClass", "BoxIn", 0));
         commandLabel->setText(QApplication::translate("BoxInClass", "  Command:", 0));
         feedbackBox->setText(QApplication::translate("BoxInClass", "Welcome to BoxIn!", 0));
     } // retranslateUi

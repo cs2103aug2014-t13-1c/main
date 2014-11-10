@@ -544,7 +544,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>BoxIn v0.1</string>
+   <string>BoxIn</string>
   </property>
   <property name="windowIcon">
    <iconset>
